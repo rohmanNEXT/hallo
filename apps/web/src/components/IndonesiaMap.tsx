@@ -233,7 +233,7 @@ export default function IndonesiaMap() {
 
   return (
     <section className="max-w-7xl mx-auto px-6 pt-16 pb-14">
-      <div className="bg-card rounded-[32px] px-6 py-8 md:p-10 shadow-[0_12px_40px_-15px_rgba(0,0,0,0.08)] flex flex-col items-center text-center overflow-hidden">
+      <div className="bg-card rounded-[32px] px-6 py-8 md:p-10 flex flex-col items-center text-center overflow-hidden">
         {/* Top: Title Only */}
         <h2 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight leading-tight mb-9.5">
           Jangkauan Lowongan Seluruh Indonesia
