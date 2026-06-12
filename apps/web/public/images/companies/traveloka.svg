@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144" width="144" height="144">
+  <rect width="144" height="144" rx="36" fill="#f8fafc"/>
+  <!-- Traveloka Bird Vector representation -->
+  <g transform="translate(18, 16) scale(1.1)">
+    <!-- Main wing/body curve -->
+    <path d="M 25 65 C 32 30, 72 20, 92 38 C 76 40, 60 52, 52 68 C 42 88, 30 92, 25 65 Z" fill="#0194d3"/>
+    <!-- Secondary wing layering -->
+    <path d="M 38 52 C 46 28, 78 24, 95 35 C 80 41, 68 52, 60 69 Z" fill="#1ba0e2"/>
+    <!-- Head/Beak accent -->
+    <path d="M 92 38 C 88 42, 82 45, 78 40 C 82 35, 88 32, 92 38 Z" fill="#005ea2"/>
+    <!-- Bottom tail accent -->
+    <path d="M 25 65 C 22 75, 18 80, 15 75 C 18 70, 22 68, 25 65 Z" fill="#007cc3"/>
+  </g>
+</svg>

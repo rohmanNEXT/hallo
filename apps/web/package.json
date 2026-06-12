@@ -1,0 +1,39 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "serve": "next start -p $PORT",
+    "lint": "next lint",
+    "test": "npx cypress verify & cypress run --component"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.3.0",
+    "autoprefixer": "^10.5.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cross-env": "^7.0.3",
+    "formik": "^2.4.9",
+    "framer-motion": "^12.40.0",
+    "lucide-react": "^1.17.0",
+    "next": "14.0.4",
+    "postcss": "^8.5.15",
+    "react": "^18",
+    "react-dom": "^18",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^3.6.0",
+    "yup": "^1.7.1",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "cypress": "^13.6.2",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "typescript": "^5"
+  }
+}
