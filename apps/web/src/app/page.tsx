@@ -221,8 +221,6 @@ export default function Home() {
                   }`}
                   onClick={() => {
                     setCurrentPage((prev) => Math.max(prev - 1, 1));
-                    // Smooth scroll to top of section
-                    document.getElementById('loker-terbaru-heading')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                   disabled={currentPage === 1}
                 >
@@ -247,7 +245,6 @@ export default function Home() {
                         }`}
                         onClick={() => {
                           setCurrentPage(pageNum);
-                          document.getElementById('loker-terbaru-heading')?.scrollIntoView({ behavior: 'smooth' });
                         }}
                       >
                         {pageNum}
@@ -269,7 +266,6 @@ export default function Home() {
                   }`}
                   onClick={() => {
                     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
-                    document.getElementById('loker-terbaru-heading')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                   disabled={currentPage === totalPages}
                 >

@@ -40,7 +40,7 @@ export default function IndonesiaMap() {
     { city: 'Jayapura', count: 20, lat: -2.541, lng: 140.669 },
     { city: 'Kupang', count: 19, lat: -10.1772, lng: 123.607 },
     { city: 'Ambon', count: 18, lat: -3.6954, lng: 128.1814 },
-  ];
+  ].sort((a, b) => b.count - a.count);
 
   // Dynamically load Leaflet JS & CSS from CDN
   useEffect(() => {
