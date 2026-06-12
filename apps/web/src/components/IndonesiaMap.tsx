@@ -231,14 +231,14 @@ export default function IndonesiaMap() {
 
   return (
     <section className="max-w-7xl mx-auto px-6 pt-16 pb-14">
-      <div className="bg-card rounded-[32px] px-6 py-8 md:p-10 shadow-[0_12px_40px_-15px_rgba(0,0,0,0.08)] flex flex-col items-center text-center gap-8 overflow-hidden">
+      <div className="bg-card rounded-[32px] px-6 py-8 md:p-10 shadow-[0_12px_40px_-15px_rgba(0,0,0,0.08)] flex flex-col items-center text-center overflow-hidden">
         {/* Top: Title Only */}
-        <h2 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight leading-tight">
+        <h2 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight leading-tight mb-9.5">
           Jangkauan Lowongan Seluruh Indonesia
         </h2>
 
         {/* Middle: Leaflet Map (Fixed & Non-interactive) */}
-        <div className="w-full max-w-4xl h-[290px] md:h-[390px] border border-border/60 rounded-2xl overflow-hidden relative shadow-md bg-muted/20">
+        <div className="w-full max-w-4xl h-[290px] md:h-[390px] mb-5.5 border border-border/60 rounded-2xl overflow-hidden relative shadow-md bg-muted/20">
           <div ref={mapContainerRef} className="w-full h-full z-10" />
           {!leafletLoaded && (
             <div className="absolute inset-0 flex items-center justify-center bg-background/80 z-20 text-xs font-bold text-muted-foreground">
@@ -392,14 +392,14 @@ export default function IndonesiaMap() {
         input[type="range"].custom-slider::-webkit-slider-thumb {
           -webkit-appearance: none !important;
           appearance: none !important;
-          width: 20px !important;
-          height: 20px !important;
+          width: 14px !important;
+          height: 14px !important;
           border-radius: 50% !important;
           background: #0f6dff !important;
-          border: 3px solid #ffffff !important;
-          box-shadow: 0 2px 6px rgba(15, 109, 255, 0.4) !important;
+          border: 2.5px solid #ffffff !important;
+          box-shadow: 0 2px 5px rgba(15, 109, 255, 0.35) !important;
           cursor: pointer !important;
-          margin-top: -8px !important; /* Center the thumb vertically on a 4px track */
+          margin-top: -5px !important; /* Center the thumb vertically on a 4px track */
           transition: transform 0.1s ease, background-color 0.1s ease !important;
         }
         input[type="range"].custom-slider::-webkit-slider-thumb:hover {
@@ -412,12 +412,12 @@ export default function IndonesiaMap() {
 
         /* Thumb styling (Firefox) */
         input[type="range"].custom-slider::-moz-range-thumb {
-          width: 20px !important;
-          height: 20px !important;
+          width: 14px !important;
+          height: 14px !important;
           border-radius: 50% !important;
           background: #0f6dff !important;
-          border: 3px solid #ffffff !important;
-          box-shadow: 0 2px 6px rgba(15, 109, 255, 0.4) !important;
+          border: 2.5px solid #ffffff !important;
+          box-shadow: 0 2px 5px rgba(15, 109, 255, 0.35) !important;
           cursor: pointer !important;
           box-sizing: border-box !important;
           transition: transform 0.1s ease, background-color 0.1s ease !important;

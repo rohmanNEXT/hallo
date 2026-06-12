@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function AppBanner() {
   return (
-    <div className="max-w-4xl mx-auto my-80 mb-20 px-6">
+    <div className="max-w-3xl mx-auto my-86 mb-16 px-6">
       <div className="bg-gradient-to-br from-card to-card/90 border border-border/80 rounded-[24px] px-6 pt-6 md:px-10 md:pt-8 pb-0 shadow-[0_12px_35px_-10px_rgba(0,0,0,0.06)] flex flex-col md:flex-row items-center justify-between gap-6 relative">
         {/* Left Side: Content */}
         <div className="max-w-sm space-y-3 pb-6 md:pb-8 text-left z-10">
