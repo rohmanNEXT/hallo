@@ -17,7 +17,7 @@ export default function IndonesiaMap() {
   const markersGroupRef = useRef<any>(null);
   const activeMarkerRef = useRef<any>(null);
   const [leafletLoaded, setLeafletLoaded] = useState(false);
-  const [minJobs, setMinJobs] = useState(20);
+  const [minJobs, setMinJobs] = useState(48);
   const { theme } = useAppStore();
 
   const hotspots: Hotspot[] = [
@@ -40,7 +40,7 @@ export default function IndonesiaMap() {
     { city: 'Jayapura', count: 20, lat: -2.541, lng: 140.669 },
     { city: 'Kupang', count: 19, lat: -10.1772, lng: 123.607 },
     { city: 'Ambon', count: 18, lat: -3.6954, lng: 128.1814 },
-  ].sort((a, b) => b.count - a.count);
+  ];
 
   // Dynamically load Leaflet JS & CSS from CDN
   useEffect(() => {
@@ -158,7 +158,7 @@ export default function IndonesiaMap() {
     activeMarkerRef.current = null;
 
     // Filter hotspots
-    const filteredHotspots = hotspots.filter((hs) => hs.count >= minJobs);
+    const filteredHotspots = hotspots.filter((hs) => hs.count <= minJobs);
 
     // Add markers for filtered hotspots
     filteredHotspots.forEach((hs) => {
@@ -206,8 +206,9 @@ export default function IndonesiaMap() {
           (marker as any).tooltipOpen = false;
           activeMarkerRef.current = null;
         } else {
-          marker.bindTooltip(
-            `
+          marker
+            .bindTooltip(
+              `
             <div class="custom-map-tooltip-inner px-2 py-1 text-[10px] font-bold rounded-lg shadow-md select-none">
               <div class="text-[#0f6dff] font-extrabold text-[11px] mb-0.5">${hs.city}</div>
               <div class="text-emerald-500 font-extrabold flex items-center gap-1">
@@ -215,13 +216,14 @@ export default function IndonesiaMap() {
               </div>
             </div>
           `,
-            {
-              permanent: true,
-              direction: tooltipDirection,
-              className: 'custom-map-tooltip p-0',
-              interactive: true,
-            },
-          ).openTooltip();
+              {
+                permanent: true,
+                direction: tooltipDirection,
+                className: 'custom-map-tooltip p-0',
+                interactive: true,
+              },
+            )
+            .openTooltip();
           (marker as any).tooltipOpen = true;
           activeMarkerRef.current = marker;
         }
@@ -261,18 +263,18 @@ export default function IndonesiaMap() {
                 type="range"
                 min="18"
                 max="48"
-                value={minJobs}
-                onChange={(e) => setMinJobs(Number(e.target.value))}
+                value={66 - minJobs}
+                onChange={(e) => setMinJobs(66 - Number(e.target.value))}
                 className="w-full h-1 rounded-lg appearance-none cursor-pointer custom-slider focus:outline-none focus:ring-2 focus:ring-[#0f6dff]/30 transition-all"
                 style={{
-                  background: `linear-gradient(to right, #0f6dff 0%, #0f6dff ${((minJobs - 18) / (48 - 18)) * 100}%, #3f3f46 ${((minJobs - 18) / (48 - 18)) * 100}%, #3f3f46 100%)`
+                  background: `linear-gradient(to right, #0f6dff 0%, #0f6dff ${(((66 - minJobs) - 18) / (48 - 18)) * 100}%, #3f3f46 ${(((66 - minJobs) - 18) / (48 - 18)) * 100}%, #3f3f46 100%)`,
                 }}
               />
             </div>
-            
+
             <div className="flex justify-between text-[11px] text-muted-foreground font-semibold px-3 mt-6">
-              <span className="translate-x-1 inline-block">Min 18</span>
-              <span>Max 48</span>
+              <span className="translate-x-1 inline-block">48</span>
+              <span>18 </span>
             </div>
           </div>
 
@@ -353,7 +355,7 @@ export default function IndonesiaMap() {
         }
         /* Range slider styling to ensure visibility across all browsers and resets */
         /* Range slider styling to ensure visibility across all browsers and resets */
-        input[type="range"].custom-slider {
+        input[type='range'].custom-slider {
           -webkit-appearance: none !important;
           appearance: none !important;
           width: 100% !important;
@@ -363,18 +365,18 @@ export default function IndonesiaMap() {
           background: #e4e4e7 !important; /* light mode track fallback */
           transition: all 0.2s ease !important;
         }
-        
-        .dark input[type="range"].custom-slider,
-        .darkblue input[type="range"].custom-slider,
-        .charcoal input[type="range"].custom-slider,
-        .teal input[type="range"].custom-slider,
-        .emerald input[type="range"].custom-slider,
-        .burgundy input[type="range"].custom-slider {
+
+        .dark input[type='range'].custom-slider,
+        .darkblue input[type='range'].custom-slider,
+        .charcoal input[type='range'].custom-slider,
+        .teal input[type='range'].custom-slider,
+        .emerald input[type='range'].custom-slider,
+        .burgundy input[type='range'].custom-slider {
           background: #27272a !important; /* dark mode track fallback */
         }
 
         /* Webkit track overrides */
-        input[type="range"].custom-slider::-webkit-slider-runnable-track {
+        input[type='range'].custom-slider::-webkit-slider-runnable-track {
           height: 4px !important;
           border-radius: 9999px !important;
           background: inherit !important;
@@ -382,14 +384,14 @@ export default function IndonesiaMap() {
         }
 
         /* Firefox track overrides */
-        input[type="range"].custom-slider::-moz-range-track {
+        input[type='range'].custom-slider::-moz-range-track {
           height: 4px !important;
           border-radius: 9999px !important;
           background: inherit !important;
         }
-        
+
         /* Thumb styling (Webkit/Blink) */
-        input[type="range"].custom-slider::-webkit-slider-thumb {
+        input[type='range'].custom-slider::-webkit-slider-thumb {
           -webkit-appearance: none !important;
           appearance: none !important;
           width: 14px !important;
@@ -400,18 +402,20 @@ export default function IndonesiaMap() {
           box-shadow: 0 2px 5px rgba(15, 109, 255, 0.35) !important;
           cursor: pointer !important;
           margin-top: -5px !important; /* Center the thumb vertically on a 4px track */
-          transition: transform 0.1s ease, background-color 0.1s ease !important;
+          transition:
+            transform 0.1s ease,
+            background-color 0.1s ease !important;
         }
-        input[type="range"].custom-slider::-webkit-slider-thumb:hover {
+        input[type='range'].custom-slider::-webkit-slider-thumb:hover {
           transform: scale(1.15) !important;
           background: #0056d6 !important;
         }
-        input[type="range"].custom-slider::-webkit-slider-thumb:active {
+        input[type='range'].custom-slider::-webkit-slider-thumb:active {
           transform: scale(0.95) !important;
         }
 
         /* Thumb styling (Firefox) */
-        input[type="range"].custom-slider::-moz-range-thumb {
+        input[type='range'].custom-slider::-moz-range-thumb {
           width: 14px !important;
           height: 14px !important;
           border-radius: 50% !important;
@@ -420,31 +424,33 @@ export default function IndonesiaMap() {
           box-shadow: 0 2px 5px rgba(15, 109, 255, 0.35) !important;
           cursor: pointer !important;
           box-sizing: border-box !important;
-          transition: transform 0.1s ease, background-color 0.1s ease !important;
+          transition:
+            transform 0.1s ease,
+            background-color 0.1s ease !important;
         }
-        input[type="range"].custom-slider::-moz-range-thumb:hover {
+        input[type='range'].custom-slider::-moz-range-thumb:hover {
           transform: scale(1.15) !important;
           background: #0056d6 !important;
         }
-        input[type="range"].custom-slider::-moz-range-thumb:active {
+        input[type='range'].custom-slider::-moz-range-thumb:active {
           transform: scale(0.95) !important;
         }
 
-        .dark input[type="range"].custom-slider::-webkit-slider-thumb,
-        .darkblue input[type="range"].custom-slider::-webkit-slider-thumb,
-        .charcoal input[type="range"].custom-slider::-webkit-slider-thumb,
-        .teal input[type="range"].custom-slider::-webkit-slider-thumb,
-        .emerald input[type="range"].custom-slider::-webkit-slider-thumb,
-        .burgundy input[type="range"].custom-slider::-webkit-slider-thumb {
+        .dark input[type='range'].custom-slider::-webkit-slider-thumb,
+        .darkblue input[type='range'].custom-slider::-webkit-slider-thumb,
+        .charcoal input[type='range'].custom-slider::-webkit-slider-thumb,
+        .teal input[type='range'].custom-slider::-webkit-slider-thumb,
+        .emerald input[type='range'].custom-slider::-webkit-slider-thumb,
+        .burgundy input[type='range'].custom-slider::-webkit-slider-thumb {
           border-color: #18181b !important;
         }
 
-        .dark input[type="range"].custom-slider::-moz-range-thumb,
-        .darkblue input[type="range"].custom-slider::-moz-range-thumb,
-        .charcoal input[type="range"].custom-slider::-moz-range-thumb,
-        .teal input[type="range"].custom-slider::-moz-range-thumb,
-        .emerald input[type="range"].custom-slider::-moz-range-thumb,
-        .burgundy input[type="range"].custom-slider::-moz-range-thumb {
+        .dark input[type='range'].custom-slider::-moz-range-thumb,
+        .darkblue input[type='range'].custom-slider::-moz-range-thumb,
+        .charcoal input[type='range'].custom-slider::-moz-range-thumb,
+        .teal input[type='range'].custom-slider::-moz-range-thumb,
+        .emerald input[type='range'].custom-slider::-moz-range-thumb,
+        .burgundy input[type='range'].custom-slider::-moz-range-thumb {
           border-color: #18181b !important;
         }
       `}</style>

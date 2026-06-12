@@ -548,9 +548,10 @@ export const CompaniesPage: Company[] = Array.from({ length: 80 }).map(
       isPremium: charSum % 3 === 0,
       isVerified: charSum % 2 === 0,
       postedAt: `${1 + (index % 7)} hari lalu`,
-      description: index % 3 === 0
-        ? `${base.name} adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang ${base.industry}.`
-        : `${base.name} merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang ${base.industry}. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.`,
+      description:
+        index % 3 === 0
+          ? `${base.name} adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang ${base.industry}.`
+          : `${base.name} merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang ${base.industry}. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.`,
       availableTitles: ['Software Engineer', 'Product Manager', 'Data Analyst'],
     };
   },
@@ -865,7 +866,7 @@ export default function CompanyList() {
         </div>
 
         {/* Company Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 content-start">
           {paginatedCompanies.map((company) => (
             <Card
               key={company.id}
@@ -953,31 +954,65 @@ export default function CompanyList() {
               </Button>
 
               <div className="flex items-center gap-1">
-                {(totalPages <= 3
-                  ? Array.from({ length: totalPages }, (_, i) => i + 1)
-                  : [1, 2, 3]
-                ).map((pageNum) => {
-                  const isCurrent = currentPage === pageNum;
-                  return (
-                    <Button
-                      key={pageNum}
-                      variant={isCurrent ? 'default' : 'outline'}
-                      className={`h-9 w-9 text-xs font-bold transition-all rounded-lg cursor-pointer ${
-                        isCurrent
-                          ? `bg-primary shadow-sm shadow-primary/25 hover:bg-primary/95 ${mounted && theme === 'white' ? '!text-black border border-black' : '!text-white'}`
-                          : `border-border/60 hover:bg-accent hover:text-accent-foreground ${mounted && theme === 'white' ? 'text-black' : ''}`
-                      }`}
-                      onClick={() => setCurrentPage(pageNum)}
+                {(() => {
+                  const renderedElements: React.ReactNode[] = [];
+
+                  const renderButton = (pageNum: number) => {
+                    const isCurrent = currentPage === pageNum;
+                    return (
+                      <Button
+                        key={pageNum}
+                        variant="outline"
+                        className="h-9 w-9 text-xs font-bold transition-all rounded-lg cursor-pointer shadow-sm"
+                        style={
+                          isCurrent
+                            ? {
+                                backgroundColor: 'hsl(var(--foreground))',
+                                color: 'hsl(var(--background))',
+                                borderColor: 'hsl(var(--foreground))',
+                              }
+                            : mounted && theme === 'white'
+                              ? { color: 'black' }
+                              : { color: 'hsl(var(--foreground))' }
+                        }
+                        onClick={() => setCurrentPage(pageNum)}
+                      >
+                        {pageNum}
+                      </Button>
+                    );
+                  };
+
+                  const renderDots = (key: string) => (
+                    <span
+                      key={key}
+                      className="px-1.5 text-muted-foreground font-bold text-sm select-none"
                     >
-                      {pageNum}
-                    </Button>
+                      ...
+                    </span>
                   );
-                })}
-                {totalPages > 3 && (
-                  <span className="px-2.5 text-muted-foreground font-bold text-sm select-none">
-                    ...
-                  </span>
-                )}
+
+                  if (totalPages <= 3) {
+                    for (let i = 1; i <= totalPages; i++) {
+                      renderedElements.push(renderButton(i));
+                    }
+                  } else {
+                    // totalPages >= 4
+                    if (currentPage < 4) {
+                      // Show 1, 2, 3, ...
+                      renderedElements.push(renderButton(1));
+                      renderedElements.push(renderButton(2));
+                      renderedElements.push(renderButton(3));
+                      renderedElements.push(renderDots('dots-right'));
+                    } else {
+                      // currentPage >= 4
+                      renderedElements.push(renderDots('dots-left'));
+                      renderedElements.push(renderButton(totalPages - 2));
+                      renderedElements.push(renderButton(totalPages - 1));
+                      renderedElements.push(renderButton(totalPages));
+                    }
+                  }
+                  return renderedElements;
+                })()}
               </div>
 
               <Button
