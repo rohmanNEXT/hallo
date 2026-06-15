@@ -461,7 +461,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                   >
                     <div className="flex items-center gap-2">
                       <GripHorizontal className="h-3.5 w-3.5 text-muted-foreground/50" />
-                      <span className="text-[11px] font-bold text-foreground tracking-tight">
+                      <span className="text-[11px] font-bold text-foreground">
                         Pilih Tema Latar
                       </span>
                     </div>
