@@ -4,6 +4,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AuthModal from '@/components/AuthModal';
+import ScrollDetector from '@/components/ScrollDetector';
 
 const jakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="id" data-theme="white">
       <body className={`${jakartaSans.className} tracking-[0.3px]`}>
+        <ScrollDetector />
         <Navbar />
         {children}
         <AuthModal />

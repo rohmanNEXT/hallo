@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
     root.setAttribute('data-theme', theme);
     if (
       ['dark', 'darkblue', 'charcoal', 'teal', 'emerald', 'burgundy'].includes(
-        theme
+        theme,
       )
     ) {
       root.classList.add('dark');
@@ -85,14 +85,19 @@ const Navbar: React.FC = () => {
     setChatInput('');
   };
 
-  const [mockJobsMap, setMockJobsMap] = useState<Record<string, { title: string; company: string; location: string }>>({});
+  const [mockJobsMap, setMockJobsMap] = useState<
+    Record<string, { title: string; company: string; location: string }>
+  >({});
   const [notifications, setNotifications] = useState<AppNotification[]>([]);
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
         const { data } = await axios.get<Job[]>('/data/jobs.json');
-        const map: Record<string, { title: string; company: string; location: string }> = {};
+        const map: Record<
+          string,
+          { title: string; company: string; location: string }
+        > = {};
         data.forEach((job) => {
           map[job.id] = {
             title: job.title,
@@ -107,7 +112,9 @@ const Navbar: React.FC = () => {
     };
     const fetchNotifications = async () => {
       try {
-        const { data } = await axios.get<AppNotification[]>('/data/notifications.json');
+        const { data } = await axios.get<AppNotification[]>(
+          '/data/notifications.json',
+        );
         setNotifications(data);
       } catch (err) {
         console.error('Failed to fetch notifications in Navbar:', err);
@@ -116,6 +123,21 @@ const Navbar: React.FC = () => {
     fetchJobs();
     fetchNotifications();
   }, []);
+
+  // Close profile dropdown and notifications popover when clicking outside
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (isProfileOpen && !target.closest('.profile-dropdown-container')) {
+        setIsProfileOpen(false);
+      }
+      if (isNotificationsOpen && !target.closest('.notifications-container')) {
+        setIsNotificationsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, [isProfileOpen, isNotificationsOpen]);
 
   return (
     <>
@@ -130,7 +152,10 @@ const Navbar: React.FC = () => {
           <div className="flex h-16 items-center justify-between">
             {/* Left side - Logo & Nav */}
             <div className="flex items-center space-x-8">
-              <Link href="/" className="flex items-center space-x-1.5 hover:opacity-90 transition-opacity">
+              <Link
+                href="/"
+                className="flex items-center space-x-1.5 hover:opacity-90 transition-opacity"
+              >
                 <div className="h-6 w-6 rounded-md bg-primary flex items-center justify-center">
                   <span className="text-primary-foreground font-bold text-sm">
                     B
@@ -191,11 +216,11 @@ const Navbar: React.FC = () => {
             <div className="flex items-center gap-3">
               {/* Download App */}
               <Button
-                variant={(!mounted || theme === 'white') ? 'default' : 'outline'}
+                variant={!mounted || theme === 'white' ? 'default' : 'outline'}
                 size="sm"
-                className={`hidden sm:flex cursor-pointer ${(!mounted || theme === 'white') ? 'bg-[#017eb7] hover:bg-[#016a9a] text-white border' : ''}`}
+                className={`hidden sm:flex cursor-pointer ${!mounted || theme === 'white' ? 'bg-[#017eb7] hover:bg-[#016a9a] text-white border' : ''}`}
                 style={
-                  (!mounted || theme === 'white')
+                  !mounted || theme === 'white'
                     ? { borderColor: '#017eb7' }
                     : undefined
                 }
@@ -218,17 +243,15 @@ const Navbar: React.FC = () => {
                 >
                   <MessageCircle className="h-5 w-5" />
                   {mounted && isLoggedIn && (
-                    <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-primary text-[9px] text-primary-foreground flex items-center justify-center font-bold">
+                    <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-primary text-[1-px] text-primary-foreground flex items-center justify-center font-bold">
                       3
                     </span>
                   )}
                 </Button>
               </Link>
 
-
-
               {/* Notification Icon & Panel */}
-              <div className="relative">
+              <div className="relative notifications-container">
                 <Button
                   variant="ghost"
                   size="icon"
@@ -240,15 +263,17 @@ const Navbar: React.FC = () => {
                   className="relative"
                 >
                   <BellRing className="h-5 w-5 cursor-pointer" />
-                  <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-primary text-[9px] text-primary-foreground flex items-center justify-center font-bold">
-                    4
-                  </span>
+                  {notifications.length > 0 && (
+                    <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-primary text-[10px] text-primary-foreground flex items-center justify-center font-bold">
+                      {notifications.length}
+                    </span>
+                  )}
                 </Button>
- 
+
                 {/* Notification Popover */}
                 {isNotificationsOpen && (
                   <div
-                    className="absolute right-[-60px] sm:right-0 mt-3 w-80 rounded-xl border p-4 shadow-2xl z-50"
+                    className="absolute right-[-60px] sm:right-0 mt-[21px] w-80 rounded-xl border p-4 shadow-2xl z-50"
                     style={{
                       backgroundColor: 'hsl(var(--card))',
                       color: 'hsl(var(--card-foreground))',
@@ -265,28 +290,54 @@ const Navbar: React.FC = () => {
                       </button>
                     </div>
                     <div className="space-y-1.5 max-h-[350px] overflow-y-auto pr-1 smooth-scroll">
-                      {notifications.map((notif) => {
-                        let statusColor = 'text-destructive';
-                        if (notif.status === 'Interview') statusColor = 'text-amber-500';
-                        else if (notif.status === 'Lulus') statusColor = 'text-emerald-500';
-                        else if (notif.status === 'Review') statusColor = 'text-blue-500';
+                      {notifications.length === 0 ? (
+                        <div className="text-center py-6 text-xs text-muted-foreground font-semibold">
+                          Tidak ada notifikasi baru.
+                        </div>
+                      ) : (
+                        notifications.map((notif) => {
+                          let statusColor = 'text-destructive';
+                          if (notif.status === 'Interview')
+                            statusColor = 'text-amber-500';
+                          else if (notif.status === 'Lulus')
+                            statusColor = 'text-emerald-500';
+                          else if (notif.status === 'Review')
+                            statusColor = 'text-blue-500';
 
-                        return (
-                          <div key={notif.id} className="p-2 border rounded-lg bg-muted/20 text-xs leading-snug">
-                            <span className="font-bold text-foreground">
-                              {notif.company}
-                            </span>{' '}
-                            status lamaran Anda diperbarui ke{' '}
-                            <span className={`${statusColor} font-bold`}>
-                              {notif.status}
-                            </span>
-                            {notif.suffix}
-                            <span className="text-xs text-muted-foreground block mt-1">
-                              {notif.time}
-                            </span>
-                          </div>
-                        );
-                      })}
+                          return (
+                            <div
+                              key={notif.id}
+                              className="p-2 pr-7 border rounded-lg bg-muted/20 text-xs leading-snug relative group"
+                            >
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setNotifications(
+                                    notifications.filter(
+                                      (n) => n.id !== notif.id,
+                                    ),
+                                  );
+                                }}
+                                className="absolute top-2 right-2 text-muted-foreground hover:text-destructive opacity-40 hover:opacity-100 transition-all cursor-pointer"
+                                title="Hapus notifikasi"
+                              >
+                                <X className="h-3.5 w-3.5" />
+                              </button>
+                              <span className="font-bold text-foreground">
+                                {notif.company}
+                              </span>{' '}
+                              status lamaran Anda diperbarui ke{' '}
+                              <span className={`${statusColor} font-bold`}>
+                                {notif.status}
+                              </span>
+                              {notif.suffix}
+                              <span className="text-xs text-muted-foreground block mt-1">
+                                {notif.time}
+                              </span>
+                            </div>
+                          );
+                        })
+                      )}
                     </div>
                   </div>
                 )}
@@ -294,12 +345,12 @@ const Navbar: React.FC = () => {
 
               {/* Profile Menu Dropdown */}
               {!mounted ? (
-                 <div className="w-16 h-8" />
+                <div className="w-16 h-8" />
               ) : isLoggedIn && user ? (
-                <div className="relative">
+                <div className="relative profile-dropdown-container">
                   <Button
                     variant="ghost"
-                    className="flex items-center gap-2 px-2 h-10 hover:bg-accent rounded-full cursor-pointer"
+                    className="flex h-10 w-10 items-center justify-center p-0 hover:bg-foreground/10 rounded-full cursor-pointer"
                     onClick={() => {
                       const nextState = !isProfileOpen;
                       if (nextState) closeAllOthers('profile');
@@ -310,10 +361,10 @@ const Navbar: React.FC = () => {
                       <img
                         src={user.profileImage}
                         alt={user.name}
-                        className="h-8 w-8 rounded-full object-cover border-2 border-primary"
+                        className="h-8 w-8 rounded-full object-cover"
                       />
                     ) : (
-                      <div className="h-8 w-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-sm border-2 border-primary">
+                      <div className="h-8 w-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-sm">
                         {user.name.charAt(0)}
                       </div>
                     )}
@@ -321,7 +372,7 @@ const Navbar: React.FC = () => {
 
                   {isProfileOpen && (
                     <div
-                      className="absolute right-0 mt-3 w-60 rounded-xl border p-2 shadow-2xl z-50"
+                      className="absolute right-0 mt-[18px] w-60 rounded-xl border p-2 shadow-2xl z-50"
                       style={{
                         backgroundColor: 'hsl(var(--card))',
                         color: 'hsl(var(--card-foreground))',
@@ -333,7 +384,7 @@ const Navbar: React.FC = () => {
                             <img
                               src={user.profileImage}
                               alt={user.name}
-                              className="h-7 w-7 rounded-full object-cover border"
+                              className="h-7 w-7 rounded-full object-cover"
                             />
                           ) : (
                             <div className="h-7 w-7 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">
@@ -365,7 +416,11 @@ const Navbar: React.FC = () => {
                       </div>
 
                       <Link
-                        href={user.role === 'admin' ? '/employer' : '/dashboard?tab=profile'}
+                        href={
+                          user.role === 'admin'
+                            ? '/employer'
+                            : '/dashboard?tab=profile'
+                        }
                         className="group flex items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg transition-all duration-75 cursor-pointer"
                         onClick={() => setIsProfileOpen(false)}
                       >

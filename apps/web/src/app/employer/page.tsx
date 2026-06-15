@@ -117,19 +117,6 @@ export default function EmployerDashboard() {
                 </p>
               </div>
             </div>
-
-            {/* Coins Widget */}
-            <div className="bg-amber-400 border-2 border-black px-4 py-2.5 rounded-xl shadow-[3px_3px_0px_0px_black] flex items-center gap-3">
-              <Coins className="h-5 w-5 text-black" />
-              <div>
-                <div className="text-[10px] text-black font-bold uppercase leading-none">
-                  Saldo Koin
-                </div>
-                <div className="font-black text-sm text-black mt-1">
-                  {user.coins || 0} Koin
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Navigation Tabs */}
@@ -438,7 +425,7 @@ export default function EmployerDashboard() {
                   </div>
 
                   <div className="flex flex-col gap-1">
-                    <label className="text-[9px] font-black uppercase text-stone-400">
+                    <label className="text-[10px] font-black uppercase text-stone-400">
                       Deskripsi Singkat
                     </label>
                     <textarea
@@ -451,7 +438,7 @@ export default function EmployerDashboard() {
                   </div>
 
                   <div className="flex flex-col gap-1">
-                    <label className="text-[9px] font-black uppercase text-stone-400">
+                    <label className="text-[10px] font-black uppercase text-stone-400">
                       Estimasi Gaji Bulanan (IDR)
                     </label>
                     <Input

@@ -18,6 +18,7 @@ export default function IndonesiaMap() {
   const activeMarkerRef = useRef<any>(null);
   const [leafletLoaded, setLeafletLoaded] = useState(false);
   const [minJobs, setMinJobs] = useState(48);
+  const [activeCity, setActiveCity] = useState<string | null>(null);
   const { theme } = useAppStore();
 
   const hotspots: Hotspot[] = [
@@ -84,6 +85,27 @@ export default function IndonesiaMap() {
     };
   }, []);
 
+  // Close active tooltip when clicking anywhere outside the marker/tooltip
+  useEffect(() => {
+    const handleDocumentClick = (e: MouseEvent) => {
+      if (activeMarkerRef.current) {
+        const target = e.target as HTMLElement;
+        // Jika klik bukan pada icon marker atau isi tooltip, maka tutup tooltip
+        if (!target.closest('.custom-map-tooltip') && !target.closest('.custom-div-icon')) {
+          activeMarkerRef.current.unbindTooltip();
+          activeMarkerRef.current.tooltipOpen = false;
+          activeMarkerRef.current = null;
+          setActiveCity(null);
+        }
+      }
+    };
+
+    document.addEventListener('click', handleDocumentClick);
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  }, []);
+
   // Initialize the Map Base Layer
   useEffect(() => {
     if (!leafletLoaded || !mapContainerRef.current) return;
@@ -143,6 +165,16 @@ export default function IndonesiaMap() {
 
     // Initialize Markers Group Layer
     markersGroupRef.current = L.layerGroup().addTo(map);
+
+    // Close active tooltip when clicking outside markers (on the map itself)
+    map.on('click', () => {
+      if (activeMarkerRef.current) {
+        activeMarkerRef.current.unbindTooltip();
+        activeMarkerRef.current.tooltipOpen = false;
+        activeMarkerRef.current = null;
+        setActiveCity(null);
+      }
+    });
   }, [leafletLoaded, theme]);
 
   // Update Markers based on minJobs filter slider
@@ -165,8 +197,8 @@ export default function IndonesiaMap() {
       const customIcon = L.divIcon({
         html: `
           <span class="relative flex h-3.5 w-3.5 items-center justify-center">
-            <span class="animate-slow-ping absolute inline-flex h-full w-full rounded-full bg-[#0f6dff]/40 opacity-50"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-[#0f6dff] opacity-85 border border-white/70"></span>
+            <span class="animate-slow-ping absolute inline-flex h-full w-full rounded-full bg-primary/40 opacity-50"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary opacity-85 border border-white/70"></span>
           </span>
         `,
         className: 'custom-div-icon',
@@ -189,8 +221,33 @@ export default function IndonesiaMap() {
       // Track tooltip state on the marker object itself
       (marker as any).tooltipOpen = false;
 
+      // Auto-open if this is the active city
+      if (hs.city === activeCity) {
+        marker
+          .bindTooltip(
+            `
+            <div class="custom-map-tooltip-inner px-2 py-1 text-[10px] font-bold rounded-lg shadow-md select-none">
+              <div class="text-primary font-extrabold text-[11px] mb-0.5">${hs.city}</div>
+              <div class="text-emerald-500 font-extrabold flex items-center gap-1">
+                <span class="font-extrabold">${hs.count} Loker</span>
+              </div>
+            </div>
+          `,
+            {
+              permanent: true,
+              direction: tooltipDirection,
+              className: 'custom-map-tooltip p-0',
+              interactive: true,
+            },
+          )
+          .openTooltip();
+        (marker as any).tooltipOpen = true;
+        activeMarkerRef.current = marker;
+      }
+
       // Open tooltip ONLY on click
       marker.on('click', (e: any) => {
+        L.DomEvent.stopPropagation(e);
         if (e.originalEvent) {
           e.originalEvent.stopPropagation();
         }
@@ -205,12 +262,13 @@ export default function IndonesiaMap() {
           marker.unbindTooltip();
           (marker as any).tooltipOpen = false;
           activeMarkerRef.current = null;
+          setActiveCity(null);
         } else {
           marker
             .bindTooltip(
               `
             <div class="custom-map-tooltip-inner px-2 py-1 text-[10px] font-bold rounded-lg shadow-md select-none">
-              <div class="text-[#0f6dff] font-extrabold text-[11px] mb-0.5">${hs.city}</div>
+              <div class="text-primary font-extrabold text-[11px] mb-0.5">${hs.city}</div>
               <div class="text-emerald-500 font-extrabold flex items-center gap-1">
                 <span class="font-extrabold">${hs.count} Loker</span>
               </div>
@@ -226,10 +284,11 @@ export default function IndonesiaMap() {
             .openTooltip();
           (marker as any).tooltipOpen = true;
           activeMarkerRef.current = marker;
+          setActiveCity(hs.city);
         }
       });
     });
-  }, [leafletLoaded, minJobs]);
+  }, [leafletLoaded, minJobs, theme, activeCity]);
 
   return (
     <section className="max-w-7xl mx-auto px-6 pt-22 pb-14">
@@ -265,9 +324,9 @@ export default function IndonesiaMap() {
                 max="48"
                 value={66 - minJobs}
                 onChange={(e) => setMinJobs(66 - Number(e.target.value))}
-                className="w-full h-1 rounded-lg appearance-none cursor-pointer custom-slider focus:outline-none focus:ring-2 focus:ring-[#0f6dff]/30 transition-all"
+                className="w-full h-1 rounded-lg appearance-none cursor-pointer custom-slider focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
                 style={{
-                  background: `linear-gradient(to right, #0f6dff 0%, #0f6dff ${(((66 - minJobs) - 18) / (48 - 18)) * 100}%, #3f3f46 ${(((66 - minJobs) - 18) / (48 - 18)) * 100}%, #3f3f46 100%)`,
+                  background: `linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) ${(((66 - minJobs) - 18) / (48 - 18)) * 100}%, #3f3f46 ${(((66 - minJobs) - 18) / (48 - 18)) * 100}%, #3f3f46 100%)`,
                 }}
               />
             </div>
@@ -397,9 +456,9 @@ export default function IndonesiaMap() {
           width: 14px !important;
           height: 14px !important;
           border-radius: 50% !important;
-          background: #0f6dff !important;
+          background: hsl(var(--primary)) !important;
           border: 2.5px solid #ffffff !important;
-          box-shadow: 0 2px 5px rgba(15, 109, 255, 0.35) !important;
+          box-shadow: 0 2px 5px hsl(var(--primary) / 0.35) !important;
           cursor: pointer !important;
           margin-top: -5px !important; /* Center the thumb vertically on a 4px track */
           transition:
@@ -408,7 +467,7 @@ export default function IndonesiaMap() {
         }
         input[type='range'].custom-slider::-webkit-slider-thumb:hover {
           transform: scale(1.15) !important;
-          background: #0056d6 !important;
+          filter: brightness(0.9) !important;
         }
         input[type='range'].custom-slider::-webkit-slider-thumb:active {
           transform: scale(0.95) !important;
@@ -419,9 +478,9 @@ export default function IndonesiaMap() {
           width: 14px !important;
           height: 14px !important;
           border-radius: 50% !important;
-          background: #0f6dff !important;
+          background: hsl(var(--primary)) !important;
           border: 2.5px solid #ffffff !important;
-          box-shadow: 0 2px 5px rgba(15, 109, 255, 0.35) !important;
+          box-shadow: 0 2px 5px hsl(var(--primary) / 0.35) !important;
           cursor: pointer !important;
           box-sizing: border-box !important;
           transition:
@@ -430,7 +489,7 @@ export default function IndonesiaMap() {
         }
         input[type='range'].custom-slider::-moz-range-thumb:hover {
           transform: scale(1.15) !important;
-          background: #0056d6 !important;
+          filter: brightness(0.9) !important;
         }
         input[type='range'].custom-slider::-moz-range-thumb:active {
           transform: scale(0.95) !important;

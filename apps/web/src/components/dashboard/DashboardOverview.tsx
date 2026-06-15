@@ -214,11 +214,10 @@ export default function DashboardOverview({
           style={{
             left: floatPos.current.x,
             top: floatPos.current.y,
-            width: 280,
+            width: 260,
           }}
         >
-          <div className="bg-card/95 backdrop-blur-md border border-border/60 rounded-2xl shadow-2xl overflow-hidden">
-            {/* Title Bar - drag handle */}
+          <div className="bg-background/20 backdrop-blur-sm border border-border/60 rounded-2xl shadow-2xl overflow-hidden">
             <div
               onMouseDown={(e) => {
                 if (!floatRef.current) return;
@@ -230,7 +229,7 @@ export default function DashboardOverview({
                 };
                 e.preventDefault();
               }}
-              className="flex items-center justify-between px-3.5 py-2.5 bg-muted/50 border-b border-border/50 cursor-grab active:cursor-grabbing"
+              className="flex items-center justify-between px-3.5 py-2.5 bg-transparent border-b border-border/50 cursor-grab active:cursor-grabbing"
             >
               <div className="flex items-center gap-2">
                 <GripHorizontal className="h-3.5 w-3.5 text-muted-foreground/50" />
@@ -240,22 +239,22 @@ export default function DashboardOverview({
               </div>
               <button
                 onClick={() => setShowPicker(false)}
-                className="h-6 w-6 rounded-full bg-rose-500 hover:bg-rose-600 flex items-center justify-center transition-colors cursor-pointer shadow-sm"
+                className="h-6 w-6 rounded-full bg-rose-500 hover:bg-rose-600 flex items-center justify-center transition-colors cursor-pointer shadow-sm border-none"
               >
                 <X className="h-3.5 w-3.5 text-white" />
               </button>
             </div>
 
             {/* Photo Grid */}
-            <div className="p-3 space-y-2.5">
-              <div className="grid grid-cols-3 gap-2">
+            <div className="p-3.5 space-y-3">
+              <div className="grid grid-cols-3 gap-2.5">
                 {bannerPhotos.slice(0, 6).map((photo, idx) => (
                   <button
                     key={idx}
                     onClick={() => changePhoto(idx)}
-                    className={`relative rounded-xl overflow-hidden h-[70px] cursor-pointer group transition-all ${
+                    className={`relative rounded-xl overflow-hidden h-[58px] cursor-pointer group transition-all border-none p-0 ${
                       bgIndex === idx
-                        ? 'ring-2 ring-primary ring-offset-1 ring-offset-card'
+                        ? 'ring-2 ring-primary ring-offset-1 ring-offset-background'
                         : 'hover:ring-2 hover:ring-primary/40'
                     }`}
                   >
@@ -266,11 +265,11 @@ export default function DashboardOverview({
                       draggable={false}
                     />
                     <div className="absolute inset-0 bg-black/25 group-hover:bg-black/5 transition-all" />
-                    <span className="absolute bottom-1 left-0 right-0 text-center text-[9px] font-bold text-white drop-shadow-md">
+                    <span className="absolute bottom-1 left-0 right-0 text-center text-[10px] font-bold text-white drop-shadow-md">
                       {photo.label}
                     </span>
                     {bgIndex === idx && (
-                      <div className="absolute top-1.5 right-1.5 h-4 w-4 bg-primary rounded-full flex items-center justify-center shadow">
+                      <div className="absolute top-1 right-1 h-3.5 w-3.5 bg-primary rounded-full flex items-center justify-center shadow">
                         <span className="text-[8px] text-primary-foreground font-black">
                           ✓
                         </span>
@@ -283,9 +282,9 @@ export default function DashboardOverview({
               {/* Standalone Bing Image Mode box below */}
               <button
                 onClick={() => changePhoto(6)}
-                className={`w-full relative rounded-xl overflow-hidden h-[48px] cursor-pointer group transition-all flex items-center justify-between px-3 border transition-colors ${
+                className={`w-full relative rounded-xl overflow-hidden h-[46px] cursor-pointer group transition-all flex items-center justify-between px-3 border transition-colors ${
                   bgIndex === 6
-                    ? 'ring-2 ring-primary ring-offset-1 ring-offset-card bg-primary/10 border-primary/30'
+                    ? 'ring-2 ring-primary ring-offset-1 ring-offset-background bg-primary/10 border-primary/30'
                     : 'hover:bg-muted/50 border-border/60 bg-background/25'
                 }`}
               >
@@ -304,7 +303,7 @@ export default function DashboardOverview({
                   </span>
                 </div>
                 {bgIndex === 6 && (
-                  <div className="h-4 w-4 bg-primary rounded-full flex items-center justify-center shadow">
+                  <div className="h-3.5 w-3.5 bg-primary rounded-full flex items-center justify-center shadow">
                     <span className="text-[8px] text-primary-foreground font-black">✓</span>
                   </div>
                 )}

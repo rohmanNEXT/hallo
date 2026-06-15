@@ -207,7 +207,7 @@ export default function DashboardApplications({
                   <div className="flex items-center justify-between">
                     <button
                       onClick={() => onNavigate?.('chat')}
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-primary/20 text-foreground text-[11px] font-bold rounded-lg hover:bg-primary/30 transition-all cursor-pointer"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-primary/20 text-foreground text-[11px] font-bold rounded-lg hover:bg-primary/30 border border-primary/30 transition-all cursor-pointer"
                     >
                       <MessageSquare className="h-3 w-3" />
                       <span>Kirim Pesan</span>

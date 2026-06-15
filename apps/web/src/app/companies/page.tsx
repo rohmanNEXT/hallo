@@ -288,9 +288,9 @@ const CompanyList: React.FC = () => {
                 <Button
                   onClick={handleReset}
                   variant="outline"
-                  className="h-10 px-4 text-xs font-semibold flex items-center gap-1.5 w-full sm:w-auto cursor-pointer !border-red-500/40 hover:!border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-all"
+                  className="h-10 px-4 text-xs font-semibold flex items-center gap-1.5 w-full sm:w-auto cursor-pointer !border-red-500/60 hover:!border-red-500 text-red-500/60 hover:text-red-500 hover:bg-red-500/10 transition-all"
                 >
-                  <RefreshCw className="h-3.5 w-3.5" />
+                  <RefreshCw className="h-3.5 w-3.5 opacity-60" />
                   Reset
                 </Button>
               </div>

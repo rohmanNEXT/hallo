@@ -201,7 +201,7 @@ export default function DashboardChat() {
                   <span className="text-xs font-bold text-foreground truncate">
                     {contact.name}
                   </span>
-                  <span className="text-[9px] text-muted-foreground/60">
+                  <span className="text-[10px] text-muted-foreground/60">
                     {contact.time}
                   </span>
                 </div>
@@ -249,7 +249,7 @@ export default function DashboardChat() {
                 <span
                   className={`h-1.5 w-1.5 rounded-full ${activeContact.online ? 'bg-emerald-500' : 'bg-muted-foreground'}`}
                 />
-                <span className="text-[9px] text-muted-foreground font-medium">
+                <span className="text-[10px] text-muted-foreground font-medium">
                   {activeContact.online ? 'Online' : 'Offline'}
                 </span>
               </div>
@@ -298,7 +298,7 @@ export default function DashboardChat() {
                             className="bg-transparent border-b border-primary-foreground/50 text-white focus:outline-none w-full text-[11px]"
                             autoFocus
                           />
-                          <div className="flex justify-end gap-1.5 text-[9px]">
+                          <div className="flex justify-end gap-1.5 text-[10px]">
                             <button
                               onClick={() => {
                                 if (editInput.trim()) {
@@ -403,7 +403,7 @@ export default function DashboardChat() {
             <Button
               type="submit"
               size="icon"
-              className="h-9 w-9 shrink-0 cursor-pointer"
+              className="h-9 w-9 shrink-0 cursor-pointer border border-primary/30"
             >
               <Send className="h-3.5 w-3.5" />
             </Button>

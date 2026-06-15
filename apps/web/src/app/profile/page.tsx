@@ -476,7 +476,6 @@ export default function ProfilePage() {
             <div className="absolute inset-0 bg-linear-to-r from-black/60 via-black/30 to-black/10" />
             <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
 
-
             {/* Quick change photo button */}
             <div className="absolute top-4 right-4 z-20">
               <button
@@ -497,10 +496,10 @@ export default function ProfilePage() {
               style={{
                 left: floatPos.current.x,
                 top: floatPos.current.y,
-                width: 280,
+                width: 260,
               }}
             >
-              <div className="bg-card/95 backdrop-blur-md border border-border/60 rounded-2xl shadow-2xl overflow-hidden">
+              <div className="bg-background/95 backdrop-blur-md border border-border/60 rounded-2xl shadow-2xl overflow-hidden">
                 {/* Title Bar - drag handle */}
                 <div
                   onMouseDown={(e) => {
@@ -513,7 +512,7 @@ export default function ProfilePage() {
                     };
                     e.preventDefault();
                   }}
-                  className="flex items-center justify-between px-3.5 py-2.5 bg-muted/50 border-b border-border/50 cursor-grab active:cursor-grabbing"
+                  className="flex items-center justify-between px-3.5 py-2.5 bg-transparent border-b border-border/50 cursor-grab active:cursor-grabbing"
                 >
                   <div className="flex items-center gap-2">
                     <GripHorizontal className="h-3.5 w-3.5 text-muted-foreground/50" />
@@ -530,8 +529,8 @@ export default function ProfilePage() {
                 </div>
 
                 {/* Photo Grid */}
-                <div className="p-3 space-y-2.5">
-                  <div className="grid grid-cols-3 gap-2">
+                <div className="p-3.5 space-y-3">
+                  <div className="grid grid-cols-3 gap-2.5">
                     {bannerPhotos.slice(0, 6).map((photo, idx) => (
                       <button
                         key={idx}
@@ -539,9 +538,9 @@ export default function ProfilePage() {
                           setBgIndex(idx);
                           setCookie('banner_photo', String(idx));
                         }}
-                        className={`relative rounded-xl overflow-hidden h-[70px] cursor-pointer group transition-all border-none p-0 ${
+                        className={`relative rounded-xl overflow-hidden h-[58px] cursor-pointer group transition-all border-none p-0 ${
                           bgIndex === idx
-                            ? 'ring-2 ring-primary ring-offset-1 ring-offset-card'
+                            ? 'ring-2 ring-primary ring-offset-1 ring-offset-background'
                             : 'hover:ring-2 hover:ring-primary/40'
                         }`}
                       >
@@ -552,11 +551,11 @@ export default function ProfilePage() {
                           draggable={false}
                         />
                         <div className="absolute inset-0 bg-black/25 group-hover:bg-black/5 transition-all" />
-                        <span className="absolute bottom-1 left-0 right-0 text-center text-[9px] font-bold text-white drop-shadow-md">
+                        <span className="absolute bottom-1 left-0 right-0 text-center text-[10px] font-bold text-white drop-shadow-md">
                           {photo.label}
                         </span>
                         {bgIndex === idx && (
-                          <div className="absolute top-1.5 right-1.5 h-4 w-4 bg-primary rounded-full flex items-center justify-center shadow">
+                          <div className="absolute top-1 right-1 h-3.5 w-3.5 bg-primary rounded-full flex items-center justify-center shadow">
                             <Check className="h-2.5 w-2.5 text-white" />
                           </div>
                         )}
@@ -570,9 +569,9 @@ export default function ProfilePage() {
                       setBgIndex(6);
                       setCookie('banner_photo', '6');
                     }}
-                    className={`w-full relative rounded-xl overflow-hidden h-[48px] cursor-pointer group transition-all flex items-center justify-between px-3 border transition-colors ${
+                    className={`w-full relative rounded-xl overflow-hidden h-[46px] cursor-pointer group transition-all flex items-center justify-between px-3 border transition-colors ${
                       bgIndex === 6
-                        ? 'ring-2 ring-primary ring-offset-1 ring-offset-card bg-primary/10 border-primary/30'
+                        ? 'ring-2 ring-primary ring-offset-1 ring-offset-background bg-primary/10 border-primary/30'
                         : 'hover:bg-muted/50 border-border/60 bg-background/25'
                     }`}
                   >
@@ -652,1152 +651,1144 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* 2-Column Dashboard Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3.5 gap-8">
-          {/* Left Column: Personal details, links, documents */}
-          <div className="space-y-6 lg:col-span-1">
-            {/* UserProfile Info Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-5 relative">
-              <div className="flex items-center justify-between">
-                <h3 className="font-bold text-sm text-muted-foreground uppercase tracking-wider">
-                  Informasi Kontak
-                </h3>
-                {editSection !== 'contact' ? (
-                  <button
-                    onClick={() => handleStartEdit('contact')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
-                  >
-                    <Pencil className="h-4 w-4" />
-                  </button>
-                ) : (
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <Check className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {editSection === 'contact' ? (
-                <div className="space-y-3.5 pt-1">
-                  <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Nama Lengkap
-                    </label>
-                    <Input
-                      value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
-                      className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Nama Panggilan
-                    </label>
-                    <Input
-                      value={formData.nickname}
-                      onChange={(e) =>
-                        setFormData({ ...formData, nickname: e.target.value })
-                      }
-                      className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Posisi / Karir
-                    </label>
-                    <Input
-                      value={formData.career}
-                      onChange={(e) =>
-                        setFormData({ ...formData, career: e.target.value })
-                      }
-                      className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Nomor WA
-                    </label>
-                    <Input
-                      value={formData.waNumber}
-                      onChange={(e) =>
-                        setFormData({ ...formData, waNumber: e.target.value })
-                      }
-                      className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Email
-                    </label>
-                    <Input
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                      className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
-                    />
-                  </div>
-                </div>
+        {/* 1-Column Dashboard Layout */}
+        <div className="space-y-6 max-w-4xl mx-auto">
+          {/* About Me Section */}
+          <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
+            <div className="flex items-center justify-between">
+              <h3 className="font-extrabold text-sm text-foreground tracking-tight">
+                Tentang Saya
+              </h3>
+              {editSection !== 'aboutMe' ? (
+                <button
+                  onClick={() => handleStartEdit('aboutMe')}
+                  className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                >
+                  <Pencil className="h-4 w-4" />
+                </button>
               ) : (
-                <div className="space-y-4 pt-1">
-                  <div className="flex items-center gap-3">
-                    <User className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
-                    <div>
-                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
-                        Nama Lengkap
-                      </span>
-                      <span className="text-xs font-bold text-foreground">
-                        {user.name}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <User className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
-                    <div>
-                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
-                        Nama Panggilan
-                      </span>
-                      <span className="text-xs font-bold text-foreground">
-                        {user.nickname || '-'}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Phone className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
-                    <div>
-                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
-                        WhatsApp
-                      </span>
-                      <span className="text-xs font-bold text-foreground">
-                        {user.waNumber || '-'}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Mail className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
-                    <div className="min-w-0">
-                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
-                        Email
-                      </span>
-                      <span className="text-xs font-bold text-foreground block break-all">
-                        {user.email}
-                      </span>
-                    </div>
-                  </div>
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={handleSave}
+                    className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <Check className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={handleCancelEdit}
+                    className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
                 </div>
               )}
             </div>
 
-            {/* Links & Files Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-5 relative">
-              <div className="flex items-center justify-between">
-                <h3 className="font-bold text-sm text-muted-foreground uppercase tracking-wider">
-                  Tautan & Dokumen
-                </h3>
-                {editSection !== 'links' ? (
-                  <button
-                    onClick={() => handleStartEdit('links')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
-                  >
-                    <Pencil className="h-4 w-4" />
-                  </button>
-                ) : (
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <Check className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </div>
-                )}
-              </div>
+            {editSection === 'aboutMe' ? (
+              <textarea
+                value={formData.aboutMe}
+                onChange={(e) =>
+                  setFormData({ ...formData, aboutMe: e.target.value })
+                }
+                rows={4}
+                className="w-full text-xs font-medium bg-background border border-border/80 rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-primary leading-relaxed"
+              />
+            ) : (
+              <p className="text-xs text-muted-foreground font-medium leading-relaxed">
+                {user.aboutMe || 'Tulis ringkasan tentang diri Anda di sini...'}
+              </p>
+            )}
+          </div>
 
-              {editSection === 'links' ? (
-                <div className="space-y-3.5 pt-1">
-                  <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1.5">
+          {/* Links & Files Section */}
+          <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-5 relative">
+            <div className="flex items-center justify-between">
+              <h3 className="font-bold text-sm text-muted-foreground uppercase tracking-wider">
+                Tautan & Dokumen
+              </h3>
+              {editSection !== 'links' ? (
+                <button
+                  onClick={() => handleStartEdit('links')}
+                  className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                >
+                  <Pencil className="h-4 w-4" />
+                </button>
+              ) : (
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={handleSave}
+                    className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <Check className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={handleCancelEdit}
+                    className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {editSection === 'links' ? (
+              <div className="space-y-3.5 pt-1">
+                <div>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1.5">
+                    Resume
+                  </label>
+                  {formData.softFile ? (
+                    <div className="flex items-center justify-between bg-muted/40 border border-border/80 rounded-xl p-2.5">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="text-xl shrink-0">
+                          {formData.softFile.endsWith('.pdf') ? '📄' : '📝'}
+                        </span>
+                        <span className="text-xs font-bold truncate text-foreground">
+                          {formData.softFile}
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setFormData({ ...formData, softFile: '' })
+                        }
+                        className="text-destructive hover:bg-destructive/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="relative border-2 border-dashed border-border/85 hover:border-primary/50 rounded-xl p-4.5 transition-all flex flex-col items-center justify-center gap-2 bg-background/25 group">
+                      <input
+                        type="file"
+                        accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                        onChange={handleFileUpload}
+                        className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                      />
+                      <div className="text-2xl text-muted-foreground group-hover:scale-110 transition-transform">
+                        📁
+                      </div>
+                      <span className="text-xs font-bold text-foreground">
+                        Pilih Berkas
+                      </span>
+                      <span className="text-[10px] text-muted-foreground text-center">
+                        PDF atau Word (Maks. 10MB)
+                      </span>
+                    </div>
+                  )}
+                  {uploadError && (
+                    <p className="text-[10px] font-bold text-rose-500 mt-1.5">
+                      {uploadError}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                    Website Pribadi
+                  </label>
+                  <Input
+                    value={formData.website}
+                    onChange={(e) =>
+                      setFormData({ ...formData, website: e.target.value })
+                    }
+                    placeholder="https://budisantoso.dev"
+                    className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                    LinkedIn{' '}
+                  </label>
+                  <Input
+                    value={formData.socialMedia}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        socialMedia: e.target.value,
+                      })
+                    }
+                    placeholder="https://linkedin.com/in/..."
+                    className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-4 pt-1">
+                <div className="flex items-center gap-3">
+                  <FileText className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
+                  <div className="min-w-0 flex-1">
+                    <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
                       Resume
+                    </span>
+                    {user.softFile ? (
+                      <div className="flex items-center gap-2 mt-1 min-w-0">
+                        <a
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            alert(`Membuka berkas: ${user.softFile}`);
+                          }}
+                          className="text-xs font-bold text-foreground hover:text-primary hover:underline truncate block"
+                        >
+                          {user.softFile}
+                        </a>
+                        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-primary/10 border border-primary/20 text-muted-foreground uppercase shrink-0">
+                          {user.softFile.split('.').pop()}
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="text-xs font-bold text-foreground block mt-1">
+                        -
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Globe className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
+                  <div>
+                    <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                      Website
+                    </span>
+                    {user.website ? (
+                      <a
+                        href={user.website}
+                        className="text-xs font-bold text-foreground hover:text-primary hover:underline block truncate"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {user.website}
+                      </a>
+                    ) : (
+                      <span className="text-xs font-bold text-foreground">
+                        -
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Linkedin className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
+                  <div>
+                    <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                      LinkedIn
+                    </span>
+                    {user.socialMedia ? (
+                      <a
+                        href={user.socialMedia}
+                        className="text-xs font-bold text-foreground hover:text-primary hover:underline block truncate"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {user.socialMedia}
+                      </a>
+                    ) : (
+                      <span className="text-xs font-bold text-foreground">
+                        -
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          {/* UserProfile Info Section */}
+          <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-5 relative">
+            <div className="flex items-center justify-between">
+              <h3 className="font-bold text-sm text-muted-foreground uppercase tracking-wider">
+                Informasi Kontak
+              </h3>
+              {editSection !== 'contact' ? (
+                <button
+                  onClick={() => handleStartEdit('contact')}
+                  className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                >
+                  <Pencil className="h-4 w-4" />
+                </button>
+              ) : (
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={handleSave}
+                    className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <Check className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={handleCancelEdit}
+                    className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {editSection === 'contact' ? (
+              <div className="space-y-3.5 pt-1">
+                <div>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                    Nama Lengkap
+                  </label>
+                  <Input
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                    Nama Panggilan
+                  </label>
+                  <Input
+                    value={formData.nickname}
+                    onChange={(e) =>
+                      setFormData({ ...formData, nickname: e.target.value })
+                    }
+                    className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                    Posisi / Karir
+                  </label>
+                  <Input
+                    value={formData.career}
+                    onChange={(e) =>
+                      setFormData({ ...formData, career: e.target.value })
+                    }
+                    className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                    Nomor WA
+                  </label>
+                  <Input
+                    value={formData.waNumber}
+                    onChange={(e) =>
+                      setFormData({ ...formData, waNumber: e.target.value })
+                    }
+                    className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                    Email
+                  </label>
+                  <Input
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-4 pt-1">
+                <div className="flex items-center gap-3">
+                  <User className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
+                  <div>
+                    <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                      Nama Lengkap
+                    </span>
+                    <span className="text-xs font-bold text-foreground">
+                      {user.name}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <User className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
+                  <div>
+                    <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                      Nama Panggilan
+                    </span>
+                    <span className="text-xs font-bold text-foreground">
+                      {user.nickname || '-'}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Phone className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
+                  <div>
+                    <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                      WhatsApp
+                    </span>
+                    <span className="text-xs font-bold text-foreground">
+                      {user.waNumber || '-'}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Mail className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
+                  <div className="min-w-0">
+                    <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                      Email
+                    </span>
+                    <span className="text-xs font-bold text-foreground block break-all">
+                      {user.email}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Pengalaman Kerja Section */}
+          <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
+            <div className="flex items-center justify-between">
+              <h3 className="font-extrabold text-sm text-foreground tracking-tight">
+                Pengalaman Kerja
+              </h3>
+              {editSection !== 'experience' ? (
+                <button
+                  onClick={() => handleStartEdit('experience')}
+                  className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                >
+                  <Pencil className="h-4 w-4" />
+                </button>
+              ) : (
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={handleSave}
+                    className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <Check className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={handleCancelEdit}
+                    className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {editSection === 'experience' ? (
+              <div className="space-y-4">
+                <div className="space-y-3 bg-background/40 p-4 rounded-xl border border-border/70">
+                  <div>
+                    <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                      Posisi & Perusahaan
                     </label>
-                    {formData.softFile ? (
-                      <div className="flex items-center justify-between bg-muted/40 border border-border/80 rounded-xl p-2.5">
-                        <div className="flex items-center gap-2 min-w-0">
-                          <span className="text-xl shrink-0">
-                            {formData.softFile.endsWith('.pdf') ? '📄' : '📝'}
-                          </span>
-                          <span className="text-xs font-bold truncate text-foreground">
-                            {formData.softFile}
-                          </span>
-                        </div>
+                    <Input
+                      value={expName}
+                      onChange={(e) => setExpName(e.target.value)}
+                      placeholder="e.g. Junior Developer di TechCorp"
+                      className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                        Tanggal Mulai
+                      </label>
+                      <Input
+                        value={expStart}
+                        onChange={(e) => setExpStart(e.target.value)}
+                        placeholder="e.g. Jan 2018 / 2018"
+                        className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                        Tanggal Selesai
+                      </label>
+                      <Input
+                        value={expEnd}
+                        onChange={(e) => setExpEnd(e.target.value)}
+                        placeholder="e.g. Des 2022 / Sekarang"
+                        className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                      />
+                    </div>
+                  </div>
+                  <Button
+                    onClick={handleAddExp}
+                    size="sm"
+                    className="w-full h-9 cursor-pointer text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/95"
+                  >
+                    Tambah Pengalaman
+                  </Button>
+                </div>
+                <div className="space-y-2">
+                  {formData.experience.map((exp: string) => (
+                    <div
+                      key={exp}
+                      className="flex items-center justify-between bg-background/50 border border-border/80 text-foreground text-xs font-semibold p-3 rounded-xl shadow-sm hover:border-border transition-all"
+                    >
+                      <div className="flex items-center gap-2 min-w-0">
+                        <Briefcase className="h-4 w-4 text-primary shrink-0" />
+                        <span className="truncate">{exp}</span>
+                      </div>
+                      <div className="flex items-center gap-1 shrink-0">
                         <button
                           type="button"
-                          onClick={() =>
-                            setFormData({ ...formData, softFile: '' })
-                          }
+                          onClick={() => {
+                            const parsed = parseItem(exp);
+                            setExpName(parsed.name);
+                            setExpStart(parsed.start);
+                            setExpEnd(parsed.end);
+                            handleRemoveExp(exp);
+                          }}
+                          className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                          title="Edit item"
+                        >
+                          <Pencil className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleRemoveExp(exp)}
                           className="text-destructive hover:bg-destructive/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
                       </div>
-                    ) : (
-                      <div className="relative border-2 border-dashed border-border/85 hover:border-primary/50 rounded-xl p-4.5 transition-all flex flex-col items-center justify-center gap-2 bg-background/25 group">
-                        <input
-                          type="file"
-                          accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                          onChange={handleFileUpload}
-                          className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-                        />
-                        <div className="text-2xl text-muted-foreground group-hover:scale-110 transition-transform">
-                          📁
-                        </div>
-                        <span className="text-xs font-bold text-foreground">
-                          Pilih Berkas
-                        </span>
-                        <span className="text-[9px] text-muted-foreground text-center">
-                          PDF atau Word (Maks. 10MB)
-                        </span>
-                      </div>
-                    )}
-                    {uploadError && (
-                      <p className="text-[10px] font-bold text-rose-500 mt-1.5">
-                        {uploadError}
-                      </p>
-                    )}
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Website Pribadi
-                    </label>
-                    <Input
-                      value={formData.website}
-                      onChange={(e) =>
-                        setFormData({ ...formData, website: e.target.value })
-                      }
-                      placeholder="https://budisantoso.dev"
-                      className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      LinkedIn{' '}
-                    </label>
-                    <Input
-                      value={formData.socialMedia}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          socialMedia: e.target.value,
-                        })
-                      }
-                      placeholder="https://linkedin.com/in/..."
-                      className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
-                    />
-                  </div>
+                    </div>
+                  ))}
                 </div>
-              ) : (
-                <div className="space-y-4 pt-1">
-                  <div className="flex items-center gap-3">
-                    <FileText className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
-                    <div className="min-w-0 flex-1">
-                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
-                        Resume
+              </div>
+            ) : (
+              <div className="space-y-2.5 pt-1">
+                {experiences.length > 0 ? (
+                  experiences.map((exp: string) => (
+                    <div
+                      key={exp}
+                      className="flex items-center gap-2.5 bg-background/40 border border-border/50 p-3 rounded-xl select-none"
+                    >
+                      <Briefcase className="h-4.5 w-4.5 text-primary shrink-0" />
+                      <span className="text-xs font-semibold text-foreground">
+                        {exp}
                       </span>
-                      {user.softFile ? (
-                        <div className="flex items-center gap-2 mt-1 min-w-0">
-                          <a
-                            href="#"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              alert(`Membuka berkas: ${user.softFile}`);
-                            }}
-                            className="text-xs font-bold text-foreground hover:text-primary hover:underline truncate block"
-                          >
-                            {user.softFile}
-                          </a>
-                          <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-300 uppercase shrink-0">
-                            {user.softFile.split('.').pop()}
-                          </span>
-                        </div>
-                      ) : (
-                        <span className="text-xs font-bold text-foreground block mt-1">
-                          -
-                        </span>
-                      )}
                     </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Globe className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
-                    <div>
-                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
-                        Website
-                      </span>
-                      {user.website ? (
-                        <a
-                          href={user.website}
-                          className="text-xs font-bold text-foreground hover:text-primary hover:underline block truncate"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {user.website}
-                        </a>
-                      ) : (
-                        <span className="text-xs font-bold text-foreground">
-                          -
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Linkedin className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
-                    <div>
-                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
-                        LinkedIn
-                      </span>
-                      {user.socialMedia ? (
-                        <a
-                          href={user.socialMedia}
-                          className="text-xs font-bold text-foreground hover:text-primary hover:underline block truncate"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {user.socialMedia}
-                        </a>
-                      ) : (
-                        <span className="text-xs font-bold text-foreground">
-                          -
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
+                  ))
+                ) : (
+                  <span className="text-xs text-muted-foreground font-medium">
+                    Belum ada pengalaman kerja yang ditambahkan.
+                  </span>
+                )}
+              </div>
+            )}
           </div>
 
-          {/* Right Column: Summaries, organization, skills, reference, certs */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* About Me Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
-              <div className="flex items-center justify-between">
-                <h3 className="font-extrabold text-sm text-foreground tracking-tight">
-                  Tentang Saya
-                </h3>
-                {editSection !== 'aboutMe' ? (
-                  <button
-                    onClick={() => handleStartEdit('aboutMe')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
-                  >
-                    <Pencil className="h-4 w-4" />
-                  </button>
-                ) : (
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <Check className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {editSection === 'aboutMe' ? (
-                <textarea
-                  value={formData.aboutMe}
-                  onChange={(e) =>
-                    setFormData({ ...formData, aboutMe: e.target.value })
-                  }
-                  rows={4}
-                  className="w-full text-xs font-medium bg-background border border-border/80 rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-primary leading-relaxed"
-                />
+          {/* Pendidikan Section */}
+          <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
+            <div className="flex items-center justify-between">
+              <h3 className="font-extrabold text-sm text-foreground tracking-tight">
+                Pendidikan
+              </h3>
+              {editSection !== 'education' ? (
+                <button
+                  onClick={() => handleStartEdit('education')}
+                  className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                >
+                  <Pencil className="h-4 w-4" />
+                </button>
               ) : (
-                <p className="text-xs text-muted-foreground font-medium leading-relaxed">
-                  {user.aboutMe ||
-                    'Tulis ringkasan tentang diri Anda di sini...'}
-                </p>
-              )}
-            </div>
-
-            {/* Pengalaman Kerja Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
-              <div className="flex items-center justify-between">
-                <h3 className="font-extrabold text-sm text-foreground tracking-tight">
-                  Pengalaman Kerja
-                </h3>
-                {editSection !== 'experience' ? (
+                <div className="flex items-center gap-1.5">
                   <button
-                    onClick={() => handleStartEdit('experience')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                    onClick={handleSave}
+                    className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                   >
-                    <Pencil className="h-4 w-4" />
+                    <Check className="h-4 w-4" />
                   </button>
-                ) : (
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <Check className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {editSection === 'experience' ? (
-                <div className="space-y-4">
-                  <div className="space-y-3 bg-background/40 p-4 rounded-xl border border-border/70">
-                    <div>
-                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                        Posisi & Perusahaan
-                      </label>
-                      <Input
-                        value={expName}
-                        onChange={(e) => setExpName(e.target.value)}
-                        placeholder="e.g. Junior Developer di TechCorp"
-                        className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                          Tanggal Mulai
-                        </label>
-                        <Input
-                          value={expStart}
-                          onChange={(e) => setExpStart(e.target.value)}
-                          placeholder="e.g. Jan 2018 / 2018"
-                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                          Tanggal Selesai
-                        </label>
-                        <Input
-                          value={expEnd}
-                          onChange={(e) => setExpEnd(e.target.value)}
-                          placeholder="e.g. Des 2022 / Sekarang"
-                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
-                        />
-                      </div>
-                    </div>
-                    <Button
-                      onClick={handleAddExp}
-                      size="sm"
-                      className="w-full h-9 cursor-pointer text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/95"
-                    >
-                      Tambah Pengalaman
-                    </Button>
-                  </div>
-                  <div className="space-y-2">
-                    {formData.experience.map((exp: string) => (
-                      <div
-                        key={exp}
-                        className="flex items-center justify-between bg-background/50 border border-border/80 text-foreground text-xs font-semibold p-3 rounded-xl shadow-sm hover:border-border transition-all"
-                      >
-                        <div className="flex items-center gap-2 min-w-0">
-                          <Briefcase className="h-4 w-4 text-primary shrink-0" />
-                          <span className="truncate">{exp}</span>
-                        </div>
-                        <div className="flex items-center gap-1 shrink-0">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const parsed = parseItem(exp);
-                              setExpName(parsed.name);
-                              setExpStart(parsed.start);
-                              setExpEnd(parsed.end);
-                              handleRemoveExp(exp);
-                            }}
-                            className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
-                            title="Edit item"
-                          >
-                            <Pencil className="h-4 w-4" />
-                          </button>
-                          <button
-                            onClick={() => handleRemoveExp(exp)}
-                            className="text-destructive hover:bg-destructive/10 p-1.5 rounded-lg transition-colors cursor-pointer"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-2.5 pt-1">
-                  {experiences.length > 0 ? (
-                    experiences.map((exp: string) => (
-                      <div
-                        key={exp}
-                        className="flex items-center gap-2.5 bg-background/40 border border-border/50 p-3 rounded-xl select-none"
-                      >
-                        <Briefcase className="h-4.5 w-4.5 text-primary shrink-0" />
-                        <span className="text-xs font-semibold text-foreground">
-                          {exp}
-                        </span>
-                      </div>
-                    ))
-                  ) : (
-                    <span className="text-xs text-muted-foreground font-medium">
-                      Belum ada pengalaman kerja yang ditambahkan.
-                    </span>
-                  )}
+                  <button
+                    onClick={handleCancelEdit}
+                    className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
                 </div>
               )}
             </div>
 
-            {/* Pendidikan Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
-              <div className="flex items-center justify-between">
-                <h3 className="font-extrabold text-sm text-foreground tracking-tight">
-                  Pendidikan
-                </h3>
-                {editSection !== 'education' ? (
-                  <button
-                    onClick={() => handleStartEdit('education')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
-                  >
-                    <Pencil className="h-4 w-4" />
-                  </button>
-                ) : (
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <Check className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {editSection === 'education' ? (
-                <div className="space-y-4">
-                  <div className="space-y-3 bg-background/40 p-4 rounded-xl border border-border/70">
-                    <div>
-                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                        Institusi & Gelar
-                      </label>
-                      <Input
-                        value={eduName}
-                        onChange={(e) => setEduName(e.target.value)}
-                        placeholder="e.g. S1 Teknik Informatika di Universitas Indonesia"
-                        className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                          Tahun Mulai
-                        </label>
-                        <Input
-                          value={eduStart}
-                          onChange={(e) => setEduStart(e.target.value)}
-                          placeholder="e.g. 2018"
-                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                          Tahun Lulus
-                        </label>
-                        <Input
-                          value={eduEnd}
-                          onChange={(e) => setEduEnd(e.target.value)}
-                          placeholder="e.g. 2022 / Sekarang"
-                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
-                        />
-                      </div>
-                    </div>
-                    <Button
-                      onClick={handleAddEdu}
-                      size="sm"
-                      className="w-full h-9 cursor-pointer text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/95"
-                    >
-                      Tambah Pendidikan
-                    </Button>
-                  </div>
-                  <div className="space-y-2">
-                    {formData.education.map((edu: string) => (
-                      <div
-                        key={edu}
-                        className="flex items-center justify-between bg-background/50 border border-border/80 text-foreground text-xs font-semibold p-3 rounded-xl shadow-sm hover:border-border transition-all"
-                      >
-                        <div className="flex items-center gap-2 min-w-0">
-                          <GraduationCap className="h-4 w-4 text-primary shrink-0" />
-                          <span className="truncate">{edu}</span>
-                        </div>
-                        <div className="flex items-center gap-1 shrink-0">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const parsed = parseItem(edu);
-                              setEduName(parsed.name);
-                              setEduStart(parsed.start);
-                              setEduEnd(parsed.end);
-                              handleRemoveEdu(edu);
-                            }}
-                            className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
-                            title="Edit item"
-                          >
-                            <Pencil className="h-4 w-4" />
-                          </button>
-                          <button
-                            onClick={() => handleRemoveEdu(edu)}
-                            className="text-destructive hover:bg-destructive/10 p-1.5 rounded-lg transition-colors cursor-pointer"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-2.5 pt-1">
-                  {educations.length > 0 ? (
-                    educations.map((edu: string) => (
-                      <div
-                        key={edu}
-                        className="flex items-center gap-2.5 bg-background/40 border border-border/50 p-3 rounded-xl select-none"
-                      >
-                        <GraduationCap className="h-4.5 w-4.5 text-primary shrink-0" />
-                        <span className="text-xs font-semibold text-foreground">
-                          {edu}
-                        </span>
-                      </div>
-                    ))
-                  ) : (
-                    <span className="text-xs text-muted-foreground font-medium">
-                      Belum ada riwayat pendidikan yang ditambahkan.
-                    </span>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {/* Skill Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
-              <div className="flex items-center justify-between">
-                <h3 className="font-extrabold text-sm text-foreground tracking-tight">
-                  Keahlian / Skill
-                </h3>
-                {editSection !== 'skill' ? (
-                  <button
-                    onClick={() => handleStartEdit('skill')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
-                  >
-                    <Pencil className="h-4 w-4" />
-                  </button>
-                ) : (
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <Check className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {editSection === 'skill' ? (
-                <div className="space-y-4">
-                  <div className="flex gap-2">
+            {editSection === 'education' ? (
+              <div className="space-y-4">
+                <div className="space-y-3 bg-background/40 p-4 rounded-xl border border-border/70">
+                  <div>
+                    <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                      Institusi & Gelar
+                    </label>
                     <Input
-                      value={newSkillText}
-                      onChange={(e) => setNewSkillText(e.target.value)}
-                      placeholder="Tambah skill baru (e.g. Next.js)"
+                      value={eduName}
+                      onChange={(e) => setEduName(e.target.value)}
+                      placeholder="e.g. S1 Teknik Informatika di Universitas Indonesia"
                       className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                          e.preventDefault();
-                          handleAddSkill();
-                        }
-                      }}
                     />
-                    <Button
-                      onClick={handleAddSkill}
-                      size="sm"
-                      className="h-9 cursor-pointer text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/95"
-                    >
-                      Tambah
-                    </Button>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    {formData.skill.map((sk: string) => (
-                      <div
-                        key={sk}
-                        className="inline-flex items-center gap-1.5 bg-primary/10 text-primary text-xs font-semibold py-1 pl-3 pr-1.5 rounded-full select-none"
-                      >
-                        <span>{sk}</span>
-                        <button
-                          onClick={() => handleRemoveSkill(sk)}
-                          className="p-0.5 hover:bg-primary/20 rounded-full transition-colors text-primary/80 hover:text-primary cursor-pointer"
-                        >
-                          <X className="h-3 w-3" />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {user.skill && user.skill.length > 0 ? (
-                    user.skill.map((sk: string) => (
-                      <span
-                        key={sk}
-                        className="bg-primary/10 text-primary text-xs font-semibold py-1 px-3.5 rounded-full select-none"
-                      >
-                        {sk}
-                      </span>
-                    ))
-                  ) : (
-                    <span className="text-xs text-muted-foreground font-medium">
-                      Belum ada skill yang ditambahkan.
-                    </span>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {/* Lisensi & Sertifikat Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
-              <div className="flex items-center justify-between">
-                <h3 className="font-extrabold text-sm text-foreground tracking-tight">
-                  Lisensi & Sertifikat
-                </h3>
-                {editSection !== 'certificates' ? (
-                  <button
-                    onClick={() => handleStartEdit('certificates')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
-                  >
-                    <Pencil className="h-4 w-4" />
-                  </button>
-                ) : (
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <Check className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {editSection === 'certificates' ? (
-                <div className="space-y-4">
-                  <div className="flex gap-2">
-                    <Input
-                      value={newCertText}
-                      onChange={(e) => setNewCertText(e.target.value)}
-                      placeholder="Tambah sertifikat (e.g. AWS Certified Developer)"
-                      className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                          e.preventDefault();
-                          handleAddCert();
-                        }
-                      }}
-                    />
-                    <Button
-                      onClick={handleAddCert}
-                      size="sm"
-                      className="h-9 cursor-pointer text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/95"
-                    >
-                      Tambah
-                    </Button>
-                  </div>
-                  <div className="space-y-2">
-                    {formData.certificates.map((cert: string) => (
-                      <div
-                        key={cert}
-                        className="flex items-center justify-between bg-muted text-muted-foreground text-xs font-semibold py-1.5 px-3 rounded-lg"
-                      >
-                        <span>{cert}</span>
-                        <button
-                          onClick={() => handleRemoveCert(cert)}
-                          className="text-destructive hover:bg-destructive/10 p-1 rounded-md transition-colors"
-                        >
-                          <Trash2 className="h-3.5 w-3.5" />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-3 pt-1">
-                  {user.certificates && user.certificates.length > 0 ? (
-                    user.certificates.map((cert: string) => (
-                      <div
-                        key={cert}
-                        className="flex items-center justify-between gap-2.5 bg-background/40 border border-border/50 p-3 rounded-xl select-none"
-                      >
-                        <div className="flex items-center gap-2.5 min-w-0">
-                          <Award className="h-4.5 w-4.5 text-primary shrink-0" />
-                          <span className="text-xs font-semibold text-foreground truncate">
-                            {cert}
-                          </span>
-                        </div>
-                        <button
-                          onClick={() =>
-                            router.push(
-                              `/profile/preview?name=${encodeURIComponent(cert)}`,
-                            )
-                          }
-                          className="text-[10px] font-bold text-primary shrink-0 bg-primary/10 px-2.5 py-1 rounded border border-primary/20 hover:bg-primary hover:text-primary-foreground transition-all cursor-pointer select-none"
-                          title="Klik untuk melihat preview sertifikat"
-                        >
-                          Preview
-                        </button>
-                      </div>
-                    ))
-                  ) : (
-                    <span className="text-xs text-muted-foreground font-medium">
-                      Belum ada lisensi atau sertifikat yang ditambahkan.
-                    </span>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {/* Pengalaman Organisasi Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
-              <div className="flex items-center justify-between">
-                <h3 className="font-extrabold text-sm text-foreground tracking-tight">
-                  Pengalaman Organisasi
-                </h3>
-                {editSection !== 'organization' ? (
-                  <button
-                    onClick={() => handleStartEdit('organization')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
-                  >
-                    <Pencil className="h-4 w-4" />
-                  </button>
-                ) : (
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <Check className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {editSection === 'organization' ? (
-                <div className="space-y-4">
-                  <div className="space-y-3 bg-background/40 p-4 rounded-xl border border-border/70">
+                  <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                        Nama Organisasi & Peran
+                        Tahun Mulai
                       </label>
                       <Input
-                        value={orgName}
-                        onChange={(e) => setOrgName(e.target.value)}
-                        placeholder="e.g. Ketua Himpunan Mahasiswa"
+                        value={eduStart}
+                        onChange={(e) => setEduStart(e.target.value)}
+                        placeholder="e.g. 2018"
                         className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
                       />
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                          Tahun Mulai
-                        </label>
-                        <Input
-                          value={orgStart}
-                          onChange={(e) => setOrgStart(e.target.value)}
-                          placeholder="e.g. 2020"
-                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
-                        />
+                    <div>
+                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                        Tahun Lulus
+                      </label>
+                      <Input
+                        value={eduEnd}
+                        onChange={(e) => setEduEnd(e.target.value)}
+                        placeholder="e.g. 2022 / Sekarang"
+                        className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                      />
+                    </div>
+                  </div>
+                  <Button
+                    onClick={handleAddEdu}
+                    size="sm"
+                    className="w-full h-9 cursor-pointer text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/95"
+                  >
+                    Tambah Pendidikan
+                  </Button>
+                </div>
+                <div className="space-y-2">
+                  {formData.education.map((edu: string) => (
+                    <div
+                      key={edu}
+                      className="flex items-center justify-between bg-background/50 border border-border/80 text-foreground text-xs font-semibold p-3 rounded-xl shadow-sm hover:border-border transition-all"
+                    >
+                      <div className="flex items-center gap-2 min-w-0">
+                        <GraduationCap className="h-4 w-4 text-primary shrink-0" />
+                        <span className="truncate">{edu}</span>
                       </div>
-                      <div>
-                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                          Tahun Selesai
-                        </label>
-                        <Input
-                          value={orgEnd}
-                          onChange={(e) => setOrgEnd(e.target.value)}
-                          placeholder="e.g. 2021"
-                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
-                        />
+                      <div className="flex items-center gap-1 shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const parsed = parseItem(edu);
+                            setEduName(parsed.name);
+                            setEduStart(parsed.start);
+                            setEduEnd(parsed.end);
+                            handleRemoveEdu(edu);
+                          }}
+                          className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                          title="Edit item"
+                        >
+                          <Pencil className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleRemoveEdu(edu)}
+                          className="text-destructive hover:bg-destructive/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
                       </div>
                     </div>
-                    <Button
-                      onClick={handleAddOrg}
-                      size="sm"
-                      className="w-full h-9 cursor-pointer text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/95"
-                    >
-                      Tambah Organisasi
-                    </Button>
-                  </div>
-                  <div className="space-y-2">
-                    {formData.organization.map((org: string) => (
-                      <div
-                        key={org}
-                        className="flex items-center justify-between bg-background/50 border border-border/80 text-foreground text-xs font-semibold p-3 rounded-xl shadow-sm hover:border-border transition-all"
-                      >
-                        <div className="flex items-center gap-2 min-w-0">
-                          <User className="h-4 w-4 text-primary shrink-0" />
-                          <span className="truncate">{org}</span>
-                        </div>
-                        <div className="flex items-center gap-1 shrink-0">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const parsed = parseItem(org);
-                              setOrgName(parsed.name);
-                              setOrgStart(parsed.start);
-                              setOrgEnd(parsed.end);
-                              handleRemoveOrg(org);
-                            }}
-                            className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
-                            title="Edit item"
-                          >
-                            <Pencil className="h-4 w-4" />
-                          </button>
-                          <button
-                            onClick={() => handleRemoveOrg(org)}
-                            className="text-destructive hover:bg-destructive/10 p-1.5 rounded-lg transition-colors cursor-pointer"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                  ))}
                 </div>
-              ) : (
-                <div className="space-y-2.5 pt-1">
-                  {organizations.length > 0 ? (
-                    organizations.map((org: string) => (
-                      <div
-                        key={org}
-                        className="flex items-center gap-2.5 bg-background/40 border border-border/50 p-3 rounded-xl select-none"
-                      >
-                        <User className="h-4.5 w-4.5 text-primary shrink-0" />
-                        <span className="text-xs font-semibold text-foreground">
-                          {org}
-                        </span>
-                      </div>
-                    ))
-                  ) : (
-                    <span className="text-xs text-muted-foreground font-medium">
-                      Belum ada pengalaman organisasi yang ditambahkan.
-                    </span>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {/* Referensi Pekerjaan Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
-              <div className="flex items-center justify-between">
-                <h3 className="font-extrabold text-sm text-foreground tracking-tight">
-                  Referensi Pekerjaan Minat
-                </h3>
-                {editSection !== 'reference' ? (
-                  <button
-                    onClick={() => handleStartEdit('reference')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
-                  >
-                    <Pencil className="h-4 w-4" />
-                  </button>
-                ) : (
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <Check className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </div>
-                )}
               </div>
-
-              {editSection === 'reference' ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
-                  <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Minat Pekerjaan
-                    </label>
-                    <Input
-                      value={formData.jobReference.interest}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          jobReference: {
-                            ...formData.jobReference,
-                            interest: e.target.value,
-                          },
-                        })
-                      }
-                      className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Kota / Lokasi
-                    </label>
-                    <Input
-                      value={formData.jobReference.city}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          jobReference: {
-                            ...formData.jobReference,
-                            city: e.target.value,
-                          },
-                        })
-                      }
-                      className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Ekspektasi Gaji
-                    </label>
-                    <Input
-                      value={formData.jobReference.salaryExpectation}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          jobReference: {
-                            ...formData.jobReference,
-                            salaryExpectation: e.target.value,
-                          },
-                        })
-                      }
-                      className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Opsi Kerja
-                    </label>
-                    <select
-                      value={formData.jobReference.workOption}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          jobReference: {
-                            ...formData.jobReference,
-                            workOption: e.target.value,
-                          },
-                        })
-                      }
-                      className="w-full h-9 text-xs font-semibold bg-background border border-border/80 rounded-xl px-2 mt-1 focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
+            ) : (
+              <div className="space-y-2.5 pt-1">
+                {educations.length > 0 ? (
+                  educations.map((edu: string) => (
+                    <div
+                      key={edu}
+                      className="flex items-center gap-2.5 bg-background/40 border border-border/50 p-3 rounded-xl select-none"
                     >
-                      <option value="Remote">Remote</option>
-                      <option value="Hybrid">Hybrid</option>
-                      <option value="Onsite">Onsite</option>
-                    </select>
-                  </div>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-                  <div className="bg-background/40 border border-border/60 p-4 rounded-xl space-y-1">
-                    <span className="text-[10px] font-bold text-muted-foreground uppercase block">
-                      Minat Pekerjaan
-                    </span>
-                    <span className="text-xs font-bold text-foreground block">
-                      {user.jobReference?.interest || '-'}
-                    </span>
-                  </div>
-                  <div className="bg-background/40 border border-border/60 p-4 rounded-xl space-y-1">
-                    <span className="text-[10px] font-bold text-muted-foreground uppercase block">
-                      Kota
-                    </span>
-                    <div className="flex items-center gap-1">
-                      <MapPin className="h-3.5 w-3.5 text-muted-foreground" />
-                      <span className="text-xs font-bold text-foreground">
-                        {user.jobReference?.city || '-'}
+                      <GraduationCap className="h-4.5 w-4.5 text-primary shrink-0" />
+                      <span className="text-xs font-semibold text-foreground">
+                        {edu}
                       </span>
                     </div>
-                  </div>
-                  <div className="bg-background/40 border border-border/60 p-4 rounded-xl space-y-1">
-                    <span className="text-[10px] font-bold text-muted-foreground uppercase block">
-                      Ekspektasi Gaji
-                    </span>
-                    <span className="text-xs font-bold text-foreground block">
-                      {user.jobReference?.salaryExpectation || '-'}
-                    </span>
-                  </div>
-                  <div className="bg-background/40 border border-border/60 p-4 rounded-xl space-y-1">
-                    <span className="text-[10px] font-bold text-muted-foreground uppercase block">
-                      Metode Kerja
-                    </span>
-                    <span className="text-xs font-bold text-primary block">
-                      {user.jobReference?.workOption || '-'}
-                    </span>
-                  </div>
+                  ))
+                ) : (
+                  <span className="text-xs text-muted-foreground font-medium">
+                    Belum ada riwayat pendidikan yang ditambahkan.
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Skill Section */}
+          <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
+            <div className="flex items-center justify-between">
+              <h3 className="font-extrabold text-sm text-foreground tracking-tight">
+                Keahlian / Skill
+              </h3>
+              {editSection !== 'skill' ? (
+                <button
+                  onClick={() => handleStartEdit('skill')}
+                  className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                >
+                  <Pencil className="h-4 w-4" />
+                </button>
+              ) : (
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={handleSave}
+                    className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <Check className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={handleCancelEdit}
+                    className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
                 </div>
               )}
             </div>
+
+            {editSection === 'skill' ? (
+              <div className="space-y-4">
+                <div className="flex gap-2">
+                  <Input
+                    value={newSkillText}
+                    onChange={(e) => setNewSkillText(e.target.value)}
+                    placeholder="Tambah skill baru (e.g. Next.js)"
+                    className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleAddSkill();
+                      }
+                    }}
+                  />
+                  <Button
+                    onClick={handleAddSkill}
+                    size="sm"
+                    className="h-9 cursor-pointer text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/95"
+                  >
+                    Tambah
+                  </Button>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {formData.skill.map((sk: string) => (
+                    <div
+                      key={sk}
+                      className="inline-flex items-center gap-1.5 bg-primary/10 text-primary text-xs font-semibold py-1 pl-3 pr-1.5 rounded-full select-none"
+                    >
+                      <span>{sk}</span>
+                      <button
+                        onClick={() => handleRemoveSkill(sk)}
+                        className="p-0.5 hover:bg-primary/20 rounded-full transition-colors text-primary/80 hover:text-primary cursor-pointer"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-wrap gap-2 pt-1">
+                {user.skill && user.skill.length > 0 ? (
+                  user.skill.map((sk: string) => (
+                    <span
+                      key={sk}
+                      className="bg-primary/10 text-primary text-xs font-semibold py-1 px-3.5 rounded-full select-none"
+                    >
+                      {sk}
+                    </span>
+                  ))
+                ) : (
+                  <span className="text-xs text-muted-foreground font-medium">
+                    Belum ada skill yang ditambahkan.
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Lisensi & Sertifikat Section */}
+          <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
+            <div className="flex items-center justify-between">
+              <h3 className="font-extrabold text-sm text-foreground tracking-tight">
+                Lisensi & Sertifikat
+              </h3>
+              {editSection !== 'certificates' ? (
+                <button
+                  onClick={() => handleStartEdit('certificates')}
+                  className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                >
+                  <Pencil className="h-4 w-4" />
+                </button>
+              ) : (
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={handleSave}
+                    className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <Check className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={handleCancelEdit}
+                    className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {editSection === 'certificates' ? (
+              <div className="space-y-4">
+                <div className="flex gap-2">
+                  <Input
+                    value={newCertText}
+                    onChange={(e) => setNewCertText(e.target.value)}
+                    placeholder="Tambah sertifikat (e.g. AWS Certified Developer)"
+                    className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleAddCert();
+                      }
+                    }}
+                  />
+                  <Button
+                    onClick={handleAddCert}
+                    size="sm"
+                    className="h-9 cursor-pointer text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/95"
+                  >
+                    Tambah
+                  </Button>
+                </div>
+                <div className="space-y-2">
+                  {formData.certificates.map((cert: string) => (
+                    <div
+                      key={cert}
+                      className="flex items-center justify-between bg-muted text-muted-foreground text-xs font-semibold py-1.5 px-3 rounded-lg"
+                    >
+                      <span>{cert}</span>
+                      <button
+                        onClick={() => handleRemoveCert(cert)}
+                        className="text-destructive hover:bg-destructive/10 p-1 rounded-md transition-colors"
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-3 pt-1">
+                {user.certificates && user.certificates.length > 0 ? (
+                  user.certificates.map((cert: string) => (
+                    <div
+                      key={cert}
+                      className="flex items-center justify-between gap-2.5 bg-background/40 border border-border/50 p-3 rounded-xl select-none"
+                    >
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <Award className="h-4.5 w-4.5 text-primary shrink-0" />
+                        <span className="text-xs font-semibold text-foreground truncate">
+                          {cert}
+                        </span>
+                      </div>
+                      <button
+                        onClick={() =>
+                          router.push(
+                            `/profile/preview?name=${encodeURIComponent(cert)}`,
+                          )
+                        }
+                        className="text-[10px] font-bold text-primary shrink-0 bg-primary/10 px-2.5 py-1 rounded border border-primary/20 hover:bg-primary hover:text-primary-foreground transition-all cursor-pointer select-none"
+                        title="Klik untuk melihat preview sertifikat"
+                      >
+                        Preview
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <span className="text-xs text-muted-foreground font-medium">
+                    Belum ada lisensi atau sertifikat yang ditambahkan.
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Pengalaman Organisasi Section */}
+          <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
+            <div className="flex items-center justify-between">
+              <h3 className="font-extrabold text-sm text-foreground tracking-tight">
+                Pengalaman Organisasi
+              </h3>
+              {editSection !== 'organization' ? (
+                <button
+                  onClick={() => handleStartEdit('organization')}
+                  className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                >
+                  <Pencil className="h-4 w-4" />
+                </button>
+              ) : (
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={handleSave}
+                    className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <Check className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={handleCancelEdit}
+                    className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {editSection === 'organization' ? (
+              <div className="space-y-4">
+                <div className="space-y-3 bg-background/40 p-4 rounded-xl border border-border/70">
+                  <div>
+                    <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                      Nama Organisasi & Peran
+                    </label>
+                    <Input
+                      value={orgName}
+                      onChange={(e) => setOrgName(e.target.value)}
+                      placeholder="e.g. Ketua Himpunan Mahasiswa"
+                      className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                        Tahun Mulai
+                      </label>
+                      <Input
+                        value={orgStart}
+                        onChange={(e) => setOrgStart(e.target.value)}
+                        placeholder="e.g. 2020"
+                        className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                        Tahun Selesai
+                      </label>
+                      <Input
+                        value={orgEnd}
+                        onChange={(e) => setOrgEnd(e.target.value)}
+                        placeholder="e.g. 2021"
+                        className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                      />
+                    </div>
+                  </div>
+                  <Button
+                    onClick={handleAddOrg}
+                    size="sm"
+                    className="w-full h-9 cursor-pointer text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/95"
+                  >
+                    Tambah Organisasi
+                  </Button>
+                </div>
+                <div className="space-y-2">
+                  {formData.organization.map((org: string) => (
+                    <div
+                      key={org}
+                      className="flex items-center justify-between bg-background/50 border border-border/80 text-foreground text-xs font-semibold p-3 rounded-xl shadow-sm hover:border-border transition-all"
+                    >
+                      <div className="flex items-center gap-2 min-w-0">
+                        <User className="h-4 w-4 text-primary shrink-0" />
+                        <span className="truncate">{org}</span>
+                      </div>
+                      <div className="flex items-center gap-1 shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const parsed = parseItem(org);
+                            setOrgName(parsed.name);
+                            setOrgStart(parsed.start);
+                            setOrgEnd(parsed.end);
+                            handleRemoveOrg(org);
+                          }}
+                          className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                          title="Edit item"
+                        >
+                          <Pencil className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleRemoveOrg(org)}
+                          className="text-destructive hover:bg-destructive/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-2.5 pt-1">
+                {organizations.length > 0 ? (
+                  organizations.map((org: string) => (
+                    <div
+                      key={org}
+                      className="flex items-center gap-2.5 bg-background/40 border border-border/50 p-3 rounded-xl select-none"
+                    >
+                      <User className="h-4.5 w-4.5 text-primary shrink-0" />
+                      <span className="text-xs font-semibold text-foreground">
+                        {org}
+                      </span>
+                    </div>
+                  ))
+                ) : (
+                  <span className="text-xs text-muted-foreground font-medium">
+                    Belum ada pengalaman organisasi yang ditambahkan.
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Referensi Pekerjaan Section */}
+          <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
+            <div className="flex items-center justify-between">
+              <h3 className="font-extrabold text-sm text-foreground tracking-tight">
+                Referensi Pekerjaan Minat
+              </h3>
+              {editSection !== 'reference' ? (
+                <button
+                  onClick={() => handleStartEdit('reference')}
+                  className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                >
+                  <Pencil className="h-4 w-4" />
+                </button>
+              ) : (
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={handleSave}
+                    className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <Check className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={handleCancelEdit}
+                    className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {editSection === 'reference' ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+                <div>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                    Minat Pekerjaan
+                  </label>
+                  <Input
+                    value={formData.jobReference.interest}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        jobReference: {
+                          ...formData.jobReference,
+                          interest: e.target.value,
+                        },
+                      })
+                    }
+                    className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                    Kota / Lokasi
+                  </label>
+                  <Input
+                    value={formData.jobReference.city}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        jobReference: {
+                          ...formData.jobReference,
+                          city: e.target.value,
+                        },
+                      })
+                    }
+                    className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                    Ekspektasi Gaji
+                  </label>
+                  <Input
+                    value={formData.jobReference.salaryExpectation}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        jobReference: {
+                          ...formData.jobReference,
+                          salaryExpectation: e.target.value,
+                        },
+                      })
+                    }
+                    className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                    Opsi Kerja
+                  </label>
+                  <select
+                    value={formData.jobReference.workOption}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        jobReference: {
+                          ...formData.jobReference,
+                          workOption: e.target.value,
+                        },
+                      })
+                    }
+                    className="w-full h-9 text-xs font-semibold bg-background border border-border/80 rounded-xl px-2 mt-1 focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
+                  >
+                    <option value="Remote">Remote</option>
+                    <option value="Hybrid">Hybrid</option>
+                    <option value="Onsite">Onsite</option>
+                  </select>
+                </div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                <div className="bg-background/40 border border-border/60 p-4 rounded-xl space-y-1">
+                  <span className="text-[10px] font-bold text-muted-foreground uppercase block">
+                    Minat Pekerjaan
+                  </span>
+                  <span className="text-xs font-bold text-foreground block">
+                    {user.jobReference?.interest || '-'}
+                  </span>
+                </div>
+                <div className="bg-background/40 border border-border/60 p-4 rounded-xl space-y-1">
+                  <span className="text-[10px] font-bold text-muted-foreground uppercase block">
+                    Kota
+                  </span>
+                  <div className="flex items-center gap-1">
+                    <MapPin className="h-3.5 w-3.5 text-muted-foreground" />
+                    <span className="text-xs font-bold text-foreground">
+                      {user.jobReference?.city || '-'}
+                    </span>
+                  </div>
+                </div>
+                <div className="bg-background/40 border border-border/60 p-4 rounded-xl space-y-1">
+                  <span className="text-[10px] font-bold text-muted-foreground uppercase block">
+                    Ekspektasi Gaji
+                  </span>
+                  <span className="text-xs font-bold text-foreground block">
+                    {user.jobReference?.salaryExpectation || '-'}
+                  </span>
+                </div>
+                <div className="bg-background/40 border border-border/60 p-4 rounded-xl space-y-1">
+                  <span className="text-[10px] font-bold text-muted-foreground uppercase block">
+                    Metode Kerja
+                  </span>
+                  <span className="text-xs font-bold text-primary block">
+                    {user.jobReference?.workOption || '-'}
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

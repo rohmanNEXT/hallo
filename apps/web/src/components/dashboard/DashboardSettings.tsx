@@ -377,7 +377,7 @@ export default function DashboardSettings() {
                       </span>
                     )}
                   </div>
-                  <span className={`text-[9px] font-semibold tracking-wide leading-none ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
+                  <span className={`text-[10px] font-semibold tracking-wide leading-none ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
                     {t.label}
                   </span>
                 </button>
@@ -458,7 +458,7 @@ export default function DashboardSettings() {
                 <span className="text-[11px] md:text-xs font-bold text-rose-500 block">
                   Hapus akun secara permanen
                 </span>
-                <span className="text-[9px] md:text-[10px] text-rose-500/80 font-medium block mt-1">
+                <span className="text-[10px] text-rose-500/80 font-medium block mt-1">
                   Semua data Anda (lamaran, chat, profil) akan dihapus selamanya.
                 </span>
               </div>

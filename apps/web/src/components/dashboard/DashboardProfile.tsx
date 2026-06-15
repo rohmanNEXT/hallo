@@ -441,10 +441,10 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                 style={{
                   left: floatPos.current.x,
                   top: floatPos.current.y,
-                  width: 280,
+                  width: 260,
                 }}
               >
-                <div className="bg-card/95 backdrop-blur-md border border-border/60 rounded-2xl shadow-2xl overflow-hidden">
+                <div className="bg-background/20 backdrop-blur-sm border border-border/60 rounded-2xl shadow-2xl overflow-hidden">
                   {/* Title Bar - drag handle */}
                   <div
                     onMouseDown={(e) => {
@@ -457,7 +457,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                       };
                       e.preventDefault();
                     }}
-                    className="flex items-center justify-between px-3.5 py-2.5 bg-muted/50 border-b border-border/50 cursor-grab active:cursor-grabbing"
+                    className="flex items-center justify-between px-3.5 py-2.5 bg-transparent border-b border-border/50 cursor-grab active:cursor-grabbing"
                   >
                     <div className="flex items-center gap-2">
                       <GripHorizontal className="h-3.5 w-3.5 text-muted-foreground/50" />
@@ -474,8 +474,8 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                   </div>
 
                   {/* Photo Grid */}
-                  <div className="p-3 space-y-2.5">
-                    <div className="grid grid-cols-3 gap-2">
+                  <div className="p-3.5 space-y-3">
+                    <div className="grid grid-cols-3 gap-2.5">
                       {bannerPhotos.slice(0, 6).map((photo, idx) => (
                         <button
                           key={idx}
@@ -483,9 +483,9 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                             setBgIndex(idx);
                             setCookie('banner_photo', String(idx));
                           }}
-                          className={`relative rounded-xl overflow-hidden h-[70px] cursor-pointer group transition-all border-none p-0 ${
+                          className={`relative rounded-xl overflow-hidden h-[58px] cursor-pointer group transition-all border-none p-0 ${
                             bgIndex === idx
-                              ? 'ring-2 ring-foreground ring-offset-1 ring-offset-card'
+                              ? 'ring-2 ring-foreground ring-offset-1 ring-offset-background'
                               : 'hover:ring-2 hover:ring-foreground/40'
                           }`}
                         >
@@ -496,12 +496,12 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                             draggable={false}
                           />
                           <div className="absolute inset-0 bg-black/25 group-hover:bg-black/5 transition-all" />
-                          <span className="absolute bottom-1 left-0 right-0 text-center text-[9px] font-bold text-white drop-shadow-md">
+                          <span className="absolute bottom-1 left-0 right-0 text-center text-[10px] font-bold text-white drop-shadow-md">
                             {photo.label}
                           </span>
                           {bgIndex === idx && (
-                            <div className="absolute top-1.5 right-1.5 h-4 w-4 bg-foreground rounded-full flex items-center justify-center shadow">
-                              <Check className="h-2.5 w-2.5 text-black" />
+                            <div className="absolute top-1 right-1 h-3.5 w-3.5 bg-foreground rounded-full flex items-center justify-center shadow">
+                              <Check className="h-2 w-2 text-black" />
                             </div>
                           )}
                         </button>
@@ -514,9 +514,9 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                         setBgIndex(6);
                         setCookie('banner_photo', '6');
                       }}
-                      className={`w-full relative rounded-xl overflow-hidden h-[48px] cursor-pointer group transition-all flex items-center justify-between px-3 border transition-colors ${
+                      className={`w-full relative rounded-xl overflow-hidden h-[46px] cursor-pointer group transition-all flex items-center justify-between px-3 border transition-colors ${
                         bgIndex === 6
-                          ? 'ring-2 ring-foreground ring-offset-1 ring-offset-card bg-foreground/10 border-foreground/30'
+                          ? 'ring-2 ring-foreground ring-offset-1 ring-offset-background bg-foreground/10 border-foreground/30'
                           : 'hover:bg-muted/50 border-border/60 bg-background/25'
                       }`}
                     >
@@ -535,8 +535,8 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                         </span>
                       </div>
                       {bgIndex === 6 && (
-                        <div className="h-4 w-4 bg-primary rounded-full flex items-center justify-center shadow">
-                          <Check className="h-2.5 w-2.5 text-white" />
+                        <div className="h-3.5 w-3.5 bg-primary rounded-full flex items-center justify-center shadow">
+                          <Check className="h-2 w-2 text-white" />
                         </div>
                       )}
                     </button>
@@ -548,7 +548,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
             {/* Avatar Overlay */}
             <div className="px-4 md:px-5 pb-3 md:pb-4 relative">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between -mt-12 sm:-mt-14 gap-2 mb-1">
-                <div className="flex flex-col sm:flex-row items-center sm:items-end gap-3 text-center sm:text-left">
+                <div className="flex flex-col sm:flex-row items-center sm:items-end gap-3.5 text-center sm:text-left">
                   <button
                     onClick={() => setShowAvatarPicker(true)}
                     className="h-20 w-20 md:h-24 md:w-24 rounded-2xl overflow-hidden border-4 border-card shadow-md bg-muted/40 relative group cursor-pointer border-none p-0 text-left shrink-0"
@@ -582,13 +582,53 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
           </div>
         </div>
 
-        {/* 2-Column Dashboard Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          
-          {/* Left Column: Personal details, links, documents */}
-          <div className="space-y-6 lg:col-span-1">
+        {/* 1-Column Dashboard Layout */}
+        <div className="space-y-6 max-w-4xl mx-auto w-full">
             
-            {/* UserProfile Info Section */}
+            {/* About Me Section */}
+            <div className="bg-card border border-border/70 rounded-2xl p-5 shadow-md space-y-4 relative">
+              <div className="flex items-center justify-between">
+                <h3 className="font-extrabold text-sm text-foreground tracking-tight">
+                  Tentang Saya
+                </h3>
+                {editSection !== 'aboutMe' ? (
+                  <button
+                    onClick={() => handleStartEdit('aboutMe')}
+                    className="text-muted-foreground hover:text-foreground p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <Pencil className="h-3 w-3" />
+                  </button>
+                ) : (
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={handleSave}
+                      className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                    >
+                      <Check className="h-3 w-3" />
+                    </button>
+                    <button
+                      onClick={handleCancelEdit}
+                      className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                    >
+                      <X className="h-3 w-3" />
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {editSection === 'aboutMe' ? (
+                <textarea
+                  value={formData.aboutMe}
+                  onChange={(e) => setFormData({ ...formData, aboutMe: e.target.value })}
+                  rows={4}
+                  className="w-full text-xs font-medium bg-background border border-border/80 rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-foreground leading-relaxed"
+                />
+              ) : (
+                <p className="text-xs text-muted-foreground font-medium leading-relaxed">
+                  {user.aboutMe || 'Tulis ringkasan tentang diri Anda di sini...'}
+                </p>
+              )}
+            </div>             {/* UserProfile Info Section */}
             <div className="bg-card border border-border/70 rounded-2xl p-5 shadow-md space-y-5 relative">
               <div className="flex items-center justify-between">
                 <h3 className="font-bold text-[11px] text-muted-foreground uppercase tracking-wider">
@@ -605,13 +645,13 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
                       <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
                       <X className="h-3 w-3" />
                     </button>
@@ -622,7 +662,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
               {editSection === 'contact' ? (
                 <div className="space-y-3 pt-1">
                   <div>
-                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Nama Lengkap</label>
+                    <label className="text-[10px] font-bold text-muted-foreground uppercase">Nama Lengkap</label>
                     <Input
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -630,7 +670,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                     />
                   </div>
                   <div>
-                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Nama Panggilan</label>
+                    <label className="text-[10px] font-bold text-muted-foreground uppercase">Nama Panggilan</label>
                     <Input
                       value={formData.nickname}
                       onChange={(e) => setFormData({ ...formData, nickname: e.target.value })}
@@ -638,7 +678,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                     />
                   </div>
                   <div>
-                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Posisi / Karir</label>
+                    <label className="text-[10px] font-bold text-muted-foreground uppercase">Posisi / Karir</label>
                     <Input
                       value={formData.career}
                       onChange={(e) => setFormData({ ...formData, career: e.target.value })}
@@ -646,7 +686,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                     />
                   </div>
                   <div>
-                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Nomor WA</label>
+                    <label className="text-[10px] font-bold text-muted-foreground uppercase">Nomor WA</label>
                     <Input
                       value={formData.waNumber}
                       onChange={(e) => setFormData({ ...formData, waNumber: e.target.value })}
@@ -654,7 +694,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                     />
                   </div>
                   <div>
-                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Email</label>
+                    <label className="text-[10px] font-bold text-muted-foreground uppercase">Email</label>
                     <Input
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -667,28 +707,28 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                   <div className="flex items-center gap-3">
                     <User className="h-3 w-3 text-muted-foreground shrink-0" />
                     <div>
-                      <span className="text-[9px] text-muted-foreground uppercase block font-semibold">Nama Lengkap</span>
+                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">Nama Lengkap</span>
                       <span className="text-xs font-bold text-foreground">{user.name}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <User className="h-3 w-3 text-muted-foreground shrink-0" />
                     <div>
-                      <span className="text-[9px] text-muted-foreground uppercase block font-semibold">Nama Panggilan</span>
+                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">Nama Panggilan</span>
                       <span className="text-xs font-bold text-foreground">{user.nickname || '-'}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Phone className="h-3 w-3 text-muted-foreground shrink-0" />
                     <div>
-                      <span className="text-[9px] text-muted-foreground uppercase block font-semibold">WhatsApp</span>
+                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">WhatsApp</span>
                       <span className="text-xs font-bold text-foreground">{user.waNumber || '-'}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Mail className="h-3 w-3 text-muted-foreground shrink-0" />
                     <div className="min-w-0">
-                      <span className="text-[9px] text-muted-foreground uppercase block font-semibold">Email</span>
+                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">Email</span>
                       <span className="text-xs font-bold text-foreground block break-all">{user.email}</span>
                     </div>
                   </div>
@@ -696,7 +736,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
               )}
             </div>
 
-            {/* Links & Files Section */}
+             {/* Links & Files Section */}
             <div className="bg-card border border-border/70 rounded-2xl p-5 shadow-md space-y-5 relative">
               <div className="flex items-center justify-between">
                 <h3 className="font-bold text-[11px] text-muted-foreground uppercase tracking-wider">
@@ -713,13 +753,13 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
                       <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
                       <X className="h-3 w-3" />
                     </button>
@@ -730,7 +770,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
               {editSection === 'links' ? (
                 <div className="space-y-3 pt-1">
                   <div>
-                    <label className="text-[9px] font-bold text-muted-foreground uppercase block mb-1.5">Resume</label>
+                    <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1.5">Resume</label>
                     {formData.softFile ? (
                       <div className="flex items-center justify-between bg-muted/40 border border-border/80 rounded-xl p-2.5">
                         <div className="flex items-center gap-2 min-w-0">
@@ -759,7 +799,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                         />
                         <div className="text-xl text-muted-foreground group-hover:scale-110 transition-transform">📁</div>
                         <span className="text-xs font-bold text-foreground">Pilih Berkas</span>
-                        <span className="text-[9px] text-muted-foreground text-center">PDF atau Word (Maks. 10MB)</span>
+                        <span className="text-[10px] text-muted-foreground text-center">PDF atau Word (Maks. 10MB)</span>
                       </div>
                     )}
                     {uploadError && (
@@ -767,7 +807,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                     )}
                   </div>
                   <div>
-                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Website Pribadi</label>
+                    <label className="text-[10px] font-bold text-muted-foreground uppercase">Website Pribadi</label>
                     <Input
                       value={formData.website}
                       onChange={(e) => setFormData({ ...formData, website: e.target.value })}
@@ -776,7 +816,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                     />
                   </div>
                   <div>
-                    <label className="text-[9px] font-bold text-muted-foreground uppercase">LinkedIn </label>
+                    <label className="text-[10px] font-bold text-muted-foreground uppercase">LinkedIn </label>
                     <Input
                       value={formData.socialMedia}
                       onChange={(e) => setFormData({ ...formData, socialMedia: e.target.value })}
@@ -804,7 +844,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                           >
                             {user.softFile}
                           </a>
-                          <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-300 uppercase shrink-0">
+                          <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-primary/10 border border-primary/20 text-muted-foreground uppercase shrink-0">
                             {user.softFile.split('.').pop()}
                           </span>
                         </div>
@@ -855,56 +895,6 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
               )}
             </div>
 
-          </div>
-
-          {/* Right Column: Summaries, organization, skills, reference, certs */}
-          <div className="lg:col-span-2 space-y-6">
-            
-            {/* About Me Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-5 shadow-md space-y-4 relative">
-              <div className="flex items-center justify-between">
-                <h3 className="font-extrabold text-sm text-foreground tracking-tight">
-                  Tentang Saya
-                </h3>
-                {editSection !== 'aboutMe' ? (
-                  <button
-                    onClick={() => handleStartEdit('aboutMe')}
-                    className="text-muted-foreground hover:text-foreground p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
-                  >
-                    <Pencil className="h-3 w-3" />
-                  </button>
-                ) : (
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={handleSave}
-                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <Check className="h-3 w-3" />
-                    </button>
-                    <button
-                      onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
-                    >
-                      <X className="h-3 w-3" />
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {editSection === 'aboutMe' ? (
-                <textarea
-                  value={formData.aboutMe}
-                  onChange={(e) => setFormData({ ...formData, aboutMe: e.target.value })}
-                  rows={4}
-                  className="w-full text-xs font-medium bg-background border border-border/80 rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-foreground leading-relaxed"
-                />
-              ) : (
-                <p className="text-xs text-muted-foreground font-medium leading-relaxed">
-                  {user.aboutMe || 'Tulis ringkasan tentang diri Anda di sini...'}
-                </p>
-              )}
-            </div>
-
             {/* Pengalaman Kerja Section */}
             <div className="bg-card border border-border/70 rounded-2xl p-5 shadow-md space-y-4 relative">
               <div className="flex items-center justify-between">
@@ -922,13 +912,13 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
                       <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
                       <X className="h-3 w-3" />
                     </button>
@@ -1046,13 +1036,13 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
                       <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
                       <X className="h-3 w-3" />
                     </button>
@@ -1168,13 +1158,13 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
                       <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
                       <X className="h-3 w-3" />
                     </button>
@@ -1261,13 +1251,13 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
                       <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
                       <X className="h-3 w-3" />
                     </button>
@@ -1347,13 +1337,13 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
                       <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
                       <X className="h-3 w-3" />
                     </button>
@@ -1469,13 +1459,13 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-emerald-500 hover:bg-emerald-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
                       <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
-                      className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
                       <X className="h-3 w-3" />
                     </button>
@@ -1486,7 +1476,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
               {editSection === 'reference' ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
                   <div>
-                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Minat Pekerjaan</label>
+                    <label className="text-[10px] font-bold text-muted-foreground uppercase">Minat Pekerjaan</label>
                     <Input
                       value={formData.jobReference.interest}
                       onChange={(e) => setFormData({
@@ -1497,7 +1487,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                     />
                   </div>
                   <div>
-                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Kota / Lokasi</label>
+                    <label className="text-[10px] font-bold text-muted-foreground uppercase">Kota / Lokasi</label>
                     <Input
                       value={formData.jobReference.city}
                       onChange={(e) => setFormData({
@@ -1508,7 +1498,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                     />
                   </div>
                   <div>
-                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Ekspektasi Gaji</label>
+                    <label className="text-[10px] font-bold text-muted-foreground uppercase">Ekspektasi Gaji</label>
                     <Input
                       value={formData.jobReference.salaryExpectation}
                       onChange={(e) => setFormData({
@@ -1519,7 +1509,7 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
                     />
                   </div>
                   <div>
-                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Opsi Kerja</label>
+                    <label className="text-[10px] font-bold text-muted-foreground uppercase">Opsi Kerja</label>
                     <select
                       value={formData.jobReference.workOption}
                       onChange={(e) => setFormData({
@@ -1537,30 +1527,27 @@ export default function DashboardProfile({ onNavigate }: DashboardProfileProps) 
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
                   <div className="bg-background/40 border border-border/60 p-4 rounded-xl space-y-1">
-                    <span className="text-[9px] font-bold text-muted-foreground uppercase block">Minat Pekerjaan</span>
+                    <span className="text-[10px] font-bold text-muted-foreground uppercase block">Minat Pekerjaan</span>
                     <span className="text-xs font-bold text-foreground block">{user.jobReference?.interest || '-'}</span>
                   </div>
                   <div className="bg-background/40 border border-border/60 p-4 rounded-xl space-y-1">
-                    <span className="text-[9px] font-bold text-muted-foreground uppercase block">Kota</span>
+                    <span className="text-[10px] font-bold text-muted-foreground uppercase block">Kota</span>
                     <div className="flex items-center gap-1">
                       <MapPin className="h-3 w-3 text-muted-foreground" />
                       <span className="text-xs font-bold text-foreground">{user.jobReference?.city || '-'}</span>
                     </div>
                   </div>
                   <div className="bg-background/40 border border-border/60 p-4 rounded-xl space-y-1">
-                    <span className="text-[9px] font-bold text-muted-foreground uppercase block">Ekspektasi Gaji</span>
+                    <span className="text-[10px] font-bold text-muted-foreground uppercase block">Ekspektasi Gaji</span>
                     <span className="text-xs font-bold text-foreground block">{user.jobReference?.salaryExpectation || '-'}</span>
                   </div>
                   <div className="bg-background/40 border border-border/60 p-4 rounded-xl space-y-1">
-                    <span className="text-[9px] font-bold text-muted-foreground uppercase block">Metode Kerja</span>
+                    <span className="text-[10px] font-bold text-muted-foreground uppercase block">Metode Kerja</span>
                     <span className="text-xs font-bold text-foreground block">{user.jobReference?.workOption || '-'}</span>
                   </div>
                 </div>
               )}
             </div>
-
-          </div>
-
         </div>
 
       </div>{/* end scroll area */}

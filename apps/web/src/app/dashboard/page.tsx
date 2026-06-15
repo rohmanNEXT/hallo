@@ -223,7 +223,7 @@ function DashboardContent() {
             </div>
 
             <div className="space-y-1.5">
-              <span className="text-[9px] font-bold text-muted-foreground/60 uppercase tracking-widest px-3 block mb-4">
+              <span className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest px-3 block mb-4">
                 Menu
               </span>
               {menuItems.map((item) => {
@@ -306,7 +306,7 @@ function DashboardContent() {
                       <div className="font-bold text-xs truncate">
                         {user.name}
                       </div>
-                      <div className="text-[9px] text-muted-foreground truncate mt-1">
+                      <div className="text-[10px] text-muted-foreground truncate mt-1">
                         {user.email}
                       </div>
                     </div>

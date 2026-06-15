@@ -35,19 +35,19 @@
   --card-foreground: 210 40% 98%;
   --popover: 220 20% 12%;
   --popover-foreground: 210 40% 98%;
-  --primary: 235 85% 65%;
+  --primary: 235 85% 52%;
   --primary-foreground: 210 40% 98%;
   --secondary: 220 15% 18%;
   --secondary-foreground: 210 40% 98%;
   --muted: 210 15% 70%;
   --muted-foreground: 210 15% 70%;
-  --accent: 235 85% 65%;
+  --accent: 235 85% 52%;
   --accent-foreground: 220 40% 10%;
   --destructive: 355 80% 60%;
   --destructive-foreground: 210 40% 98%;
-  --border: 220 15% 23%;
+  --border: 220 15% 20%;
   --input: 220 15% 23%;
-  --ring: 235 85% 65%;
+  --ring: 235 85% 52%;
   --radius: 0.5rem;
 }
  
@@ -61,19 +61,19 @@
   --card-foreground: 210 40% 98%;
   --popover: 0 0% 7%;
   --popover-foreground: 210 40% 98%;
-  --primary: 235 85% 65%;
+  --primary: 235 85% 52%;
   --primary-foreground: 210 40% 98%;
   --secondary: 0 0% 10%;
   --secondary-foreground: 210 40% 98%;
   --muted: 0 0% 60%;
   --muted-foreground: 0 0% 60%;
-  --accent: 235 85% 65%;
+  --accent: 235 85% 52%;
   --accent-foreground: 220 40% 10%;
   --destructive: 355 80% 60%;
   --destructive-foreground: 210 40% 98%;
-  --border: 0 0% 17%;
+  --border: 0 0% 20%;
   --input: 0 0% 17%;
-  --ring: 235 85% 65%;
+  --ring: 235 85% 52%;
 }
  
 /* 3. DARK BLUE THEME */
@@ -85,19 +85,19 @@
   --card-foreground: 210 40% 98%;
   --popover: 220 20% 12%;
   --popover-foreground: 210 40% 98%;
-  --primary: 235 85% 65%;
+  --primary: 235 85% 52%;
   --primary-foreground: 210 40% 98%;
   --secondary: 220 15% 18%;
   --secondary-foreground: 210 40% 98%;
   --muted: 210 15% 70%;
   --muted-foreground: 210 15% 70%;
-  --accent: 235 85% 65%;
+  --accent: 235 85% 52%;
   --accent-foreground: 220 40% 10%;
   --destructive: 355 80% 60%;
   --destructive-foreground: 210 40% 98%;
-  --border: 220 15% 23%;
+  --border: 220 15% 20%;
   --input: 220 15% 23%;
-  --ring: 235 85% 65%;
+  --ring: 235 85% 52%;
 }
  
 /* 4. ARCTIC WHITE THEME */
@@ -132,19 +132,19 @@
   --card-foreground: 210 40% 98%;
   --popover: 170 25% 12%;
   --popover-foreground: 210 40% 98%;
-  --primary: 170 80% 50%;
+  --primary: 170 80% 38%;
   --primary-foreground: 210 40% 98%;
   --secondary: 170 20% 18%;
   --secondary-foreground: 210 40% 98%;
   --muted: 170 15% 70%;
   --muted-foreground: 170 15% 70%;
-  --accent: 170 80% 50%;
+  --accent: 170 80% 38%;
   --accent-foreground: 170 40% 10%;
   --destructive: 355 80% 60%;
   --destructive-foreground: 210 40% 98%;
-  --border: 170 20% 23%;
+  --border: 170 20% 20%;
   --input: 170 20% 23%;
-  --ring: 170 80% 50%;
+  --ring: 170 80% 38%;
 }
  
 /* 6. CHARCOAL GREY THEME */
@@ -156,19 +156,19 @@
   --card-foreground: 210 40% 98%;
   --popover: 290 12% 12%;
   --popover-foreground: 210 40% 98%;
-  --primary: 280 65% 60%;
+  --primary: 280 65% 45%;
   --primary-foreground: 210 40% 98%;
   --secondary: 290 10% 18%;
   --secondary-foreground: 210 40% 98%;
   --muted: 290 10% 70%;
   --muted-foreground: 290 10% 70%;
-  --accent: 280 65% 60%;
+  --accent: 280 65% 45%;
   --accent-foreground: 290 40% 10%;
   --destructive: 355 80% 60%;
   --destructive-foreground: 210 40% 98%;
-  --border: 290 10% 23%;
+  --border: 290 10% 20%;
   --input: 290 10% 23%;
-  --ring: 280 65% 60%;
+  --ring: 280 65% 45%;
 }
  
 /* 7. EMERALD GREEN THEME */
@@ -180,19 +180,19 @@
   --card-foreground: 210 40% 98%;
   --popover: 142 25% 12%;
   --popover-foreground: 210 40% 98%;
-  --primary: 142 75% 45%;
+  --primary: 142 75% 38%;
   --primary-foreground: 210 40% 98%;
   --secondary: 142 20% 18%;
   --secondary-foreground: 210 40% 98%;
   --muted: 142 15% 70%;
   --muted-foreground: 142 15% 70%;
-  --accent: 142 75% 45%;
+  --accent: 142 75% 38%;
   --accent-foreground: 142 40% 10%;
   --destructive: 355 80% 60%;
   --destructive-foreground: 210 40% 98%;
-  --border: 142 20% 23%;
+  --border: 142 20% 20%;
   --input: 142 20% 23%;
-  --ring: 142 75% 45%;
+  --ring: 142 75% 38%;
 }
  
 /* 8. BURGUNDY THEME */
@@ -204,19 +204,19 @@
   --card-foreground: 210 40% 98%;
   --popover: 350 30% 12%;
   --popover-foreground: 210 40% 98%;
-  --primary: 350 80% 55%;
+  --primary: 350 80% 45%;
   --primary-foreground: 210 40% 98%;
   --secondary: 350 25% 18%;
   --secondary-foreground: 210 40% 98%;
   --muted: 350 15% 70%;
   --muted-foreground: 350 15% 70%;
-  --accent: 350 80% 55%;
+  --accent: 350 80% 45%;
   --accent-foreground: 350 40% 10%;
   --destructive: 355 80% 60%;
   --destructive-foreground: 210 40% 98%;
-  --border: 350 25% 23%;
+  --border: 350 25% 20%;
   --input: 350 25% 23%;
-  --ring: 350 80% 55%;
+  --ring: 350 80% 45%;
 }
  
 /* 9. WHITE THEME (Cream Friendly) */
@@ -228,19 +228,19 @@
   --card-foreground: 220 25% 10%;
   --popover: 0 0% 100%;
   --popover-foreground: 220 25% 10%;
-  --primary: 235 85% 60%;
-  --primary-foreground: 0 0% 100%;
+  --primary: 235 85% 52%;
+  --primary-foreground: 210 40% 98%;
   --secondary: 60 4% 92%;
   --secondary-foreground: 220 25% 10%;
   --muted: 220 10% 40%;
   --muted-foreground: 220 10% 40%;
-  --accent: 235 85% 60%;
+  --accent: 235 85% 52%;
   --accent-foreground: 0 0% 100%;
   --destructive: 355 80% 60%;
   --destructive-foreground: 210 40% 98%;
   --border: 60 4% 85%;
   --input: 60 4% 85%;
-  --ring: 235 85% 60%;
+  --ring: 235 85% 52%;
 }
  
  
@@ -251,10 +251,17 @@
 /* Ensure button text readability and premium transitions globally */
 .btn-primary, button[type="submit"], button.bg-primary {
   color: hsl(var(--primary-foreground)) !important;
-  transition: all 0.2s ease-in-out;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
-/* Button hover handled per-component - no global opacity override */
+.btn-primary:hover, button[type="submit"]:hover, button.bg-primary:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 5px 15px hsl(var(--primary) / 0.3);
+}
+
+.btn-primary:active, button[type="submit"]:active, button.bg-primary:active {
+  transform: translateY(0) scale(0.97);
+}
 
 body {
   background-color: hsl(var(--background));
@@ -263,28 +270,59 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* Custom smooth mini scrollbar */
-.smooth-scroll {
+/* Custom smooth mini scrollbar applied globally */
+.smooth-scroll,
+.overflow-y-auto,
+.overflow-x-auto,
+.overflow-auto {
   scrollbar-width: thin;
-  scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.3s ease;
 }
 
-.smooth-scroll::-webkit-scrollbar {
+.smooth-scroll.is-scrolling,
+.overflow-y-auto.is-scrolling,
+.overflow-x-auto.is-scrolling,
+.overflow-auto.is-scrolling {
+  scrollbar-color: hsl(var(--muted-foreground) / 0.35) transparent;
+}
+
+.smooth-scroll::-webkit-scrollbar,
+.overflow-y-auto::-webkit-scrollbar,
+.overflow-x-auto::-webkit-scrollbar,
+.overflow-auto::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
 
-.smooth-scroll::-webkit-scrollbar-track {
+.smooth-scroll::-webkit-scrollbar-track,
+.overflow-y-auto::-webkit-scrollbar-track,
+.overflow-x-auto::-webkit-scrollbar-track,
+.overflow-auto::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.smooth-scroll::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground) / 0.3);
+.smooth-scroll::-webkit-scrollbar-thumb,
+.overflow-y-auto::-webkit-scrollbar-thumb,
+.overflow-x-auto::-webkit-scrollbar-thumb,
+.overflow-auto::-webkit-scrollbar-thumb {
+  background: transparent;
   border-radius: 9999px;
+  transition: background-color 0.3s ease;
 }
 
-.smooth-scroll::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground) / 0.5);
+.smooth-scroll.is-scrolling::-webkit-scrollbar-thumb,
+.overflow-y-auto.is-scrolling::-webkit-scrollbar-thumb,
+.overflow-x-auto.is-scrolling::-webkit-scrollbar-thumb,
+.overflow-auto.is-scrolling::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.35);
+}
+
+.smooth-scroll::-webkit-scrollbar-thumb:hover,
+.overflow-y-auto::-webkit-scrollbar-thumb:hover,
+.overflow-x-auto::-webkit-scrollbar-thumb:hover,
+.overflow-auto::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.6) !important;
 }
 
 /* Hide scrollbar utility */
@@ -295,5 +333,11 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Smooth theme transitions */
+body, header, main, footer, div, button, span, input, a, select, textarea, label {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, fill 0.2s ease, stroke 0.2s ease;
+}
+
 
 

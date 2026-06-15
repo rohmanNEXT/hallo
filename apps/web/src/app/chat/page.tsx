@@ -157,10 +157,10 @@ export default function ChatPage() {
   };
 
   return (
-    <main className="h-screen flex flex-col bg-background pt-10 pb-8 px-6 md:px-12 text-foreground overflow-hidden">
-      <div className="max-w-5xl mx-auto flex flex-col flex-1 w-full space-y-6 overflow-hidden min-h-0">
+        <main className="h-[calc(100vh-64px)] flex flex-col bg-background p-3 md:p-6 text-foreground overflow-hidden">
+      <div className="max-w-5xl mx-auto flex flex-col flex-1 w-full space-y-4 overflow-hidden min-h-0">
         {/* Title */}
-        <h1 className="text-3xl font-extrabold tracking-tight text-foreground">
+        <h1 className="text-xl md:text-2xl font-extrabold tracking-tight text-foreground">
           Chat
         </h1>
 
@@ -194,7 +194,7 @@ export default function ChatPage() {
             </div>
 
             {/* Contacts */}
-            <div className="flex-1 overflow-y-auto divide-y divide-border/40">
+            <div className="flex-1 overflow-y-auto divide-y divide-border/40 smooth-scroll">
               {filteredContacts.map((contact) => (
                 <div
                   key={contact.id}
@@ -202,10 +202,10 @@ export default function ChatPage() {
                     setActiveContactId(contact.id);
                     setShowChatOnMobile(true);
                   }}
-                  className={`flex items-center gap-2.5 py-2.5 px-3.5 cursor-pointer transition-colors ${
+                  className={`flex items-center gap-2.5 py-3 px-3.5 cursor-pointer transition-all hover:translate-x-0.5 duration-205 ${
                     activeContactId === contact.id
-                      ? 'bg-primary/5 border-l-4 border-primary'
-                      : 'hover:bg-muted/60 border-l-4 border-transparent'
+                      ? 'bg-primary/8 border-l-4 border-primary'
+                      : 'hover:bg-muted/40 border-l-4 border-transparent'
                   }`}
                 >
                   {/* Logo */}
@@ -224,7 +224,7 @@ export default function ChatPage() {
                       <span className="text-sm font-bold text-foreground truncate">
                         {contact.name}
                       </span>
-                      <span className="text-[9px] text-muted-foreground/60">
+                      <span className="text-[10px] text-muted-foreground/60">
                         {contact.time}
                       </span>
                     </div>
@@ -287,7 +287,7 @@ export default function ChatPage() {
             {/* Messages Area */}
             <div
               ref={chatContainerRef}
-              className="flex-1 overflow-y-auto p-4 space-y-4 bg-background/20"
+              className="flex-1 overflow-y-auto p-4 space-y-4 bg-background/20 smooth-scroll"
             >
               {activeContactId === 'techcorp' && chatMessages.length > 0 ? (
                 chatMessages.filter(msg => !hiddenMessages.has(msg.id)).map((msg) => {
@@ -304,7 +304,7 @@ export default function ChatPage() {
                       className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}
                     >
                       <div
-                        className={`max-w-[75%] rounded-2xl px-4 py-2.5 text-xs md:text-sm shadow-xs relative group ${
+                        className={`max-w-[85%] sm:max-w-[75%] rounded-2xl px-4 py-2.5 text-xs md:text-sm shadow-xs relative group ${
                           isUser
                             ? 'bg-primary text-primary-foreground rounded-tr-none'
                             : 'bg-card border border-border/60 text-card-foreground rounded-tl-none'
@@ -344,10 +344,10 @@ export default function ChatPage() {
                             <p className="leading-relaxed whitespace-pre-wrap">
                               {msg.content}
                             </p>
-                            <div className="flex items-center justify-between mt-1 gap-4 opacity-75 text-[9px]">
+                            <div className="flex flex-wrap items-center justify-between mt-1 gap-2 opacity-75 text-[10px]">
                               <span>{msg.timestamp}</span>
                               {isUser && (
-                                <div className="flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div className="flex gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-200">
                                   {canEdit && (
                                     <button
                                       onClick={() => {
@@ -419,7 +419,7 @@ export default function ChatPage() {
                 <Button
                   type="submit"
                   size="icon"
-                  className="h-10 w-10 shrink-0 cursor-pointer"
+                  className="h-10 w-10 shrink-0 cursor-pointer border border-primary/30"
                 >
                   <Send className="h-4 w-4" />
                 </Button>
