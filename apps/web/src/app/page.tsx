@@ -1,12 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Hero from '@/components/Hero';
 import AppBanner from '@/components/AppBanner';
 import IndonesiaMap from '@/components/IndonesiaMap';
-import { mockJobsData } from '@/app/jobs/page';
-import { useAppStore } from '@/lib/store';
+import { useAppStore } from '@/store/store';
 import {
   ShieldCheck,
   Bookmark,
@@ -18,15 +17,28 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import axios from 'axios';
+import { Job } from '@/lib/types';
 
-export default function Home() {
+const Home: React.FC = () => {
   const [mounted, setMounted] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
   const { bookmarks, toggleBookmark, theme } = useAppStore();
 
+  const [mockJobsData, setMockJobsData] = useState<Job[]>([]);
+
   useEffect(() => {
     setMounted(true);
+    const fetchJobs = async () => {
+      try {
+        const { data } = await axios.get<Job[]>('/data/jobs.json');
+        setMockJobsData(data);
+      } catch (err) {
+        console.error('Failed to fetch jobs on homepage:', err);
+      }
+    };
+    fetchJobs();
   }, []);
 
   // 12 jobs per page (3x4 grid)
@@ -44,11 +56,18 @@ export default function Home() {
 
         {/* Divider Line with Year */}
         <div className="max-w-7xl mx-auto px-6 pt-24 flex items-center gap-4">
-          <div className="flex-grow border-t border-border/50"></div>
-          <span className="text-xs font-extrabold text-muted-foreground tracking-widest select-none px-3 py-1 rounded-full border border-border/40 bg-muted/40 font-mono">
+          <div className="grow border-t border-border/50"></div>
+          <Badge
+            variant="outline"
+            className={`text-xs font-extrabold tracking-widest select-none px-3 py-1 rounded-full font-mono ${
+              !mounted || theme === 'white'
+                ? 'bg-[#eef5fa] border border-[#d2e2f0] text-[#334155]'
+                : 'bg-background/50 border border-border/80 text-muted-foreground'
+            }`}
+          >
             [ {new Date().getFullYear()} ]
-          </span>
-          <div className="flex-grow border-t border-border/50"></div>
+          </Badge>
+          <div className="grow border-t border-border/50"></div>
         </div>
 
         {/* Loker Terbaru Section */}
@@ -57,9 +76,9 @@ export default function Home() {
             <div className="text-left">
               <h2
                 id="loker-terbaru-heading"
-                className="text-2xl font-extrabold tracking-tight"
+                className="text-2xl font-extrabold"
               >
-                Lowongan Kerja Terbaru
+                Lowongan Terbaru
               </h2>
             </div>
             <Link href="/jobs" className="block shrink-0">
@@ -119,17 +138,17 @@ export default function Home() {
                         className="text-muted-foreground hover:text-primary transition-colors p-1 shrink-0 cursor-pointer"
                       >
                         <Bookmark
-                          className={`h-4.5 w-4.5 ${bookmarks.includes(job.id) ? 'fill-primary text-primary' : ''}`}
+                          className={`h-4.5 w-4.5 ${bookmarks.includes(job.id) ? 'fill-primary/60' : ''}`}
                         />
                       </button>
                     </div>
 
                     {/* Job Info */}
                     <div className="space-y-1 mb-3">
-                      <h3 className="font-bold text-[13.5px] text-foreground group-hover:text-primary transition-colors leading-snug truncate">
+                      <h3 className="font-bold text-sm text-foreground group-hover:text-primary transition-colors leading-snug truncate">
                         {job.title}
                       </h3>
-                      <div className="text-[11.5px] text-muted-foreground truncate font-medium flex items-center gap-1">
+                      <div className="text-xs text-muted-foreground truncate font-medium flex items-center gap-1">
                         <span className="truncate">{job.company}</span>
                         {job.isVerified && (
                           <ShieldCheck className="h-3.5 w-3.5 text-emerald-500 fill-emerald-500/10 shrink-0" />
@@ -328,10 +347,12 @@ export default function Home() {
           )}
         </section>
 
-        <AppBanner />
-
         <IndonesiaMap />
+
+        <AppBanner />
       </main>
     </>
   );
-}
+};
+
+export default Home;

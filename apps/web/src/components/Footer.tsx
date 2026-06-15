@@ -139,7 +139,7 @@ export default function Footer() {
             <h4 className="text-sm font-bold text-foreground">Kontak</h4>
             <ul className="space-y-2.5 text-xs font-normal">
               <li className="flex items-start gap-2.5">
-                <Mail className="h-3 w-3 text-muted-foreground shrink-0 mt-0.5" />
+                <Mail className="h-3 w-3 text-muted-foreground shrink-0 mt-1" />
                 <a
                   href="mailto:support@jobseeker.id"
                   className="hover:text-foreground transition-colors"
@@ -148,11 +148,11 @@ export default function Footer() {
                 </a>
               </li>
               <li className="flex items-start gap-2.5">
-                <Phone className="h-3 w-3 text-muted-foreground shrink-0 mt-0.5" />
+                <Phone className="h-3 w-3 text-muted-foreground shrink-0 mt-1" />
                 <span className="text-muted-foreground">+62 21 1234 5678</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <MapPin className="h-3 w-3 text-muted-foreground shrink-0 mt-0.5" />
+                <MapPin className="h-3 w-3 text-muted-foreground shrink-0 mt-1" />
                 <span className="text-muted-foreground">
                   Jakarta, Indonesia
                 </span>

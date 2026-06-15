@@ -1,0 +1,2602 @@
+[
+  {
+    "id": "1",
+    "title": "Product Manager",
+    "company": "Microsoft",
+    "logo": "/images/companies/microsoft.svg",
+    "location": "Kabupaten Simeulue",
+    "salary": "Rp 10jt - Rp15jt",
+    "salaryNum": 10,
+    "workOption": "Remote",
+    "workType": "Penuh Waktu",
+    "experienceLevel": "Tidak berpengalaman",
+    "educationLevel": "S1",
+    "isPremium": false,
+    "isUrgent": true,
+    "isVerified": true,
+    "postedAt": "3 jam lalu",
+    "postedDaysAgo": 0,
+    "categories": [
+      "Product",
+      "Tech"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Tidak berpengalaman)",
+      "Menguasai stack utama Product & Tech",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Product",
+      "Tech",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Microsoft untuk berkontribusi pada proyek skala enterprise di bidang Product.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Microsoft Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Microsoft adalah perusahaan teknologi global inovatif yang berkomitmen penuh untuk menghadirkan solusi cerdas terbaik di bidang Product & Tech.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://microsoft.com",
+      "linkedin": "https://linkedin.com/company/microsoft",
+      "instagram": "https://instagram.com/microsoft",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "2",
+    "title": "Senior Software Engineer",
+    "company": "Google",
+    "logo": "/images/companies/google.svg",
+    "location": "Kabupaten Aceh Singkil",
+    "salary": "Rp 11jt - Rp16jt",
+    "salaryNum": 11,
+    "workOption": "Hybrid",
+    "workType": "Kontrak",
+    "experienceLevel": "Fresh Graduate",
+    "educationLevel": "D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": false,
+    "postedAt": "1 hari lalu",
+    "postedDaysAgo": 1,
+    "categories": [
+      "Engineering",
+      "Tech"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Fresh Graduate)",
+      "Menguasai stack utama Engineering & Tech",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "Tech",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Google untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Google Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Google merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Engineering & Tech. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://google.com",
+      "linkedin": "https://linkedin.com/company/google",
+      "instagram": "https://instagram.com/google",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "3",
+    "title": "iOS Developer",
+    "company": "Apple",
+    "logo": "/images/companies/apple.svg",
+    "location": "Kabupaten Aceh Selatan",
+    "salary": "Rp 12jt - Rp17jt",
+    "salaryNum": 12,
+    "workOption": "Onsite",
+    "workType": "Magang",
+    "experienceLevel": "Kurang dari setahun",
+    "educationLevel": "SMA/SMK",
+    "isPremium": true,
+    "isUrgent": true,
+    "isVerified": true,
+    "postedAt": "2 hari lalu",
+    "postedDaysAgo": 2,
+    "categories": [
+      "Engineering",
+      "iOS"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Kurang dari setahun)",
+      "Menguasai stack utama Engineering & iOS",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "iOS",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Apple untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Apple Recruiter",
+      "isPremium": true,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Apple merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Engineering & iOS. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://apple.com",
+      "linkedin": "https://linkedin.com/company/apple",
+      "instagram": "https://instagram.com/apple",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "4",
+    "title": "Fullstack Engineer",
+    "company": "Meta",
+    "logo": "/images/companies/meta.svg",
+    "location": "Kabupaten Aceh Tenggara",
+    "salary": "Rp 13jt - Rp18jt",
+    "salaryNum": 13,
+    "workOption": "Remote",
+    "workType": "Paruh Waktu",
+    "experienceLevel": "1-3 tahun",
+    "educationLevel": "S1/D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": false,
+    "postedAt": "3 hari lalu",
+    "postedDaysAgo": 3,
+    "categories": [
+      "Engineering",
+      "Fullstack"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (1-3 tahun)",
+      "Menguasai stack utama Engineering & Fullstack",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "Fullstack",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Meta untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Meta Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Meta adalah perusahaan teknologi global inovatif yang berkomitmen penuh untuk menghadirkan solusi cerdas terbaik di bidang Engineering & Fullstack.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://meta.com",
+      "linkedin": "https://linkedin.com/company/meta",
+      "instagram": "https://instagram.com/meta",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "5",
+    "title": "Backend Developer",
+    "company": "Spotify",
+    "logo": "/images/companies/spotify.svg",
+    "location": "Kabupaten Aceh Timur",
+    "salary": "Rp 14jt - Rp19jt",
+    "salaryNum": 14,
+    "workOption": "Hybrid",
+    "workType": "Freelance",
+    "experienceLevel": "3-5 tahun",
+    "educationLevel": "S1",
+    "isPremium": true,
+    "isUrgent": true,
+    "isVerified": true,
+    "postedAt": "4 hari lalu",
+    "postedDaysAgo": 4,
+    "categories": [
+      "Engineering",
+      "Backend"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (3-5 tahun)",
+      "Menguasai stack utama Engineering & Backend",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "Backend",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Spotify untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Spotify Recruiter",
+      "isPremium": true,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Spotify merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Engineering & Backend. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://spotify.com",
+      "linkedin": "https://linkedin.com/company/spotify",
+      "instagram": "https://instagram.com/spotify",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "6",
+    "title": "Frontend Specialist",
+    "company": "Netflix",
+    "logo": "/images/companies/netflix.svg",
+    "location": "Kabupaten Aceh Tengah",
+    "salary": "Rp 15jt - Rp20jt",
+    "salaryNum": 15,
+    "workOption": "Onsite",
+    "workType": "Penuh Waktu",
+    "experienceLevel": "5-10 tahun",
+    "educationLevel": "D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": true,
+    "postedAt": "5 hari lalu",
+    "postedDaysAgo": 5,
+    "categories": [
+      "Engineering",
+      "Frontend"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (5-10 tahun)",
+      "Menguasai stack utama Engineering & Frontend",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "Frontend",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Netflix untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Netflix Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Netflix merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Engineering & Frontend. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://netflix.com",
+      "linkedin": "https://linkedin.com/company/netflix",
+      "instagram": "https://instagram.com/netflix",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "7",
+    "title": "Security Engineer",
+    "company": "Twitter",
+    "logo": "/images/companies/twitter.svg",
+    "location": "Kabupaten Aceh Barat",
+    "salary": "Rp 16jt - Rp21jt",
+    "salaryNum": 16,
+    "workOption": "Remote",
+    "workType": "Kontrak",
+    "experienceLevel": "Lebih dari 10 tahun",
+    "educationLevel": "SMA/SMK",
+    "isPremium": false,
+    "isUrgent": true,
+    "isVerified": false,
+    "postedAt": "6 hari lalu",
+    "postedDaysAgo": 6,
+    "categories": [
+      "Security",
+      "Tech"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Lebih dari 10 tahun)",
+      "Menguasai stack utama Security & Tech",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Security",
+      "Tech",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Twitter untuk berkontribusi pada proyek skala enterprise di bidang Security.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Twitter Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Twitter adalah perusahaan teknologi global inovatif yang berkomitmen penuh untuk menghadirkan solusi cerdas terbaik di bidang Security & Tech.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://twitter.com",
+      "linkedin": "https://linkedin.com/company/twitter",
+      "instagram": "https://instagram.com/twitter",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "8",
+    "title": "UX Researcher",
+    "company": "Airbnb",
+    "logo": "/images/companies/airbnb.svg",
+    "location": "Kabupaten Aceh Besar",
+    "salary": "Rp 17jt - Rp22jt",
+    "salaryNum": 17,
+    "workOption": "Hybrid",
+    "workType": "Magang",
+    "experienceLevel": "Tidak berpengalaman",
+    "educationLevel": "S1/D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": true,
+    "postedAt": "3 jam lalu",
+    "postedDaysAgo": 0,
+    "categories": [
+      "Design",
+      "Research"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Tidak berpengalaman)",
+      "Menguasai stack utama Design & Research",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Design",
+      "Research",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Airbnb untuk berkontribusi pada proyek skala enterprise di bidang Design.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Airbnb Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Airbnb merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Design & Research. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://airbnb.com",
+      "linkedin": "https://linkedin.com/company/airbnb",
+      "instagram": "https://instagram.com/airbnb",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "9",
+    "title": "Quality Assurance",
+    "company": "Zoom",
+    "logo": "/images/companies/zoom.svg",
+    "location": "Kabupaten Pidie",
+    "salary": "Rp 18jt - Rp23jt",
+    "salaryNum": 18,
+    "workOption": "Onsite",
+    "workType": "Paruh Waktu",
+    "experienceLevel": "Fresh Graduate",
+    "educationLevel": "S1",
+    "isPremium": false,
+    "isUrgent": true,
+    "isVerified": false,
+    "postedAt": "1 hari lalu",
+    "postedDaysAgo": 1,
+    "categories": [
+      "QA",
+      "Testing"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Fresh Graduate)",
+      "Menguasai stack utama QA & Testing",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "QA",
+      "Testing",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Zoom untuk berkontribusi pada proyek skala enterprise di bidang QA.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Zoom Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Zoom merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang QA & Testing. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://zoom.com",
+      "linkedin": "https://linkedin.com/company/zoom",
+      "instagram": "https://instagram.com/zoom",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "10",
+    "title": "Lead UI/UX Designer",
+    "company": "Figma",
+    "logo": "/images/companies/figma.svg",
+    "location": "Kabupaten Bireuen",
+    "salary": "Rp 19jt - Rp24jt",
+    "salaryNum": 19,
+    "workOption": "Remote",
+    "workType": "Freelance",
+    "experienceLevel": "Kurang dari setahun",
+    "educationLevel": "D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": true,
+    "postedAt": "2 hari lalu",
+    "postedDaysAgo": 2,
+    "categories": [
+      "Design",
+      "Creative"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Kurang dari setahun)",
+      "Menguasai stack utama Design & Creative",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Design",
+      "Creative",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Figma untuk berkontribusi pada proyek skala enterprise di bidang Design.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Figma Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Figma adalah perusahaan teknologi global inovatif yang berkomitmen penuh untuk menghadirkan solusi cerdas terbaik di bidang Design & Creative.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://figma.com",
+      "linkedin": "https://linkedin.com/company/figma",
+      "instagram": "https://instagram.com/figma",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "11",
+    "title": "Graphic Designer",
+    "company": "Adobe",
+    "logo": "/images/companies/adobe.svg",
+    "location": "Kabupaten Aceh Utara",
+    "salary": "Rp 20jt - Rp25jt",
+    "salaryNum": 20,
+    "workOption": "Hybrid",
+    "workType": "Penuh Waktu",
+    "experienceLevel": "1-3 tahun",
+    "educationLevel": "SMA/SMK",
+    "isPremium": false,
+    "isUrgent": true,
+    "isVerified": false,
+    "postedAt": "3 hari lalu",
+    "postedDaysAgo": 3,
+    "categories": [
+      "Design",
+      "Creative"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (1-3 tahun)",
+      "Menguasai stack utama Design & Creative",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Design",
+      "Creative",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Adobe untuk berkontribusi pada proyek skala enterprise di bidang Design.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Adobe Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Adobe merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Design & Creative. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://adobe.com",
+      "linkedin": "https://linkedin.com/company/adobe",
+      "instagram": "https://instagram.com/adobe",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "12",
+    "title": "Product Marketing",
+    "company": "Slack",
+    "logo": "/images/companies/slack.svg",
+    "location": "Kabupaten Aceh Barat Daya",
+    "salary": "Rp 21jt - Rp26jt",
+    "salaryNum": 21,
+    "workOption": "Onsite",
+    "workType": "Kontrak",
+    "experienceLevel": "3-5 tahun",
+    "educationLevel": "S1/D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": true,
+    "postedAt": "4 hari lalu",
+    "postedDaysAgo": 4,
+    "categories": [
+      "Marketing",
+      "Business"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (3-5 tahun)",
+      "Menguasai stack utama Marketing & Business",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Marketing",
+      "Business",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Slack untuk berkontribusi pada proyek skala enterprise di bidang Marketing.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Slack Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Slack merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Marketing & Business. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://slack.com",
+      "linkedin": "https://linkedin.com/company/slack",
+      "instagram": "https://instagram.com/slack",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "13",
+    "title": "AI/ML Engineer",
+    "company": "NVIDIA",
+    "logo": "/images/companies/nvidia.svg",
+    "location": "Kabupaten Gayo Lues",
+    "salary": "Rp 22jt - Rp27jt",
+    "salaryNum": 22,
+    "workOption": "Remote",
+    "workType": "Magang",
+    "experienceLevel": "5-10 tahun",
+    "educationLevel": "S1",
+    "isPremium": false,
+    "isUrgent": true,
+    "isVerified": false,
+    "postedAt": "5 hari lalu",
+    "postedDaysAgo": 5,
+    "categories": [
+      "AI/ML",
+      "Tech"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (5-10 tahun)",
+      "Menguasai stack utama AI/ML & Tech",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "AI/ML",
+      "Tech",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di NVIDIA untuk berkontribusi pada proyek skala enterprise di bidang AI/ML.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "NVIDIA Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "NVIDIA adalah perusahaan teknologi global inovatif yang berkomitmen penuh untuk menghadirkan solusi cerdas terbaik di bidang AI/ML & Tech.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://nvidia.com",
+      "linkedin": "https://linkedin.com/company/nvidia",
+      "instagram": "https://instagram.com/nvidia",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "14",
+    "title": "Autopilot Software Lead",
+    "company": "Tesla",
+    "logo": "/images/companies/tesla.svg",
+    "location": "Kabupaten Aceh Tamiang",
+    "salary": "Rp 23jt - Rp28jt",
+    "salaryNum": 23,
+    "workOption": "Hybrid",
+    "workType": "Paruh Waktu",
+    "experienceLevel": "Lebih dari 10 tahun",
+    "educationLevel": "D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": false,
+    "postedAt": "6 hari lalu",
+    "postedDaysAgo": 6,
+    "categories": [
+      "Engineering",
+      "AI/ML"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Lebih dari 10 tahun)",
+      "Menguasai stack utama Engineering & AI/ML",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "AI/ML",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Tesla untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Tesla Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Tesla merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Engineering & AI/ML. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://tesla.com",
+      "linkedin": "https://linkedin.com/company/tesla",
+      "instagram": "https://instagram.com/tesla",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "15",
+    "title": "Cloud Architect",
+    "company": "Amazon",
+    "logo": "/images/companies/amazon.svg",
+    "location": "Kabupaten Nagan Raya",
+    "salary": "Rp 24jt - Rp29jt",
+    "salaryNum": 24,
+    "workOption": "Onsite",
+    "workType": "Freelance",
+    "experienceLevel": "Tidak berpengalaman",
+    "educationLevel": "SMA/SMK",
+    "isPremium": false,
+    "isUrgent": true,
+    "isVerified": true,
+    "postedAt": "3 jam lalu",
+    "postedDaysAgo": 0,
+    "categories": [
+      "Cloud",
+      "Tech"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Tidak berpengalaman)",
+      "Menguasai stack utama Cloud & Tech",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Cloud",
+      "Tech",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Amazon untuk berkontribusi pada proyek skala enterprise di bidang Cloud.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Amazon Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Amazon merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Cloud & Tech. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://amazon.com",
+      "linkedin": "https://linkedin.com/company/amazon",
+      "instagram": "https://instagram.com/amazon",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "16",
+    "title": "Hardware Engineer",
+    "company": "Intel",
+    "logo": "/images/companies/intel.svg",
+    "location": "Kabupaten Aceh Jaya",
+    "salary": "Rp 10jt - Rp15jt",
+    "salaryNum": 10,
+    "workOption": "Remote",
+    "workType": "Penuh Waktu",
+    "experienceLevel": "Fresh Graduate",
+    "educationLevel": "S1/D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": true,
+    "postedAt": "1 hari lalu",
+    "postedDaysAgo": 1,
+    "categories": [
+      "Hardware",
+      "Tech"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Fresh Graduate)",
+      "Menguasai stack utama Hardware & Tech",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Hardware",
+      "Tech",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Intel untuk berkontribusi pada proyek skala enterprise di bidang Hardware.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Intel Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Intel adalah perusahaan teknologi global inovatif yang berkomitmen penuh untuk menghadirkan solusi cerdas terbaik di bidang Hardware & Tech.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://intel.com",
+      "linkedin": "https://linkedin.com/company/intel",
+      "instagram": "https://instagram.com/intel",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "17",
+    "title": "Mobile UI Architect",
+    "company": "Samsung",
+    "logo": "/images/companies/samsung.svg",
+    "location": "Kabupaten Bener Meriah",
+    "salary": "Rp 11jt - Rp16jt",
+    "salaryNum": 11,
+    "workOption": "Hybrid",
+    "workType": "Kontrak",
+    "experienceLevel": "Kurang dari setahun",
+    "educationLevel": "S1",
+    "isPremium": false,
+    "isUrgent": true,
+    "isVerified": true,
+    "postedAt": "2 hari lalu",
+    "postedDaysAgo": 2,
+    "categories": [
+      "Design",
+      "Mobile"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Kurang dari setahun)",
+      "Menguasai stack utama Design & Mobile",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Design",
+      "Mobile",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Samsung untuk berkontribusi pada proyek skala enterprise di bidang Design.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Samsung Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Samsung merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Design & Mobile. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://samsung.com",
+      "linkedin": "https://linkedin.com/company/samsung",
+      "instagram": "https://instagram.com/samsung",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "18",
+    "title": "Data Analyst",
+    "company": "TikTok",
+    "logo": "/images/companies/tiktok.svg",
+    "location": "Kabupaten Pidie Jaya",
+    "salary": "Rp 12jt - Rp17jt",
+    "salaryNum": 12,
+    "workOption": "Onsite",
+    "workType": "Magang",
+    "experienceLevel": "1-3 tahun",
+    "educationLevel": "D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": true,
+    "postedAt": "3 hari lalu",
+    "postedDaysAgo": 3,
+    "categories": [
+      "Data",
+      "Analytics"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (1-3 tahun)",
+      "Menguasai stack utama Data & Analytics",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Data",
+      "Analytics",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di TikTok untuk berkontribusi pada proyek skala enterprise di bidang Data.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "TikTok Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "TikTok merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Data & Analytics. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://tiktok.com",
+      "linkedin": "https://linkedin.com/company/tiktok",
+      "instagram": "https://instagram.com/tiktok",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "19",
+    "title": "DevOps Engineer",
+    "company": "Grab",
+    "logo": "/images/companies/grab.svg",
+    "location": "Kota Banda Aceh",
+    "salary": "Rp 13jt - Rp18jt",
+    "salaryNum": 13,
+    "workOption": "Remote",
+    "workType": "Paruh Waktu",
+    "experienceLevel": "3-5 tahun",
+    "educationLevel": "SMA/SMK",
+    "isPremium": false,
+    "isUrgent": true,
+    "isVerified": true,
+    "postedAt": "4 hari lalu",
+    "postedDaysAgo": 4,
+    "categories": [
+      "Engineering",
+      "DevOps"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (3-5 tahun)",
+      "Menguasai stack utama Engineering & DevOps",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "DevOps",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Grab untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Grab Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Grab adalah perusahaan teknologi global inovatif yang berkomitmen penuh untuk menghadirkan solusi cerdas terbaik di bidang Engineering & DevOps.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://grab.com",
+      "linkedin": "https://linkedin.com/company/grab",
+      "instagram": "https://instagram.com/grab",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "20",
+    "title": "Merchant Growth Manager",
+    "company": "Tokopedia",
+    "logo": "/images/companies/tokopedia.svg",
+    "location": "Kota Sabang",
+    "salary": "Rp 14jt - Rp19jt",
+    "salaryNum": 14,
+    "workOption": "Hybrid",
+    "workType": "Freelance",
+    "experienceLevel": "5-10 tahun",
+    "educationLevel": "S1/D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": true,
+    "postedAt": "5 hari lalu",
+    "postedDaysAgo": 5,
+    "categories": [
+      "Business",
+      "Growth"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (5-10 tahun)",
+      "Menguasai stack utama Business & Growth",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Business",
+      "Growth",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Tokopedia untuk berkontribusi pada proyek skala enterprise di bidang Business.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Tokopedia Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Tokopedia merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Business & Growth. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://tokopedia.com",
+      "linkedin": "https://linkedin.com/company/tokopedia",
+      "instagram": "https://instagram.com/tokopedia",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "21",
+    "title": "Android Engineer",
+    "company": "Gojek",
+    "logo": "/images/companies/gojek.svg",
+    "location": "Kota Langsa",
+    "salary": "Rp 15jt - Rp20jt",
+    "salaryNum": 15,
+    "workOption": "Onsite",
+    "workType": "Penuh Waktu",
+    "experienceLevel": "Lebih dari 10 tahun",
+    "educationLevel": "S1",
+    "isPremium": false,
+    "isUrgent": true,
+    "isVerified": true,
+    "postedAt": "6 hari lalu",
+    "postedDaysAgo": 6,
+    "categories": [
+      "Engineering",
+      "Mobile"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Lebih dari 10 tahun)",
+      "Menguasai stack utama Engineering & Mobile",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "Mobile",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Gojek untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Gojek Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Gojek merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Engineering & Mobile. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://gojek.com",
+      "linkedin": "https://linkedin.com/company/gojek",
+      "instagram": "https://instagram.com/gojek",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "22",
+    "title": "Flight Search Architect",
+    "company": "Traveloka",
+    "logo": "/images/companies/traveloka.svg",
+    "location": "Kota Lhokseumawe",
+    "salary": "Rp 16jt - Rp21jt",
+    "salaryNum": 16,
+    "workOption": "Remote",
+    "workType": "Kontrak",
+    "experienceLevel": "Tidak berpengalaman",
+    "educationLevel": "D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": false,
+    "postedAt": "3 jam lalu",
+    "postedDaysAgo": 0,
+    "categories": [
+      "Engineering",
+      "Search"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Tidak berpengalaman)",
+      "Menguasai stack utama Engineering & Search",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "Search",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Traveloka untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Traveloka Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Traveloka adalah perusahaan teknologi global inovatif yang berkomitmen penuh untuk menghadirkan solusi cerdas terbaik di bidang Engineering & Search.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://traveloka.com",
+      "linkedin": "https://linkedin.com/company/traveloka",
+      "instagram": "https://instagram.com/traveloka",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "23",
+    "title": "SEO Specialist",
+    "company": "Bukalapak",
+    "logo": "/images/companies/bukalapak.svg",
+    "location": "Kota Subulussalam",
+    "salary": "Rp 17jt - Rp22jt",
+    "salaryNum": 17,
+    "workOption": "Hybrid",
+    "workType": "Magang",
+    "experienceLevel": "Fresh Graduate",
+    "educationLevel": "SMA/SMK",
+    "isPremium": false,
+    "isUrgent": true,
+    "isVerified": true,
+    "postedAt": "1 hari lalu",
+    "postedDaysAgo": 1,
+    "categories": [
+      "Marketing",
+      "Growth"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Fresh Graduate)",
+      "Menguasai stack utama Marketing & Growth",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Marketing",
+      "Growth",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Bukalapak untuk berkontribusi pada proyek skala enterprise di bidang Marketing.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Bukalapak Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Bukalapak merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Marketing & Growth. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://bukalapak.com",
+      "linkedin": "https://linkedin.com/company/bukalapak",
+      "instagram": "https://instagram.com/bukalapak",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "24",
+    "title": "Product Operations Analyst",
+    "company": "Shopee",
+    "logo": "/images/companies/shopee.svg",
+    "location": "Kabupaten Jembrana",
+    "salary": "Rp 18jt - Rp23jt",
+    "salaryNum": 18,
+    "workOption": "Onsite",
+    "workType": "Paruh Waktu",
+    "experienceLevel": "Kurang dari setahun",
+    "educationLevel": "S1/D3",
+    "isPremium": true,
+    "isUrgent": false,
+    "isVerified": true,
+    "postedAt": "2 hari lalu",
+    "postedDaysAgo": 2,
+    "categories": [
+      "Business",
+      "Operations"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Kurang dari setahun)",
+      "Menguasai stack utama Business & Operations",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Business",
+      "Operations",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Shopee untuk berkontribusi pada proyek skala enterprise di bidang Business.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Shopee Recruiter",
+      "isPremium": true,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Shopee merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Business & Operations. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://shopee.com",
+      "linkedin": "https://linkedin.com/company/shopee",
+      "instagram": "https://instagram.com/shopee",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "25",
+    "title": "Community Manager",
+    "company": "Discord",
+    "logo": "/images/companies/discord.svg",
+    "location": "Kabupaten Tabanan",
+    "salary": "Rp 19jt - Rp24jt",
+    "salaryNum": 19,
+    "workOption": "Remote",
+    "workType": "Freelance",
+    "experienceLevel": "1-3 tahun",
+    "educationLevel": "S1",
+    "isPremium": false,
+    "isUrgent": true,
+    "isVerified": true,
+    "postedAt": "3 hari lalu",
+    "postedDaysAgo": 3,
+    "categories": [
+      "Community",
+      "Support"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (1-3 tahun)",
+      "Menguasai stack utama Community & Support",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Community",
+      "Support",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Discord untuk berkontribusi pada proyek skala enterprise di bidang Community.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Discord Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Discord adalah perusahaan teknologi global inovatif yang berkomitmen penuh untuk menghadirkan solusi cerdas terbaik di bidang Community & Support.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://discord.com",
+      "linkedin": "https://linkedin.com/company/discord",
+      "instagram": "https://instagram.com/discord",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "26",
+    "title": "Solutions Engineer",
+    "company": "Notion",
+    "logo": "/images/companies/notion.svg",
+    "location": "Kabupaten Badung",
+    "salary": "Rp 20jt - Rp25jt",
+    "salaryNum": 20,
+    "workOption": "Hybrid",
+    "workType": "Penuh Waktu",
+    "experienceLevel": "3-5 tahun",
+    "educationLevel": "D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": false,
+    "postedAt": "4 hari lalu",
+    "postedDaysAgo": 4,
+    "categories": [
+      "Engineering",
+      "Support"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (3-5 tahun)",
+      "Menguasai stack utama Engineering & Support",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "Support",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Notion untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Notion Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Notion merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Engineering & Support. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://notion.com",
+      "linkedin": "https://linkedin.com/company/notion",
+      "instagram": "https://instagram.com/notion",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "27",
+    "title": "Game Engine Developer",
+    "company": "Roblox",
+    "logo": "/images/companies/roblox.svg",
+    "location": "Kabupaten Gianyar",
+    "salary": "Rp 21jt - Rp26jt",
+    "salaryNum": 21,
+    "workOption": "Onsite",
+    "workType": "Kontrak",
+    "experienceLevel": "5-10 tahun",
+    "educationLevel": "SMA/SMK",
+    "isPremium": true,
+    "isUrgent": true,
+    "isVerified": true,
+    "postedAt": "5 hari lalu",
+    "postedDaysAgo": 5,
+    "categories": [
+      "Engineering",
+      "Gaming"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (5-10 tahun)",
+      "Menguasai stack utama Engineering & Gaming",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "Gaming",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Roblox untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Roblox Recruiter",
+      "isPremium": true,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Roblox merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Engineering & Gaming. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://roblox.com",
+      "linkedin": "https://linkedin.com/company/roblox",
+      "instagram": "https://instagram.com/roblox",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "28",
+    "title": "Content Moderator",
+    "company": "Reddit",
+    "logo": "/images/companies/reddit.svg",
+    "location": "Kabupaten Klungkung",
+    "salary": "Rp 22jt - Rp27jt",
+    "salaryNum": 22,
+    "workOption": "Remote",
+    "workType": "Magang",
+    "experienceLevel": "Lebih dari 10 tahun",
+    "educationLevel": "S1/D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": true,
+    "postedAt": "6 hari lalu",
+    "postedDaysAgo": 6,
+    "categories": [
+      "Support",
+      "Operations"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Lebih dari 10 tahun)",
+      "Menguasai stack utama Support & Operations",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Support",
+      "Operations",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Reddit untuk berkontribusi pada proyek skala enterprise di bidang Support.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Reddit Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Reddit adalah perusahaan teknologi global inovatif yang berkomitmen penuh untuk menghadirkan solusi cerdas terbaik di bidang Support & Operations.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://reddit.com",
+      "linkedin": "https://linkedin.com/company/reddit",
+      "instagram": "https://instagram.com/reddit",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "29",
+    "title": "Creative Lead",
+    "company": "Pinterest",
+    "logo": "/images/companies/pinterest.svg",
+    "location": "Kabupaten Bangli",
+    "salary": "Rp 23jt - Rp28jt",
+    "salaryNum": 23,
+    "workOption": "Hybrid",
+    "workType": "Paruh Waktu",
+    "experienceLevel": "Tidak berpengalaman",
+    "educationLevel": "S1",
+    "isPremium": false,
+    "isUrgent": true,
+    "isVerified": true,
+    "postedAt": "3 jam lalu",
+    "postedDaysAgo": 0,
+    "categories": [
+      "Design",
+      "Creative"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Tidak berpengalaman)",
+      "Menguasai stack utama Design & Creative",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Design",
+      "Creative",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Pinterest untuk berkontribusi pada proyek skala enterprise di bidang Design.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Pinterest Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Pinterest merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Design & Creative. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://pinterest.com",
+      "linkedin": "https://linkedin.com/company/pinterest",
+      "instagram": "https://instagram.com/pinterest",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "30",
+    "title": "Talent Acquisition",
+    "company": "LinkedIn",
+    "logo": "/images/companies/linkedin.svg",
+    "location": "Kabupaten Karang Asem",
+    "salary": "Rp 24jt - Rp29jt",
+    "salaryNum": 24,
+    "workOption": "Onsite",
+    "workType": "Freelance",
+    "experienceLevel": "Fresh Graduate",
+    "educationLevel": "D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": true,
+    "postedAt": "1 hari lalu",
+    "postedDaysAgo": 1,
+    "categories": [
+      "HR",
+      "Recruitment"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Fresh Graduate)",
+      "Menguasai stack utama HR & Recruitment",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "HR",
+      "Recruitment",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di LinkedIn untuk berkontribusi pada proyek skala enterprise di bidang HR.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "LinkedIn Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "LinkedIn merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang HR & Recruitment. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://linkedin.com",
+      "linkedin": "https://linkedin.com/company/linkedin",
+      "instagram": "https://instagram.com/linkedin",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "31",
+    "title": "CRM Consultant",
+    "company": "Salesforce",
+    "logo": "/images/companies/salesforce.svg",
+    "location": "Kabupaten Buleleng",
+    "salary": "Rp 10jt - Rp15jt",
+    "salaryNum": 10,
+    "workOption": "Remote",
+    "workType": "Penuh Waktu",
+    "experienceLevel": "Kurang dari setahun",
+    "educationLevel": "SMA/SMK",
+    "isPremium": false,
+    "isUrgent": true,
+    "isVerified": false,
+    "postedAt": "2 hari lalu",
+    "postedDaysAgo": 2,
+    "categories": [
+      "Business",
+      "CRM"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Kurang dari setahun)",
+      "Menguasai stack utama Business & CRM",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Business",
+      "CRM",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Salesforce untuk berkontribusi pada proyek skala enterprise di bidang Business.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Salesforce Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Salesforce adalah perusahaan teknologi global inovatif yang berkomitmen penuh untuk menghadirkan solusi cerdas terbaik di bidang Business & CRM.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://salesforce.com",
+      "linkedin": "https://linkedin.com/company/salesforce",
+      "instagram": "https://instagram.com/salesforce",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "32",
+    "title": "Database Administrator",
+    "company": "Oracle",
+    "logo": "/images/companies/oracle.svg",
+    "location": "Kota Denpasar",
+    "salary": "Rp 11jt - Rp16jt",
+    "salaryNum": 11,
+    "workOption": "Hybrid",
+    "workType": "Kontrak",
+    "experienceLevel": "1-3 tahun",
+    "educationLevel": "S1/D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": true,
+    "postedAt": "3 hari lalu",
+    "postedDaysAgo": 3,
+    "categories": [
+      "Database",
+      "Tech"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (1-3 tahun)",
+      "Menguasai stack utama Database & Tech",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Database",
+      "Tech",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Oracle untuk berkontribusi pada proyek skala enterprise di bidang Database.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Oracle Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Oracle merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Database & Tech. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://oracle.com",
+      "linkedin": "https://linkedin.com/company/oracle",
+      "instagram": "https://instagram.com/oracle",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "33",
+    "title": "Templates Creator Specialist",
+    "company": "Canva",
+    "logo": "/images/companies/canva.svg",
+    "location": "Kabupaten Pandeglang",
+    "salary": "Rp 12jt - Rp17jt",
+    "salaryNum": 12,
+    "workOption": "Onsite",
+    "workType": "Magang",
+    "experienceLevel": "3-5 tahun",
+    "educationLevel": "S1",
+    "isPremium": true,
+    "isUrgent": true,
+    "isVerified": false,
+    "postedAt": "4 hari lalu",
+    "postedDaysAgo": 4,
+    "categories": [
+      "Design",
+      "Creative"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (3-5 tahun)",
+      "Menguasai stack utama Design & Creative",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Design",
+      "Creative",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Canva untuk berkontribusi pada proyek skala enterprise di bidang Design.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Canva Recruiter",
+      "isPremium": true,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Canva merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Design & Creative. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://canva.com",
+      "linkedin": "https://linkedin.com/company/canva",
+      "instagram": "https://instagram.com/canva",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "34",
+    "title": "E-commerce Engineer",
+    "company": "Shopify",
+    "logo": "/images/companies/shopify.svg",
+    "location": "Kabupaten Lebak",
+    "salary": "Rp 13jt - Rp18jt",
+    "salaryNum": 13,
+    "workOption": "Remote",
+    "workType": "Paruh Waktu",
+    "experienceLevel": "5-10 tahun",
+    "educationLevel": "D3",
+    "isPremium": true,
+    "isUrgent": false,
+    "isVerified": true,
+    "postedAt": "5 hari lalu",
+    "postedDaysAgo": 5,
+    "categories": [
+      "Engineering",
+      "E-commerce"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (5-10 tahun)",
+      "Menguasai stack utama Engineering & E-commerce",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "E-commerce",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Shopify untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Shopify Recruiter",
+      "isPremium": true,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Shopify adalah perusahaan teknologi global inovatif yang berkomitmen penuh untuk menghadirkan solusi cerdas terbaik di bidang Engineering & E-commerce.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://shopify.com",
+      "linkedin": "https://linkedin.com/company/shopify",
+      "instagram": "https://instagram.com/shopify",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "35",
+    "title": "Payment API Engineer",
+    "company": "Stripe",
+    "logo": "/images/companies/stripe.svg",
+    "location": "Kabupaten Tangerang",
+    "salary": "Rp 14jt - Rp19jt",
+    "salaryNum": 14,
+    "workOption": "Hybrid",
+    "workType": "Freelance",
+    "experienceLevel": "Lebih dari 10 tahun",
+    "educationLevel": "SMA/SMK",
+    "isPremium": false,
+    "isUrgent": true,
+    "isVerified": false,
+    "postedAt": "6 hari lalu",
+    "postedDaysAgo": 6,
+    "categories": [
+      "Engineering",
+      "Finance"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Lebih dari 10 tahun)",
+      "Menguasai stack utama Engineering & Finance",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "Finance",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Stripe untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Stripe Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Stripe merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Engineering & Finance. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://stripe.com",
+      "linkedin": "https://linkedin.com/company/stripe",
+      "instagram": "https://instagram.com/stripe",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "36",
+    "title": "Rideshare Dispatch Lead",
+    "company": "Uber",
+    "logo": "/images/companies/uber.svg",
+    "location": "Kabupaten Serang",
+    "salary": "Rp 15jt - Rp20jt",
+    "salaryNum": 15,
+    "workOption": "Onsite",
+    "workType": "Penuh Waktu",
+    "experienceLevel": "Tidak berpengalaman",
+    "educationLevel": "S1/D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": true,
+    "postedAt": "3 jam lalu",
+    "postedDaysAgo": 0,
+    "categories": [
+      "Engineering",
+      "Operations"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Tidak berpengalaman)",
+      "Menguasai stack utama Engineering & Operations",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "Operations",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Uber untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Uber Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Uber merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Engineering & Operations. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://uber.com",
+      "linkedin": "https://linkedin.com/company/uber",
+      "instagram": "https://instagram.com/uber",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "37",
+    "title": "Developer Advocate",
+    "company": "GitHub",
+    "logo": "/images/companies/github.svg",
+    "location": "Kota Tangerang",
+    "salary": "Rp 16jt - Rp21jt",
+    "salaryNum": 16,
+    "workOption": "Remote",
+    "workType": "Kontrak",
+    "experienceLevel": "Fresh Graduate",
+    "educationLevel": "S1",
+    "isPremium": true,
+    "isUrgent": true,
+    "isVerified": false,
+    "postedAt": "1 hari lalu",
+    "postedDaysAgo": 1,
+    "categories": [
+      "Engineering",
+      "Community"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Fresh Graduate)",
+      "Menguasai stack utama Engineering & Community",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "Community",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di GitHub untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "GitHub Recruiter",
+      "isPremium": true,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "GitHub adalah perusahaan teknologi global inovatif yang berkomitmen penuh untuk menghadirkan solusi cerdas terbaik di bidang Engineering & Community.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://github.com",
+      "linkedin": "https://linkedin.com/company/github",
+      "instagram": "https://instagram.com/github",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "38",
+    "title": "CI/CD Architect",
+    "company": "GitLab",
+    "logo": "/images/companies/gitlab.svg",
+    "location": "Kota Cilegon",
+    "salary": "Rp 17jt - Rp22jt",
+    "salaryNum": 17,
+    "workOption": "Hybrid",
+    "workType": "Magang",
+    "experienceLevel": "Kurang dari setahun",
+    "educationLevel": "D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": false,
+    "postedAt": "2 hari lalu",
+    "postedDaysAgo": 2,
+    "categories": [
+      "Engineering",
+      "DevOps"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (Kurang dari setahun)",
+      "Menguasai stack utama Engineering & DevOps",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "DevOps",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di GitLab untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "GitLab Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "GitLab merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Engineering & DevOps. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://gitlab.com",
+      "linkedin": "https://linkedin.com/company/gitlab",
+      "instagram": "https://instagram.com/gitlab",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "39",
+    "title": "Blockchain Security Engineer",
+    "company": "Coinbase",
+    "logo": "/images/companies/coinbase.svg",
+    "location": "Kota Serang",
+    "salary": "Rp 18jt - Rp23jt",
+    "salaryNum": 18,
+    "workOption": "Onsite",
+    "workType": "Paruh Waktu",
+    "experienceLevel": "1-3 tahun",
+    "educationLevel": "SMA/SMK",
+    "isPremium": true,
+    "isUrgent": true,
+    "isVerified": true,
+    "postedAt": "3 hari lalu",
+    "postedDaysAgo": 3,
+    "categories": [
+      "Engineering",
+      "Crypto"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (1-3 tahun)",
+      "Menguasai stack utama Engineering & Crypto",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Engineering",
+      "Crypto",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Coinbase untuk berkontribusi pada proyek skala enterprise di bidang Engineering.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Coinbase Recruiter",
+      "isPremium": true,
+      "onlineStatus": "Online",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Coinbase merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Engineering & Crypto. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://coinbase.com",
+      "linkedin": "https://linkedin.com/company/coinbase",
+      "instagram": "https://instagram.com/coinbase",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  },
+  {
+    "id": "40",
+    "title": "Crypto Operations Manager",
+    "company": "Binance",
+    "logo": "/images/companies/binance.svg",
+    "location": "Kota Tangerang Selatan",
+    "salary": "Rp 19jt - Rp24jt",
+    "salaryNum": 19,
+    "workOption": "Remote",
+    "workType": "Freelance",
+    "experienceLevel": "3-5 tahun",
+    "educationLevel": "S1/D3",
+    "isPremium": false,
+    "isUrgent": false,
+    "isVerified": true,
+    "postedAt": "4 hari lalu",
+    "postedDaysAgo": 4,
+    "categories": [
+      "Crypto",
+      "Operations"
+    ],
+    "requirements": [
+      "Pengalaman kerja minimal di bidang terkait (3-5 tahun)",
+      "Menguasai stack utama Crypto & Operations",
+      "Kemampuan komunikasi dan kolaborasi tim yang baik"
+    ],
+    "skills": [
+      "Crypto",
+      "Operations",
+      "Agile",
+      "Git"
+    ],
+    "benefits": [
+      "BPJS Kesehatan",
+      "Bonus Kinerja Tahunan",
+      "Waktu Kerja Fleksibel"
+    ],
+    "description": "Bergabunglah bersama tim global kami di Binance untuk berkontribusi pada proyek skala enterprise di bidang Crypto.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.",
+    "managedBy": {
+      "name": "Binance Recruiter",
+      "isPremium": false,
+      "onlineStatus": "Aktif 10 menit lalu",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80"
+    },
+    "companyDetails": {
+      "description": "Binance adalah perusahaan teknologi global inovatif yang berkomitmen penuh untuk menghadirkan solusi cerdas terbaik di bidang Crypto & Operations.",
+      "industry": "Teknologi & Informasi",
+      "employees": "1000+ Karyawan",
+      "website": "https://binance.com",
+      "linkedin": "https://linkedin.com/company/binance",
+      "instagram": "https://instagram.com/binance",
+      "cultureTitle": "Inovasi & Kolaborasi Tanpa Batas",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+      ],
+      "galleryVideos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4"
+      ],
+      "workers": [
+        "Alif (Tech Lead)",
+        "Sarah (Product Owner)"
+      ]
+    }
+  }
+]

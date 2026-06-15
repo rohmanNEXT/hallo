@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "company": "TechCorp Indonesia",
+    "status": "Interview",
+    "time": "1 jam yang lalu",
+    "suffix": "."
+  },
+  {
+    "id": "2",
+    "company": "DesignStudio",
+    "status": "Lulus",
+    "time": "1 hari yang lalu",
+    "suffix": "!"
+  },
+  {
+    "id": "3",
+    "company": "StartupXYZ",
+    "status": "Review",
+    "time": "2 hari yang lalu",
+    "suffix": "."
+  },
+  {
+    "id": "4",
+    "company": "GrowthHub",
+    "status": "Belum lulus",
+    "time": "3 hari yang lalu",
+    "suffix": "."
+  }
+]

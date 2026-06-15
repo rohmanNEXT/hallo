@@ -29,17 +29,20 @@ import {
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { useAppStore } from '@/lib/store';
-import { mockJobsData, Job } from '@/app/jobs/page';
-import { CompaniesPage } from '@/app/companies/page';
+import { useAppStore } from '@/store/store';
+import React from 'react';
+import axios from 'axios';
+import { Job, Company } from '@/lib/types';
 
-export default function JobDetailPage() {
+const JobDetailPage: React.FC = () => {
   const params = useParams();
   const router = useRouter();
   const jobId = params.id as string;
 
   const { bookmarks, toggleBookmark, applyJob, user, theme } = useAppStore();
   const [job, setJob] = useState<Job | null>(null);
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [companies, setCompanies] = useState<Company[]>([]);
   const [appliedJobs, setAppliedJobs] = useState<string[]>([]);
   const [isApplying, setIsApplying] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -48,13 +51,26 @@ export default function JobDetailPage() {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    // Find job from mock data, default to first job if not found
-    const found = mockJobsData.find((j) => j.id === jobId) || mockJobsData[0];
-    if (found) {
-      setJob(found);
+    const fetchData = async () => {
+      try {
+        const [jobsRes, companiesRes] = await Promise.all([
+          axios.get<Job[]>('/data/jobs.json'),
+          axios.get<Company[]>('/data/companies.json')
+        ]);
+        const jobsData = jobsRes.data;
+        const companiesData = companiesRes.data;
+        setJobs(jobsData);
+        setCompanies(companiesData);
+        const found = jobsData.find((j) => j.id === jobId) || jobsData[0];
+        if (found) {
+          setJob(found);
+        }
+      } catch (err) {
+        console.error('Failed to fetch details:', err);
+      }
+    };
+    if (jobId) {
+      fetchData();
     }
   }, [jobId]);
 
@@ -73,7 +89,7 @@ export default function JobDetailPage() {
     );
   }
 
-  const foundCompany = CompaniesPage.find(
+  const foundCompany = companies.find(
     (c) => c.name.toLowerCase() === job.company.toLowerCase(),
   );
   const companyId = foundCompany ? foundCompany.id : '1';
@@ -90,7 +106,7 @@ export default function JobDetailPage() {
   };
 
   // Filter recommendations based on matching category or title keyword
-  const recommendedJobs = mockJobsData
+  const recommendedJobs = jobs
     .filter(
       (j) =>
         j.id !== job.id &&
@@ -128,7 +144,7 @@ export default function JobDetailPage() {
   return (
     <>
       <div className="min-h-screen bg-background pt-6 pb-12">
-        <div className="bg-card/60 backdrop-blur-md">
+        <div className="bg-background">
           <div className="w-full max-w-[90%] mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
             <Button
               variant="ghost"
@@ -157,7 +173,7 @@ export default function JobDetailPage() {
                 className={`text-xs font-semibold cursor-pointer ${isBookmarked ? 'text-primary border-primary bg-primary/5' : ''}`}
               >
                 <Bookmark
-                  className={`h-3.5 w-3.5 mr-1.5 ${isBookmarked ? 'fill-primary text-primary' : ''}`}
+                  className={`h-3.5 w-3.5 mr-1.5 ${isBookmarked ? 'fill-primary/60' : ''}`}
                 />
                 {isBookmarked ? 'Tersimpan' : 'Simpan'}
               </Button>
@@ -306,7 +322,7 @@ export default function JobDetailPage() {
                       title={isBookmarked ? 'Tersimpan' : 'Simpan'}
                     >
                       <Bookmark
-                        className={`h-4 w-4 ${isBookmarked ? 'fill-primary text-primary' : ''}`}
+                        className={`h-4 w-4 ${isBookmarked ? 'fill-primary/60' : ''}`}
                       />
                     </button>
 
@@ -451,7 +467,7 @@ export default function JobDetailPage() {
 
               {/* Tips Menjaga Diri (Default Information) */}
               <div className="bg-orange-600/5 p-4 rounded-xl border border-orange-600/25 flex gap-3">
-                <AlertCircle className="h-5 w-5 text-orange-600 shrink-0 mt-0.5" />
+                <AlertCircle className="h-5 w-5 text-orange-600 shrink-0 mt-1" />
                 <div>
                   <h4 className="font-bold text-xs text-orange-700 dark:text-orange-400">
                     Tips Menjaga Diri & Keamanan
@@ -478,7 +494,7 @@ export default function JobDetailPage() {
                       )}
                     </div>
                     <button
-                      onClick={() => router.push(`/company/${companyId}`)}
+                      onClick={() => router.push(`/companies/${companyId}`)}
                       className="text-xs text-primary hover:text-primary/80 transition-colors font-semibold flex items-center gap-1 cursor-pointer"
                     >
                       Lihat Profil Perusahaan
@@ -490,7 +506,7 @@ export default function JobDetailPage() {
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 border-b pb-5 border-border/60 text-xs">
                     <div className="flex items-start gap-3">
-                      <Building2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <Building2 className="h-5 w-5 text-primary shrink-0 mt-1" />
                       <div>
                         <div className="text-xs text-muted-foreground font-bold tracking-wider">
                           Industry
@@ -501,7 +517,7 @@ export default function JobDetailPage() {
                       </div>
                     </div>
                     <div className="flex items-start gap-3 md:border-l md:pl-5 border-border/60">
-                      <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <MapPin className="h-5 w-5 text-primary shrink-0 mt-1" />
                       <div>
                         <div className="text-xs text-muted-foreground font-bold tracking-wider">
                           Location
@@ -512,7 +528,7 @@ export default function JobDetailPage() {
                       </div>
                     </div>
                     <div className="flex items-start gap-3 md:border-l md:pl-5 border-border/60">
-                      <Users className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <Users className="h-5 w-5 text-primary shrink-0 mt-1" />
                       <div>
                         <div className="text-xs text-muted-foreground font-bold tracking-wider">
                           Company Size
@@ -772,7 +788,7 @@ export default function JobDetailPage() {
                               className="text-muted-foreground hover:text-primary transition-colors p-1 shrink-0 cursor-pointer"
                             >
                               <Bookmark
-                                className={`h-4.5 w-4.5 ${mounted && bookmarks.includes(recJob.id) ? 'fill-primary text-primary' : ''}`}
+                                className={`h-4.5 w-4.5 ${mounted && bookmarks.includes(recJob.id) ? 'fill-primary/60' : ''}`}
                               />
                             </button>
                           </div>
@@ -931,7 +947,7 @@ export default function JobDetailPage() {
                               className="text-muted-foreground hover:text-primary transition-colors p-1 shrink-0 cursor-pointer"
                             >
                               <Bookmark
-                                className={`h-4.5 w-4.5 ${bookmarks.includes(recJob.id) ? 'fill-primary text-primary' : ''}`}
+                                className={`h-4.5 w-4.5 ${bookmarks.includes(recJob.id) ? 'fill-primary/60' : ''}`}
                               />
                             </button>
                           </div>
@@ -997,4 +1013,6 @@ export default function JobDetailPage() {
       </div>
     </>
   );
-}
+};
+
+export default JobDetailPage;

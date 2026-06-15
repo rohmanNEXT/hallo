@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect, useRef, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
   Search,
   MapPin,
@@ -13,14 +13,6 @@ import {
   GraduationCap,
   Building2,
   Bookmark,
-  HelpCircle,
-  Share2,
-  Send,
-  CheckCircle,
-  ExternalLink,
-  Moon,
-  Sun,
-  Sparkles,
   ShieldCheck,
   HelpCircle as HelpIcon,
   ArrowRight,
@@ -36,418 +28,40 @@ import {
   CardHeader,
   CardTitle,
 } from '../../components/ui/card';
-import { useAppStore } from '@/lib/store';
+import { useAppStore } from '@/store/store';
+import React from 'react';
 import provincesData from '../../lib/indonesia-regions.json';
-import { CompaniesPage } from '../companies/page';
-
-export interface ProvinceData {
-  province: string;
-  regencies: string[];
-}
-
-export interface Job {
-  id: string;
-  title: string;
-  company: string;
-  logo: string;
-  location: string;
-  salary: string;
-  salaryNum: number; // For slider filtering
-  workOption: string;
-  workType: string;
-  experienceLevel: string;
-  educationLevel: string;
-  isPremium: boolean;
-  isUrgent: boolean;
-  isVerified: boolean;
-  postedAt: string;
-  postedDaysAgo: number;
-  categories: string[];
-  requirements: string[];
-  skills: string[];
-  benefits: string[];
-  description: string;
-  managedBy: {
-    name: string;
-    isPremium: boolean;
-    onlineStatus: string; // e.g., "10 menit lalu"
-    avatar?: string;
-  };
-  companyDetails: {
-    description: string;
-    industry: string;
-    employees: string;
-    website: string;
-    linkedin: string;
-    instagram: string;
-    cultureTitle: string;
-    galleryImages: string[];
-    galleryVideos: string[];
-    workers: string[];
-  };
-}
+import axios from 'axios';
+import { Job, ProvinceData } from '@/lib/types';
 
 const PROVINCES = provincesData as ProvinceData[];
 
-export const mockJobsData: Job[] = [
-  {
-    name: 'Microsoft',
-    logo: '/images/companies/microsoft.svg',
-    title: 'Product Manager',
-    cat: ['Product', 'Tech'],
-  },
-  {
-    name: 'Google',
-    logo: '/images/companies/google.svg',
-    title: 'Senior Software Engineer',
-    cat: ['Engineering', 'Tech'],
-  },
-  {
-    name: 'Apple',
-    logo: '/images/companies/apple.svg',
-    title: 'iOS Developer',
-    cat: ['Engineering', 'iOS'],
-  },
-  {
-    name: 'Meta',
-    logo: '/images/companies/meta.svg',
-    title: 'Fullstack Engineer',
-    cat: ['Engineering', 'Fullstack'],
-  },
-  {
-    name: 'Spotify',
-    logo: '/images/companies/spotify.svg',
-    title: 'Backend Developer',
-    cat: ['Engineering', 'Backend'],
-  },
-  {
-    name: 'Netflix',
-    logo: '/images/companies/netflix.svg',
-    title: 'Frontend Specialist',
-    cat: ['Engineering', 'Frontend'],
-  },
-  {
-    name: 'Twitter',
-    logo: '/images/companies/twitter.svg',
-    title: 'Security Engineer',
-    cat: ['Security', 'Tech'],
-  },
-  {
-    name: 'Airbnb',
-    logo: '/images/companies/airbnb.svg',
-    title: 'UX Researcher',
-    cat: ['Design', 'Research'],
-  },
-  {
-    name: 'Zoom',
-    logo: '/images/companies/zoom.svg',
-    title: 'Quality Assurance',
-    cat: ['QA', 'Testing'],
-  },
-  {
-    name: 'Figma',
-    logo: '/images/companies/figma.svg',
-    title: 'Lead UI/UX Designer',
-    cat: ['Design', 'Creative'],
-  },
-  {
-    name: 'Adobe',
-    logo: '/images/companies/adobe.svg',
-    title: 'Graphic Designer',
-    cat: ['Design', 'Creative'],
-  },
-  {
-    name: 'Slack',
-    logo: '/images/companies/slack.svg',
-    title: 'Product Marketing',
-    cat: ['Marketing', 'Business'],
-  },
-  {
-    name: 'NVIDIA',
-    logo: '/images/companies/nvidia.svg',
-    title: 'AI/ML Engineer',
-    cat: ['AI/ML', 'Tech'],
-  },
-  {
-    name: 'Tesla',
-    logo: '/images/companies/tesla.svg',
-    title: 'Autopilot Software Lead',
-    cat: ['Engineering', 'AI/ML'],
-  },
-  {
-    name: 'Amazon',
-    logo: '/images/companies/amazon.svg',
-    title: 'Cloud Architect',
-    cat: ['Cloud', 'Tech'],
-  },
-  {
-    name: 'Intel',
-    logo: '/images/companies/intel.svg',
-    title: 'Hardware Engineer',
-    cat: ['Hardware', 'Tech'],
-  },
-  {
-    name: 'Samsung',
-    logo: '/images/companies/samsung.svg',
-    title: 'Mobile UI Architect',
-    cat: ['Design', 'Mobile'],
-  },
-  {
-    name: 'TikTok',
-    logo: '/images/companies/tiktok.svg',
-    title: 'Data Analyst',
-    cat: ['Data', 'Analytics'],
-  },
-  {
-    name: 'Grab',
-    logo: '/images/companies/grab.svg',
-    title: 'DevOps Engineer',
-    cat: ['Engineering', 'DevOps'],
-  },
-  {
-    name: 'Tokopedia',
-    logo: '/images/companies/tokopedia.svg',
-    title: 'Merchant Growth Manager',
-    cat: ['Business', 'Growth'],
-  },
-  {
-    name: 'Gojek',
-    logo: '/images/companies/gojek.svg',
-    title: 'Android Engineer',
-    cat: ['Engineering', 'Mobile'],
-  },
-  {
-    name: 'Traveloka',
-    logo: '/images/companies/traveloka.svg',
-    title: 'Flight Search Architect',
-    cat: ['Engineering', 'Search'],
-  },
-  {
-    name: 'Bukalapak',
-    logo: '/images/companies/bukalapak.svg',
-    title: 'SEO Specialist',
-    cat: ['Marketing', 'Growth'],
-  },
-  {
-    name: 'Shopee',
-    logo: '/images/companies/shopee.svg',
-    title: 'Product Operations Analyst',
-    cat: ['Business', 'Operations'],
-  },
-  {
-    name: 'Discord',
-    logo: '/images/companies/discord.svg',
-    title: 'Community Manager',
-    cat: ['Community', 'Support'],
-  },
-  {
-    name: 'Notion',
-    logo: '/images/companies/notion.svg',
-    title: 'Solutions Engineer',
-    cat: ['Engineering', 'Support'],
-  },
-  {
-    name: 'Roblox',
-    logo: '/images/companies/roblox.svg',
-    title: 'Game Engine Developer',
-    cat: ['Engineering', 'Gaming'],
-  },
-  {
-    name: 'Reddit',
-    logo: '/images/companies/reddit.svg',
-    title: 'Content Moderator',
-    cat: ['Support', 'Operations'],
-  },
-  {
-    name: 'Pinterest',
-    logo: '/images/companies/pinterest.svg',
-    title: 'Creative Lead',
-    cat: ['Design', 'Creative'],
-  },
-  {
-    name: 'LinkedIn',
-    logo: '/images/companies/linkedin.svg',
-    title: 'Talent Acquisition',
-    cat: ['HR', 'Recruitment'],
-  },
-  {
-    name: 'Salesforce',
-    logo: '/images/companies/salesforce.svg',
-    title: 'CRM Consultant',
-    cat: ['Business', 'CRM'],
-  },
-  {
-    name: 'Oracle',
-    logo: '/images/companies/oracle.svg',
-    title: 'Database Administrator',
-    cat: ['Database', 'Tech'],
-  },
-  {
-    name: 'Canva',
-    logo: '/images/companies/canva.svg',
-    title: 'Templates Creator Specialist',
-    cat: ['Design', 'Creative'],
-  },
-  {
-    name: 'Shopify',
-    logo: '/images/companies/shopify.svg',
-    title: 'E-commerce Engineer',
-    cat: ['Engineering', 'E-commerce'],
-  },
-  {
-    name: 'Stripe',
-    logo: '/images/companies/stripe.svg',
-    title: 'Payment API Engineer',
-    cat: ['Engineering', 'Finance'],
-  },
-  {
-    name: 'Uber',
-    logo: '/images/companies/uber.svg',
-    title: 'Rideshare Dispatch Lead',
-    cat: ['Engineering', 'Operations'],
-  },
-  {
-    name: 'GitHub',
-    logo: '/images/companies/github.svg',
-    title: 'Developer Advocate',
-    cat: ['Engineering', 'Community'],
-  },
-  {
-    name: 'GitLab',
-    logo: '/images/companies/gitlab.svg',
-    title: 'CI/CD Architect',
-    cat: ['Engineering', 'DevOps'],
-  },
-  {
-    name: 'Coinbase',
-    logo: '/images/companies/coinbase.svg',
-    title: 'Blockchain Security Engineer',
-    cat: ['Engineering', 'Crypto'],
-  },
-  {
-    name: 'Binance',
-    logo: '/images/companies/binance.svg',
-    title: 'Crypto Operations Manager',
-    cat: ['Crypto', 'Operations'],
-  },
-].map((brand, i) => {
-  const id = String(i + 1);
-  const WORK_OPTIONS = ['Remote', 'Hybrid', 'Onsite'];
-  const WORK_TYPES = [
-    'Penuh Waktu',
-    'Kontrak',
-    'Magang',
-    'Paruh Waktu',
-    'Freelance',
-  ];
-  const EXP_LEVELS = [
-    'Tidak berpengalaman',
-    'Fresh Graduate',
-    'Kurang dari setahun',
-    '1-3 tahun',
-    '3-5 tahun',
-    '5-10 tahun',
-    'Lebih dari 10 tahun',
-  ];
-  const EDU_LEVELS = [
-    'S1',
-    'D3',
-    'SMA/SMK',
-    'S1/D3',
-  ];
-
-  const allRegencies = PROVINCES.flatMap((p) => p.regencies);
-  const location = allRegencies[i % allRegencies.length];
-  const workOption = WORK_OPTIONS[i % WORK_OPTIONS.length];
-  const workType = WORK_TYPES[i % WORK_TYPES.length];
-  const experienceLevel = EXP_LEVELS[i % EXP_LEVELS.length];
-  const educationLevel = EDU_LEVELS[i % EDU_LEVELS.length];
-  const salaryNum = 10 + (i % 15);
-  const salary = `Rp ${salaryNum}jt - Rp${salaryNum + 5}jt`;
-
-  const companyObj = CompaniesPage.find((c) => c.name === brand.name);
-  const isPremium = companyObj ? companyObj.isPremium : i % 3 === 0;
-  const isUrgent = i % 2 === 0;
-  const isVerified = companyObj ? companyObj.isVerified : i % 3 !== 1;
-
-  const postedDaysAgo = i % 7;
-  const postedAt =
-    postedDaysAgo === 0 ? '3 jam lalu' : `${postedDaysAgo} hari lalu`;
-
-  return {
-    id,
-    title: brand.title,
-    company: brand.name,
-    logo: `/images/companies/${brand.name.toLowerCase()}.svg`,
-    location,
-    salary,
-    salaryNum,
-    workOption,
-    workType,
-    experienceLevel,
-    educationLevel,
-    isPremium,
-    isUrgent,
-    isVerified,
-    postedAt,
-    postedDaysAgo,
-    categories: brand.cat,
-    requirements: [
-      `Pengalaman kerja minimal di bidang terkait (${experienceLevel})`,
-      `Menguasai stack utama ${brand.cat.join(' & ')}`,
-      'Kemampuan komunikasi dan kolaborasi tim yang baik',
-    ],
-    skills: [...brand.cat, 'Agile', 'Git'],
-    benefits: [
-      'BPJS Kesehatan',
-      'Bonus Kinerja Tahunan',
-      'Waktu Kerja Fleksibel',
-    ],
-    description: `Bergabunglah bersama tim global kami di ${brand.name} untuk berkontribusi pada proyek skala enterprise di bidang ${brand.cat[0]}.\n\nTanggung Jawab Utama:\n- Mengelola siklus hidup produk dari ideasi, spesifikasi, pengembangan, hingga peluncuran.\n- Berkolaborasi dengan tim lintas divisi (desainer, engineer, pemasaran) untuk menyelaraskan visi produk.\n- Menganalisis masukan pengguna dan data performa untuk iterasi produk yang berkelanjutan.\n- Menyusun dokumentasi kebutuhan produk (PRD) yang jelas dan terperinci.`,
-    managedBy: {
-      name: `${brand.name} Recruiter`,
-      isPremium,
-      onlineStatus: i % 2 === 0 ? 'Online' : 'Aktif 10 menit lalu',
-      avatar: `https://images.unsplash.com/photo-${
-        i % 4 === 0
-          ? '1534528741775-53994a69daeb'
-          : i % 4 === 1
-            ? '1507003211169-0a1dd7228f2d'
-            : i % 4 === 2
-              ? '1494790108377-be9c29b29330'
-              : '1500648767791-00dcc994a43e'
-      }?auto=format&fit=crop&w=100&h=100&q=80`,
-    },
-    companyDetails: {
-      description: i % 3 === 0
-        ? `${brand.name} adalah perusahaan teknologi global inovatif yang berkomitmen penuh untuk menghadirkan solusi cerdas terbaik di bidang ${brand.cat.join(' & ')}.`
-        : `${brand.name} merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang ${brand.cat.join(' & ')}. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.`,
-      industry: 'Teknologi & Informasi',
-      employees: '1000+ Karyawan',
-      website: `https://${brand.name.toLowerCase()}.com`,
-      linkedin: `https://linkedin.com/company/${brand.name.toLowerCase()}`,
-      instagram: `https://instagram.com/${brand.name.toLowerCase()}`,
-      cultureTitle: 'Inovasi & Kolaborasi Tanpa Batas',
-      galleryImages: [
-        'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
-        'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
-      ],
-      galleryVideos: [
-        'https://assets.mixkit.co/videos/preview/mixkit-working-in-a-modern-office-space-32863-large.mp4',
-      ],
-      workers: ['Alif (Tech Lead)', 'Sarah (Product Owner)'],
-    },
-  };
-});
-
-export default function JobsPage() {
+const JobsPage: React.FC = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { bookmarks, toggleBookmark, applyJob, theme, setTheme } =
     useAppStore();
   const [mounted, setMounted] = useState(false);
+  const [mockJobsData, setMockJobsData] = useState<Job[]>([]);
+
+  useEffect(() => {
+    const searchParam = searchParams.get('search');
+    if (searchParam) {
+      setSearchQuery(searchParam);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     setMounted(true);
+    const fetchJobs = async () => {
+      try {
+        const { data } = await axios.get<Job[]>('/data/jobs.json');
+        setMockJobsData(data);
+      } catch (err) {
+        console.error('Failed to fetch jobs in JobsPage:', err);
+      }
+    };
+    fetchJobs();
   }, []);
 
   // Filter States
@@ -705,23 +319,11 @@ export default function JobsPage() {
     }
   };
 
-  const handleResetFilters = () => {
-    setSearchQuery('');
-    setSelectedProvince('');
-    setSelectedRegency('');
-    setSalaryLimit(30);
-    setWorkOptions([]);
-    setWorkTypes([]);
-    setExpLevels([]);
-    setEduLevels([]);
-    setLastUpdate('all');
-    setSortBy('relevance');
-  };
 
   return (
     <div className="min-h-screen bg-background">
       {/* Search Header */}
-      <div className="bg-card/60 relative overflow-visible z-10">
+      <div className="bg-background relative overflow-visible z-10">
         <div className="w-full max-w-[90%] mx-auto px-4 md:px-8 pt-7 pb-4">
           <div className="flex flex-col sm:flex-row gap-3 items-center">
             {/* Input Search */}
@@ -880,7 +482,7 @@ export default function JobsPage() {
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Left Sidebar - Filters */}
           <aside
-            className={`lg:w-72 shrink-0 ${showFilters ? 'block' : 'hidden lg:block'} space-y-4`}
+            className={`lg:w-62 shrink-0 ${showFilters ? 'block' : 'hidden lg:block'} space-y-4`}
           >
             {/* Download App QR Code Card */}
             <Card className="border bg-card/60 backdrop-blur-md shadow-sm p-4 flex items-center gap-4 relative z-30">
@@ -915,14 +517,6 @@ export default function JobsPage() {
                   <CardTitle className="text-sm font-bold text-foreground">
                     Filter
                   </CardTitle>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={handleResetFilters}
-                    className="text-[10px] h-7 px-2 !border-red-500/40 hover:!border-red-500 transition-all text-red-500 hover:bg-red-500 hover:text-white font-semibold cursor-pointer"
-                  >
-                    Clean Filters
-                  </Button>
                 </div>
               </CardHeader>
 
@@ -1490,7 +1084,7 @@ export default function JobsPage() {
                               className="text-muted-foreground hover:text-primary transition-colors p-1 shrink-0 cursor-pointer"
                             >
                               <Bookmark
-                                className={`h-4.5 w-4.5 ${bookmarks.includes(job.id) ? 'fill-primary text-primary' : ''}`}
+                                className={`h-4.5 w-4.5 ${bookmarks.includes(job.id) ? 'fill-primary/60' : ''}`}
                               />
                             </button>
                           </div>
@@ -1659,4 +1253,25 @@ export default function JobsPage() {
       )}
     </div>
   );
-}
+};
+
+const JobsPageWithSuspense: React.FC = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
+          <div className="flex flex-col items-center gap-3">
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+            <p className="text-sm text-muted-foreground font-medium">
+              Memuat Pekerjaan...
+            </p>
+          </div>
+        </div>
+      }
+    >
+      <JobsPage />
+    </Suspense>
+  );
+};
+
+export default JobsPageWithSuspense;

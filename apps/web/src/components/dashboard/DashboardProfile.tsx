@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAppStore } from '@/store/store';
 import {
   Pencil,
@@ -18,7 +17,6 @@ import {
   Plus,
   Trash2,
   Settings,
-  Heart,
   Award,
   Image as ImageIcon,
   GripHorizontal,
@@ -45,9 +43,12 @@ const Linkedin = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-export default function ProfilePage() {
-  const { user, updateProfile } = useAppStore();
-  const router = useRouter();
+interface DashboardProfileProps {
+  onNavigate: (tab: string) => void;
+}
+
+export default function DashboardProfile({ onNavigate }: DashboardProfileProps) {
+  const { user, updateProfile, theme } = useAppStore();
   const [mounted, setMounted] = useState(false);
 
   // Per-section edit state
@@ -99,9 +100,9 @@ export default function ProfilePage() {
       label: 'Salju',
     },
     {
-      url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&q=80&auto=format&fit=crop',
+      url: 'https://bing.biturl.top/?resolution=1920&format=image&index=0',
       label: 'Bing Image',
-      copyright: 'Lembah Hijau, Austria',
+      copyright: 'Realtime Bing Image of the Day',
     },
   ];
 
@@ -109,22 +110,13 @@ export default function ProfilePage() {
   const [showPicker, setShowPicker] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [showAvatarPicker, setShowAvatarPicker] = useState(false);
-  const [customAvatarUrl, setCustomAvatarUrl] = useState('');
   const floatRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
   const dragOffset = useRef({ x: 0, y: 0 });
   const floatPos = useRef({ x: 100, y: 120 });
 
-  const presetAvatars = [
-    'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80',
-    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80',
-    'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=150&q=80',
-    'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80',
-    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
-    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80',
-    'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80',
-    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-  ];
+
+
 
   const setCookie = (name: string, value: string, days = 7) => {
     const expires = new Date(Date.now() + days * 864e5).toUTCString();
@@ -180,26 +172,14 @@ export default function ProfilePage() {
         career: user.career || '',
         waNumber: user.waNumber || '',
         email: user.email || '',
-        education: Array.isArray(user.education)
-          ? user.education
-          : user.education
-            ? [user.education]
-            : [],
-        experience: Array.isArray(user.experience)
-          ? user.experience
-          : user.experience
-            ? [user.experience]
-            : [],
+        education: Array.isArray(user.education) ? user.education : (user.education ? [user.education] : []),
+        experience: Array.isArray(user.experience) ? user.experience : (user.experience ? [user.experience] : []),
         resume: user.resume || '',
         website: user.website || '',
         socialMedia: user.socialMedia || '',
         softFile: user.softFile || '',
         aboutMe: user.aboutMe || '',
-        organization: Array.isArray(user.organization)
-          ? user.organization
-          : user.organization
-            ? [user.organization]
-            : [],
+        organization: Array.isArray(user.organization) ? user.organization : (user.organization ? [user.organization] : []),
         skill: user.skill || [],
         jobReference: {
           interest: user.jobReference?.interest || '',
@@ -212,34 +192,11 @@ export default function ProfilePage() {
     }
   }, [user]);
 
-  if (!mounted || !user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
-        <div className="flex flex-col items-center gap-3">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
-          <p className="text-sm text-muted-foreground font-medium">
-            Memuat Profil...
-          </p>
-        </div>
-      </div>
-    );
-  }
+  if (!mounted || !user) return null;
 
-  const experiences = Array.isArray(user.experience)
-    ? user.experience
-    : user.experience
-      ? [user.experience]
-      : [];
-  const educations = Array.isArray(user.education)
-    ? user.education
-    : user.education
-      ? [user.education]
-      : [];
-  const organizations = Array.isArray(user.organization)
-    ? user.organization
-    : user.organization
-      ? [user.organization]
-      : [];
+  const experiences = Array.isArray(user.experience) ? user.experience : (user.experience ? [user.experience] : []);
+  const educations = Array.isArray(user.education) ? user.education : (user.education ? [user.education] : []);
+  const organizations = Array.isArray(user.organization) ? user.organization : (user.organization ? [user.organization] : []);
 
   const handleStartEdit = (section: string) => {
     setEditSection(section);
@@ -254,26 +211,14 @@ export default function ProfilePage() {
       career: user.career || '',
       waNumber: user.waNumber || '',
       email: user.email || '',
-      education: Array.isArray(user.education)
-        ? user.education
-        : user.education
-          ? [user.education]
-          : [],
-      experience: Array.isArray(user.experience)
-        ? user.experience
-        : user.experience
-          ? [user.experience]
-          : [],
+      education: Array.isArray(user.education) ? user.education : (user.education ? [user.education] : []),
+      experience: Array.isArray(user.experience) ? user.experience : (user.experience ? [user.experience] : []),
       resume: user.resume || '',
       website: user.website || '',
       socialMedia: user.socialMedia || '',
       softFile: user.softFile || '',
       aboutMe: user.aboutMe || '',
-      organization: Array.isArray(user.organization)
-        ? user.organization
-        : user.organization
-          ? [user.organization]
-          : [],
+      organization: Array.isArray(user.organization) ? user.organization : (user.organization ? [user.organization] : []),
       skill: user.skill || [],
       jobReference: {
         interest: user.jobReference?.interest || '',
@@ -309,10 +254,7 @@ export default function ProfilePage() {
 
   // Certificate handlers
   const handleAddCert = () => {
-    if (
-      newCertText.trim() &&
-      !formData.certificates.includes(newCertText.trim())
-    ) {
+    if (newCertText.trim() && !formData.certificates.includes(newCertText.trim())) {
       setFormData({
         ...formData,
         certificates: [...formData.certificates, newCertText.trim()],
@@ -345,12 +287,11 @@ export default function ProfilePage() {
   // Education handlers
   const handleAddEdu = () => {
     if (eduName.trim()) {
-      const duration =
-        eduStart.trim() && eduEnd.trim()
-          ? ` (${eduStart.trim()} - ${eduEnd.trim()})`
-          : eduStart.trim()
-            ? ` (${eduStart.trim()})`
-            : '';
+      const duration = eduStart.trim() && eduEnd.trim()
+        ? ` (${eduStart.trim()} - ${eduEnd.trim()})`
+        : eduStart.trim()
+          ? ` (${eduStart.trim()})`
+          : '';
       const combined = `${eduName.trim()}${duration}`;
       if (!formData.education.includes(combined)) {
         setFormData({
@@ -373,12 +314,11 @@ export default function ProfilePage() {
   // Experience handlers
   const handleAddExp = () => {
     if (expName.trim()) {
-      const duration =
-        expStart.trim() && expEnd.trim()
-          ? ` (${expStart.trim()} - ${expEnd.trim()})`
-          : expStart.trim()
-            ? ` (${expStart.trim()})`
-            : '';
+      const duration = expStart.trim() && expEnd.trim()
+        ? ` (${expStart.trim()} - ${expEnd.trim()})`
+        : expStart.trim()
+          ? ` (${expStart.trim()})`
+          : '';
       const combined = `${expName.trim()}${duration}`;
       if (!formData.experience.includes(combined)) {
         setFormData({
@@ -401,12 +341,11 @@ export default function ProfilePage() {
   // Organization handlers
   const handleAddOrg = () => {
     if (orgName.trim()) {
-      const duration =
-        orgStart.trim() && orgEnd.trim()
-          ? ` (${orgStart.trim()} - ${orgEnd.trim()})`
-          : orgStart.trim()
-            ? ` (${orgStart.trim()})`
-            : '';
+      const duration = orgStart.trim() && orgEnd.trim()
+        ? ` (${orgStart.trim()} - ${orgEnd.trim()})`
+        : orgStart.trim()
+          ? ` (${orgStart.trim()})`
+          : '';
       const combined = `${orgName.trim()}${duration}`;
       if (!formData.organization.includes(combined)) {
         setFormData({
@@ -442,7 +381,7 @@ export default function ProfilePage() {
     const allowedTypes = [
       'application/pdf',
       'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
     ];
     const fileExtension = file.name.split('.').pop()?.toLowerCase();
     const isAllowedExt = ['pdf', 'doc', 'docx'].includes(fileExtension || '');
@@ -455,297 +394,270 @@ export default function ProfilePage() {
     setUploadError(null);
     setFormData({
       ...formData,
-      softFile: file.name,
+      softFile: file.name
     });
   };
 
   return (
-    <main className="min-h-screen bg-background pt-8 pb-28 px-4 md:px-8 text-foreground">
-      <div className="max-w-5xl mx-auto space-y-8">
-        {/* Profile Header with Banner & Avatar Overlay */}
-        <div className="bg-card border border-border/70 rounded-2xl overflow-hidden shadow-xl relative">
-          {/* Banner */}
-          <div
-            className="h-26 md:h-36 bg-cover bg-center relative transition-all duration-300"
-            style={{
-              backgroundImage: `url('${bannerPhotos[bgIndex].url}')`,
-            }}
-          >
-            {/* Stronger dark overlay for text contrast and depth */}
-            <div className="absolute inset-0 bg-black/45" />
-            <div className="absolute inset-0 bg-linear-to-r from-black/60 via-black/30 to-black/10" />
-            <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
+    <div className="bg-card border border-border/70 rounded-3xl p-5 md:p-6 shadow-md flex flex-col h-[880px] overflow-hidden animate-in fade-in duration-300">
+      
+      {/* Scrollable Content Area */}
+      <div className="flex-1 overflow-y-auto pr-1.5 smooth-scroll space-y-6 md:space-y-8 pb-4">
 
-
-            {/* Quick change photo button */}
-            <div className="absolute top-4 right-4 z-20">
-              <button
-                onClick={() => setShowPicker((prev) => !prev)}
-                className="flex items-center justify-center bg-black/40 hover:bg-black/60 backdrop-blur-sm border border-white/20 text-white p-2 rounded-full transition-all cursor-pointer shadow-sm"
-                title="Ganti foto latar"
-              >
-                <ImageIcon className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-
-          {/* Floating Window - Draggable Photo Picker */}
-          {showPicker && (
+        {/* Profile Header — ikut scroll */}
+        <div className="mb-6">
+          {/* Profile Header with Banner & Avatar Overlay */}
+          <div className="bg-card border border-border/70 rounded-2xl overflow-hidden shadow-xl relative">
+            {/* Banner */}
             <div
-              ref={floatRef}
-              className="fixed z-50 select-none animate-in fade-in zoom-in-95 duration-150"
+              className="h-32 md:h-36 bg-cover bg-center relative transition-all duration-300"
               style={{
-                left: floatPos.current.x,
-                top: floatPos.current.y,
-                width: 280,
+                backgroundImage: `url('${bannerPhotos[bgIndex].url}')`,
               }}
             >
-              <div className="bg-card/95 backdrop-blur-md border border-border/60 rounded-2xl shadow-2xl overflow-hidden">
-                {/* Title Bar - drag handle */}
-                <div
-                  onMouseDown={(e) => {
-                    if (!floatRef.current) return;
-                    dragging.current = true;
-                    const rect = floatRef.current.getBoundingClientRect();
-                    dragOffset.current = {
-                      x: e.clientX - rect.left,
-                      y: e.clientY - rect.top,
-                    };
-                    e.preventDefault();
-                  }}
-                  className="flex items-center justify-between px-3.5 py-2.5 bg-muted/50 border-b border-border/50 cursor-grab active:cursor-grabbing"
+              {/* Stronger dark overlay for text contrast and depth */}
+              <div className="absolute inset-0 bg-black/45" />
+              <div className="absolute inset-0 bg-linear-to-r from-black/60 via-black/30 to-black/10" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
+
+
+              {/* Quick change photo button */}
+              <div className="absolute top-4 right-4 z-20">
+                <button
+                  onClick={() => setShowPicker((prev) => !prev)}
+                  className="flex items-center justify-center bg-black/40 hover:bg-black/60 backdrop-blur-sm border border-white/20 text-white p-2 rounded-full transition-all cursor-pointer shadow-sm"
+                  title="Ganti foto latar"
                 >
-                  <div className="flex items-center gap-2">
-                    <GripHorizontal className="h-3.5 w-3.5 text-muted-foreground/50" />
-                    <span className="text-[11px] font-bold text-foreground tracking-tight">
-                      Pilih Tema Latar
-                    </span>
-                  </div>
-                  <button
-                    onClick={() => setShowPicker(false)}
-                    className="h-6 w-6 rounded-full bg-rose-500 hover:bg-rose-600 flex items-center justify-center transition-colors cursor-pointer shadow-sm border-none"
-                  >
-                    <X className="h-3.5 w-3.5 text-white" />
-                  </button>
-                </div>
-
-                {/* Photo Grid */}
-                <div className="p-3 space-y-2.5">
-                  <div className="grid grid-cols-3 gap-2">
-                    {bannerPhotos.slice(0, 6).map((photo, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => {
-                          setBgIndex(idx);
-                          setCookie('banner_photo', String(idx));
-                        }}
-                        className={`relative rounded-xl overflow-hidden h-[70px] cursor-pointer group transition-all border-none p-0 ${
-                          bgIndex === idx
-                            ? 'ring-2 ring-primary ring-offset-1 ring-offset-card'
-                            : 'hover:ring-2 hover:ring-primary/40'
-                        }`}
-                      >
-                        <img
-                          src={photo.url}
-                          alt={photo.label}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                          draggable={false}
-                        />
-                        <div className="absolute inset-0 bg-black/25 group-hover:bg-black/5 transition-all" />
-                        <span className="absolute bottom-1 left-0 right-0 text-center text-[9px] font-bold text-white drop-shadow-md">
-                          {photo.label}
-                        </span>
-                        {bgIndex === idx && (
-                          <div className="absolute top-1.5 right-1.5 h-4 w-4 bg-primary rounded-full flex items-center justify-center shadow">
-                            <Check className="h-2.5 w-2.5 text-white" />
-                          </div>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-
-                  {/* Standalone Bing Image Mode box below */}
-                  <button
-                    onClick={() => {
-                      setBgIndex(6);
-                      setCookie('banner_photo', '6');
-                    }}
-                    className={`w-full relative rounded-xl overflow-hidden h-[48px] cursor-pointer group transition-all flex items-center justify-between px-3 border transition-colors ${
-                      bgIndex === 6
-                        ? 'ring-2 ring-primary ring-offset-1 ring-offset-card bg-primary/10 border-primary/30'
-                        : 'hover:bg-muted/50 border-border/60 bg-background/25'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2">
-                      <div className="h-7 w-7 rounded-lg overflow-hidden bg-muted relative shrink-0">
-                        <img
-                          src={bannerPhotos[6].url}
-                          alt="Bing"
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                          draggable={false}
-                        />
-                        <div className="absolute inset-0 bg-black/25" />
-                      </div>
-                      <span className="text-[10px] font-bold text-foreground">
-                        Mode Bing Image
-                      </span>
-                    </div>
-                    {bgIndex === 6 && (
-                      <div className="h-4 w-4 bg-primary rounded-full flex items-center justify-center shadow">
-                        <Check className="h-2.5 w-2.5 text-white" />
-                      </div>
-                    )}
-                  </button>
-                </div>
+                  <ImageIcon className="h-4 w-4" />
+                </button>
               </div>
             </div>
-          )}
 
-          {/* Avatar Overlay */}
-          <div className="px-6 md:px-8 pb-6 relative">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between -mt-12 sm:-mt-15 gap-4 mb-6">
-              <div className="flex flex-col sm:flex-row items-center sm:items-end gap-4 text-center sm:text-left">
-                <button
-                  onClick={() => setShowAvatarPicker(true)}
-                  className="h-24 w-24 md:h-30 md:w-30 rounded-2xl overflow-hidden border-4 border-card shadow-md bg-muted/40 relative group cursor-pointer border-none p-0 text-left shrink-0"
-                  title="Ubah Foto Profil"
-                >
-                  <img
-                    src={user.profileImage || '/images/avatar.svg'}
-                    alt="avatar"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    onError={(e) => {
-                      e.currentTarget.src =
-                        'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80';
+            {/* Floating Window - Draggable Photo Picker */}
+            {showPicker && (
+              <div
+                ref={floatRef}
+                className="fixed z-50 select-none animate-in fade-in zoom-in-95 duration-150"
+                style={{
+                  left: floatPos.current.x,
+                  top: floatPos.current.y,
+                  width: 280,
+                }}
+              >
+                <div className="bg-card/95 backdrop-blur-md border border-border/60 rounded-2xl shadow-2xl overflow-hidden">
+                  {/* Title Bar - drag handle */}
+                  <div
+                    onMouseDown={(e) => {
+                      if (!floatRef.current) return;
+                      dragging.current = true;
+                      const rect = floatRef.current.getBoundingClientRect();
+                      dragOffset.current = {
+                        x: e.clientX - rect.left,
+                        y: e.clientY - rect.top,
+                      };
+                      e.preventDefault();
                     }}
-                  />
-                  <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center gap-1 transition-opacity duration-200 text-white">
-                    <Pencil className="h-4.5 w-4.5" />
-                    <span className="text-[9px] font-bold uppercase tracking-wider">
-                      Ubah Foto
-                    </span>
+                    className="flex items-center justify-between px-3.5 py-2.5 bg-muted/50 border-b border-border/50 cursor-grab active:cursor-grabbing"
+                  >
+                    <div className="flex items-center gap-2">
+                      <GripHorizontal className="h-3.5 w-3.5 text-muted-foreground/50" />
+                      <span className="text-[11px] font-bold text-foreground tracking-tight">
+                        Pilih Tema Latar
+                      </span>
+                    </div>
+                    <button
+                      onClick={() => setShowPicker(false)}
+                      className="h-6 w-6 rounded-full bg-rose-500 hover:bg-rose-600 flex items-center justify-center transition-colors cursor-pointer shadow-sm border-none"
+                    >
+                      <X className="h-3.5 w-3.5 text-white" />
+                    </button>
                   </div>
-                </button>
-                <div className="space-y-1 mb-0.5">
-                  <h1 className="text-xl md:text-2xl font-extrabold tracking-tight text-foreground">
-                    {user.name}
-                  </h1>
-                  <p className="text-xs md:text-sm font-semibold text-muted-foreground">
-                    {user.career || 'Pekerjaan belum diatur'}
-                  </p>
+
+                  {/* Photo Grid */}
+                  <div className="p-3 space-y-2.5">
+                    <div className="grid grid-cols-3 gap-2">
+                      {bannerPhotos.slice(0, 6).map((photo, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => {
+                            setBgIndex(idx);
+                            setCookie('banner_photo', String(idx));
+                          }}
+                          className={`relative rounded-xl overflow-hidden h-[70px] cursor-pointer group transition-all border-none p-0 ${
+                            bgIndex === idx
+                              ? 'ring-2 ring-foreground ring-offset-1 ring-offset-card'
+                              : 'hover:ring-2 hover:ring-foreground/40'
+                          }`}
+                        >
+                          <img
+                            src={photo.url}
+                            alt={photo.label}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            draggable={false}
+                          />
+                          <div className="absolute inset-0 bg-black/25 group-hover:bg-black/5 transition-all" />
+                          <span className="absolute bottom-1 left-0 right-0 text-center text-[9px] font-bold text-white drop-shadow-md">
+                            {photo.label}
+                          </span>
+                          {bgIndex === idx && (
+                            <div className="absolute top-1.5 right-1.5 h-4 w-4 bg-foreground rounded-full flex items-center justify-center shadow">
+                              <Check className="h-2.5 w-2.5 text-black" />
+                            </div>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Standalone Bing Image Mode box below */}
+                    <button
+                      onClick={() => {
+                        setBgIndex(6);
+                        setCookie('banner_photo', '6');
+                      }}
+                      className={`w-full relative rounded-xl overflow-hidden h-[48px] cursor-pointer group transition-all flex items-center justify-between px-3 border transition-colors ${
+                        bgIndex === 6
+                          ? 'ring-2 ring-foreground ring-offset-1 ring-offset-card bg-foreground/10 border-foreground/30'
+                          : 'hover:bg-muted/50 border-border/60 bg-background/25'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <div className="h-7 w-7 rounded-lg overflow-hidden bg-muted relative shrink-0">
+                          <img
+                            src={bannerPhotos[6].url}
+                            alt="Bing"
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            draggable={false}
+                          />
+                          <div className="absolute inset-0 bg-black/25" />
+                        </div>
+                        <span className="text-[10px] font-bold text-foreground">
+                          Mode Bing Image
+                        </span>
+                      </div>
+                      {bgIndex === 6 && (
+                        <div className="h-4 w-4 bg-primary rounded-full flex items-center justify-center shadow">
+                          <Check className="h-2.5 w-2.5 text-white" />
+                        </div>
+                      )}
+                    </button>
+                  </div>
                 </div>
               </div>
+            )}
 
-              {/* General Edit / Settings quick link */}
-              <div className="flex justify-center sm:justify-end gap-2">
-                <Button
-                  onClick={() => (window.location.href = '/settings')}
-                  variant="outline"
-                  size="sm"
-                  className="h-9 gap-1.5 cursor-pointer font-bold border-border/60 text-xs"
-                >
-                  <Settings className="h-4 w-4" />
-                  <span>Pengaturan</span>
-                </Button>
+            {/* Avatar Overlay */}
+            <div className="px-4 md:px-5 pb-3 md:pb-4 relative">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between -mt-12 sm:-mt-14 gap-2 mb-1">
+                <div className="flex flex-col sm:flex-row items-center sm:items-end gap-3 text-center sm:text-left">
+                  <button
+                    onClick={() => setShowAvatarPicker(true)}
+                    className="h-20 w-20 md:h-24 md:w-24 rounded-2xl overflow-hidden border-4 border-card shadow-md bg-muted/40 relative group cursor-pointer border-none p-0 text-left shrink-0"
+                    title="Ubah Foto Profil"
+                  >
+                    <img
+                      src={user.profileImage || '/images/avatar.svg'}
+                      alt="avatar"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        e.currentTarget.src =
+                          'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80';
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center gap-1 transition-opacity duration-200 text-white">
+                      <Pencil className="h-4.5 w-4.5" />
+                      <span className="text-[10px] font-bold uppercase tracking-wider">Ubah Foto</span>
+                    </div>
+                  </button>
+                  <div className="space-y-1 pb-1">
+                    <h1 className="text-lg md:text-xl font-extrabold tracking-tight text-foreground">
+                      {user.name}
+                    </h1>
+                    <p className="text-sm md:text-base font-semibold text-muted-foreground">
+                      {user.career || 'Pekerjaan belum diatur'}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* 2-Column Dashboard Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3.5 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
           {/* Left Column: Personal details, links, documents */}
           <div className="space-y-6 lg:col-span-1">
+            
             {/* UserProfile Info Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-5 relative">
+            <div className="bg-card border border-border/70 rounded-2xl p-5 shadow-md space-y-5 relative">
               <div className="flex items-center justify-between">
-                <h3 className="font-bold text-sm text-muted-foreground uppercase tracking-wider">
+                <h3 className="font-bold text-[11px] text-muted-foreground uppercase tracking-wider">
                   Informasi Kontak
                 </h3>
                 {editSection !== 'contact' ? (
                   <button
                     onClick={() => handleStartEdit('contact')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                    className="text-muted-foreground hover:text-foreground p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
                   >
-                    <Pencil className="h-4 w-4" />
+                    <Pencil className="h-3 w-3" />
                   </button>
                 ) : (
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <Check className="h-4 w-4" />
+                      <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
                       className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <X className="h-4 w-4" />
+                      <X className="h-3 w-3" />
                     </button>
                   </div>
                 )}
               </div>
 
               {editSection === 'contact' ? (
-                <div className="space-y-3.5 pt-1">
+                <div className="space-y-3 pt-1">
                   <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Nama Lengkap
-                    </label>
+                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Nama Lengkap</label>
                     <Input
                       value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Nama Panggilan
-                    </label>
+                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Nama Panggilan</label>
                     <Input
                       value={formData.nickname}
-                      onChange={(e) =>
-                        setFormData({ ...formData, nickname: e.target.value })
-                      }
+                      onChange={(e) => setFormData({ ...formData, nickname: e.target.value })}
                       className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Posisi / Karir
-                    </label>
+                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Posisi / Karir</label>
                     <Input
                       value={formData.career}
-                      onChange={(e) =>
-                        setFormData({ ...formData, career: e.target.value })
-                      }
+                      onChange={(e) => setFormData({ ...formData, career: e.target.value })}
                       className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Nomor WA
-                    </label>
+                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Nomor WA</label>
                     <Input
                       value={formData.waNumber}
-                      onChange={(e) =>
-                        setFormData({ ...formData, waNumber: e.target.value })
-                      }
+                      onChange={(e) => setFormData({ ...formData, waNumber: e.target.value })}
                       className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Email
-                    </label>
+                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Email</label>
                     <Input
                       value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
                     />
                   </div>
@@ -753,47 +665,31 @@ export default function ProfilePage() {
               ) : (
                 <div className="space-y-4 pt-1">
                   <div className="flex items-center gap-3">
-                    <User className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
+                    <User className="h-3 w-3 text-muted-foreground shrink-0" />
                     <div>
-                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
-                        Nama Lengkap
-                      </span>
-                      <span className="text-xs font-bold text-foreground">
-                        {user.name}
-                      </span>
+                      <span className="text-[9px] text-muted-foreground uppercase block font-semibold">Nama Lengkap</span>
+                      <span className="text-xs font-bold text-foreground">{user.name}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <User className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
+                    <User className="h-3 w-3 text-muted-foreground shrink-0" />
                     <div>
-                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
-                        Nama Panggilan
-                      </span>
-                      <span className="text-xs font-bold text-foreground">
-                        {user.nickname || '-'}
-                      </span>
+                      <span className="text-[9px] text-muted-foreground uppercase block font-semibold">Nama Panggilan</span>
+                      <span className="text-xs font-bold text-foreground">{user.nickname || '-'}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Phone className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
+                    <Phone className="h-3 w-3 text-muted-foreground shrink-0" />
                     <div>
-                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
-                        WhatsApp
-                      </span>
-                      <span className="text-xs font-bold text-foreground">
-                        {user.waNumber || '-'}
-                      </span>
+                      <span className="text-[9px] text-muted-foreground uppercase block font-semibold">WhatsApp</span>
+                      <span className="text-xs font-bold text-foreground">{user.waNumber || '-'}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Mail className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
+                    <Mail className="h-3 w-3 text-muted-foreground shrink-0" />
                     <div className="min-w-0">
-                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
-                        Email
-                      </span>
-                      <span className="text-xs font-bold text-foreground block break-all">
-                        {user.email}
-                      </span>
+                      <span className="text-[9px] text-muted-foreground uppercase block font-semibold">Email</span>
+                      <span className="text-xs font-bold text-foreground block break-all">{user.email}</span>
                     </div>
                   </div>
                 </div>
@@ -801,42 +697,40 @@ export default function ProfilePage() {
             </div>
 
             {/* Links & Files Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-5 relative">
+            <div className="bg-card border border-border/70 rounded-2xl p-5 shadow-md space-y-5 relative">
               <div className="flex items-center justify-between">
-                <h3 className="font-bold text-sm text-muted-foreground uppercase tracking-wider">
+                <h3 className="font-bold text-[11px] text-muted-foreground uppercase tracking-wider">
                   Tautan & Dokumen
                 </h3>
                 {editSection !== 'links' ? (
                   <button
                     onClick={() => handleStartEdit('links')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                    className="text-muted-foreground hover:text-foreground p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
                   >
-                    <Pencil className="h-4 w-4" />
+                    <Pencil className="h-3 w-3" />
                   </button>
                 ) : (
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <Check className="h-4 w-4" />
+                      <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
                       className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <X className="h-4 w-4" />
+                      <X className="h-3 w-3" />
                     </button>
                   </div>
                 )}
               </div>
 
               {editSection === 'links' ? (
-                <div className="space-y-3.5 pt-1">
+                <div className="space-y-3 pt-1">
                   <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1.5">
-                      Resume
-                    </label>
+                    <label className="text-[9px] font-bold text-muted-foreground uppercase block mb-1.5">Resume</label>
                     {formData.softFile ? (
                       <div className="flex items-center justify-between bg-muted/40 border border-border/80 rounded-xl p-2.5">
                         <div className="flex items-center gap-2 min-w-0">
@@ -849,76 +743,54 @@ export default function ProfilePage() {
                         </div>
                         <button
                           type="button"
-                          onClick={() =>
-                            setFormData({ ...formData, softFile: '' })
-                          }
+                          onClick={() => setFormData({ ...formData, softFile: '' })}
                           className="text-destructive hover:bg-destructive/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                         >
-                          <Trash2 className="h-4 w-4" />
+                          <Trash2 className="h-3 w-3" />
                         </button>
                       </div>
                     ) : (
-                      <div className="relative border-2 border-dashed border-border/85 hover:border-primary/50 rounded-xl p-4.5 transition-all flex flex-col items-center justify-center gap-2 bg-background/25 group">
+                      <div className="relative border-2 border-dashed border-border/85 hover:border-foreground/50 rounded-xl p-4 transition-all flex flex-col items-center justify-center gap-1.5 bg-background/25 group">
                         <input
                           type="file"
                           accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                           onChange={handleFileUpload}
                           className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                         />
-                        <div className="text-2xl text-muted-foreground group-hover:scale-110 transition-transform">
-                          📁
-                        </div>
-                        <span className="text-xs font-bold text-foreground">
-                          Pilih Berkas
-                        </span>
-                        <span className="text-[9px] text-muted-foreground text-center">
-                          PDF atau Word (Maks. 10MB)
-                        </span>
+                        <div className="text-xl text-muted-foreground group-hover:scale-110 transition-transform">📁</div>
+                        <span className="text-xs font-bold text-foreground">Pilih Berkas</span>
+                        <span className="text-[9px] text-muted-foreground text-center">PDF atau Word (Maks. 10MB)</span>
                       </div>
                     )}
                     {uploadError && (
-                      <p className="text-[10px] font-bold text-rose-500 mt-1.5">
-                        {uploadError}
-                      </p>
+                      <p className="text-[10px] font-bold text-rose-500 mt-1.5">{uploadError}</p>
                     )}
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Website Pribadi
-                    </label>
+                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Website Pribadi</label>
                     <Input
                       value={formData.website}
-                      onChange={(e) =>
-                        setFormData({ ...formData, website: e.target.value })
-                      }
+                      onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                       placeholder="https://budisantoso.dev"
                       className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      LinkedIn{' '}
-                    </label>
+                    <label className="text-[9px] font-bold text-muted-foreground uppercase">LinkedIn </label>
                     <Input
                       value={formData.socialMedia}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          socialMedia: e.target.value,
-                        })
-                      }
+                      onChange={(e) => setFormData({ ...formData, socialMedia: e.target.value })}
                       placeholder="https://linkedin.com/in/..."
                       className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
                     />
                   </div>
                 </div>
               ) : (
-                <div className="space-y-4 pt-1">
+                <div className="space-y-4 pt-1 line-clamp-1">
                   <div className="flex items-center gap-3">
-                    <FileText className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
+                    <FileText className="h-3 w-3 text-muted-foreground shrink-0" />
                     <div className="min-w-0 flex-1">
-                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
-                        Resume
+                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">Resume
                       </span>
                       {user.softFile ? (
                         <div className="flex items-center gap-2 mt-1 min-w-0">
@@ -928,7 +800,7 @@ export default function ProfilePage() {
                               e.preventDefault();
                               alert(`Membuka berkas: ${user.softFile}`);
                             }}
-                            className="text-xs font-bold text-foreground hover:text-primary hover:underline truncate block"
+                            className="text-xs font-bold text-foreground hover:underline truncate block"
                           >
                             {user.softFile}
                           </a>
@@ -937,65 +809,59 @@ export default function ProfilePage() {
                           </span>
                         </div>
                       ) : (
-                        <span className="text-xs font-bold text-foreground block mt-1">
-                          -
-                        </span>
+                        <span className="text-xs font-bold text-foreground block mt-1">-</span>
                       )}
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Globe className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
+                    <Globe className="h-3 w-3 text-muted-foreground shrink-0" />
                     <div>
-                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
-                        Website
+                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">Website
                       </span>
                       {user.website ? (
                         <a
                           href={user.website}
-                          className="text-xs font-bold text-foreground hover:text-primary hover:underline block truncate"
+                          className="text-xs font-bold text-foreground hover:underline block truncate"
                           target="_blank"
                           rel="noreferrer"
                         >
                           {user.website}
                         </a>
                       ) : (
-                        <span className="text-xs font-bold text-foreground">
-                          -
-                        </span>
+                        <span className="text-xs font-bold text-foreground">-</span>
                       )}
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Linkedin className="h-4.5 w-4.5 text-muted-foreground shrink-0" />
+                    <Linkedin className="h-3 w-3 text-muted-foreground shrink-0" />
                     <div>
-                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
-                        LinkedIn
+                      <span className="text-[10px] text-muted-foreground uppercase block font-semibold">LinkedIn                        
                       </span>
                       {user.socialMedia ? (
                         <a
                           href={user.socialMedia}
-                          className="text-xs font-bold text-foreground hover:text-primary hover:underline block truncate"
+                          className="text-xs font-bold text-foreground hover:underline block truncate"
                           target="_blank"
                           rel="noreferrer"
                         >
                           {user.socialMedia}
                         </a>
                       ) : (
-                        <span className="text-xs font-bold text-foreground">
-                          -
-                        </span>
+                        <span className="text-xs font-bold text-foreground">-</span>
                       )}
                     </div>
                   </div>
                 </div>
               )}
             </div>
+
           </div>
 
           {/* Right Column: Summaries, organization, skills, reference, certs */}
           <div className="lg:col-span-2 space-y-6">
+            
             {/* About Me Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
+            <div className="bg-card border border-border/70 rounded-2xl p-5 shadow-md space-y-4 relative">
               <div className="flex items-center justify-between">
                 <h3 className="font-extrabold text-sm text-foreground tracking-tight">
                   Tentang Saya
@@ -1003,23 +869,23 @@ export default function ProfilePage() {
                 {editSection !== 'aboutMe' ? (
                   <button
                     onClick={() => handleStartEdit('aboutMe')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                    className="text-muted-foreground hover:text-foreground p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
                   >
-                    <Pencil className="h-4 w-4" />
+                    <Pencil className="h-3 w-3" />
                   </button>
                 ) : (
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <Check className="h-4 w-4" />
+                      <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
                       className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <X className="h-4 w-4" />
+                      <X className="h-3 w-3" />
                     </button>
                   </div>
                 )}
@@ -1028,22 +894,19 @@ export default function ProfilePage() {
               {editSection === 'aboutMe' ? (
                 <textarea
                   value={formData.aboutMe}
-                  onChange={(e) =>
-                    setFormData({ ...formData, aboutMe: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, aboutMe: e.target.value })}
                   rows={4}
-                  className="w-full text-xs font-medium bg-background border border-border/80 rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-primary leading-relaxed"
+                  className="w-full text-xs font-medium bg-background border border-border/80 rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-foreground leading-relaxed"
                 />
               ) : (
                 <p className="text-xs text-muted-foreground font-medium leading-relaxed">
-                  {user.aboutMe ||
-                    'Tulis ringkasan tentang diri Anda di sini...'}
+                  {user.aboutMe || 'Tulis ringkasan tentang diri Anda di sini...'}
                 </p>
               )}
             </div>
 
             {/* Pengalaman Kerja Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
+            <div className="bg-card border border-border/70 rounded-2xl p-5 shadow-md space-y-4 relative">
               <div className="flex items-center justify-between">
                 <h3 className="font-extrabold text-sm text-foreground tracking-tight">
                   Pengalaman Kerja
@@ -1051,23 +914,23 @@ export default function ProfilePage() {
                 {editSection !== 'experience' ? (
                   <button
                     onClick={() => handleStartEdit('experience')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                    className="text-muted-foreground hover:text-foreground p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
                   >
-                    <Pencil className="h-4 w-4" />
+                    <Pencil className="h-3 w-3" />
                   </button>
                 ) : (
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <Check className="h-4 w-4" />
+                      <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
                       className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <X className="h-4 w-4" />
+                      <X className="h-3 w-3" />
                     </button>
                   </div>
                 )}
@@ -1077,45 +940,35 @@ export default function ProfilePage() {
                 <div className="space-y-4">
                   <div className="space-y-3 bg-background/40 p-4 rounded-xl border border-border/70">
                     <div>
-                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                        Posisi & Perusahaan
-                      </label>
+                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">Posisi & Perusahaan</label>
                       <Input
                         value={expName}
                         onChange={(e) => setExpName(e.target.value)}
                         placeholder="e.g. Junior Developer di TechCorp"
-                        className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                        className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-foreground"
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                          Tanggal Mulai
-                        </label>
+                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">Tanggal Mulai</label>
                         <Input
                           value={expStart}
                           onChange={(e) => setExpStart(e.target.value)}
                           placeholder="e.g. Jan 2018 / 2018"
-                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-foreground"
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                          Tanggal Selesai
-                        </label>
+                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">Tanggal Selesai</label>
                         <Input
                           value={expEnd}
                           onChange={(e) => setExpEnd(e.target.value)}
                           placeholder="e.g. Des 2022 / Sekarang"
-                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-foreground"
                         />
                       </div>
                     </div>
-                    <Button
-                      onClick={handleAddExp}
-                      size="sm"
-                      className="w-full h-9 cursor-pointer text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/95"
-                    >
+                    <Button onClick={handleAddExp} size="sm" className="w-full h-9 cursor-pointer text-xs font-bold bg-foreground text-background hover:bg-foreground/90">
                       Tambah Pengalaman
                     </Button>
                   </div>
@@ -1126,7 +979,7 @@ export default function ProfilePage() {
                         className="flex items-center justify-between bg-background/50 border border-border/80 text-foreground text-xs font-semibold p-3 rounded-xl shadow-sm hover:border-border transition-all"
                       >
                         <div className="flex items-center gap-2 min-w-0">
-                          <Briefcase className="h-4 w-4 text-primary shrink-0" />
+                          <Briefcase className="h-3 w-3 text-foreground shrink-0" />
                           <span className="truncate">{exp}</span>
                         </div>
                         <div className="flex items-center gap-1 shrink-0">
@@ -1142,13 +995,13 @@ export default function ProfilePage() {
                             className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                             title="Edit item"
                           >
-                            <Pencil className="h-4 w-4" />
+                            <Pencil className="h-3 w-3" />
                           </button>
                           <button
                             onClick={() => handleRemoveExp(exp)}
                             className="text-destructive hover:bg-destructive/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                           >
-                            <Trash2 className="h-4 w-4" />
+                            <Trash2 className="h-3 w-3" />
                           </button>
                         </div>
                       </div>
@@ -1161,25 +1014,23 @@ export default function ProfilePage() {
                     experiences.map((exp: string) => (
                       <div
                         key={exp}
-                        className="flex items-center gap-2.5 bg-background/40 border border-border/50 p-3 rounded-xl select-none"
+                        className="flex items-center gap-2 bg-background/40 border border-border/60 p-3 rounded-xl"
                       >
-                        <Briefcase className="h-4.5 w-4.5 text-primary shrink-0" />
-                        <span className="text-xs font-semibold text-foreground">
-                          {exp}
-                        </span>
+                        <Briefcase className="h-3 w-3 text-foreground shrink-0" />
+                        <span className="text-xs font-semibold text-foreground">{exp}</span>
                       </div>
                     ))
                   ) : (
-                    <span className="text-xs text-muted-foreground font-medium">
-                      Belum ada pengalaman kerja yang ditambahkan.
-                    </span>
+                    <span className="text-xs text-muted-foreground font-medium">Belum ada pengalaman kerja yang ditambahkan.</span>
                   )}
                 </div>
               )}
             </div>
 
+
+
             {/* Pendidikan Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
+            <div className="bg-card border border-border/70 rounded-2xl p-5 shadow-md space-y-4 relative">
               <div className="flex items-center justify-between">
                 <h3 className="font-extrabold text-sm text-foreground tracking-tight">
                   Pendidikan
@@ -1187,23 +1038,23 @@ export default function ProfilePage() {
                 {editSection !== 'education' ? (
                   <button
                     onClick={() => handleStartEdit('education')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                    className="text-muted-foreground hover:text-foreground p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
                   >
-                    <Pencil className="h-4 w-4" />
+                    <Pencil className="h-3 w-3" />
                   </button>
                 ) : (
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <Check className="h-4 w-4" />
+                      <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
                       className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <X className="h-4 w-4" />
+                      <X className="h-3 w-3" />
                     </button>
                   </div>
                 )}
@@ -1213,45 +1064,35 @@ export default function ProfilePage() {
                 <div className="space-y-4">
                   <div className="space-y-3 bg-background/40 p-4 rounded-xl border border-border/70">
                     <div>
-                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                        Institusi & Gelar
-                      </label>
+                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">Institusi & Gelar</label>
                       <Input
                         value={eduName}
                         onChange={(e) => setEduName(e.target.value)}
                         placeholder="e.g. S1 Teknik Informatika di Universitas Indonesia"
-                        className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                        className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-foreground"
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                          Tahun Mulai
-                        </label>
+                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">Tahun Mulai</label>
                         <Input
                           value={eduStart}
                           onChange={(e) => setEduStart(e.target.value)}
                           placeholder="e.g. 2018"
-                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-foreground"
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                          Tahun Lulus
-                        </label>
+                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">Tahun Lulus</label>
                         <Input
                           value={eduEnd}
                           onChange={(e) => setEduEnd(e.target.value)}
                           placeholder="e.g. 2022 / Sekarang"
-                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-foreground"
                         />
                       </div>
                     </div>
-                    <Button
-                      onClick={handleAddEdu}
-                      size="sm"
-                      className="w-full h-9 cursor-pointer text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/95"
-                    >
+                    <Button onClick={handleAddEdu} size="sm" className="w-full h-9 cursor-pointer text-xs font-bold bg-foreground text-background hover:bg-foreground/90">
                       Tambah Pendidikan
                     </Button>
                   </div>
@@ -1262,7 +1103,7 @@ export default function ProfilePage() {
                         className="flex items-center justify-between bg-background/50 border border-border/80 text-foreground text-xs font-semibold p-3 rounded-xl shadow-sm hover:border-border transition-all"
                       >
                         <div className="flex items-center gap-2 min-w-0">
-                          <GraduationCap className="h-4 w-4 text-primary shrink-0" />
+                          <GraduationCap className="h-3 w-3 text-foreground shrink-0" />
                           <span className="truncate">{edu}</span>
                         </div>
                         <div className="flex items-center gap-1 shrink-0">
@@ -1278,13 +1119,13 @@ export default function ProfilePage() {
                             className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                             title="Edit item"
                           >
-                            <Pencil className="h-4 w-4" />
+                            <Pencil className="h-3 w-3" />
                           </button>
                           <button
                             onClick={() => handleRemoveEdu(edu)}
                             className="text-destructive hover:bg-destructive/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                           >
-                            <Trash2 className="h-4 w-4" />
+                            <Trash2 className="h-3 w-3" />
                           </button>
                         </div>
                       </div>
@@ -1297,25 +1138,21 @@ export default function ProfilePage() {
                     educations.map((edu: string) => (
                       <div
                         key={edu}
-                        className="flex items-center gap-2.5 bg-background/40 border border-border/50 p-3 rounded-xl select-none"
+                        className="flex items-center gap-2 bg-background/40 border border-border/60 p-3 rounded-xl"
                       >
-                        <GraduationCap className="h-4.5 w-4.5 text-primary shrink-0" />
-                        <span className="text-xs font-semibold text-foreground">
-                          {edu}
-                        </span>
+                        <GraduationCap className="h-3 w-3 text-foreground shrink-0" />
+                        <span className="text-xs font-semibold text-foreground">{edu}</span>
                       </div>
                     ))
                   ) : (
-                    <span className="text-xs text-muted-foreground font-medium">
-                      Belum ada riwayat pendidikan yang ditambahkan.
-                    </span>
+                    <span className="text-xs text-muted-foreground font-medium">Belum ada riwayat pendidikan yang ditambahkan.</span>
                   )}
                 </div>
               )}
             </div>
 
             {/* Skill Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
+            <div className="bg-card border border-border/70 rounded-2xl p-5 shadow-md space-y-4 relative">
               <div className="flex items-center justify-between">
                 <h3 className="font-extrabold text-sm text-foreground tracking-tight">
                   Keahlian / Skill
@@ -1323,23 +1160,23 @@ export default function ProfilePage() {
                 {editSection !== 'skill' ? (
                   <button
                     onClick={() => handleStartEdit('skill')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                    className="text-muted-foreground hover:text-foreground p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
                   >
-                    <Pencil className="h-4 w-4" />
+                    <Pencil className="h-3 w-3" />
                   </button>
                 ) : (
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <Check className="h-4 w-4" />
+                      <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
                       className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <X className="h-4 w-4" />
+                      <X className="h-3 w-3" />
                     </button>
                   </div>
                 )}
@@ -1352,7 +1189,7 @@ export default function ProfilePage() {
                       value={newSkillText}
                       onChange={(e) => setNewSkillText(e.target.value)}
                       placeholder="Tambah skill baru (e.g. Next.js)"
-                      className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                      className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-foreground"
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') {
                           e.preventDefault();
@@ -1360,11 +1197,7 @@ export default function ProfilePage() {
                         }
                       }}
                     />
-                    <Button
-                      onClick={handleAddSkill}
-                      size="sm"
-                      className="h-9 cursor-pointer text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/95"
-                    >
+                    <Button onClick={handleAddSkill} size="sm" className="h-9 cursor-pointer text-xs font-bold bg-foreground text-background hover:bg-foreground/90">
                       Tambah
                     </Button>
                   </div>
@@ -1372,12 +1205,16 @@ export default function ProfilePage() {
                     {formData.skill.map((sk: string) => (
                       <div
                         key={sk}
-                        className="inline-flex items-center gap-1.5 bg-primary/10 text-primary text-xs font-semibold py-1 pl-3 pr-1.5 rounded-full select-none"
+                        className={`inline-flex items-center gap-1.5 text-[11px] font-semibold pl-2.5 pr-1.5 py-0.5 h-6 rounded-full border shadow-sm select-none ${
+                          mounted && theme === 'white'
+                            ? 'bg-[#eef5fa] border-[#d2e2f0] text-[#334155]'
+                            : 'bg-background/50 border-border/80 text-muted-foreground'
+                        }`}
                       >
                         <span>{sk}</span>
                         <button
                           onClick={() => handleRemoveSkill(sk)}
-                          className="p-0.5 hover:bg-primary/20 rounded-full transition-colors text-primary/80 hover:text-primary cursor-pointer"
+                          className="p-0.5 hover:bg-muted rounded-full transition-colors text-muted-foreground hover:text-foreground cursor-pointer"
                         >
                           <X className="h-3 w-3" />
                         </button>
@@ -1391,59 +1228,61 @@ export default function ProfilePage() {
                     user.skill.map((sk: string) => (
                       <span
                         key={sk}
-                        className="bg-primary/10 text-primary text-xs font-semibold py-1 px-3.5 rounded-full select-none"
+                        className={`inline-flex items-center text-[11px] font-semibold px-2.5 py-0.5 h-6 rounded-full border shadow-sm select-none ${
+                          mounted && theme === 'white'
+                            ? 'bg-[#eef5fa] border-[#d2e2f0] text-[#334155]'
+                            : 'bg-background/50 border-border/80 text-muted-foreground'
+                        }`}
                       >
                         {sk}
                       </span>
                     ))
                   ) : (
-                    <span className="text-xs text-muted-foreground font-medium">
-                      Belum ada skill yang ditambahkan.
-                    </span>
+                    <span className="text-xs text-muted-foreground font-medium">Belum ada skill yang ditambahkan.</span>
                   )}
                 </div>
               )}
             </div>
 
-            {/* Lisensi & Sertifikat Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
+            {/* Sertifikat Section */}
+            <div className="bg-card border border-border/70 rounded-2xl p-5 shadow-md space-y-4 relative">
               <div className="flex items-center justify-between">
                 <h3 className="font-extrabold text-sm text-foreground tracking-tight">
-                  Lisensi & Sertifikat
+                  Sertifikasi / Lisensi
                 </h3>
-                {editSection !== 'certificates' ? (
+                {editSection !== 'certs' ? (
                   <button
-                    onClick={() => handleStartEdit('certificates')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                    onClick={() => handleStartEdit('certs')}
+                    className="text-muted-foreground hover:text-foreground p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
                   >
-                    <Pencil className="h-4 w-4" />
+                    <Pencil className="h-3 w-3" />
                   </button>
                 ) : (
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <Check className="h-4 w-4" />
+                      <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
                       className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <X className="h-4 w-4" />
+                      <X className="h-3 w-3" />
                     </button>
                   </div>
                 )}
               </div>
 
-              {editSection === 'certificates' ? (
+              {editSection === 'certs' ? (
                 <div className="space-y-4">
                   <div className="flex gap-2">
                     <Input
                       value={newCertText}
                       onChange={(e) => setNewCertText(e.target.value)}
-                      placeholder="Tambah sertifikat (e.g. AWS Certified Developer)"
-                      className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                      placeholder="Tambah sertifikat baru (e.g. TOEFL 550)"
+                      className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-foreground"
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') {
                           e.preventDefault();
@@ -1451,11 +1290,7 @@ export default function ProfilePage() {
                         }
                       }}
                     />
-                    <Button
-                      onClick={handleAddCert}
-                      size="sm"
-                      className="h-9 cursor-pointer text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/95"
-                    >
+                    <Button onClick={handleAddCert} size="sm" className="h-9 cursor-pointer text-xs font-bold bg-foreground text-background hover:bg-foreground/90">
                       Tambah
                     </Button>
                   </div>
@@ -1463,57 +1298,40 @@ export default function ProfilePage() {
                     {formData.certificates.map((cert: string) => (
                       <div
                         key={cert}
-                        className="flex items-center justify-between bg-muted text-muted-foreground text-xs font-semibold py-1.5 px-3 rounded-lg"
+                        className="flex items-center justify-between bg-muted text-muted-foreground text-xs font-semibold py-1.5 px-3 rounded-xl"
                       >
                         <span>{cert}</span>
                         <button
                           onClick={() => handleRemoveCert(cert)}
-                          className="text-destructive hover:bg-destructive/10 p-1 rounded-md transition-colors"
+                          className="p-1 hover:bg-muted-foreground/20 rounded-md transition-colors"
                         >
-                          <Trash2 className="h-3.5 w-3.5" />
+                          <Trash2 className="h-3 w-3 text-rose-500" />
                         </button>
                       </div>
                     ))}
                   </div>
                 </div>
               ) : (
-                <div className="space-y-3 pt-1">
+                <div className="space-y-2 pt-1">
                   {user.certificates && user.certificates.length > 0 ? (
                     user.certificates.map((cert: string) => (
                       <div
                         key={cert}
-                        className="flex items-center justify-between gap-2.5 bg-background/40 border border-border/50 p-3 rounded-xl select-none"
+                        className="flex items-center gap-2 bg-background/40 border border-border/60 p-3 rounded-xl"
                       >
-                        <div className="flex items-center gap-2.5 min-w-0">
-                          <Award className="h-4.5 w-4.5 text-primary shrink-0" />
-                          <span className="text-xs font-semibold text-foreground truncate">
-                            {cert}
-                          </span>
-                        </div>
-                        <button
-                          onClick={() =>
-                            router.push(
-                              `/profile/preview?name=${encodeURIComponent(cert)}`,
-                            )
-                          }
-                          className="text-[10px] font-bold text-primary shrink-0 bg-primary/10 px-2.5 py-1 rounded border border-primary/20 hover:bg-primary hover:text-primary-foreground transition-all cursor-pointer select-none"
-                          title="Klik untuk melihat preview sertifikat"
-                        >
-                          Preview
-                        </button>
+                        <Award className="h-3 w-3 text-foreground shrink-0" />
+                        <span className="text-xs font-semibold text-foreground">{cert}</span>
                       </div>
                     ))
                   ) : (
-                    <span className="text-xs text-muted-foreground font-medium">
-                      Belum ada lisensi atau sertifikat yang ditambahkan.
-                    </span>
+                    <span className="text-xs text-muted-foreground font-medium">Belum ada sertifikasi yang ditambahkan.</span>
                   )}
                 </div>
               )}
             </div>
 
             {/* Pengalaman Organisasi Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
+            <div className="bg-card border border-border/70 rounded-2xl p-5 shadow-md space-y-4 relative">
               <div className="flex items-center justify-between">
                 <h3 className="font-extrabold text-sm text-foreground tracking-tight">
                   Pengalaman Organisasi
@@ -1521,23 +1339,23 @@ export default function ProfilePage() {
                 {editSection !== 'organization' ? (
                   <button
                     onClick={() => handleStartEdit('organization')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                    className="text-muted-foreground hover:text-foreground p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
                   >
-                    <Pencil className="h-4 w-4" />
+                    <Pencil className="h-3 w-3" />
                   </button>
                 ) : (
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <Check className="h-4 w-4" />
+                      <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
                       className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <X className="h-4 w-4" />
+                      <X className="h-3 w-3" />
                     </button>
                   </div>
                 )}
@@ -1547,45 +1365,35 @@ export default function ProfilePage() {
                 <div className="space-y-4">
                   <div className="space-y-3 bg-background/40 p-4 rounded-xl border border-border/70">
                     <div>
-                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                        Nama Organisasi & Peran
-                      </label>
+                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">Nama Organisasi & Peran</label>
                       <Input
                         value={orgName}
                         onChange={(e) => setOrgName(e.target.value)}
                         placeholder="e.g. Ketua Himpunan Mahasiswa"
-                        className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                        className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-foreground"
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                          Tahun Mulai
-                        </label>
+                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">Tahun Mulai</label>
                         <Input
                           value={orgStart}
                           onChange={(e) => setOrgStart(e.target.value)}
                           placeholder="e.g. 2020"
-                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-foreground"
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
-                          Tahun Selesai
-                        </label>
+                        <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">Tahun Selesai</label>
                         <Input
                           value={orgEnd}
                           onChange={(e) => setOrgEnd(e.target.value)}
                           placeholder="e.g. 2021"
-                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
+                          className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-foreground"
                         />
                       </div>
                     </div>
-                    <Button
-                      onClick={handleAddOrg}
-                      size="sm"
-                      className="w-full h-9 cursor-pointer text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/95"
-                    >
+                    <Button onClick={handleAddOrg} size="sm" className="w-full h-9 cursor-pointer text-xs font-bold bg-foreground text-background hover:bg-foreground/90">
                       Tambah Organisasi
                     </Button>
                   </div>
@@ -1596,7 +1404,7 @@ export default function ProfilePage() {
                         className="flex items-center justify-between bg-background/50 border border-border/80 text-foreground text-xs font-semibold p-3 rounded-xl shadow-sm hover:border-border transition-all"
                       >
                         <div className="flex items-center gap-2 min-w-0">
-                          <User className="h-4 w-4 text-primary shrink-0" />
+                          <User className="h-3 w-3 text-foreground shrink-0" />
                           <span className="truncate">{org}</span>
                         </div>
                         <div className="flex items-center gap-1 shrink-0">
@@ -1612,13 +1420,13 @@ export default function ProfilePage() {
                             className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                             title="Edit item"
                           >
-                            <Pencil className="h-4 w-4" />
+                            <Pencil className="h-3 w-3" />
                           </button>
                           <button
                             onClick={() => handleRemoveOrg(org)}
                             className="text-destructive hover:bg-destructive/10 p-1.5 rounded-lg transition-colors cursor-pointer"
                           >
-                            <Trash2 className="h-4 w-4" />
+                            <Trash2 className="h-3 w-3" />
                           </button>
                         </div>
                       </div>
@@ -1631,25 +1439,21 @@ export default function ProfilePage() {
                     organizations.map((org: string) => (
                       <div
                         key={org}
-                        className="flex items-center gap-2.5 bg-background/40 border border-border/50 p-3 rounded-xl select-none"
+                        className="flex items-center gap-2 bg-background/40 border border-border/60 p-3 rounded-xl"
                       >
-                        <User className="h-4.5 w-4.5 text-primary shrink-0" />
-                        <span className="text-xs font-semibold text-foreground">
-                          {org}
-                        </span>
+                        <User className="h-3 w-3 text-foreground shrink-0" />
+                        <span className="text-xs font-semibold text-foreground">{org}</span>
                       </div>
                     ))
                   ) : (
-                    <span className="text-xs text-muted-foreground font-medium">
-                      Belum ada pengalaman organisasi yang ditambahkan.
-                    </span>
+                    <span className="text-xs text-muted-foreground font-medium">Belum ada pengalaman organisasi yang ditambahkan.</span>
                   )}
                 </div>
               )}
             </div>
 
             {/* Referensi Pekerjaan Section */}
-            <div className="bg-card border border-border/70 rounded-2xl p-6 shadow-md space-y-4 relative">
+            <div className="bg-card border border-border/70 rounded-2xl p-5 shadow-md space-y-4 relative">
               <div className="flex items-center justify-between">
                 <h3 className="font-extrabold text-sm text-foreground tracking-tight">
                   Referensi Pekerjaan Minat
@@ -1657,23 +1461,23 @@ export default function ProfilePage() {
                 {editSection !== 'reference' ? (
                   <button
                     onClick={() => handleStartEdit('reference')}
-                    className="text-muted-foreground hover:text-primary p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
+                    className="text-muted-foreground hover:text-foreground p-1.5 hover:bg-muted/50 rounded-lg transition-colors cursor-pointer"
                   >
-                    <Pencil className="h-4 w-4" />
+                    <Pencil className="h-3 w-3" />
                   </button>
                 ) : (
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={handleSave}
-                      className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <Check className="h-4 w-4" />
+                      <Check className="h-3 w-3" />
                     </button>
                     <button
                       onClick={handleCancelEdit}
                       className="text-muted-foreground hover:bg-muted p-1.5 rounded-lg transition-colors cursor-pointer"
                     >
-                      <X className="h-4 w-4" />
+                      <X className="h-3 w-3" />
                     </button>
                   </div>
                 )}
@@ -1682,75 +1486,47 @@ export default function ProfilePage() {
               {editSection === 'reference' ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
                   <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Minat Pekerjaan
-                    </label>
+                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Minat Pekerjaan</label>
                     <Input
                       value={formData.jobReference.interest}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          jobReference: {
-                            ...formData.jobReference,
-                            interest: e.target.value,
-                          },
-                        })
-                      }
-                      className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        jobReference: { ...formData.jobReference, interest: e.target.value }
+                      })}
+                      className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-foreground mt-1"
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Kota / Lokasi
-                    </label>
+                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Kota / Lokasi</label>
                     <Input
                       value={formData.jobReference.city}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          jobReference: {
-                            ...formData.jobReference,
-                            city: e.target.value,
-                          },
-                        })
-                      }
-                      className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        jobReference: { ...formData.jobReference, city: e.target.value }
+                      })}
+                      className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-foreground mt-1"
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Ekspektasi Gaji
-                    </label>
+                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Ekspektasi Gaji</label>
                     <Input
                       value={formData.jobReference.salaryExpectation}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          jobReference: {
-                            ...formData.jobReference,
-                            salaryExpectation: e.target.value,
-                          },
-                        })
-                      }
-                      className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary mt-1"
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        jobReference: { ...formData.jobReference, salaryExpectation: e.target.value }
+                      })}
+                      className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-foreground mt-1"
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                      Opsi Kerja
-                    </label>
+                    <label className="text-[9px] font-bold text-muted-foreground uppercase">Opsi Kerja</label>
                     <select
                       value={formData.jobReference.workOption}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          jobReference: {
-                            ...formData.jobReference,
-                            workOption: e.target.value,
-                          },
-                        })
-                      }
-                      className="w-full h-9 text-xs font-semibold bg-background border border-border/80 rounded-xl px-2 mt-1 focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        jobReference: { ...formData.jobReference, workOption: e.target.value }
+                      })}
+                      className="w-full h-9 text-xs font-semibold bg-background border border-border/80 rounded-xl px-2 mt-1 focus:outline-none focus:ring-1 focus:ring-foreground cursor-pointer"
                     >
                       <option value="Remote">Remote</option>
                       <option value="Hybrid">Hybrid</option>
@@ -1761,118 +1537,83 @@ export default function ProfilePage() {
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
                   <div className="bg-background/40 border border-border/60 p-4 rounded-xl space-y-1">
-                    <span className="text-[10px] font-bold text-muted-foreground uppercase block">
-                      Minat Pekerjaan
-                    </span>
-                    <span className="text-xs font-bold text-foreground block">
-                      {user.jobReference?.interest || '-'}
-                    </span>
+                    <span className="text-[9px] font-bold text-muted-foreground uppercase block">Minat Pekerjaan</span>
+                    <span className="text-xs font-bold text-foreground block">{user.jobReference?.interest || '-'}</span>
                   </div>
                   <div className="bg-background/40 border border-border/60 p-4 rounded-xl space-y-1">
-                    <span className="text-[10px] font-bold text-muted-foreground uppercase block">
-                      Kota
-                    </span>
+                    <span className="text-[9px] font-bold text-muted-foreground uppercase block">Kota</span>
                     <div className="flex items-center gap-1">
-                      <MapPin className="h-3.5 w-3.5 text-muted-foreground" />
-                      <span className="text-xs font-bold text-foreground">
-                        {user.jobReference?.city || '-'}
-                      </span>
+                      <MapPin className="h-3 w-3 text-muted-foreground" />
+                      <span className="text-xs font-bold text-foreground">{user.jobReference?.city || '-'}</span>
                     </div>
                   </div>
                   <div className="bg-background/40 border border-border/60 p-4 rounded-xl space-y-1">
-                    <span className="text-[10px] font-bold text-muted-foreground uppercase block">
-                      Ekspektasi Gaji
-                    </span>
-                    <span className="text-xs font-bold text-foreground block">
-                      {user.jobReference?.salaryExpectation || '-'}
-                    </span>
+                    <span className="text-[9px] font-bold text-muted-foreground uppercase block">Ekspektasi Gaji</span>
+                    <span className="text-xs font-bold text-foreground block">{user.jobReference?.salaryExpectation || '-'}</span>
                   </div>
                   <div className="bg-background/40 border border-border/60 p-4 rounded-xl space-y-1">
-                    <span className="text-[10px] font-bold text-muted-foreground uppercase block">
-                      Metode Kerja
-                    </span>
-                    <span className="text-xs font-bold text-primary block">
-                      {user.jobReference?.workOption || '-'}
-                    </span>
+                    <span className="text-[9px] font-bold text-muted-foreground uppercase block">Metode Kerja</span>
+                    <span className="text-xs font-bold text-foreground block">{user.jobReference?.workOption || '-'}</span>
                   </div>
                 </div>
               )}
             </div>
+
           </div>
+
         </div>
 
-        {showAvatarPicker && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
-            <div className="bg-card border border-border/80 w-full max-w-sm rounded-3xl p-5 relative shadow-2xl animate-in scale-in duration-200">
-              <button
-                onClick={() => {
-                  setShowAvatarPicker(false);
-                  setCustomAvatarUrl('');
-                }}
-                className="absolute top-4 right-4 p-1.5 hover:bg-muted rounded-full transition-colors cursor-pointer text-muted-foreground hover:text-foreground"
-              >
-                <X className="h-4 w-4" />
-              </button>
+      </div>{/* end scroll area */}
 
-              <h3 className="text-sm font-extrabold tracking-tight text-foreground mb-4">
-                Ubah Foto Profil
-              </h3>
+      {showAvatarPicker && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="bg-card border border-border/80 w-full max-w-sm rounded-3xl p-5 relative shadow-2xl animate-in scale-in duration-200">
+            <button
+              onClick={() => setShowAvatarPicker(false)}
+              className="absolute top-4 right-4 p-1.5 hover:bg-muted rounded-full transition-colors cursor-pointer text-muted-foreground hover:text-foreground"
+            >
+              <X className="h-3 w-3" />
+            </button>
 
-              {/* Avatar Preset Grid */}
-              <div className="grid grid-cols-4 gap-2 mb-4">
-                {presetAvatars.map((url, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => {
-                      updateProfile({ profileImage: url });
-                      setShowAvatarPicker(false);
-                    }}
-                    className={`relative rounded-xl overflow-hidden h-14 w-14 cursor-pointer hover:ring-2 hover:ring-primary/45 transition-all border p-0 ${
-                      user.profileImage === url
-                        ? 'ring-2 ring-primary border-primary'
-                        : 'border-border/60'
-                    }`}
-                  >
-                    <img
-                      src={url}
-                      alt={`avatar-${idx}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
+            <h3 className="text-sm font-extrabold tracking-tight text-foreground mb-4">
+              Ubah Foto Profil
+            </h3>
 
-              {/* Custom URL Input */}
-              <div className="space-y-2 border-t pt-3.5">
-                <label className="text-[10px] font-bold text-muted-foreground uppercase">
-                  Atau Paste URL Gambar Custom:
-                </label>
-                <div className="flex gap-2">
-                  <Input
-                    value={customAvatarUrl}
-                    onChange={(e) => setCustomAvatarUrl(e.target.value)}
-                    placeholder="https://example.com/foto.jpg"
-                    className="h-9 text-xs focus-visible:ring-1 focus-visible:ring-primary"
-                  />
-                  <Button
-                    onClick={() => {
-                      if (customAvatarUrl.trim()) {
-                        updateProfile({ profileImage: customAvatarUrl.trim() });
-                        setShowAvatarPicker(false);
-                        setCustomAvatarUrl('');
-                      }
-                    }}
-                    size="sm"
-                    className="h-9 cursor-pointer text-xs font-bold"
-                  >
-                    Simpan
-                  </Button>
-                </div>
-              </div>
+            {/* Upload dari perangkat */}
+            <div className="space-y-2 mb-4">
+              <label className="text-[10px] font-bold text-muted-foreground uppercase block">
+                Upload dari Perangkat
+              </label>
+              <label className="relative border-2 border-dashed border-border/70 hover:border-primary/50 rounded-xl p-4 flex flex-col items-center justify-center gap-1.5 bg-background/25 group cursor-pointer transition-all">
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onload = (ev) => {
+                        const result = ev.target?.result as string;
+                        if (result) {
+                          updateProfile({ profileImage: result });
+                          setShowAvatarPicker(false);
+                        }
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                />
+                <span className="text-2xl group-hover:scale-110 transition-transform">🖼️</span>
+                <span className="text-xs font-bold text-foreground">Pilih Foto</span>
+                <span className="text-[10px] text-muted-foreground">JPG, PNG, WEBP (Maks. 5MB)</span>
+              </label>
             </div>
+
+
           </div>
-        )}
-      </div>
-    </main>
+        </div>
+      )}
+    </div>
   );
 }

@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import AuthModal from '@/components/AuthModal';
 
 const jakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={`${jakartaSans.className} tracking-[0.3px]`}>
         <Navbar />
         {children}
+        <AuthModal />
         <Footer />
       </body>
     </html>

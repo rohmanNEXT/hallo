@@ -1,0 +1,1522 @@
+[
+  {
+    "id": "1",
+    "name": "Tokopedia",
+    "logo": "/images/companies/tokopedia.svg",
+    "industry": "E-commerce",
+    "location": "Jakarta Selatan, DKI Jakarta",
+    "totalEmployees": "1000+",
+    "openJobs": 5,
+    "rating": 4,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "1 hari lalu",
+    "description": "Tokopedia adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang E-commerce.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Gojek",
+    "logo": "/images/companies/gojek.svg",
+    "industry": "Transportation",
+    "location": "Jakarta Pusat, DKI Jakarta",
+    "totalEmployees": "500-1000",
+    "openJobs": 6,
+    "rating": 4.1,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "2 hari lalu",
+    "description": "Gojek merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Transportation. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Traveloka",
+    "logo": "/images/companies/traveloka.svg",
+    "industry": "Travel & Tech",
+    "location": "Jakarta Barat, DKI Jakarta",
+    "totalEmployees": "100-500",
+    "openJobs": 7,
+    "rating": 4.2,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "3 hari lalu",
+    "description": "Traveloka merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Travel & Tech. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Bukalapak",
+    "logo": "/images/companies/bukalapak.svg",
+    "industry": "E-commerce",
+    "location": "Bandung, Jawa Barat",
+    "totalEmployees": "1000+",
+    "openJobs": 8,
+    "rating": 4.3,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "4 hari lalu",
+    "description": "Bukalapak adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang E-commerce.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Shopee",
+    "logo": "/images/companies/shopee.svg",
+    "industry": "E-commerce",
+    "location": "Surabaya, Jawa Timur",
+    "totalEmployees": "500-1000",
+    "openJobs": 9,
+    "rating": 4.4,
+    "isPremium": true,
+    "isVerified": true,
+    "postedAt": "5 hari lalu",
+    "description": "Shopee merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang E-commerce. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "6",
+    "name": "Grab",
+    "logo": "/images/companies/grab.svg",
+    "industry": "Logistics",
+    "location": "Medan, Sumatera Utara",
+    "totalEmployees": "100-500",
+    "openJobs": 10,
+    "rating": 4.5,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "6 hari lalu",
+    "description": "Grab merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Logistics. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Google",
+    "logo": "/images/companies/google.svg",
+    "industry": "Technology",
+    "location": "Jakarta Pusat, DKI Jakarta",
+    "totalEmployees": "1000+",
+    "openJobs": 11,
+    "rating": 4.6,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "7 hari lalu",
+    "description": "Google adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Technology.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "8",
+    "name": "Microsoft",
+    "logo": "/images/companies/microsoft.svg",
+    "industry": "Technology",
+    "location": "Jakarta Selatan, DKI Jakarta",
+    "totalEmployees": "500-1000",
+    "openJobs": 12,
+    "rating": 4.7,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "1 hari lalu",
+    "description": "Microsoft merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Technology. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "9",
+    "name": "Apple",
+    "logo": "/images/companies/apple.svg",
+    "industry": "Technology",
+    "location": "Jakarta Utara, DKI Jakarta",
+    "totalEmployees": "100-500",
+    "openJobs": 13,
+    "rating": 4.8,
+    "isPremium": true,
+    "isVerified": true,
+    "postedAt": "2 hari lalu",
+    "description": "Apple merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Technology. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "10",
+    "name": "Meta",
+    "logo": "/images/companies/meta.svg",
+    "industry": "Technology",
+    "location": "Bandung, Jawa Barat",
+    "totalEmployees": "1000+",
+    "openJobs": 14,
+    "rating": 4.9,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "3 hari lalu",
+    "description": "Meta adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Technology.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "11",
+    "name": "Amazon",
+    "logo": "/images/companies/amazon.svg",
+    "industry": "E-commerce & Cloud",
+    "location": "Surabaya, Jawa Timur",
+    "totalEmployees": "500-1000",
+    "openJobs": 15,
+    "rating": 4,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "4 hari lalu",
+    "description": "Amazon merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang E-commerce & Cloud. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "12",
+    "name": "Netflix",
+    "logo": "/images/companies/netflix.svg",
+    "industry": "Entertainment",
+    "location": "Jakarta Pusat, DKI Jakarta",
+    "totalEmployees": "100-500",
+    "openJobs": 16,
+    "rating": 4.1,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "5 hari lalu",
+    "description": "Netflix merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Entertainment. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "13",
+    "name": "Spotify",
+    "logo": "/images/companies/spotify.svg",
+    "industry": "Entertainment",
+    "location": "Jakarta Selatan, DKI Jakarta",
+    "totalEmployees": "1000+",
+    "openJobs": 17,
+    "rating": 4.2,
+    "isPremium": true,
+    "isVerified": true,
+    "postedAt": "6 hari lalu",
+    "description": "Spotify adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Entertainment.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "14",
+    "name": "Twitter",
+    "logo": "/images/companies/twitter.svg",
+    "industry": "Social Media",
+    "location": "Medan, Sumatera Utara",
+    "totalEmployees": "500-1000",
+    "openJobs": 18,
+    "rating": 4.3,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "7 hari lalu",
+    "description": "Twitter merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Social Media. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "15",
+    "name": "Airbnb",
+    "logo": "/images/companies/airbnb.svg",
+    "industry": "Travel & Tech",
+    "location": "Denpasar, Bali",
+    "totalEmployees": "100-500",
+    "openJobs": 19,
+    "rating": 4.4,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "1 hari lalu",
+    "description": "Airbnb merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Travel & Tech. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "16",
+    "name": "Zoom",
+    "logo": "/images/companies/zoom.svg",
+    "industry": "Technology",
+    "location": "Bandung, Jawa Barat",
+    "totalEmployees": "1000+",
+    "openJobs": 20,
+    "rating": 4.5,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "2 hari lalu",
+    "description": "Zoom adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Technology.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "17",
+    "name": "Figma",
+    "logo": "/images/companies/figma.svg",
+    "industry": "Design Tool",
+    "location": "Jakarta Barat, DKI Jakarta",
+    "totalEmployees": "500-1000",
+    "openJobs": 21,
+    "rating": 4.6,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "3 hari lalu",
+    "description": "Figma merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Design Tool. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "18",
+    "name": "Adobe",
+    "logo": "/images/companies/adobe.svg",
+    "industry": "Design & Tech",
+    "location": "Jakarta Pusat, DKI Jakarta",
+    "totalEmployees": "100-500",
+    "openJobs": 22,
+    "rating": 4.7,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "4 hari lalu",
+    "description": "Adobe merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Design & Tech. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "19",
+    "name": "Slack",
+    "logo": "/images/companies/slack.svg",
+    "industry": "Communication",
+    "location": "Yogyakarta, DIY",
+    "totalEmployees": "1000+",
+    "openJobs": 23,
+    "rating": 4.8,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "5 hari lalu",
+    "description": "Slack adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Communication.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "20",
+    "name": "NVIDIA",
+    "logo": "/images/companies/nvidia.svg",
+    "industry": "Hardware & AI",
+    "location": "Surabaya, Jawa Timur",
+    "totalEmployees": "500-1000",
+    "openJobs": 24,
+    "rating": 4.9,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "6 hari lalu",
+    "description": "NVIDIA merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Hardware & AI. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "21",
+    "name": "Tesla",
+    "logo": "/images/companies/tesla.svg",
+    "industry": "Automotive & Tech",
+    "location": "Jakarta Selatan, DKI Jakarta",
+    "totalEmployees": "100-500",
+    "openJobs": 25,
+    "rating": 4,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "7 hari lalu",
+    "description": "Tesla merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Automotive & Tech. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "22",
+    "name": "Intel",
+    "logo": "/images/companies/intel.svg",
+    "industry": "Hardware",
+    "location": "Bandung, Jawa Barat",
+    "totalEmployees": "1000+",
+    "openJobs": 26,
+    "rating": 4.1,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "1 hari lalu",
+    "description": "Intel adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Hardware.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "23",
+    "name": "Samsung",
+    "logo": "/images/companies/samsung.svg",
+    "industry": "Electronics",
+    "location": "Tangerang, Banten",
+    "totalEmployees": "500-1000",
+    "openJobs": 27,
+    "rating": 4.2,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "2 hari lalu",
+    "description": "Samsung merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Electronics. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "24",
+    "name": "TikTok",
+    "logo": "/images/companies/tiktok.svg",
+    "industry": "Social Media",
+    "location": "Jakarta Pusat, DKI Jakarta",
+    "totalEmployees": "100-500",
+    "openJobs": 28,
+    "rating": 4.3,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "3 hari lalu",
+    "description": "TikTok merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Social Media. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "25",
+    "name": "Discord",
+    "logo": "/images/companies/discord.svg",
+    "industry": "Communication",
+    "location": "Jakarta Selatan, DKI Jakarta",
+    "totalEmployees": "1000+",
+    "openJobs": 29,
+    "rating": 4.4,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "4 hari lalu",
+    "description": "Discord adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Communication.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "26",
+    "name": "Notion",
+    "logo": "/images/companies/notion.svg",
+    "industry": "Productivity",
+    "location": "Bandung, Jawa Barat",
+    "totalEmployees": "500-1000",
+    "openJobs": 5,
+    "rating": 4.5,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "5 hari lalu",
+    "description": "Notion merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Productivity. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "27",
+    "name": "Roblox",
+    "logo": "/images/companies/roblox.svg",
+    "industry": "Gaming",
+    "location": "Surabaya, Jawa Timur",
+    "totalEmployees": "100-500",
+    "openJobs": 6,
+    "rating": 4.6,
+    "isPremium": true,
+    "isVerified": true,
+    "postedAt": "6 hari lalu",
+    "description": "Roblox merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Gaming. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "28",
+    "name": "Reddit",
+    "logo": "/images/companies/reddit.svg",
+    "industry": "Social Media",
+    "location": "Medan, Sumatera Utara",
+    "totalEmployees": "1000+",
+    "openJobs": 7,
+    "rating": 4.7,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "7 hari lalu",
+    "description": "Reddit adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Social Media.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "29",
+    "name": "Pinterest",
+    "logo": "/images/companies/pinterest.svg",
+    "industry": "Social Media",
+    "location": "Jakarta Pusat, DKI Jakarta",
+    "totalEmployees": "500-1000",
+    "openJobs": 8,
+    "rating": 4.8,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "1 hari lalu",
+    "description": "Pinterest merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Social Media. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "30",
+    "name": "LinkedIn",
+    "logo": "/images/companies/linkedin.svg",
+    "industry": "Professional Network",
+    "location": "Jakarta Selatan, DKI Jakarta",
+    "totalEmployees": "100-500",
+    "openJobs": 9,
+    "rating": 4.9,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "2 hari lalu",
+    "description": "LinkedIn merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Professional Network. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "31",
+    "name": "Salesforce",
+    "logo": "/images/companies/salesforce.svg",
+    "industry": "Cloud CRM",
+    "location": "Jakarta Utara, DKI Jakarta",
+    "totalEmployees": "1000+",
+    "openJobs": 10,
+    "rating": 4,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "3 hari lalu",
+    "description": "Salesforce adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Cloud CRM.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "32",
+    "name": "Oracle",
+    "logo": "/images/companies/oracle.svg",
+    "industry": "Database",
+    "location": "Bandung, Jawa Barat",
+    "totalEmployees": "500-1000",
+    "openJobs": 11,
+    "rating": 4.1,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "4 hari lalu",
+    "description": "Oracle merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Database. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "33",
+    "name": "Canva",
+    "logo": "/images/companies/canva.svg",
+    "industry": "Design Tool",
+    "location": "Surabaya, Jawa Timur",
+    "totalEmployees": "100-500",
+    "openJobs": 12,
+    "rating": 4.2,
+    "isPremium": true,
+    "isVerified": false,
+    "postedAt": "5 hari lalu",
+    "description": "Canva merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Design Tool. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "34",
+    "name": "Shopify",
+    "logo": "/images/companies/shopify.svg",
+    "industry": "E-commerce",
+    "location": "Medan, Sumatera Utara",
+    "totalEmployees": "1000+",
+    "openJobs": 13,
+    "rating": 4.3,
+    "isPremium": true,
+    "isVerified": true,
+    "postedAt": "6 hari lalu",
+    "description": "Shopify adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang E-commerce.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "35",
+    "name": "Stripe",
+    "logo": "/images/companies/stripe.svg",
+    "industry": "Fintech",
+    "location": "Jakarta Pusat, DKI Jakarta",
+    "totalEmployees": "500-1000",
+    "openJobs": 14,
+    "rating": 4.4,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "7 hari lalu",
+    "description": "Stripe merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Fintech. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "36",
+    "name": "Uber",
+    "logo": "/images/companies/uber.svg",
+    "industry": "Transportation",
+    "location": "Jakarta Selatan, DKI Jakarta",
+    "totalEmployees": "100-500",
+    "openJobs": 15,
+    "rating": 4.5,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "1 hari lalu",
+    "description": "Uber merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Transportation. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "37",
+    "name": "GitHub",
+    "logo": "/images/companies/github.svg",
+    "industry": "Development",
+    "location": "Bandung, Jawa Barat",
+    "totalEmployees": "1000+",
+    "openJobs": 16,
+    "rating": 4.6,
+    "isPremium": true,
+    "isVerified": false,
+    "postedAt": "2 hari lalu",
+    "description": "GitHub adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Development.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "38",
+    "name": "GitLab",
+    "logo": "/images/companies/gitlab.svg",
+    "industry": "Development",
+    "location": "Surabaya, Jawa Timur",
+    "totalEmployees": "500-1000",
+    "openJobs": 17,
+    "rating": 4.7,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "3 hari lalu",
+    "description": "GitLab merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Development. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "39",
+    "name": "Coinbase",
+    "logo": "/images/companies/coinbase.svg",
+    "industry": "Cryptocurrency",
+    "location": "Jakarta Barat, DKI Jakarta",
+    "totalEmployees": "100-500",
+    "openJobs": 18,
+    "rating": 4.8,
+    "isPremium": true,
+    "isVerified": true,
+    "postedAt": "4 hari lalu",
+    "description": "Coinbase merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Cryptocurrency. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "40",
+    "name": "Binance",
+    "logo": "/images/companies/binance.svg",
+    "industry": "Cryptocurrency",
+    "location": "Medan, Sumatera Utara",
+    "totalEmployees": "1000+",
+    "openJobs": 19,
+    "rating": 4.9,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "5 hari lalu",
+    "description": "Binance adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Cryptocurrency.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "41",
+    "name": "Goto Financial",
+    "logo": "/images/companies/gojek.svg",
+    "industry": "Fintech",
+    "location": "Jakarta Selatan, DKI Jakarta",
+    "totalEmployees": "500-1000",
+    "openJobs": 20,
+    "rating": 4,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "6 hari lalu",
+    "description": "Goto Financial merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Fintech. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "42",
+    "name": "Tokopedia Seller",
+    "logo": "/images/companies/tokopedia.svg",
+    "industry": "E-commerce",
+    "location": "Bandung, Jawa Barat",
+    "totalEmployees": "100-500",
+    "openJobs": 21,
+    "rating": 4.1,
+    "isPremium": true,
+    "isVerified": false,
+    "postedAt": "7 hari lalu",
+    "description": "Tokopedia Seller merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang E-commerce. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "43",
+    "name": "Google Cloud Indo",
+    "logo": "/images/companies/google.svg",
+    "industry": "Cloud Computing",
+    "location": "Jakarta Pusat, DKI Jakarta",
+    "totalEmployees": "1000+",
+    "openJobs": 22,
+    "rating": 4.2,
+    "isPremium": true,
+    "isVerified": true,
+    "postedAt": "1 hari lalu",
+    "description": "Google Cloud Indo adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Cloud Computing.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "44",
+    "name": "AWS Indonesia",
+    "logo": "/images/companies/amazon.svg",
+    "industry": "Cloud Computing",
+    "location": "Surabaya, Jawa Timur",
+    "totalEmployees": "500-1000",
+    "openJobs": 23,
+    "rating": 4.3,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "2 hari lalu",
+    "description": "AWS Indonesia merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Cloud Computing. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "45",
+    "name": "Apple Developer ID",
+    "logo": "/images/companies/apple.svg",
+    "industry": "Technology",
+    "location": "Yogyakarta, DIY",
+    "totalEmployees": "100-500",
+    "openJobs": 24,
+    "rating": 4.4,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "3 hari lalu",
+    "description": "Apple Developer ID merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Technology. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "46",
+    "name": "Meta Oculus Indo",
+    "logo": "/images/companies/meta.svg",
+    "industry": "VR & AR",
+    "location": "Medan, Sumatera Utara",
+    "totalEmployees": "1000+",
+    "openJobs": 25,
+    "rating": 4.5,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "4 hari lalu",
+    "description": "Meta Oculus Indo adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang VR & AR.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "47",
+    "name": "Microsoft Azure ID",
+    "logo": "/images/companies/microsoft.svg",
+    "industry": "Cloud Computing",
+    "location": "Jakarta Barat, DKI Jakarta",
+    "totalEmployees": "500-1000",
+    "openJobs": 26,
+    "rating": 4.6,
+    "isPremium": true,
+    "isVerified": true,
+    "postedAt": "5 hari lalu",
+    "description": "Microsoft Azure ID merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Cloud Computing. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "48",
+    "name": "Netflix Production",
+    "logo": "/images/companies/netflix.svg",
+    "industry": "Entertainment",
+    "location": "Denpasar, Bali",
+    "totalEmployees": "100-500",
+    "openJobs": 27,
+    "rating": 4.7,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "6 hari lalu",
+    "description": "Netflix Production merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Entertainment. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "49",
+    "name": "Spotify Podcasts",
+    "logo": "/images/companies/spotify.svg",
+    "industry": "Entertainment",
+    "location": "Jakarta Selatan, DKI Jakarta",
+    "totalEmployees": "1000+",
+    "openJobs": 28,
+    "rating": 4.8,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "7 hari lalu",
+    "description": "Spotify Podcasts adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Entertainment.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "50",
+    "name": "X Corp Indonesia",
+    "logo": "/images/companies/twitter.svg",
+    "industry": "Social Media",
+    "location": "Bandung, Jawa Barat",
+    "totalEmployees": "500-1000",
+    "openJobs": 29,
+    "rating": 4.9,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "1 hari lalu",
+    "description": "X Corp Indonesia merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Social Media. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "51",
+    "name": "Airbnb Experiences",
+    "logo": "/images/companies/airbnb.svg",
+    "industry": "Travel & Tech",
+    "location": "Surabaya, Jawa Timur",
+    "totalEmployees": "100-500",
+    "openJobs": 5,
+    "rating": 4,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "2 hari lalu",
+    "description": "Airbnb Experiences merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Travel & Tech. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "52",
+    "name": "Zoom Meetings ID",
+    "logo": "/images/companies/zoom.svg",
+    "industry": "Technology",
+    "location": "Jakarta Pusat, DKI Jakarta",
+    "totalEmployees": "1000+",
+    "openJobs": 6,
+    "rating": 4.1,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "3 hari lalu",
+    "description": "Zoom Meetings ID adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Technology.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "53",
+    "name": "Figma Design Studio",
+    "logo": "/images/companies/figma.svg",
+    "industry": "Design Tool",
+    "location": "Yogyakarta, DIY",
+    "totalEmployees": "500-1000",
+    "openJobs": 7,
+    "rating": 4.2,
+    "isPremium": true,
+    "isVerified": true,
+    "postedAt": "4 hari lalu",
+    "description": "Figma Design Studio merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Design Tool. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "54",
+    "name": "Adobe Creative Cloud",
+    "logo": "/images/companies/adobe.svg",
+    "industry": "Design & Tech",
+    "location": "Medan, Sumatera Utara",
+    "totalEmployees": "100-500",
+    "openJobs": 8,
+    "rating": 4.3,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "5 hari lalu",
+    "description": "Adobe Creative Cloud merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Design & Tech. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "55",
+    "name": "Slack Communications",
+    "logo": "/images/companies/slack.svg",
+    "industry": "Communication",
+    "location": "Jakarta Barat, DKI Jakarta",
+    "totalEmployees": "1000+",
+    "openJobs": 9,
+    "rating": 4.4,
+    "isPremium": true,
+    "isVerified": false,
+    "postedAt": "6 hari lalu",
+    "description": "Slack Communications adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Communication.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "56",
+    "name": "NVIDIA Graphics ID",
+    "logo": "/images/companies/nvidia.svg",
+    "industry": "Hardware & AI",
+    "location": "Denpasar, Bali",
+    "totalEmployees": "500-1000",
+    "openJobs": 10,
+    "rating": 4.5,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "7 hari lalu",
+    "description": "NVIDIA Graphics ID merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Hardware & AI. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "57",
+    "name": "Tesla Motors ID",
+    "logo": "/images/companies/tesla.svg",
+    "industry": "Automotive & Tech",
+    "location": "Jakarta Selatan, DKI Jakarta",
+    "totalEmployees": "100-500",
+    "openJobs": 11,
+    "rating": 4.6,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "1 hari lalu",
+    "description": "Tesla Motors ID merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Automotive & Tech. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "58",
+    "name": "Intel Processors",
+    "logo": "/images/companies/intel.svg",
+    "industry": "Hardware",
+    "location": "Bandung, Jawa Barat",
+    "totalEmployees": "1000+",
+    "openJobs": 12,
+    "rating": 4.7,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "2 hari lalu",
+    "description": "Intel Processors adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Hardware.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "59",
+    "name": "Samsung Electronics",
+    "logo": "/images/companies/samsung.svg",
+    "industry": "Electronics",
+    "location": "Surabaya, Jawa Timur",
+    "totalEmployees": "500-1000",
+    "openJobs": 13,
+    "rating": 4.8,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "3 hari lalu",
+    "description": "Samsung Electronics merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Electronics. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "60",
+    "name": "TikTok Shop ID",
+    "logo": "/images/companies/tiktok.svg",
+    "industry": "E-commerce",
+    "location": "Jakarta Pusat, DKI Jakarta",
+    "totalEmployees": "100-500",
+    "openJobs": 14,
+    "rating": 4.9,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "4 hari lalu",
+    "description": "TikTok Shop ID merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang E-commerce. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "61",
+    "name": "Discord Communities",
+    "logo": "/images/companies/discord.svg",
+    "industry": "Communication",
+    "location": "Yogyakarta, DIY",
+    "totalEmployees": "1000+",
+    "openJobs": 15,
+    "rating": 4,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "5 hari lalu",
+    "description": "Discord Communities adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Communication.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "62",
+    "name": "Notion Workspaces",
+    "logo": "/images/companies/notion.svg",
+    "industry": "Productivity",
+    "location": "Medan, Sumatera Utara",
+    "totalEmployees": "500-1000",
+    "openJobs": 16,
+    "rating": 4.1,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "6 hari lalu",
+    "description": "Notion Workspaces merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Productivity. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "63",
+    "name": "Roblox Games Indo",
+    "logo": "/images/companies/roblox.svg",
+    "industry": "Gaming",
+    "location": "Jakarta Barat, DKI Jakarta",
+    "totalEmployees": "100-500",
+    "openJobs": 17,
+    "rating": 4.2,
+    "isPremium": true,
+    "isVerified": false,
+    "postedAt": "7 hari lalu",
+    "description": "Roblox Games Indo merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Gaming. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "64",
+    "name": "Reddit Forums ID",
+    "logo": "/images/companies/reddit.svg",
+    "industry": "Social Media",
+    "location": "Denpasar, Bali",
+    "totalEmployees": "1000+",
+    "openJobs": 18,
+    "rating": 4.3,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "1 hari lalu",
+    "description": "Reddit Forums ID adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Social Media.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "65",
+    "name": "Pinterest Ideas",
+    "logo": "/images/companies/pinterest.svg",
+    "industry": "Social Media",
+    "location": "Jakarta Selatan, DKI Jakarta",
+    "totalEmployees": "500-1000",
+    "openJobs": 19,
+    "rating": 4.4,
+    "isPremium": true,
+    "isVerified": true,
+    "postedAt": "2 hari lalu",
+    "description": "Pinterest Ideas merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Social Media. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "66",
+    "name": "LinkedIn Recruiter",
+    "logo": "/images/companies/linkedin.svg",
+    "industry": "Professional Network",
+    "location": "Bandung, Jawa Barat",
+    "totalEmployees": "100-500",
+    "openJobs": 20,
+    "rating": 4.5,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "3 hari lalu",
+    "description": "LinkedIn Recruiter merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Professional Network. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "67",
+    "name": "Salesforce CRM ID",
+    "logo": "/images/companies/salesforce.svg",
+    "industry": "Cloud CRM",
+    "location": "Surabaya, Jawa Timur",
+    "totalEmployees": "1000+",
+    "openJobs": 21,
+    "rating": 4.6,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "4 hari lalu",
+    "description": "Salesforce CRM ID adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Cloud CRM.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "68",
+    "name": "Oracle Databases",
+    "logo": "/images/companies/oracle.svg",
+    "industry": "Database",
+    "location": "Jakarta Pusat, DKI Jakarta",
+    "totalEmployees": "500-1000",
+    "openJobs": 22,
+    "rating": 4.7,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "5 hari lalu",
+    "description": "Oracle Databases merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Database. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "69",
+    "name": "Canva Pro Indo",
+    "logo": "/images/companies/canva.svg",
+    "industry": "Design Tool",
+    "location": "Yogyakarta, DIY",
+    "totalEmployees": "100-500",
+    "openJobs": 23,
+    "rating": 4.8,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "6 hari lalu",
+    "description": "Canva Pro Indo merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Design Tool. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "70",
+    "name": "Shopify Sellers ID",
+    "logo": "/images/companies/shopify.svg",
+    "industry": "E-commerce",
+    "location": "Medan, Sumatera Utara",
+    "totalEmployees": "1000+",
+    "openJobs": 24,
+    "rating": 4.9,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "7 hari lalu",
+    "description": "Shopify Sellers ID adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang E-commerce.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "71",
+    "name": "Stripe Payments ID",
+    "logo": "/images/companies/stripe.svg",
+    "industry": "Fintech",
+    "location": "Jakarta Barat, DKI Jakarta",
+    "totalEmployees": "500-1000",
+    "openJobs": 25,
+    "rating": 4,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "1 hari lalu",
+    "description": "Stripe Payments ID merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Fintech. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "72",
+    "name": "Uber Eats Indo",
+    "logo": "/images/companies/uber.svg",
+    "industry": "Logistics",
+    "location": "Denpasar, Bali",
+    "totalEmployees": "100-500",
+    "openJobs": 26,
+    "rating": 4.1,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "2 hari lalu",
+    "description": "Uber Eats Indo merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Logistics. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "73",
+    "name": "GitHub Actions ID",
+    "logo": "/images/companies/github.svg",
+    "industry": "Development",
+    "location": "Jakarta Selatan, DKI Jakarta",
+    "totalEmployees": "1000+",
+    "openJobs": 27,
+    "rating": 4.2,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "3 hari lalu",
+    "description": "GitHub Actions ID adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Development.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "74",
+    "name": "GitLab Pipelines",
+    "logo": "/images/companies/gitlab.svg",
+    "industry": "Development",
+    "location": "Bandung, Jawa Barat",
+    "totalEmployees": "500-1000",
+    "openJobs": 28,
+    "rating": 4.3,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "4 hari lalu",
+    "description": "GitLab Pipelines merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Development. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "75",
+    "name": "Coinbase Exchange",
+    "logo": "/images/companies/coinbase.svg",
+    "industry": "Cryptocurrency",
+    "location": "Surabaya, Jawa Timur",
+    "totalEmployees": "100-500",
+    "openJobs": 29,
+    "rating": 4.4,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "5 hari lalu",
+    "description": "Coinbase Exchange merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Cryptocurrency. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "76",
+    "name": "Binance Smart Chain",
+    "logo": "/images/companies/binance.svg",
+    "industry": "Cryptocurrency",
+    "location": "Jakarta Pusat, DKI Jakarta",
+    "totalEmployees": "1000+",
+    "openJobs": 5,
+    "rating": 4.5,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "6 hari lalu",
+    "description": "Binance Smart Chain adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Cryptocurrency.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "77",
+    "name": "GrabFood Indonesia",
+    "logo": "/images/companies/grab.svg",
+    "industry": "Logistics",
+    "location": "Yogyakarta, DIY",
+    "totalEmployees": "500-1000",
+    "openJobs": 6,
+    "rating": 4.6,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "7 hari lalu",
+    "description": "GrabFood Indonesia merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang Logistics. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "78",
+    "name": "BukaMall Indonesia",
+    "logo": "/images/companies/bukalapak.svg",
+    "industry": "E-commerce",
+    "location": "Medan, Sumatera Utara",
+    "totalEmployees": "100-500",
+    "openJobs": 7,
+    "rating": 4.7,
+    "isPremium": true,
+    "isVerified": false,
+    "postedAt": "1 hari lalu",
+    "description": "BukaMall Indonesia merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang E-commerce. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "79",
+    "name": "Traveloka Eats",
+    "logo": "/images/companies/traveloka.svg",
+    "industry": "Travel & Tech",
+    "location": "Jakarta Barat, DKI Jakarta",
+    "totalEmployees": "1000+",
+    "openJobs": 8,
+    "rating": 4.8,
+    "isPremium": false,
+    "isVerified": true,
+    "postedAt": "2 hari lalu",
+    "description": "Traveloka Eats adalah perusahaan terkemuka yang berfokus pada inovasi dan pengembangan solusi berkualitas tinggi di bidang Travel & Tech.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  },
+  {
+    "id": "80",
+    "name": "ShopeeFood ID",
+    "logo": "/images/companies/shopee.svg",
+    "industry": "E-commerce",
+    "location": "Denpasar, Bali",
+    "totalEmployees": "500-1000",
+    "openJobs": 9,
+    "rating": 4.9,
+    "isPremium": false,
+    "isVerified": false,
+    "postedAt": "3 hari lalu",
+    "description": "ShopeeFood ID merupakan salah satu pemimpin industri global terkemuka yang memiliki komitmen luar biasa dalam menghadirkan inovasi mutakhir serta solusi terbaik di bidang E-commerce. Didorong oleh visi besar untuk mentransformasi lanskap teknologi secara berkelanjutan, kami terus berinvestasi pada talenta terbaik dunia, penelitian mendalam, serta teknologi generasi berikutnya. Kami berkomitmen untuk memberdayakan setiap individu dan organisasi di seluruh penjuru dunia agar mampu mencapai lebih banyak hal melalui solusi digital terintegrasi yang andal, aman, berskala enterprise, dan dirancang dengan standar kualitas tertinggi.",
+    "availableTitles": [
+      "Software Engineer",
+      "Product Manager",
+      "Data Analyst"
+    ]
+  }
+]

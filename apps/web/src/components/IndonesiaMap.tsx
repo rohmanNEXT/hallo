@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Compass, Filter, Briefcase } from 'lucide-react';
-import { useAppStore } from '@/lib/store';
+import { useAppStore } from '@/store/store';
 
 interface Hotspot {
   city: string;
@@ -232,10 +232,10 @@ export default function IndonesiaMap() {
   }, [leafletLoaded, minJobs]);
 
   return (
-    <section className="max-w-7xl mx-auto px-6 pt-16 pb-14">
-      <div className="bg-card rounded-[32px] px-6 py-8 md:p-10 flex flex-col items-center text-center overflow-hidden">
+    <section className="max-w-7xl mx-auto px-6 pt-22 pb-14">
+      <div className="bg-card rounded-[32px] px-6 py-8 md:p-10 flex flex-col items-center text-center border border-border overflow-hidden">
         {/* Top: Title Only */}
-        <h2 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight leading-tight mb-9.5">
+        <h2 className="text-2xl md:text-3xl font-extrabold text-foreground leading-tight mb-9.5">
           Jangkauan Lowongan Seluruh Indonesia
         </h2>
 
@@ -279,7 +279,7 @@ export default function IndonesiaMap() {
           </div>
 
           <div className="pt-0">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-[#0f6dff]/10 text-[#0f6dff] border border-[#0f6dff]/20 text-xs font-extrabold tracking-wide">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-foreground/10 text-foreground border border-foreground/20 text-xs font-extrabold tracking-wide">
               {minJobs} Lowongan
             </span>
           </div>

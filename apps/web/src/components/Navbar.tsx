@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Link from 'next/link';
-import { useAppStore } from '@/lib/store';
+import useAppStore from '@/store/store';
 import {
   Search,
   Bookmark,
@@ -13,13 +14,7 @@ import {
   User,
   Settings,
   LogOut,
-  ChevronDown,
-  Send,
   FileText,
-  CheckCircle,
-  Clock,
-  XCircle,
-  Trash2,
   BellRing,
   Coins,
   Sparkles,
@@ -29,24 +24,21 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Input } from './ui/input';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Job, AppNotification } from '@/lib/types';
 
-export default function Navbar() {
+const Navbar: React.FC = () => {
   const {
     user,
     isLoggedIn,
     bookmarks,
-    toggleBookmark,
-    chatMessages,
     sendChatMessage,
-    isChatOpen,
     setChatOpen,
-    applications,
     setAuthModal,
     logout,
     theme,
     setTheme,
     upgradePlan,
-  } = useAppStore();
+  } = useAppStore(); // Using modular Zustand store (fixed export)
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -69,14 +61,10 @@ export default function Navbar() {
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isBookmarksOpen, setIsBookmarksOpen] = useState(false);
-  const [isApplicationsOpen, setIsApplicationsOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isSettingWebOpen, setIsSettingWebOpen] = useState(false);
   const [isCoinModalOpen, setIsCoinModalOpen] = useState(false);
   const [isPlanModalOpen, setIsPlanModalOpen] = useState(false);
-  const [appTab, setAppTab] = useState<
-    'Semua' | 'Interview' | 'Lulus' | 'Belum lulus'
-  >('Semua');
   const [chatInput, setChatInput] = useState('');
 
   const closeAllOthers = (except: string) => {
@@ -84,7 +72,6 @@ export default function Navbar() {
     if (except !== 'bookmarks') setIsBookmarksOpen(false);
     if (except !== 'notifications') setIsNotificationsOpen(false);
     if (except !== 'chat') setChatOpen(false);
-    if (except !== 'applications') setIsApplicationsOpen(false);
     if (except !== 'settingWeb') setIsSettingWebOpen(false);
     if (except !== 'coin') setIsCoinModalOpen(false);
     if (except !== 'plan') setIsPlanModalOpen(false);
@@ -98,42 +85,37 @@ export default function Navbar() {
     setChatInput('');
   };
 
-  // Mock Job Data for bookmarks (matching mockJobs in JobSearch)
-  const mockJobsMap: Record<
-    string,
-    { title: string; company: string; location: string }
-  > = {
-    '1': {
-      title: 'Senior Software Engineer',
-      company: 'TechCorp Indonesia',
-      location: 'Jakarta Selatan',
-    },
-    '2': {
-      title: 'Product Manager',
-      company: 'StartupXYZ',
-      location: 'Bandung',
-    },
-    '3': {
-      title: 'UI/UX Designer',
-      company: 'DesignStudio',
-      location: 'Jakarta Pusat',
-    },
-    '4': {
-      title: 'Marketing Manager',
-      company: 'GrowthHub',
-      location: 'Surabaya',
-    },
-    '5': {
-      title: 'Data Analyst',
-      company: 'DataDriven Co',
-      location: 'Yogyakarta',
-    },
-    '6': {
-      title: 'Frontend Developer',
-      company: 'WebTech Solutions',
-      location: 'Jakarta Barat',
-    },
-  };
+  const [mockJobsMap, setMockJobsMap] = useState<Record<string, { title: string; company: string; location: string }>>({});
+  const [notifications, setNotifications] = useState<AppNotification[]>([]);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const { data } = await axios.get<Job[]>('/data/jobs.json');
+        const map: Record<string, { title: string; company: string; location: string }> = {};
+        data.forEach((job) => {
+          map[job.id] = {
+            title: job.title,
+            company: job.company,
+            location: job.location,
+          };
+        });
+        setMockJobsMap(map);
+      } catch (err) {
+        console.error('Failed to fetch jobs map in Navbar:', err);
+      }
+    };
+    const fetchNotifications = async () => {
+      try {
+        const { data } = await axios.get<AppNotification[]>('/data/notifications.json');
+        setNotifications(data);
+      } catch (err) {
+        console.error('Failed to fetch notifications in Navbar:', err);
+      }
+    };
+    fetchJobs();
+    fetchNotifications();
+  }, []);
 
   return (
     <>
@@ -148,17 +130,17 @@ export default function Navbar() {
           <div className="flex h-16 items-center justify-between">
             {/* Left side - Logo & Nav */}
             <div className="flex items-center space-x-8">
-              <Link href="/" className="flex items-center space-x-2">
-                <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-xl">
-                    J
+              <Link href="/" className="flex items-center space-x-1.5 hover:opacity-90 transition-opacity">
+                <div className="h-6 w-6 rounded-md bg-primary flex items-center justify-center">
+                  <span className="text-primary-foreground font-bold text-sm">
+                    B
                   </span>
                 </div>
-                <span className="font-bold text-xl tracking-tight">
-                  JobSeeker
+                <span className="font-bold text-base tracking-tight">
+                  BlueJob
                 </span>
               </Link>
-              <nav className="hidden md:flex items-center space-x-6">
+              <nav className="hidden md:flex items-center gap-6">
                 {user?.role === 'admin' ? (
                   <>
                     <Link
@@ -206,7 +188,7 @@ export default function Navbar() {
             </div>
 
             {/* Right side - User Actions & Panels */}
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center gap-3">
               {/* Download App */}
               <Button
                 variant={(!mounted || theme === 'white') ? 'default' : 'outline'}
@@ -227,17 +209,12 @@ export default function Navbar() {
                 Download App
               </Button>
 
-              {/* Chat Icon & Panel */}
-              <div className="relative">
+              {/* Chat Icon */}
+              <Link href="/dashboard?tab=chat">
                 <Button
                   variant="ghost"
                   size="icon"
-                  onClick={() => {
-                    const nextState = !isChatOpen;
-                    if (nextState) closeAllOthers('chat');
-                    setChatOpen(nextState);
-                  }}
-                  className="relative"
+                  className="relative cursor-pointer"
                 >
                   <MessageCircle className="h-5 w-5" />
                   {mounted && isLoggedIn && (
@@ -246,169 +223,9 @@ export default function Navbar() {
                     </span>
                   )}
                 </Button>
+              </Link>
 
-                {/* Chat Panel Glassmorphism */}
-                {isChatOpen && (
-                  <div
-                    className="absolute right-[-100px] sm:right-0 mt-3 w-80 sm:w-96 rounded-xl border p-4 shadow-2xl z-50"
-                    style={{
-                      backgroundColor: 'hsl(var(--card))',
-                      color: 'hsl(var(--card-foreground))',
-                    }}
-                  >
-                    <div className="flex items-center justify-between border-b pb-2 mb-3">
-                      <div className="flex items-center gap-2">
-                        <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                        <span className="font-semibold text-sm">
-                          TechCorp Recruiter (Online)
-                        </span>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => setChatOpen(false)}
-                        className="text-muted-foreground hover:text-foreground"
-                      >
-                        <X className="h-4 w-4" />
-                      </button>
-                    </div>
 
-                    {/* Message List */}
-                    <div className="h-60 overflow-y-auto space-y-3 pr-1 smooth-scroll mb-3">
-                      {isLoggedIn ? (
-                        chatMessages.map((msg) => (
-                          <div
-                            key={msg.id}
-                            className={`flex flex-col max-w-[80%] rounded-lg p-2.5 text-xs ${
-                              msg.sender === 'user'
-                                ? 'bg-primary text-primary-foreground ml-auto'
-                                : 'bg-muted text-muted-foreground'
-                            }`}
-                          >
-                            <span>{msg.content}</span>
-                            <span className="text-[9px] text-right mt-1 opacity-70">
-                              {msg.timestamp}
-                            </span>
-                          </div>
-                        ))
-                      ) : (
-                        <div className="text-center text-muted-foreground py-8 text-sm">
-                          Silakan login untuk memulai percakapan realtime.
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Chat Input Form */}
-                    {isLoggedIn && (
-                      <form
-                        onSubmit={handleSendChat}
-                        className="flex gap-2 mt-3 border-t pt-3"
-                      >
-                        <Input
-                          placeholder="Tulis pesan..."
-                          value={chatInput}
-                          onChange={(e) => setChatInput(e.target.value)}
-                          className="h-8 text-xs"
-                        />
-                        <Button
-                          type="submit"
-                          size="icon"
-                          className="h-8 w-8 shrink-0"
-                        >
-                          <Send className="h-3.5 w-3.5" />
-                        </Button>
-                      </form>
-                    )}
-                  </div>
-                )}
-              </div>
-
-              {/* Bookmark Icon & Panel */}
-              <div className="relative">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => {
-                    const nextState = !isBookmarksOpen;
-                    if (nextState) closeAllOthers('bookmarks');
-                    setIsBookmarksOpen(nextState);
-                  }}
-                  className="relative"
-                >
-                  <Bookmark className="h-5 w-5" />
-                  {mounted && bookmarks.length > 0 && (
-                    <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-primary text-[9px] text-primary-foreground flex items-center justify-center font-bold">
-                      {bookmarks.length}
-                    </span>
-                  )}
-                </Button>
-
-                {/* Bookmark Popover */}
-                {isBookmarksOpen && (
-                  <div
-                    className="absolute right-[-60px] sm:right-0 mt-3 w-80 rounded-xl border p-4 shadow-2xl z-50"
-                    style={{
-                      backgroundColor: 'hsl(var(--card))',
-                      color: 'hsl(var(--card-foreground))',
-                    }}
-                  >
-                    <div className="flex items-center justify-between border-b pb-2 mb-3">
-                      <span className="font-semibold text-sm">
-                        Pekerjaan Tersimpan ({bookmarks.length})
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => setIsBookmarksOpen(false)}
-                        className="text-muted-foreground hover:text-foreground"
-                      >
-                        <X className="h-4 w-4" />
-                      </button>
-                    </div>
-
-                    <div className="max-h-60 overflow-y-auto space-y-3 pr-1 smooth-scroll">
-                      {bookmarks.length > 0 ? (
-                        bookmarks.map((id) => {
-                          const job = mockJobsMap[id] || {
-                            title: 'Lowongan Kerja',
-                            company: 'Perusahaan',
-                            location: 'Indonesia',
-                          };
-                          return (
-                            <div
-                              key={id}
-                              className="flex items-center justify-between border-b pb-2 text-xs"
-                            >
-                              <div className="min-w-0 pr-2">
-                                <Link
-                                  href={`/jobs/${id}`}
-                                  className="font-bold hover:text-primary transition-colors block truncate"
-                                  onClick={() => setIsBookmarksOpen(false)}
-                                >
-                                  {job.title}
-                                </Link>
-                                <span className="text-muted-foreground block truncate">
-                                  {job.company} • {job.location}
-                                </span>
-                              </div>
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                className="text-destructive h-7 w-7 hover:bg-destructive/10"
-                                onClick={() => toggleBookmark(id)}
-                              >
-                                <Trash2 className="h-4 w-4" />
-                              </Button>
-                            </div>
-                          );
-                        })
-                      ) : (
-                        <div className="text-center text-muted-foreground py-6 text-sm">
-                          Belum ada lowongan tersimpan.
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
 
               {/* Notification Icon & Panel */}
               <div className="relative">
@@ -422,12 +239,12 @@ export default function Navbar() {
                   }}
                   className="relative"
                 >
-                  <BellRing className="h-5 w-5" />
+                  <BellRing className="h-5 w-5 cursor-pointer" />
                   <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-primary text-[9px] text-primary-foreground flex items-center justify-center font-bold">
-                    2
+                    4
                   </span>
                 </Button>
-
+ 
                 {/* Notification Popover */}
                 {isNotificationsOpen && (
                   <div
@@ -444,36 +261,32 @@ export default function Navbar() {
                         onClick={() => setIsNotificationsOpen(false)}
                         className="text-muted-foreground hover:text-foreground"
                       >
-                        <X className="h-4 w-4" />
+                        <X className="h-4 w-4 cursor-pointer" />
                       </button>
                     </div>
-                    <div className="space-y-3">
-                      <div className="border-b pb-2 text-xs">
-                        <span className="font-bold text-foreground">
-                          TechCorp Indonesia
-                        </span>{' '}
-                        status lamaran Anda diperbarui ke{' '}
-                        <span className="text-amber-500 font-bold">
-                          Interview
-                        </span>
-                        .
-                        <span className="text-[10px] text-muted-foreground block mt-1">
-                          1 jam yang lalu
-                        </span>
-                      </div>
-                      <div className="text-xs">
-                        <span className="font-bold text-foreground">
-                          DesignStudio
-                        </span>{' '}
-                        status lamaran Anda diperbarui ke{' '}
-                        <span className="text-emerald-500 font-bold">
-                          Lulus
-                        </span>
-                        !
-                        <span className="text-[10px] text-muted-foreground block mt-1">
-                          1 hari yang lalu
-                        </span>
-                      </div>
+                    <div className="space-y-1.5 max-h-[350px] overflow-y-auto pr-1 smooth-scroll">
+                      {notifications.map((notif) => {
+                        let statusColor = 'text-destructive';
+                        if (notif.status === 'Interview') statusColor = 'text-amber-500';
+                        else if (notif.status === 'Lulus') statusColor = 'text-emerald-500';
+                        else if (notif.status === 'Review') statusColor = 'text-blue-500';
+
+                        return (
+                          <div key={notif.id} className="p-2 border rounded-lg bg-muted/20 text-xs leading-snug">
+                            <span className="font-bold text-foreground">
+                              {notif.company}
+                            </span>{' '}
+                            status lamaran Anda diperbarui ke{' '}
+                            <span className={`${statusColor} font-bold`}>
+                              {notif.status}
+                            </span>
+                            {notif.suffix}
+                            <span className="text-xs text-muted-foreground block mt-1">
+                              {notif.time}
+                            </span>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 )}
@@ -531,7 +344,7 @@ export default function Navbar() {
                             <div className="font-bold text-xs truncate">
                               {user.name}
                             </div>
-                            <div className="text-[10px] text-muted-foreground truncate">
+                            <div className="text-[10px] text-muted-foreground mt-1 truncate">
                               {user.email}
                             </div>
                           </div>
@@ -552,11 +365,11 @@ export default function Navbar() {
                       </div>
 
                       <Link
-                        href={user.role === 'admin' ? '/employer' : '/profile'}
-                        className="flex items-center px-3 py-2 text-xs hover:bg-accent rounded-lg transition-colors cursor-pointer"
+                        href={user.role === 'admin' ? '/employer' : '/dashboard?tab=profile'}
+                        className="group flex items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg transition-all duration-75 cursor-pointer"
                         onClick={() => setIsProfileOpen(false)}
                       >
-                        <User className="h-4 w-4 mr-2.5 text-muted-foreground" />
+                        <User className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
                         {user.role === 'admin' ? 'Dasbor Saya' : 'Profil Saya'}
                       </Link>
 
@@ -565,10 +378,6 @@ export default function Navbar() {
                           <div className="px-3 py-2 border-b">
                             <div className="flex items-center justify-between text-[10px] text-muted-foreground font-semibold">
                               <span>Plan: {user.plan}</span>
-                              <span className="flex items-center gap-1 text-amber-500 font-bold">
-                                <Coins className="h-3 w-3" />
-                                {user.coins} Koin
-                              </span>
                             </div>
                             <div className="flex gap-2 mt-2">
                               <button
@@ -595,34 +404,41 @@ export default function Navbar() {
                         </>
                       ) : (
                         <>
-                          <button
-                            onClick={() => {
-                              closeAllOthers('applications');
-                              setIsApplicationsOpen(true);
-                            }}
-                            className="flex w-full items-center px-3 py-2 text-xs hover:bg-accent rounded-lg text-left transition-colors cursor-pointer"
+                          <Link
+                            href="/dashboard?tab=bookmark"
+                            className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer"
+                            onClick={() => setIsProfileOpen(false)}
                           >
-                            <FileText className="h-4 w-4 mr-2.5 text-muted-foreground" />
+                            <Bookmark className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                            Loker Disimpan
+                          </Link>
+
+                          <Link
+                            href="/dashboard?tab=lamaran"
+                            className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer"
+                            onClick={() => setIsProfileOpen(false)}
+                          >
+                            <FileText className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
                             Lamaran Saya
-                          </button>
+                          </Link>
 
                           <button
                             onClick={() => {
                               closeAllOthers('settingWeb');
                               setIsSettingWebOpen(true);
                             }}
-                            className="flex w-full items-center px-3 py-2 text-xs hover:bg-accent rounded-lg text-left transition-colors cursor-pointer"
+                            className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer"
                           >
-                            <Sparkles className="h-4 w-4 mr-2.5 text-muted-foreground" />
+                            <Sparkles className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
                             Setting Tema
                           </button>
 
                           <Link
-                            href="/settings"
-                            className="flex items-center px-3 py-2 text-xs hover:bg-accent rounded-lg transition-colors cursor-pointer"
+                            href="/dashboard?tab=settings"
+                            className="group flex items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg transition-all duration-75 cursor-pointer"
                             onClick={() => setIsProfileOpen(false)}
                           >
-                            <Settings className="h-4 w-4 mr-2.5 text-muted-foreground" />
+                            <Settings className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
                             Setting App
                           </Link>
                         </>
@@ -635,7 +451,7 @@ export default function Navbar() {
                           setIsProfileOpen(false);
                           logout();
                         }}
-                        className="flex w-full items-center px-3 py-2 text-xs text-destructive hover:bg-destructive/10 rounded-lg text-left transition-colors cursor-pointer"
+                        className="flex w-full items-center px-3 py-2 text-xs hover:bg-red-600/20 hover:text-white rounded-lg text-left transition-all duration-75 cursor-pointer"
                       >
                         <LogOut className="h-4 w-4 mr-2.5" />
                         Keluar
@@ -733,124 +549,6 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Applications Drawer/Modal */}
-      <AnimatePresence>
-        {isApplicationsOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
-          >
-            <motion.div
-              initial={{ scale: 0.95, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 20 }}
-              className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl border bg-card p-6 shadow-2xl flex flex-col"
-              style={{
-                backgroundColor: 'hsl(var(--card))',
-                color: 'hsl(var(--card-foreground))',
-              }}
-            >
-              <button
-                type="button"
-                onClick={() => setIsApplicationsOpen(false)}
-                className="absolute right-4 top-4 rounded-full p-1.5 text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
-              >
-                <X className="h-5 w-5" />
-              </button>
-
-              <div className="mb-6">
-                <h2 className="text-xl font-bold">Status Lamaran Kerja Saya</h2>
-                <p className="text-xs text-muted-foreground">
-                  Pantau perkembangan status lamaran kerja Anda secara realtime
-                </p>
-              </div>
-
-              {/* Tabs */}
-              <div className="flex border-b mb-6 overflow-x-auto gap-2">
-                {(['Semua', 'Interview', 'Lulus', 'Belum lulus'] as const).map(
-                  (tab) => {
-                    const count =
-                      tab === 'Semua'
-                        ? applications.length
-                        : applications.filter((a) => a.status === tab).length;
-                    return (
-                      <button
-                        key={tab}
-                        type="button"
-                        onClick={() => setAppTab(tab)}
-                        className={`pb-2 px-3 text-xs font-semibold whitespace-nowrap border-b-2 transition-all ${
-                          appTab === tab
-                            ? 'border-primary text-primary'
-                            : 'border-transparent text-muted-foreground hover:text-foreground'
-                        }`}
-                      >
-                        {tab} ({count})
-                      </button>
-                    );
-                  },
-                )}
-              </div>
-
-              <div className="flex-grow overflow-y-auto space-y-4 max-h-[50vh] pr-1 smooth-scroll">
-                {applications.filter(
-                  (a) => appTab === 'Semua' || a.status === appTab,
-                ).length > 0 ? (
-                  applications
-                    .filter((a) => appTab === 'Semua' || a.status === appTab)
-                    .map((app) => (
-                      <div
-                        key={app.id}
-                        className="flex items-center justify-between p-3 border rounded-xl hover:bg-accent/40 transition-all"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-lg bg-primary flex items-center justify-center font-bold text-primary-foreground">
-                            {app.logo}
-                          </div>
-                          <div>
-                            <h4 className="font-semibold text-sm">
-                              {app.jobTitle}
-                            </h4>
-                            <span className="text-xs text-muted-foreground">
-                              {app.company} • Dilamar pada {app.date}
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-2">
-                          {app.status === 'Interview' && (
-                            <Badge className="bg-amber-500/10 text-amber-500 border-amber-500/20 hover:bg-amber-500/15">
-                              <Clock className="h-3 w-3 mr-1" />
-                              Interview
-                            </Badge>
-                          )}
-                          {app.status === 'Lulus' && (
-                            <Badge className="bg-emerald-500/10 text-emerald-500 border-emerald-500/20 hover:bg-emerald-500/15">
-                              <CheckCircle className="h-3 w-3 mr-1" />
-                              Lulus
-                            </Badge>
-                          )}
-                          {app.status === 'Belum lulus' && (
-                            <Badge className="bg-destructive/10 text-destructive border-destructive/20 hover:bg-destructive/15">
-                              <XCircle className="h-3 w-3 mr-1" />
-                              Gagal
-                            </Badge>
-                          )}
-                        </div>
-                      </div>
-                    ))
-                ) : (
-                  <div className="text-center py-8 text-muted-foreground text-xs font-semibold">
-                    Belum ada lamaran terkirim.
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* MODAL SETTING WEB (THEME SWITCHER FLOATING MODAL) */}
       <AnimatePresence>
         {isSettingWebOpen && (
@@ -891,7 +589,7 @@ export default function Navbar() {
                 </div>
                 <button
                   onClick={() => setIsSettingWebOpen(false)}
-                  className="rounded-full p-1.5 hover:bg-accent hover:text-foreground text-muted-foreground transition-all"
+                  className="rounded-full p-1.5 hover:bg-accent hover:text-foreground text-muted-foreground transition-all cursor-pointer"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -903,49 +601,62 @@ export default function Navbar() {
                     id: 'white',
                     name: 'White Light',
                     color: 'bg-white border-2 text-black',
+                    bgColor: '#f9f9f7',
+                    textColor: '#0f172a',
                   },
                   {
                     id: 'dark',
                     name: 'Black Dark',
                     color: 'bg-[#020617] border-2 border-white/20 text-white',
+                    bgColor: '#020617',
+                    textColor: '#f8fafc',
                   },
                   {
                     id: 'darkblue',
-                    name: 'Cyber Dark',
+                    name: 'Dark Blue',
                     color:
                       'bg-[#0b1329] border-2 border-cyan-500/30 text-cyan-400',
-                  },
-                  {
-                    id: 'arctic',
-                    name: 'Arctic Light',
-                    color:
-                      'bg-[#f0f9f9] border-2 border-teal-500/20 text-teal-800',
+                    bgColor: '#0b1329',
+                    textColor: '#e2e8f0',
                   },
                   {
                     id: 'teal',
                     name: 'Teal Dark',
                     color:
                       'bg-[#041e1a] border-2 border-teal-500/30 text-teal-400',
+                    bgColor: '#041e1a',
+                    textColor: '#ccfbf1',
                   },
                   {
                     id: 'charcoal',
                     name: 'Charcoal Minimal',
                     color:
                       'bg-[#150a1c] border-2 border-purple-500/20 text-purple-350',
+                    bgColor: '#150a1c',
+                    textColor: '#f3e8ff',
+                  },
+                  {
+                    id: 'burgundy',
+                    name: 'Burgundy',
+                    color:
+                      'bg-[#120508] border-2 border-rose-500/30 text-rose-400',
+                    bgColor: '#120508',
+                    textColor: '#fecdd3',
                   },
                 ].map((th) => (
                   <button
                     key={th.id}
                     onClick={() => setTheme(th.id)}
-                    className={`relative p-3 rounded-lg border text-left flex flex-col justify-between h-20 transition-all hover:bg-accent/40 ${
-                      theme === th.id ? 'border-primary' : 'border-border'
+                    className={`cursor-pointer relative p-3 rounded-lg border text-left flex flex-col justify-between h-20 transition-all ${
+                      theme === th.id
+                        ? 'border-2 border-primary ring-2 ring-primary/40'
+                        : 'border border-border/80'
                     }`}
-                    style={{ backgroundColor: 'hsl(var(--background))' }}
+                    style={{ backgroundColor: th.bgColor, color: th.textColor }}
                   >
                     <div className="flex items-center justify-between w-full">
-                      <div className={`h-2.5 w-6 rounded ${th.color}`} />
                       {theme === th.id && (
-                        <div className="h-4 w-4 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] font-bold">
+                        <div className="h-4 w-4 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] font-bold ml-auto">
                           ✓
                         </div>
                       )}
@@ -968,7 +679,7 @@ export default function Navbar() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="h-8 text-[10px] font-semibold"
+                  className="cursor-pointer h-8 text-[10px] font-semibold"
                   onClick={() => setTheme('white')}
                 >
                   RESET DEFAULT
@@ -1051,7 +762,7 @@ export default function Navbar() {
                       <div className="font-bold text-sm">
                         {pack.amount} Koin
                       </div>
-                      <div className="text-[10px] text-muted-foreground mt-0.5">
+                      <div className="text-[10px] text-muted-foreground mt-1">
                         {pack.desc}
                       </div>
                     </div>
@@ -1163,7 +874,7 @@ export default function Navbar() {
                     <div className="flex justify-between items-center border-b pb-2 mb-2">
                       <div>
                         <div className="font-bold text-sm">{pl.name} Plan</div>
-                        <div className="text-[10px] text-muted-foreground mt-0.5">
+                        <div className="text-[10px] text-muted-foreground mt-1">
                           Dapatkan {pl.coins} Koin
                         </div>
                       </div>
@@ -1198,4 +909,6 @@ export default function Navbar() {
       </AnimatePresence>
     </>
   );
-}
+};
+
+export default Navbar;

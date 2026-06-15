@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import provincesData from '../lib/indonesia-regions.json';
 import Badge from './ui/badge';
-import { useAppStore } from '@/lib/store';
+import { useAppStore } from '@/store/store';
 
 interface ProvinceItem {
   province: string;
@@ -276,7 +276,7 @@ export function Hero() {
                   className={`text-xs font-normal px-3.5 py-1 h-7 rounded-full shadow-sm flex items-center cursor-pointer transition-all hover:-translate-y-0.5 duration-200 ${
                     (!mounted || theme === 'white')
                       ? 'bg-[#eef5fa] border border-[#d2e2f0] text-[#334155]'
-                      : 'bg-card/50 border border-border/80 text-muted-foreground'
+                      : 'bg-background/50 border border-border/80 text-muted-foreground'
                   }`}
                 >
                   {pos}
@@ -293,7 +293,7 @@ export function Hero() {
                   className={`text-xs font-normal px-3.5 py-1 h-7 rounded-full shadow-sm flex items-center cursor-pointer transition-all hover:-translate-y-0.5 duration-200 ${
                     (!mounted || theme === 'white')
                       ? 'bg-[#eef5fa] border border-[#d2e2f0] text-[#334155]'
-                      : 'bg-card/50 border border-border/80 text-muted-foreground'
+                      : 'bg-background/50 border border-border/80 text-muted-foreground'
                   }`}
                 >
                   {pos}
@@ -310,7 +310,7 @@ export function Hero() {
                   className={`text-xs font-normal px-3.5 py-1 h-7 rounded-full shadow-sm flex items-center cursor-pointer transition-all hover:-translate-y-0.5 duration-200 ${
                     (!mounted || theme === 'white')
                       ? 'bg-[#eef5fa] border border-[#d2e2f0] text-[#334155]'
-                      : 'bg-card/50 border border-border/80 text-muted-foreground'
+                      : 'bg-background/50 border border-border/80 text-muted-foreground'
                   }`}
                 >
                   {pos}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import {
   Building2,
@@ -10,364 +10,115 @@ import {
   Briefcase,
   Award,
   Star,
+  Users,
+  ShieldCheck,
+  Bookmark,
+  Flame,
+  AlertCircle,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { CompaniesPage } from '@/app/companies/page';
-import { Users, ShieldCheck, Bookmark, Flame, AlertCircle } from 'lucide-react';
-import { useAppStore } from '@/lib/store';
-import { mockJobsData } from '@/app/jobs/page';
+import { useAppStore } from '@/store/store';
+import axios from 'axios';
+import { CompanyProfile, Company, Job } from '@/lib/types';
 
-interface CompanyProfile {
-  id: string;
-  name: string;
-  logo: string;
-  industry: string;
-  location: string;
-  totalEmployees: string;
-  rating: number;
-  isPremium: boolean;
-  description: string;
-  website: string;
-  linkedin: string;
-  instagram: string;
-  twitter?: string;
-  facebook?: string;
-  youtube?: string;
-  cultureTitle: string;
-  cultureDesc: string;
-  galleryImages: string[];
-  galleryVideos: string[];
-  workers: {
-    name: string;
-    position: string;
-    image: string;
-    linkedin?: string;
-  }[];
-  benefits: string[];
-}
-
-const mockCompaniesProfiles: Record<string, CompanyProfile> = {
-  '1': {
-    id: '1',
-    name: 'Tokopedia',
-    logo: '/images/companies/tokopedia.svg',
-    industry: 'It & Software',
-    location: 'Jakarta Selatan, DKI Jakarta',
-    totalEmployees: '500 - 1000 Karyawan',
-    rating: 4.8,
-    isPremium: true,
-    description:
-      'Perusahaan solusi IT terkemuka dengan fokus pada transformasi digital berskala enterprise dan cloud computing. Kami berdedikasi untuk memberikan teknologi terbaik yang membantu mempercepat pertumbuhan bisnis klien kami secara aman dan berkelanjutan di era modern global saat ini.',
-    website: 'https://techcorp.co.id',
-    linkedin: 'https://linkedin.com/company/techcorp-indo',
-    instagram: 'https://instagram.com/techcorp.indo',
-    twitter: 'https://twitter.com/tokopedia',
-    facebook: 'https://facebook.com/tokopedia',
-    youtube: 'https://youtube.com/tokopedia',
-    cultureTitle: 'Inovasi Tanpa Batas & Fleksibilitas Kerja',
-    cultureDesc:
-      'Di TechCorp, kami menerapkan budaya kerja Agile yang kolaboratif, transparan, dan mendukung penuh keseimbangan hidup karyawan (work-life balance) melalui sistem kerja hybrid.',
-    benefits: [
-      '✈️ Period Leave',
-      '👯 Team Building Activity',
-      '👕 Casual Dress Code',
-      '🤰 Paid Maternity / Paternity Leave',
-      '🛍️ Employee Discounts',
-      '💵 Competitive Salary',
-      '🎁 THR / Bonus system',
-      '📈 Professional Development',
-      '⚽ Company Outings',
-    ],
-    galleryImages: [
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80',
-    ],
-    galleryVideos: [
-      'https://assets.mixkit.co/videos/preview/mixkit-business-people-meeting-around-table-40192-large.mp4',
-      'https://assets.mixkit.co/videos/preview/mixkit-people-working-in-a-modern-office-42358-large.mp4',
-      'https://assets.mixkit.co/videos/preview/mixkit-workers-in-a-modern-office-discussing-work-42263-large.mp4',
-    ],
-    workers: [
-      {
-        name: 'Budi Santoso',
-        position: 'Chief Executive Officer (CEO)',
-        image:
-          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80',
-        linkedin: 'https://linkedin.com/in/budisantoso',
-      },
-      {
-        name: 'Siti Rahma',
-        position: 'Head of HR Department',
-        image:
-          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80',
-        linkedin: 'https://linkedin.com/in/sitirahma',
-      },
-      {
-        name: 'Dewi Lestari',
-        position: 'Lead Software Architect',
-        image:
-          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&h=120&q=80',
-        linkedin: 'https://linkedin.com/in/dewilestari',
-      },
-      {
-        name: 'Aditya Pratama',
-        position: 'Senior Project Manager',
-        image:
-          'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&h=120&q=80',
-        linkedin: 'https://linkedin.com/in/adityapratama',
-      },
-    ],
-  },
-  '2': {
-    id: '2',
-    name: 'Gojek',
-    logo: '/images/companies/gojek.svg',
-    industry: 'E-commerce & Logistics Tech',
-    location: 'Bandung, Jawa Barat',
-    totalEmployees: '100 - 500 Karyawan',
-    rating: 4.2,
-    isPremium: false,
-    description:
-      'Fast-growing e-commerce platform connecting buyers and sellers across Indonesia with social logistics. Kami mendobrak batas distribusi dengan teknologi kecerdasan buatan untuk merampingkan waktu pengiriman.',
-    website: 'https://startupxyz.com',
-    linkedin: 'https://linkedin.com/company/startupxyz-tech',
-    instagram: 'https://instagram.com/startupxyz.official',
-    twitter: 'https://twitter.com/gojek',
-    facebook: 'https://facebook.com/gojek',
-    youtube: 'https://youtube.com/gojek',
-    cultureTitle: 'Kecepatan, Eksekusi Mandiri & Kolaborasi',
-    cultureDesc:
-      'Kami mengutamakan kecepatan belajar dari kegagalan. Setiap anggota didorong untuk menjadi penemu solusi mandiri yang berani mengambil inisiatif tinggi.',
-    benefits: [
-      '✈️ Period Leave',
-      '👕 Casual Dress Code',
-      '💵 Competitive Salary',
-      '🎁 THR / Bonus system',
-      '⚽ Company Outings',
-    ],
-    galleryImages: [
-      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80',
-    ],
-    galleryVideos: [
-      'https://assets.mixkit.co/videos/preview/mixkit-workers-in-a-modern-office-discussing-work-42263-large.mp4',
-      'https://assets.mixkit.co/videos/preview/mixkit-young-man-working-in-a-co-working-space-40280-large.mp4',
-      'https://assets.mixkit.co/videos/preview/mixkit-business-people-meeting-around-table-40192-large.mp4',
-    ],
-    workers: [
-      {
-        name: 'Reza Mahendra',
-        position: 'Founder & CEO',
-        image:
-          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=120&h=120&q=80',
-        linkedin: 'https://linkedin.com/in/rezamahendra',
-      },
-      {
-        name: 'Lina Kartika',
-        position: 'VP of Engineering',
-        image:
-          'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&h=120&q=80',
-        linkedin: 'https://linkedin.com/in/linakartika',
-      },
-      {
-        name: 'Taufik Hidayat',
-        position: 'Lead UI/UX Designer',
-        image:
-          'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=120&h=120&q=80',
-        linkedin: 'https://linkedin.com/in/taufikhidayat',
-      },
-    ],
-  },
-};
-
-const mockJobs = [
-  {
-    id: 'j1',
-    title: 'Senior Frontend Engineer',
-    type: 'Full-time',
-    location: 'Jakarta (Hybrid)',
-    salary: 'Rp 15M - 25M',
-  },
-  {
-    id: 'j2',
-    title: 'Product Designer (UI/UX)',
-    type: 'Full-time',
-    location: 'Jakarta (Onsite)',
-    salary: 'Rp 10M - 18M',
-  },
-  {
-    id: 'j3',
-    title: 'Backend Developer (Go)',
-    type: 'Full-time',
-    location: 'Remote',
-    salary: 'Rp 12M - 22M',
-  },
-  {
-    id: 'j4',
-    title: 'Mobile Engineer (React Native)',
-    type: 'Contract',
-    location: 'Bandung (Hybrid)',
-    salary: 'Rp 8M - 15M',
-  },
-  {
-    id: 'j5',
-    title: 'QA Automation Engineer',
-    type: 'Full-time',
-    location: 'Jakarta (Onsite)',
-    salary: 'Rp 9M - 14M',
-  },
-  {
-    id: 'j6',
-    title: 'Data Analyst',
-    type: 'Full-time',
-    location: 'Jakarta (Hybrid)',
-    salary: 'Rp 10M - 16M',
-  },
-  {
-    id: 'j7',
-    title: 'DevOps Engineer',
-    type: 'Full-time',
-    location: 'Remote',
-    salary: 'Rp 14M - 24M',
-  },
-  {
-    id: 'j8',
-    title: 'Scrum Master',
-    type: 'Contract',
-    location: 'Jakarta (Onsite)',
-    salary: 'Rp 12M - 18M',
-  },
-  {
-    id: 'j9',
-    title: 'Technical Writer',
-    type: 'Internship',
-    location: 'Remote',
-    salary: 'Rp 4M - 6M',
-  },
-  {
-    id: 'j10',
-    title: 'HR Generalist',
-    type: 'Full-time',
-    location: 'Jakarta (Onsite)',
-    salary: 'Rp 8M - 12M',
-  },
-  {
-    id: 'j11',
-    title: 'SEO Specialist',
-    type: 'Full-time',
-    location: 'Jakarta (Hybrid)',
-    salary: 'Rp 7M - 11M',
-  },
-  {
-    id: 'j12',
-    title: 'Graphic Designer',
-    type: 'Internship',
-    location: 'Bandung (Hybrid)',
-    salary: 'Rp 3M - 5M',
-  },
-];
-
-export default function CompanyProfilePage() {
+const CompanyProfilePage: React.FC = () => {
   const params = useParams();
   const router = useRouter();
   const companyId = (params?.id as string) || '1';
   const { bookmarks, toggleBookmark, theme } = useAppStore();
   const [mounted, setMounted] = useState(false);
+  const [company, setCompany] = useState<CompanyProfile | null>(null);
+  const [companyJobs, setCompanyJobs] = useState<any[]>([]);
+  const [allJobs, setAllJobs] = useState<Job[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredJobs, setFilteredJobs] = useState<any[]>([]);
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    const fetchData = async () => {
+      try {
+        const [companiesRes, jobsRes] = await Promise.all([
+          axios.get<Company[]>('/data/companies.json'),
+          axios.get<Job[]>('/data/jobs.json')
+        ]);
+        const companiesList = companiesRes.data;
+        const jobsList = jobsRes.data;
+        setAllJobs(jobsList);
 
-  // Get details or fallback to TechCorp
-  const foundCompany = CompaniesPage.find((c) => c.id === companyId);
-  const company =
-    mockCompaniesProfiles[companyId] ||
-    (foundCompany
-      ? {
-          id: foundCompany.id,
-          name: foundCompany.name,
-          logo: foundCompany.logo,
-          industry: foundCompany.industry,
-          location: foundCompany.location,
-          totalEmployees: foundCompany.totalEmployees.includes('Karyawan')
-            ? foundCompany.totalEmployees
-            : `${foundCompany.totalEmployees} Karyawan`,
-          rating: foundCompany.rating,
-          isPremium: foundCompany.isPremium,
-          description: foundCompany.description,
-          website: `https://${foundCompany.name.toLowerCase().replace(/\s+/g, '')}.com`,
-          linkedin: `https://linkedin.com/company/${foundCompany.name.toLowerCase().replace(/\s+/g, '-')}`,
-          instagram: `https://instagram.com/${foundCompany.name.toLowerCase().replace(/\s+/g, '.')}`,
-          twitter: `https://twitter.com/${foundCompany.name.toLowerCase().replace(/\s+/g, '')}`,
-          facebook: `https://facebook.com/${foundCompany.name.toLowerCase().replace(/\s+/g, '')}`,
-          youtube: `https://youtube.com/${foundCompany.name.toLowerCase().replace(/\s+/g, '')}`,
-          cultureTitle: 'Inovasi Tanpa Batas & Fleksibilitas Kerja',
-          cultureDesc: `Di ${foundCompany.name}, kami menerapkan budaya kerja Agile yang kolaboratif, transparan, dan mendukung penuh keseimbangan hidup karyawan (work-life balance) melalui sistem kerja hybrid.`,
-          benefits: [
-            '✈️ Period Leave',
-            '👯 Team Building Activity',
-            '👕 Casual Dress Code',
-            '🤰 Paid Maternity / Paternity Leave',
-            '🛍️ Employee Discounts',
-            '💵 Competitive Salary',
-            '🎁 THR / Bonus system',
-            '📈 Professional Development',
-            '⚽ Company Outings',
-          ],
-          galleryImages: [
-            'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
-            'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80',
-            'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
-            'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80',
-          ],
-          galleryVideos: [
-            'https://assets.mixkit.co/videos/preview/mixkit-business-people-meeting-around-table-40192-large.mp4',
-            'https://assets.mixkit.co/videos/preview/mixkit-people-working-in-a-modern-office-42358-large.mp4',
-            'https://assets.mixkit.co/videos/preview/mixkit-workers-in-a-modern-office-discussing-work-42263-large.mp4',
-          ],
-          workers: [
-            {
-              name: 'Budi Santoso',
-              position: 'Chief Executive Officer (CEO)',
-              image:
-                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80',
-            },
-            {
-              name: 'Siti Rahma',
-              position: 'Head of HR Department',
-              image:
-                'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80',
-            },
-          ],
+        const foundCompany = companiesList.find((c) => c.id === companyId);
+        if (foundCompany) {
+          const profile: CompanyProfile = {
+            id: foundCompany.id,
+            name: foundCompany.name,
+            logo: foundCompany.logo,
+            industry: foundCompany.industry,
+            location: foundCompany.location,
+            totalEmployees: foundCompany.totalEmployees.includes('Karyawan')
+              ? foundCompany.totalEmployees
+              : `${foundCompany.totalEmployees} Karyawan`,
+            rating: foundCompany.rating,
+            isPremium: foundCompany.isPremium,
+            description: foundCompany.description,
+            website: `https://${foundCompany.name.toLowerCase().replace(/\s+/g, '')}.com`,
+            linkedin: `https://linkedin.com/company/${foundCompany.name.toLowerCase().replace(/\s+/g, '-')}`,
+            instagram: `https://instagram.com/${foundCompany.name.toLowerCase().replace(/\s+/g, '.')}`,
+            twitter: `https://twitter.com/${foundCompany.name.toLowerCase().replace(/\s+/g, '')}`,
+            facebook: `https://facebook.com/${foundCompany.name.toLowerCase().replace(/\s+/g, '')}`,
+            youtube: `https://youtube.com/${foundCompany.name.toLowerCase().replace(/\s+/g, '')}`,
+            cultureTitle: 'Inovasi Tanpa Batas & Fleksibilitas Kerja',
+            cultureDesc: `Di ${foundCompany.name}, kami menerapkan budaya kerja Agile yang kolaboratif, transparan, dan mendukung penuh keseimbangan hidup karyawan (work-life balance) melalui sistem kerja hybrid.`,
+            benefits: [
+              '✈️ Period Leave',
+              '👯 Team Building Activity',
+              '👕 Casual Dress Code',
+              '🤰 Paid Maternity / Paternity Leave',
+              '🛍️ Employee Discounts',
+              '💵 Competitive Salary',
+              '🎁 THR / Bonus system',
+              '📈 Professional Development',
+              '⚽ Company Outings',
+            ],
+            galleryImages: [
+              'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
+              'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80',
+              'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
+              'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80',
+            ],
+            galleryVideos: [
+              'https://assets.mixkit.co/videos/preview/mixkit-business-people-meeting-around-table-40192-large.mp4',
+              'https://assets.mixkit.co/videos/preview/mixkit-people-working-in-a-modern-office-42358-large.mp4',
+              'https://assets.mixkit.co/videos/preview/mixkit-workers-in-a-modern-office-discussing-work-42263-large.mp4',
+            ],
+            workers: [
+              {
+                name: 'Budi Santoso',
+                position: 'Chief Executive Officer (CEO)',
+                image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80',
+              },
+              {
+                name: 'Siti Rahma',
+                position: 'Head of HR Department',
+                image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80',
+              },
+            ],
+          };
+          setCompany(profile);
+
+          const matching = jobsList.filter(
+            (j) => j.company.toLowerCase() === foundCompany.name.toLowerCase()
+          );
+          setCompanyJobs(matching);
+          setFilteredJobs(matching);
         }
-      : {
-          ...mockCompaniesProfiles['1'],
-          id: companyId,
-          name: companyId === '3' ? 'DesignStudio' : `Company #${companyId}`,
-        });
-
-  const companyJobs = mockJobs.map((job, idx) => ({
-    ...job,
-    company: company.name,
-    logo: company.logo,
-    isPremium: company.isPremium,
-    workType: job.type,
-    experienceLevel: idx % 2 === 0 ? '1-3 tahun' : '3-5 tahun',
-    postedAt: idx === 0 ? '3 jam lalu' : `${idx + 1} hari lalu`,
-    isUrgent: idx === 0 || idx % 3 === 0,
-  }));
-
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filteredJobs, setFilteredJobs] = useState<any[]>(companyJobs);
-
-  useEffect(() => {
-    setFilteredJobs(companyJobs);
-  }, [company.name, companyJobs]);
+      } catch (err) {
+        console.error('Failed to load company profile:', err);
+      }
+    };
+    if (companyId) {
+      fetchData();
+    }
+  }, [companyId]);
 
   const handleSearch = () => {
     const query = searchQuery.toLowerCase();
@@ -379,6 +130,8 @@ export default function CompanyProfilePage() {
     );
     setFilteredJobs(filtered);
   };
+
+  if (!mounted || !company) return null;
 
   return (
     <>
@@ -536,7 +289,7 @@ export default function CompanyProfilePage() {
 
             {/* Tips Menjaga Diri (Default Information) next to the banner */}
             <div className="lg:col-span-4 bg-orange-600/5 p-6 rounded-3xl border border-orange-600/25 flex gap-3 h-full items-start">
-              <AlertCircle className="h-5 w-5 text-orange-600 shrink-0 mt-0.5" />
+              <AlertCircle className="h-5 w-5 text-orange-600 shrink-0 mt-1" />
               <div>
                 <h4 className="font-bold text-xs text-orange-700 dark:text-orange-400">
                   Tips Menjaga Diri & Keamanan
@@ -617,7 +370,7 @@ export default function CompanyProfilePage() {
                 {/* Metadata Grid (Industry, Location, Company Size) */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 border-b pb-5 border-border/60 text-xs">
                   <div className="flex items-start gap-3">
-                    <Building2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                    <Building2 className="h-5 w-5 text-primary shrink-0 mt-1" />
                     <div>
                       <div className="text-xs text-muted-foreground font-bold tracking-wider">
                         Industry
@@ -628,7 +381,7 @@ export default function CompanyProfilePage() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3 md:border-l md:pl-5 border-border/60">
-                    <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                    <MapPin className="h-5 w-5 text-primary shrink-0 mt-1" />
                     <div>
                       <div className="text-xs text-muted-foreground font-bold tracking-wider">
                         Location
@@ -639,7 +392,7 @@ export default function CompanyProfilePage() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3 md:border-l md:pl-5 border-border/60">
-                    <Users className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                    <Users className="h-5 w-5 text-primary shrink-0 mt-1" />
                     <div>
                       <div className="text-xs text-muted-foreground font-bold tracking-wider">
                         Company Size
@@ -817,7 +570,7 @@ export default function CompanyProfilePage() {
                                 className="text-muted-foreground hover:text-primary transition-colors p-1 shrink-0 cursor-pointer"
                               >
                                 <Bookmark
-                                  className={`h-4.5 w-4.5 ${mounted && bookmarks.includes(job.id) ? 'fill-primary text-primary' : ''}`}
+                                  className={`h-4.5 w-4.5 ${mounted && bookmarks.includes(job.id) ? 'fill-primary/60' : ''}`}
                                 />
                               </button>
                             </div>
@@ -883,4 +636,6 @@ export default function CompanyProfilePage() {
       </main>
     </>
   );
-}
+};
+
+export default CompanyProfilePage;

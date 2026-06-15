@@ -1,224 +1,395 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useAppStore } from '@/lib/store';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import { useAppStore } from '@/store/store';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 import {
-  Settings as SettingsIcon,
   Bell,
   Shield,
   User,
-  Link as LinkIcon,
-  Save,
+  Pencil,
+  AlertTriangle,
+  Check,
+  X,
 } from 'lucide-react';
 
+type SectionType = 'account' | 'visibility' | 'notifications';
+
 export default function SettingsPage() {
-  const { settings, updateSettings } = useAppStore();
+  const { settings, updateSettings, user, updateProfile, logout } = useAppStore();
   const [mounted, setMounted] = useState(false);
+  const [activeSection, setActiveSection] = useState<SectionType>('account');
+  const [email, setEmail] = useState('');
+  const [isEditingEmail, setIsEditingEmail] = useState(false);
   const [visibility, setVisibility] = useState(
     settings?.visibility || 'Public',
   );
   const [notifs, setNotifs] = useState<string[]>(settings?.notifications || []);
+  const [connected, setConnected] = useState<string[]>(
+    settings?.connectedAccounts || [],
+  );
 
   useEffect(() => {
     setMounted(true);
     if (settings) {
       setVisibility(settings.visibility);
       setNotifs(settings.notifications);
+      setConnected(settings.connectedAccounts || []);
+      setEmail(settings.email || user?.email || '');
     }
-  }, [settings]);
+  }, [settings, user]);
 
-  const handleSave = () => {
+  const handleSaveEmail = () => {
     updateSettings({
-      visibility,
-      notifications: notifs,
+      email,
     });
-    alert('Pengaturan berhasil disimpan!');
+    if (email && updateProfile) {
+      updateProfile({ email });
+    }
+    setIsEditingEmail(false);
+    alert('Email berhasil diperbarui!');
+  };
+
+  const handleSaveSettings = (newVisibility?: string, newNotifs?: string[]) => {
+    updateSettings({
+      visibility: newVisibility ?? visibility,
+      notifications: newNotifs ?? notifs,
+      connectedAccounts: connected,
+      email,
+    });
   };
 
   const toggleNotif = (type: string) => {
+    let updatedNotifs: string[];
     if (notifs.includes(type)) {
-      setNotifs(notifs.filter((n) => n !== type));
+      updatedNotifs = notifs.filter((n) => n !== type);
     } else {
-      setNotifs([...notifs, type]);
+      updatedNotifs = [...notifs, type];
+    }
+    setNotifs(updatedNotifs);
+    handleSaveSettings(undefined, updatedNotifs);
+  };
+
+  const handleVisibilityChange = (val: string) => {
+    setVisibility(val);
+    handleSaveSettings(val, undefined);
+  };
+
+  const toggleConnect = (provider: string) => {
+    let updatedConnected: string[];
+    if (connected.includes(provider)) {
+      updatedConnected = connected.filter((p) => p !== provider);
+      setConnected(updatedConnected);
+      alert(`Berhasil memutus koneksi dengan ${provider}`);
+    } else {
+      updatedConnected = [...connected, provider];
+      setConnected(updatedConnected);
+      alert(`Berhasil menghubungkan akun dengan ${provider}`);
+    }
+    updateSettings({
+      connectedAccounts: updatedConnected,
+    });
+  };
+
+  const handleDeleteAccount = () => {
+    const confirmDelete = confirm(
+      'Apakah Anda yakin ingin menghapus akun Anda secara permanen? Semua data profil, riwayat koin, lamaran kerja, dan chat tidak akan bisa dikembalikan.',
+    );
+    if (confirmDelete) {
+      logout();
+      alert('Akun Anda telah berhasil dihapus secara permanen.');
+      window.location.href = '/';
     }
   };
 
   if (!mounted || !settings) {
     return (
-      <>
-        <Navbar />
-        <main className="min-h-screen bg-stone-100 flex items-center justify-center">
-          <p className="text-stone-500 font-bold animate-pulse">
-            Loading Settings...
+      <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
+        <div className="flex flex-col items-center gap-3">
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+          <p className="text-sm text-muted-foreground font-medium">
+            Memuat Pengaturan...
           </p>
-        </main>
-        <Footer />
-      </>
+        </div>
+      </div>
     );
   }
 
   return (
-    <>
-      <Navbar />
-      <main className="min-h-screen bg-stone-100 py-12 px-4">
-        <div className="max-w-3xl mx-auto bg-white border-4 border-black p-6 rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-          <div className="flex items-center justify-between border-b-4 border-black pb-6 mb-8">
-            <div>
-              <h1 className="text-3xl font-black uppercase tracking-tight text-black flex items-center gap-2">
-                <SettingsIcon className="h-7 w-7" />
-                <span>Pengaturan Akun</span>
-              </h1>
-              <p className="text-stone-500 font-bold text-xs mt-1">
-                Sesuaikan preferensi privasi, visibilitas profil, dan notifikasi
-                Anda.
-              </p>
-            </div>
-            <Button
-              onClick={handleSave}
-              className="bg-black hover:bg-stone-850 text-white font-bold border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,0.15)] flex items-center gap-2 rounded-xl h-10 px-5"
-            >
-              <Save className="h-4 w-4" />
-              <span>Simpan</span>
-            </Button>
-          </div>
+    <main className="min-h-screen bg-background pt-10 pb-28 px-6 md:px-12 text-foreground">
+      <div className="max-w-5xl mx-auto space-y-8">
+        {/* Title */}
+        <div className="pb-2">
+          <h1 className="text-4xl font-extrabold tracking-tight text-foreground">
+            Pengaturan
+          </h1>
+        </div>
 
-          <div className="space-y-6">
-            {/* Visibilitas Profil */}
-            <div className="p-5 bg-stone-50 border-2 border-black rounded-xl shadow-[3px_3px_0px_0px_black] space-y-3">
-              <h3 className="font-black text-sm uppercase text-black flex items-center gap-2">
-                <Shield className="h-4.5 w-4.5 text-blue-600" />
-                Visibilitas Profil
-              </h3>
-              <p className="text-stone-500 text-xs font-bold leading-relaxed">
-                Tentukan siapa saja yang dapat melihat profil lengkap, resume,
-                dan portfolio yang telah Anda unggah.
-              </p>
-              <div className="flex flex-wrap gap-2.5 pt-2">
-                {['Public', 'Premium Only', 'Private'].map((opt) => (
+        {/* Horizontal Navigation Tabs */}
+        <div className="flex border-b border-border/60 gap-8 mb-8">
+          {[
+            { id: 'account', label: 'Akun', icon: User },
+            { id: 'visibility', label: 'Visibilitas', icon: Shield },
+            { id: 'notifications', label: 'Notifikasi', icon: Bell },
+          ].map((tab) => {
+            const Icon = tab.icon;
+            const isActive = activeSection === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveSection(tab.id as SectionType)}
+                className={`flex items-center gap-2 pb-3 text-base font-semibold transition-all border-b-2 -mb-[1px] cursor-pointer ${
+                  isActive
+                    ? 'text-foreground'
+                    : 'border-transparent text-muted-foreground hover:text-foreground'
+                }`}
+                style={
+                  isActive
+                    ? {
+                        borderBottomColor: 'hsl(var(--primary))',
+                      }
+                    : undefined
+                }
+              >
+                <Icon className="h-5 w-5" />
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Content Tabs Area */}
+        <div className="space-y-5 max-w-4xl">
+          {activeSection === 'account' && (
+            <>
+              {/* Email Card */}
+              <div className="border border-border/70 bg-card p-4 rounded-2xl flex items-center justify-between shadow-sm">
+                <div className="space-y-1 flex-1 pr-4">
+                  <span className="text-xs font-semibold text-muted-foreground block">
+                    Email
+                  </span>
+                  {isEditingEmail ? (
+                    <div className="flex items-center gap-2 mt-1">
+                      <Input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="h-9 text-sm focus-visible:ring-1 focus-visible:ring-primary max-w-sm font-medium"
+                        autoFocus
+                      />
+                      <button
+                        onClick={handleSaveEmail}
+                        className="p-1.5 bg-primary/10 text-primary hover:bg-primary/20 rounded-lg transition-colors cursor-pointer"
+                        title="Simpan"
+                      >
+                        <Check className="h-4 w-4" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          setIsEditingEmail(false);
+                          setEmail(settings?.email || user?.email || '');
+                        }}
+                        className="p-1.5 bg-muted hover:bg-muted/80 text-muted-foreground rounded-lg transition-colors cursor-pointer"
+                        title="Batal"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                  ) : (
+                    <span className="text-sm font-medium text-foreground block">
+                      {email}
+                    </span>
+                  )}
+                </div>
+                {!isEditingEmail && (
                   <button
-                    key={opt}
-                    onClick={() => setVisibility(opt)}
-                    className={`px-4 py-2 border-2 border-black text-xs font-bold rounded-xl transition-all shadow-[2px_2px_0px_0px_black] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0px_0px_black] ${
-                      visibility === opt
-                        ? 'bg-blue-400 text-black'
-                        : 'bg-white text-stone-600 hover:bg-stone-50'
-                    }`}
+                    onClick={() => setIsEditingEmail(true)}
+                    className="text-muted-foreground hover:text-primary p-2 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer"
                   >
-                    {opt === 'Public'
-                      ? '🔓 Publik (Semua Rekruter)'
-                      : opt === 'Premium Only'
-                        ? '💎 Premium Only'
-                        : '🔒 Privat'}
+                    <Pencil className="h-4.5 w-4.5" />
                   </button>
-                ))}
+                )}
+              </div>
+
+              {/* Connected Accounts Card */}
+              <div className="border border-border/70 bg-card p-6 rounded-2xl shadow-sm space-y-4">
+                <span className="text-xs font-semibold text-muted-foreground block">
+                  Akun terhubung
+                </span>
+                <div className="space-y-3">
+                  {[
+                    {
+                      name: 'Google',
+                      connected: connected.includes('Google'),
+                      icon: '🌐',
+                    },
+                    {
+                      name: 'LinkedIn',
+                      connected: connected.includes('LinkedIn'),
+                      icon: '💼',
+                    },
+                    {
+                      name: 'Microsoft',
+                      connected: connected.includes('Microsoft'),
+                      icon: '🪟',
+                    },
+                  ].map((acc) => (
+                    <div
+                      key={acc.name}
+                      className="flex items-center justify-between py-1 border-b border-border/40 last:border-b-0 pb-3 last:pb-0"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <span className="text-base">{acc.icon}</span>
+                        <span className="text-sm font-medium text-foreground">
+                          {acc.name}
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => toggleConnect(acc.name)}
+                        className={`cursor-pointer text-xs font-bold transition-colors ${
+                          acc.connected
+                            ? 'text-destructive hover:underline'
+                            : 'text-primary hover:underline'
+                        }`}
+                      >
+                        {acc.connected ? 'Putuskan' : 'Hubungkan'}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Delete Account Card (Danger Styling) */}
+              <div className="border border-destructive/30 bg-destructive/5 hover:bg-destructive/10 p-6 rounded-2xl flex items-center justify-between shadow-sm transition-colors">
+                <div className="flex items-center gap-2.5">
+                  <AlertTriangle className="h-5 w-5 text-destructive shrink-0" />
+                  <span className="text-sm font-semibold text-destructive">
+                    Hapus akun secara permanen
+                  </span>
+                </div>
+                <button
+                  onClick={handleDeleteAccount}
+                  className="text-sm font-bold text-destructive hover:underline cursor-pointer"
+                >
+                  Hapus
+                </button>
+              </div>
+            </>
+          )}
+
+          {activeSection === 'visibility' && (
+            <div className="border border-border/70 bg-card p-6 rounded-2xl shadow-sm space-y-4">
+              <span className="text-xs font-semibold text-muted-foreground block">
+                Siapa yang dapat melihat profil saya
+              </span>
+              <div className="flex flex-col gap-3 pt-1">
+                {[
+                  {
+                    id: 'Public',
+                    title: '🔓 Publik (Semua Rekruter)',
+                    desc: 'Profil, resume, dan portofolio Anda dapat ditemukan oleh semua perusahaan.',
+                  },
+                  {
+                    id: 'Premium Only',
+                    title: '💎 Rekruter Premium',
+                    desc: 'Hanya perusahaan premium yang dapat melihat info profil lengkap Anda.',
+                  },
+                  {
+                    id: 'Private',
+                    title: '🔒 Privat / Tersembunyi',
+                    desc: 'Profil disembunyikan. Hanya perusahaan yang Anda lamar yang bisa melihat.',
+                  },
+                ].map((opt) => {
+                  const isSelected = visibility === opt.id;
+                  return (
+                    <div
+                      key={opt.id}
+                      onClick={() => handleVisibilityChange(opt.id)}
+                      className={`cursor-pointer p-4 border rounded-xl transition-all flex items-start gap-3 select-none ${
+                        isSelected
+                          ? 'bg-primary/10 border-border/80'
+                          : 'bg-background/30 border-border/80 hover:bg-background/60'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        checked={isSelected}
+                        onChange={() => handleVisibilityChange(opt.id)}
+                        className="mt-1 cursor-pointer accent-primary"
+                      />
+                      <div>
+                        <div className="font-semibold text-xs text-foreground">
+                          {opt.title}
+                        </div>
+                        <div className="text-[10.5px] text-muted-foreground font-medium leading-normal mt-1">
+                          {opt.desc}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
+          )}
 
-            {/* Preferensi Notifikasi */}
-            <div className="p-5 bg-stone-50 border-2 border-black rounded-xl shadow-[3px_3px_0px_0px_black] space-y-3">
-              <h3 className="font-black text-sm uppercase text-black flex items-center gap-2">
-                <Bell className="h-4.5 w-4.5 text-orange-500" />
-                Notifikasi
-              </h3>
-              <p className="text-stone-500 text-xs font-bold leading-relaxed">
-                Pilih jenis email dan pemberitahuan yang ingin Anda dapatkan di
-                perangkat Anda.
-              </p>
-              <div className="space-y-3 pt-2">
+          {activeSection === 'notifications' && (
+            <div className="border border-border/70 bg-card p-6 rounded-2xl shadow-sm space-y-4">
+              <span className="text-xs font-semibold text-muted-foreground block">
+                Notifikasi lamaran kerja & info karir
+              </span>
+              <div className="space-y-3 pt-1">
                 {[
                   {
                     id: 'apply_status',
-                    label: '📢 Perubahan Status Lamaran',
-                    desc: 'Dapatkan pemberitahuan instan saat status lamaran Anda berubah.',
+                    label: 'Perubahan Status Lamaran Kerja',
+                    desc: 'Notifikasi saat status lamaran kerja Anda diperbarui rekruter.',
                   },
                   {
                     id: 'new_jobs',
-                    label: '💼 Rekomendasi Lowongan Baru',
-                    desc: 'Info berkala mengenai pekerjaan yang sesuai dengan minat dan keahlian Anda.',
+                    label: 'Rekomendasi Lowongan Kerja Baru',
+                    desc: 'Notifikasi berkala mengenai lowongan kerja baru yang cocok.',
                   },
                   {
                     id: 'newsletter',
-                    label: '✉️ Newsletter Karir Bulanan',
-                    desc: 'Tips seputar wawancara, penyusunan CV, dan perkembangan industri kerja.',
+                    label: 'Newsletter Tips Karir & CV',
+                    desc: 'Tips berkala wawancara, pembuatan CV, dan tren karir terbaru.',
                   },
-                ].map((item) => (
-                  <label
-                    key={item.id}
-                    className="flex items-start gap-3 p-3 bg-white border-2 border-black rounded-xl cursor-pointer hover:bg-stone-50 transition-colors select-none"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={notifs.includes(item.id)}
-                      onChange={() => toggleNotif(item.id)}
-                      className="mt-1 h-4 w-4 border-2 border-black rounded accent-primary cursor-pointer"
-                    />
-                    <div>
-                      <div className="font-black text-xs text-black">
-                        {item.label}
-                      </div>
-                      <div className="text-[10px] text-stone-500 font-medium mt-0.5">
-                        {item.desc}
-                      </div>
-                    </div>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Akun Terhubung */}
-            <div className="p-5 bg-stone-50 border-2 border-black rounded-xl shadow-[3px_3px_0px_0px_black] space-y-3">
-              <h3 className="font-black text-sm uppercase text-black flex items-center gap-2">
-                <LinkIcon className="h-4.5 w-4.5 text-emerald-500" />
-                Akun Terhubung
-              </h3>
-              <p className="text-stone-500 text-xs font-bold leading-relaxed">
-                Kelola integrasi login sekali klik Anda melalui platform pihak
-                ketiga.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-                {[
-                  {
-                    name: 'Google',
-                    connected: settings.connectedAccounts?.includes('Google'),
-                    icon: '🌐',
-                  },
-                  {
-                    name: 'LinkedIn',
-                    connected: settings.connectedAccounts?.includes('LinkedIn'),
-                    icon: '💼',
-                  },
-                ].map((acc) => (
-                  <div
-                    key={acc.name}
-                    className="flex items-center justify-between p-3 bg-white border-2 border-black rounded-xl"
-                  >
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm">{acc.icon}</span>
-                      <span className="font-black text-xs text-black">
-                        {acc.name}
-                      </span>
-                    </div>
-                    <Badge
-                      className={
-                        acc.connected
-                          ? 'bg-emerald-500/15 text-emerald-600 border border-emerald-500/10'
-                          : 'bg-stone-100 text-stone-400'
-                      }
+                ].map((item) => {
+                  const isChecked = notifs.includes(item.id);
+                  return (
+                    <div
+                      key={item.id}
+                      onClick={() => toggleNotif(item.id)}
+                      className={`cursor-pointer p-4 border rounded-xl transition-all flex items-start gap-3 select-none ${
+                        isChecked
+                          ? 'bg-primary/10 border-border/80'
+                          : 'bg-background/30 border-border/80 hover:bg-background/60'
+                      }`}
                     >
-                      {acc.connected ? 'Terhubung' : 'Terputus'}
-                    </Badge>
-                  </div>
-                ))}
+                      <input
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={() => toggleNotif(item.id)}
+                        className="mt-1 h-4 w-4 border border-border/80 rounded accent-primary cursor-pointer"
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                      <div>
+                        <div className="font-semibold text-xs text-foreground">
+                          {item.label}
+                        </div>
+                        <div className="text-[10.5px] text-muted-foreground font-medium leading-normal mt-1">
+                          {item.desc}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-          </div>
+          )}
         </div>
-      </main>
-      <Footer />
-    </>
+      </div>
+    </main>
   );
 }

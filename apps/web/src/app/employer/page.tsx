@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useAppStore } from '@/lib/store';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import { useAppStore } from '@/store/store';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -84,24 +82,18 @@ export default function EmployerDashboard() {
 
   if (!mounted || !user) {
     return (
-      <>
-        <Navbar />
-        <main className="min-h-screen bg-stone-100 flex items-center justify-center">
-          <p className="text-stone-500 font-bold animate-pulse">
-            Loading Employer Dashboard...
-          </p>
-        </main>
-        <Footer />
-      </>
+      <main className="min-h-screen bg-stone-100 flex items-center justify-center">
+        <p className="text-stone-500 font-bold animate-pulse">
+          Loading Employer Dashboard...
+        </p>
+      </main>
     );
   }
 
   const isVerified = user.companyVerification?.verified || false;
 
   return (
-    <>
-      <Navbar />
-      <main className="min-h-screen bg-stone-100 py-10 px-4">
+    <main className="min-h-screen bg-stone-100 py-10 px-4">
         <div className="max-w-6xl mx-auto space-y-6">
           {/* Header Card */}
           <div className="bg-white border-4 border-black p-6 rounded-2xl shadow-[6px_6px_0px_0px_black] flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -284,7 +276,7 @@ export default function EmployerDashboard() {
                           <div className="font-black text-sm text-black">
                             {pack.amount} Koin
                           </div>
-                          <div className="text-[10px] text-stone-500 font-bold mt-0.5">
+                          <div className="text-[10px] text-stone-500 font-bold mt-1">
                             {pack.desc}
                           </div>
                         </div>
@@ -334,7 +326,7 @@ export default function EmployerDashboard() {
                           <div className="font-black text-sm text-black">
                             {pl.name} Plan
                           </div>
-                          <div className="text-[10px] text-stone-500 font-bold mt-0.5">
+                          <div className="text-[10px] text-stone-500 font-bold mt-1">
                             {pl.desc}
                           </div>
                         </div>
@@ -485,7 +477,5 @@ export default function EmployerDashboard() {
           </div>
         </div>
       </main>
-      <Footer />
-    </>
   );
 }
