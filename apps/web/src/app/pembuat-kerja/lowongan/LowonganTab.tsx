@@ -723,7 +723,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
       </div>
 
       {/* Sub tabs navigation */}
-      <div className="flex border-b border-border">
+      <div className="flex">
         <button
           onClick={() => setActiveSubTab('semua')}
           className={`pb-3 px-6 font-bold text-xs border-b-2 transition-all cursor-pointer ${

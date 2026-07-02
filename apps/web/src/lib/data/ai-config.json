@@ -1,0 +1,12 @@
+{
+  "activeProvider": "Gemini",
+  "providers": {
+    "OpenRouter": { "apiKey": "sk-or-xxxxxxxxxxxxxxxxxxxx", "model": "meta-llama/llama-3-70b-instruct" },
+    "MaimaRouter": { "apiKey": "sk-mr-xxxxxxxxxxxxxxxxxxxx", "model": "maima-v1-standard" },
+    "ChatGpt": { "apiKey": "sk-proj-xxxxxxxxxxxxxxxxxxxx", "model": "gpt-4o" },
+    "Gemini": { "apiKey": "AIzaSyxxxxxxxxxxxxxxxxxxxx", "model": "gemini-1.5-pro" },
+    "claude": { "apiKey": "sk-ant-xxxxxxxxxxxxxxxxxxxx", "model": "claude-3-5-sonnet" },
+    "deepseek": { "apiKey": "sk-ds-xxxxxxxxxxxxxxxxxxxx", "model": "deepseek-chat" },
+    "kimi": { "apiKey": "sk-km-xxxxxxxxxxxxxxxxxxxx", "model": "moonshot-v1-8k" }
+  }
+}

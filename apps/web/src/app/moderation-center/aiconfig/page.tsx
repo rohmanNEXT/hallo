@@ -6,12 +6,62 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import CustomSelect from '@/components/ui/select-custom';
 import { useModeration } from '../context';
+import api from '@/lib/api';
 import { LuChevronLeft as ChevronLeft, LuChevronRight as ChevronRight } from 'react-icons/lu';
 
 const AiConfigPage: React.FC = () => {
   const { aiConfig, setAiConfig, showToast } = useModeration();
 
-  return (
+  const activeProvider = aiConfig.activeProvider;
+  const activeConfig = aiConfig.providers[activeProvider] || { apiKey: '', model: '' };
+
+  const handleProviderChange = (val: string) => {
+    setAiConfig({
+      ...aiConfig,
+      activeProvider: val,
+    });
+  };
+
+  const handleModelChange = (modelVal: string) => {
+    setAiConfig({
+      ...aiConfig,
+      providers: {
+        ...aiConfig.providers,
+        [activeProvider]: {
+          ...activeConfig,
+          model: modelVal,
+        },
+      },
+    });
+  };
+
+  const handleKeyChange = (keyVal: string) => {
+    setAiConfig({
+      ...aiConfig,
+      providers: {
+        ...aiConfig.providers,
+        [activeProvider]: {
+          ...activeConfig,
+          apiKey: keyVal,
+        },
+      },
+    });
+  };
+
+  const handleSaveSettings = async () => {
+    try {
+      const { data } = await api.post('/ai-config', aiConfig);
+      showToast(
+        `Konfigurasi untuk ${activeProvider} berhasil disimpan!`,
+        'success',
+      );
+    } catch (error) {
+      console.error('Error saving AI configuration:', error);
+      showToast('Gagal menyimpan konfigurasi AI!', 'error');
+    }
+  };
+
+  const pageContent = (
     <div className="space-y-6">
       <Card className="h-[960px] border border-border bg-card rounded-3xl overflow-hidden">
         <CardContent className="p-5 md:p-6 flex flex-col justify-between h-full space-y-4">
@@ -28,13 +78,11 @@ const AiConfigPage: React.FC = () => {
             <div className="space-y-4 max-w-2xl">
               <div>
                 <label className="text-xs font-bold text-muted-foreground block mb-1.5">
-                  Provider
+                  Provider (7 Available)
                 </label>
                 <CustomSelect
-                  value={aiConfig.provider}
-                  onChange={(val) =>
-                    setAiConfig({ ...aiConfig, provider: val })
-                  }
+                  value={activeProvider}
+                  onChange={handleProviderChange}
                   options={[
                     { value: 'OpenRouter', label: 'OpenRouter' },
                     { value: 'MaimaRouter', label: 'MaimaRouter' },
@@ -49,36 +97,26 @@ const AiConfigPage: React.FC = () => {
               </div>
               <div>
                 <label className="text-xs font-bold text-muted-foreground block mb-1.5">
-                  Text Model
+                  Text Model untuk {activeProvider}
                 </label>
                 <Input
-                  value={aiConfig.model}
-                  onChange={(e) =>
-                    setAiConfig({
-                      ...aiConfig,
-                      model: e.target.value,
-                    })
-                  }
+                  value={activeConfig.model}
+                  onChange={(e) => handleModelChange(e.target.value)}
                   className="rounded-xl border-border bg-background text-sm h-10 text-foreground"
                 />
               </div>
               <div>
                 <label className="text-xs font-bold text-muted-foreground block mb-1.5">
-                  API Key
+                  API Key untuk {activeProvider}
                 </label>
                 <Input
                   type="password"
-                  value={aiConfig.apiKey}
-                  onChange={(e) =>
-                    setAiConfig({
-                      ...aiConfig,
-                      apiKey: e.target.value,
-                    })
-                  }
+                  value={activeConfig.apiKey}
+                  onChange={(e) => handleKeyChange(e.target.value)}
                   className="rounded-xl border-border bg-background text-sm h-10 text-foreground"
                 />
                 <p className="text-[10px] text-muted-foreground mt-1.5">
-                  *Kunci API dienkripsi secara aman di sisi server.
+                  *Kunci API untuk {activeProvider} dienkripsi secara aman di sisi server.
                 </p>
               </div>
             </div>
@@ -86,12 +124,7 @@ const AiConfigPage: React.FC = () => {
             <div className="pt-4 border-t border-border flex justify-start">
               <Button
                 className="rounded-xl font-bold h-10 px-6 shadow-sm"
-                onClick={() =>
-                  showToast(
-                    'Konfigurasi AI berhasil disimpan!',
-                    'success',
-                  )
-                }
+                onClick={handleSaveSettings}
               >
                 Simpan Pengaturan
               </Button>
@@ -134,6 +167,8 @@ const AiConfigPage: React.FC = () => {
       </Card>
     </div>
   );
+
+  return pageContent;
 };
 
 export default AiConfigPage;

@@ -10,6 +10,8 @@ import express, {
 import cors from 'cors';
 import { PORT } from './config';
 import { SampleRouter } from './routers/sample.router';
+import { ChatSettingsRouter } from './routers/chat-settings.router';
+import { AiConfigRouter } from './routers/ai-config.router';
 
 export default class App {
   private app: Express;
@@ -52,12 +54,16 @@ export default class App {
 
   private routes(): void {
     const sampleRouter = new SampleRouter();
+    const chatSettingsRouter = new ChatSettingsRouter();
+    const aiConfigRouter = new AiConfigRouter();
 
     this.app.get('/api', (req: Request, res: Response) => {
       res.send(`Hello, Purwadhika Student API!`);
     });
 
     this.app.use('/api/samples', sampleRouter.getRouter());
+    this.app.use('/api/chat-settings', chatSettingsRouter.getRouter());
+    this.app.use('/api/ai-config', aiConfigRouter.getRouter());
   }
 
   public start(): void {

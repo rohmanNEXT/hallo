@@ -34,7 +34,7 @@ const Home: React.FC = () => {
     if (typeof window !== 'undefined' && isLoggedIn && user?.role === 'admin') {
       const savedMode = localStorage.getItem('jobseeker-currentViewMode');
       if (savedMode === 'employer') {
-        router.push('/pembuat-kerja/employer');
+        router.push('/pembuat-kerja/lowongan');
         return;
       }
     }

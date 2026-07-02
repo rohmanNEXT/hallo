@@ -4,36 +4,30 @@ import React, { useState, useEffect } from 'react';
 import { useAppStore } from '@/store/store';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { 
-  LuBell as Bell, 
-  LuShield as Shield, 
-  LuUser as User, 
-  LuPencil as Pencil, 
-  LuTriangleAlert as AlertTriangle, 
-  LuCheck as Check, 
+import {
+  LuCheck as Check,
   LuX as X,
-  LuPhone as Phone,
-  LuLock as Lock,
-  LuChevronRight as ChevronRight,
-  LuMessageSquareQuote as MessageSquareQuote,
-  LuTrash2 as Trash2,
-  LuMoon as Moon,
-  LuSun as Sun,
-  LuInfo as Info
+  LuPencil as Pencil,
+  LuTriangleAlert as AlertTriangle,
 } from 'react-icons/lu';
-import { Card } from '@/components/ui/card';
 
-export default function DashboardSettings() {
+const DashboardSettings: React.FC = () => {
   const { settings, updateSettings, user, updateProfile, logout, theme, setTheme } = useAppStore();
   const [mounted, setMounted] = useState(false);
   
-  // Edit & Change Mode States
+  // Email edit state
+  const [email, setEmail] = useState('');
   const [isEditingEmail, setIsEditingEmail] = useState(false);
+  
+  // WhatsApp edit state
+  const [waNumber, setWaNumber] = useState('');
   const [isEditingWa, setIsEditingWa] = useState(false);
+  
+  // Password change state
   const [isChangingPassword, setIsChangingPassword] = useState(false);
-  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   // Language state
   const [language, setLanguage] = useState<'id' | 'en'>('id');
@@ -42,63 +36,76 @@ export default function DashboardSettings() {
   const [dailyNotif, setDailyNotif] = useState(true);
   const [weeklyNotif, setWeeklyNotif] = useState(true);
 
-  // Toast state
-  const [toastMessage, setToastMessage] = useState<{ text: string; type: 'success' | 'error' | 'info' } | null>(null);
-  const showToast = (text: string, type: 'success' | 'error' | 'info' = 'success') => {
-    setToastMessage({ text, type });
-    setTimeout(() => {
-      setToastMessage(null);
-    }, 4000);
-  };
-
-  // Formiks
-  const emailFormik = useFormik({
-    initialValues: { email: user?.email || '' },
-    enableReinitialize: true,
-    validationSchema: Yup.object({
-      email: Yup.string().email('Format email tidak valid').required('Email wajib diisi'),
-    }),
-    onSubmit: (values) => {
-      updateProfile({ email: values.email.trim() });
-      setIsEditingEmail(false);
-      showToast('Email berhasil diperbarui!', 'success');
-    }
-  });
-
-  const waFormik = useFormik({
-    initialValues: { waNumber: user?.waNumber || '' },
-    enableReinitialize: true,
-    validationSchema: Yup.object({
-      waNumber: Yup.string().required('Nomor WhatsApp wajib diisi'),
-    }),
-    onSubmit: (values) => {
-      updateProfile({ waNumber: values.waNumber.trim() });
-      setIsEditingWa(false);
-      showToast('Nomor WhatsApp berhasil diperbarui!', 'success');
-    }
-  });
-
-  const passwordFormik = useFormik({
-    initialValues: { oldPassword: '', newPassword: '', confirmPassword: '' },
-    validationSchema: Yup.object({
-      oldPassword: Yup.string().required('Kata sandi lama wajib diisi'),
-      newPassword: Yup.string().required('Kata sandi baru wajib diisi').min(6, 'Minimal 6 karakter'),
-      confirmPassword: Yup.string()
-        .required('Konfirmasi kata sandi wajib diisi')
-        .oneOf([Yup.ref('newPassword')], 'Konfirmasi kata sandi tidak cocok'),
-    }),
-    onSubmit: (values) => {
-      showToast('Kata sandi berhasil diubah!', 'success');
-      setIsChangingPassword(false);
-      passwordFormik.resetForm();
-    }
-  });
+  // Testimonial state
+  const [isEditingTestimonial, setIsEditingTestimonial] = useState(false);
+  const [testimonialText, setTestimonialText] = useState('');
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    if (user) {
+      setWaNumber(user.waNumber || '6285646831030');
+      setEmail(user.email || '');
+    }
+  }, [user]);
 
   if (!mounted || !user) return null;
+
+  const handleSaveEmail = () => {
+    if (!email.trim()) {
+      alert('Email tidak boleh kosong');
+      return;
+    }
+    updateProfile({ email: email.trim() });
+    setIsEditingEmail(false);
+    alert('Email berhasil diperbarui!');
+  };
+
+  const handleSaveWa = () => {
+    if (!waNumber.trim()) {
+      alert('Nomor WhatsApp tidak boleh kosong');
+      return;
+    }
+    updateProfile({ waNumber: waNumber.trim() });
+    setIsEditingWa(false);
+    alert('Nomor WhatsApp berhasil diperbarui!');
+  };
+
+  const handleChangePasswordSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!oldPassword || !newPassword || !confirmPassword) {
+      alert('Semua kolom kata sandi wajib diisi');
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      alert('Konfirmasi kata sandi baru tidak cocok');
+      return;
+    }
+    alert('Kata sandi berhasil diubah!');
+    setIsChangingPassword(false);
+    setOldPassword('');
+    setNewPassword('');
+    setConfirmPassword('');
+  };
+
+  const handleSaveTestimonial = () => {
+    if (!testimonialText.trim()) {
+      alert('Testimoni tidak boleh kosong');
+      return;
+    }
+    alert('Terima kasih atas testimoni Anda!');
+    setIsEditingTestimonial(false);
+  };
+
+  const handleDeleteAccount = () => {
+    const confirmDelete = confirm(
+      'Apakah Anda yakin ingin menghapus akun Anda secara permanen? Semua data profil, lamaran kerja, dan chat tidak akan bisa dikembalikan.',
+    );
+    if (confirmDelete) {
+      logout();
+      alert('Akun Anda telah berhasil dihapus secara permanen.');
+      window.location.href = '/';
+    }
+  };
 
   return (
     <div className="bg-card border border-border/70 rounded-3xl p-5 md:p-6 shadow-md flex flex-col h-[880px] overflow-hidden animate-in fade-in duration-300">
@@ -120,50 +127,44 @@ export default function DashboardSettings() {
                 Email
               </span>
               {isEditingEmail ? (
-                <form onSubmit={emailFormik.handleSubmit} className="flex flex-col gap-1 mt-1 max-w-sm">
-                  <div className="flex items-center gap-1.5">
-                    <Input
-                      name="email"
-                      type="email"
-                      value={emailFormik.values.email}
-                      onChange={emailFormik.handleChange}
-                      onBlur={emailFormik.handleBlur}
-                      className="h-8 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary"
-                      autoFocus
-                    />
-                    <button
-                      type="submit"
-                      className="p-1.5 bg-primary/10 text-primary hover:bg-primary/20 rounded-lg transition-colors cursor-pointer"
-                      title="Simpan"
-                    >
-                      <Check className="h-4 w-4" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsEditingEmail(false);
-                        emailFormik.resetForm();
-                      }}
-                      className="p-1.5 bg-muted hover:bg-muted/85 text-muted-foreground rounded-lg transition-colors cursor-pointer"
-                      title="Batal"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </div>
-                  {emailFormik.touched.email && emailFormik.errors.email && (
-                    <span className="text-[10px] text-rose-500 font-bold">{emailFormik.errors.email}</span>
-                  )}
-                </form>
+                <div className="flex items-center gap-1.5 mt-1 max-w-sm">
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="h-8 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary"
+                    autoFocus
+                  />
+                  <button
+                    onClick={handleSaveEmail}
+                    className="p-1.5 bg-primary/10 text-primary hover:bg-primary/20 rounded-lg transition-colors cursor-pointer"
+                    title="Simpan"
+                  >
+                    <Check className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={() => {
+                      setIsEditingEmail(false);
+                      setEmail(user.email || '');
+                    }}
+                    className="p-1.5 bg-muted hover:bg-muted/85 text-muted-foreground rounded-lg transition-colors cursor-pointer"
+                    title="Batal"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
               ) : (
                 <span className="text-xs font-semibold text-foreground block">
-                  {emailFormik.values.email}
+                  {email}
                 </span>
               )}
             </div>
             {!isEditingEmail && (
               <button
+                type="button"
                 onClick={() => setIsEditingEmail(true)}
                 className="text-muted-foreground hover:text-primary p-1.5 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer shrink-0"
+                title="Ubah email"
               >
                 <Pencil className="h-3.5 w-3.5" />
               </button>
@@ -177,50 +178,46 @@ export default function DashboardSettings() {
                 WhatsApp
               </span>
               {isEditingWa ? (
-                <form onSubmit={waFormik.handleSubmit} className="flex flex-col gap-1 mt-1 max-w-sm">
-                  <div className="flex items-center gap-1.5">
-                    <Input
-                      name="waNumber"
-                      type="text"
-                      value={waFormik.values.waNumber}
-                      onChange={waFormik.handleChange}
-                      onBlur={waFormik.handleBlur}
-                      className="h-8 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary"
-                      autoFocus
-                    />
-                    <button
-                      type="submit"
-                      className="p-1.5 bg-primary/10 text-primary hover:bg-primary/20 rounded-lg transition-colors cursor-pointer"
-                      title="Simpan"
-                    >
-                      <Check className="h-4 w-4" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsEditingWa(false);
-                        waFormik.resetForm();
-                      }}
-                      className="p-1.5 bg-muted hover:bg-muted/85 text-muted-foreground rounded-lg transition-colors cursor-pointer"
-                      title="Batal"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </div>
-                  {waFormik.touched.waNumber && waFormik.errors.waNumber && (
-                    <span className="text-[10px] text-rose-500 font-bold">{waFormik.errors.waNumber}</span>
-                  )}
-                </form>
+                <div className="flex items-center gap-1.5 mt-1 max-w-sm">
+                  <Input
+                    type="text"
+                    value={waNumber}
+                    onChange={(e) => setWaNumber(e.target.value)}
+                    className="h-8 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-primary"
+                    autoFocus
+                  />
+                  <button
+                    type="button"
+                    onClick={handleSaveWa}
+                    className="p-1.5 bg-primary/10 text-primary hover:bg-primary/20 rounded-lg transition-colors cursor-pointer"
+                    title="Simpan"
+                  >
+                    <Check className="h-4 w-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsEditingWa(false);
+                      setWaNumber(user.waNumber || '');
+                    }}
+                    className="p-1.5 bg-muted hover:bg-muted/85 text-muted-foreground rounded-lg transition-colors cursor-pointer"
+                    title="Batal"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
               ) : (
                 <span className="text-xs font-semibold text-foreground block">
-                  {waFormik.values.waNumber}
+                  {waNumber}
                 </span>
               )}
             </div>
             {!isEditingWa && (
               <button
+                type="button"
                 onClick={() => setIsEditingWa(true)}
                 className="text-muted-foreground hover:text-primary p-1.5 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer shrink-0"
+                title="Ubah WhatsApp"
               >
                 <Pencil className="h-3.5 w-3.5" />
               </button>
@@ -230,53 +227,32 @@ export default function DashboardSettings() {
           {/* Kata Sandi Row */}
           <div className="p-3.5">
             {isChangingPassword ? (
-              <form onSubmit={passwordFormik.handleSubmit} className="space-y-2.5 pt-0.5">
+              <form onSubmit={handleChangePasswordSubmit} className="space-y-2.5 pt-0.5">
                 <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block">
                   Ubah Kata Sandi
                 </span>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                  <div>
-                    <Input
-                      type="password"
-                      name="oldPassword"
-                      placeholder="Kata Sandi Lama"
-                      value={passwordFormik.values.oldPassword}
-                      onChange={passwordFormik.handleChange}
-                      onBlur={passwordFormik.handleBlur}
-                      className="h-8 text-xs"
-                    />
-                    {passwordFormik.touched.oldPassword && passwordFormik.errors.oldPassword && (
-                      <span className="text-[10px] text-rose-500 font-bold">{passwordFormik.errors.oldPassword}</span>
-                    )}
-                  </div>
-                  <div>
-                    <Input
-                      type="password"
-                      name="newPassword"
-                      placeholder="Kata Sandi Baru"
-                      value={passwordFormik.values.newPassword}
-                      onChange={passwordFormik.handleChange}
-                      onBlur={passwordFormik.handleBlur}
-                      className="h-8 text-xs"
-                    />
-                    {passwordFormik.touched.newPassword && passwordFormik.errors.newPassword && (
-                      <span className="text-[10px] text-rose-500 font-bold">{passwordFormik.errors.newPassword}</span>
-                    )}
-                  </div>
-                  <div>
-                    <Input
-                      type="password"
-                      name="confirmPassword"
-                      placeholder="Konfirmasi Kata Sandi Baru"
-                      value={passwordFormik.values.confirmPassword}
-                      onChange={passwordFormik.handleChange}
-                      onBlur={passwordFormik.handleBlur}
-                      className="h-8 text-xs"
-                    />
-                    {passwordFormik.touched.confirmPassword && passwordFormik.errors.confirmPassword && (
-                      <span className="text-[10px] text-rose-500 font-bold">{passwordFormik.errors.confirmPassword}</span>
-                    )}
-                  </div>
+                  <Input
+                    type="password"
+                    placeholder="Kata Sandi Lama"
+                    value={oldPassword}
+                    onChange={(e) => setOldPassword(e.target.value)}
+                    className="h-8 text-xs"
+                  />
+                  <Input
+                    type="password"
+                    placeholder="Kata Sandi Baru"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    className="h-8 text-xs"
+                  />
+                  <Input
+                    type="password"
+                    placeholder="Konfirmasi Kata Sandi Baru"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="h-8 text-xs"
+                  />
                 </div>
                 <div className="flex justify-end gap-2 pt-0.5">
                   <Button
@@ -286,7 +262,9 @@ export default function DashboardSettings() {
                     className="h-7 text-[10px] cursor-pointer px-3"
                     onClick={() => {
                       setIsChangingPassword(false);
-                      passwordFormik.resetForm();
+                      setOldPassword('');
+                      setNewPassword('');
+                      setConfirmPassword('');
                     }}
                   >
                     Batal
@@ -307,7 +285,6 @@ export default function DashboardSettings() {
                   </span>
                 </div>
                 <button
-                  type="button"
                   onClick={() => setIsChangingPassword(true)}
                   className="text-muted-foreground hover:text-primary p-1.5 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer shrink-0"
                 >
@@ -484,7 +461,7 @@ export default function DashboardSettings() {
               </div>
             </div>
             <Button
-              onClick={() => setShowConfirmDelete(true)}
+              onClick={handleDeleteAccount}
               variant="ghost"
               size="sm"
               className="h-8 text-xs text-rose-500 hover:text-rose-600 hover:bg-rose-500/10 cursor-pointer font-bold px-3"
@@ -494,64 +471,8 @@ export default function DashboardSettings() {
           </div>
         </div>
       </div>
-
-      {/* Toast Notification Container */}
-      {toastMessage && (
-        <div className={`fixed bottom-6 right-6 z-9999 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs font-extrabold animate-in slide-in-from-bottom-5 duration-200 ${
-          toastMessage.type === 'success'
-            ? 'bg-emerald-600 text-white'
-            : toastMessage.type === 'error'
-              ? 'bg-rose-600 text-white'
-              : 'bg-slate-800 text-white'
-        }`}>
-          {toastMessage.type === 'success' ? (
-            <div className="h-5 w-5 rounded-full bg-white/20 flex items-center justify-center">
-              <Check className="h-3 w-3 text-white" />
-            </div>
-          ) : (
-            <div className="h-5 w-5 rounded-full bg-white/20 flex items-center justify-center">
-              <Info className="h-3 w-3 text-white" />
-            </div>
-          )}
-          <span>{toastMessage.text}</span>
-        </div>
-      )}
-
-      {/* Custom Confirmation Modal */}
-      {showConfirmDelete && (
-        <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <Card className="w-full max-w-sm bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-800 rounded-3xl p-6 shadow-2xl space-y-4">
-            <h4 className="font-extrabold text-sm text-foreground uppercase tracking-wide flex items-center gap-2">
-              <AlertTriangle className="h-4.5 w-4.5 shrink-0" />
-              <span>Konfirmasi Hapus Akun</span>
-            </h4>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              Apakah Anda yakin ingin menghapus akun Anda secara permanen? Semua data profil, lamaran kerja, dan chat tidak akan bisa dikembalikan.
-            </p>
-            <div className="flex justify-end gap-3 pt-2">
-              <Button
-                variant="outline"
-                onClick={() => setShowConfirmDelete(false)}
-                className="h-9 text-xs font-bold px-4 rounded-xl cursor-pointer"
-              >
-                Batal
-              </Button>
-              <Button
-                onClick={() => {
-                  logout();
-                  showToast('Akun Anda telah berhasil dihapus secara permanen.', 'success');
-                  setTimeout(() => {
-                    window.location.href = '/';
-                  }, 1500);
-                }}
-                className="h-9 text-xs font-bold px-4 bg-rose-600 hover:bg-rose-700 text-white rounded-xl cursor-pointer"
-              >
-                Hapus Akun
-              </Button>
-            </div>
-          </Card>
-        </div>
-      )}
     </div>
   );
-}
+};
+
+export default DashboardSettings;

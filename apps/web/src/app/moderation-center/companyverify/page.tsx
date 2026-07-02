@@ -25,6 +25,7 @@ import {
   LuUsers as Users,
   LuCircleAlert as AlertCircle,
   LuFilter as Filter,
+  LuSparkles as Sparkles,
 } from 'react-icons/lu';
 
 const CompanyVerifyPage: React.FC = () => {
@@ -35,6 +36,7 @@ const CompanyVerifyPage: React.FC = () => {
     setMockCompanies,
     getDaysDiff,
     theme,
+    aiModeration,
   } = useModeration();
 
   const [showDoc, setShowDoc] = useState(false);
@@ -242,6 +244,55 @@ const CompanyVerifyPage: React.FC = () => {
                   ))}
                 </div>
               </div>
+
+              {/* AI Verification Assessment (otak ai) */}
+              {aiModeration && (
+                <div className="bg-gradient-to-r from-emerald-500/10 to-teal-500/10 dark:from-emerald-950/20 dark:to-teal-950/20 border border-emerald-500/20 dark:border-emerald-800/40 rounded-2xl p-5 text-left space-y-3 animate-in fade-in duration-300">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="h-5 w-5 text-emerald-500 animate-pulse" />
+                      <span className="font-extrabold text-xs uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                        AI Moderation Scan Result (otak ai)
+                      </span>
+                    </div>
+                    <Badge className="bg-emerald-500 text-white font-extrabold text-[9px] h-5">
+                      {viewingCompanyProfile.aiScore || 85}% TRUST SCORE
+                    </Badge>
+                  </div>
+                  <div className="text-xs space-y-2 leading-relaxed">
+                    <p className="font-semibold text-foreground">
+                      Analisis Dokumen NIB & SIUP:
+                    </p>
+                    <p className="text-muted-foreground text-[11px]">
+                      {viewingCompanyProfile.aiScore && viewingCompanyProfile.aiScore < 50 ? (
+                        <span className="text-rose-500 font-extrabold">⚠️ TERINDIKASI REKAYASA DIGITAL: Ditemukan metadata edit gambar Photoshop/GIMP pada berkas PDF. Struktur nomor NIB tidak sinkron dengan data BKPM.</span>
+                      ) : (
+                        <span className="text-emerald-600 font-extrabold">✓ DOKUMEN VALID: Tanda tangan digital cocok dengan sertifikat BKPM. Informasi pimpinan dan bidang usaha sinkron dengan database pemerintah.</span>
+                      )}
+                    </p>
+                    {viewingCompanyProfile.aiScore && viewingCompanyProfile.aiScore < 50 && (
+                      <div className="mt-3 bg-card border border-rose-500/20 rounded-xl p-3 space-y-2">
+                        <p className="font-bold text-[10px] text-rose-500 uppercase tracking-wide">Template Alasan Penolakan AI:</p>
+                        <p className="text-[11px] text-muted-foreground italic bg-muted/30 p-2.5 rounded-lg border border-border/40">
+                          "Berdasarkan pemindaian AI dari sistem moderasi, berkas dokumen legalitas (SIUP/NIB) yang diunggah terdeteksi memiliki rekayasa digital pada metadata file. Harap ajukan verifikasi ulang dengan melampirkan berkas scan dokumen asli tanpa suntingan."
+                        </p>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => {
+                            setRejectReason("Berdasarkan pemindaian AI dari sistem moderasi, berkas dokumen legalitas (SIUP/NIB) yang diunggah terdeteksi memiliki rekayasa digital pada metadata file. Harap ajukan verifikasi ulang dengan melampirkan berkas scan dokumen asli tanpa suntingan.");
+                            setRejectModalCompanyId(viewingCompanyProfile.id);
+                            showToast("Template Alasan Penolakan AI disalin ke form Tolak!", "info");
+                          }}
+                          className="h-7 text-[10px] font-bold border-rose-500/20 text-rose-600 hover:bg-rose-500/10 cursor-pointer bg-transparent"
+                        >
+                          Gunakan Sebagai Alasan Penolakan
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
 
               {/* Reason Alerts */}
               {viewingCompanyProfile.status === 'rejected' &&
@@ -508,6 +559,61 @@ const CompanyVerifyPage: React.FC = () => {
                       >
                         Download Dokumen
                       </Button>
+                    </div>
+                    
+                    {/* Mock Document Preview */}
+                    <div className="w-full h-[400px] rounded-2xl border border-border/80 overflow-hidden bg-white mt-3 relative shadow-inner">
+                      <div className="p-8 text-black text-left font-serif space-y-4 text-xs h-full overflow-y-auto bg-zinc-50/50">
+                        <div className="text-center border-b-2 border-black pb-4">
+                          <h2 className="font-extrabold text-sm uppercase tracking-wide">Pemerintah Republik Indonesia</h2>
+                          <h3 className="font-bold text-xs uppercase text-zinc-700">Lembaga Pengelola dan Penyelenggara OSS</h3>
+                          <p className="text-[9px] font-sans text-zinc-500 mt-1">NIB (Nomor Induk Berusaha): 01234567891011</p>
+                        </div>
+                        <div className="space-y-3 pt-2">
+                          <p className="font-bold text-center underline uppercase tracking-tight">IZIN USAHA DI BIDANG PERDAGANGAN (SIUP)</p>
+                          <p className="text-[10px] font-sans mt-3 text-zinc-800">Berdasarkan Ketentuan Undang-Undang Republik Indonesia, dengan ini menerangkan bahwa:</p>
+                          <table className="w-full text-[10px] font-sans mt-2 border-collapse">
+                            <tbody>
+                              <tr className="border-b border-zinc-200/50 py-1.5">
+                                <td className="font-bold w-36 py-1.5 text-zinc-700">Nama Perusahaan</td>
+                                <td className="py-1.5">: {viewingCompanyProfile.name}</td>
+                              </tr>
+                              <tr className="border-b border-zinc-200/50 py-1.5">
+                                <td className="font-bold py-1.5 text-zinc-700">Alamat Kantor</td>
+                                <td className="py-1.5">: Jl. Jenderal Sudirman No. 12, Jakarta Selatan, DKI Jakarta</td>
+                              </tr>
+                              <tr className="border-b border-zinc-200/50 py-1.5">
+                                <td className="font-bold py-1.5 text-zinc-700">Nama Pimpinan</td>
+                                <td className="py-1.5">: Budi Santoso</td>
+                              </tr>
+                              <tr className="border-b border-zinc-200/50 py-1.5">
+                                <td className="font-bold py-1.5 text-zinc-700">Nomor Telepon</td>
+                                <td className="py-1.5">: +62 21 1234 5678</td>
+                              </tr>
+                              <tr className="border-b border-zinc-200/50 py-1.5">
+                                <td className="font-bold py-1.5 text-zinc-700">Bidang Usaha</td>
+                                <td className="py-1.5">: {viewingCompanyProfile.industry}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p className="text-[10px] font-sans mt-4 text-zinc-700 leading-relaxed">
+                            Dokumen ini diterbitkan secara elektronik dan sah sebagai izin operasional resmi serta bukti legalitas perusahaan di wilayah hukum Negara Kesatuan Republik Indonesia.
+                          </p>
+                        </div>
+                        <div className="pt-8 flex justify-between items-center text-[9px] font-sans text-zinc-500">
+                          <div>
+                            <p>Dicetak Pada: 2026-07-02</p>
+                            <p className="text-emerald-600 font-extrabold mt-1">✓ SECURE & VERIFIED BY OSS SYSTEM</p>
+                          </div>
+                          <div className="text-center">
+                            <p>Kepala Badan Koordinasi Penanaman BKPM</p>
+                            <div className="h-10 w-24 mx-auto my-2 border border-dashed border-zinc-300 flex items-center justify-center text-zinc-400 bg-zinc-50 font-sans text-[7px] rounded-lg">
+                              DIGITAL SIGNATURE
+                            </div>
+                            <p className="font-extrabold text-zinc-800">Bahlil Lahadalia</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -835,6 +941,22 @@ const CompanyVerifyPage: React.FC = () => {
                           </div>
                         </div>
 
+                        {comp.updateRequestReason ? (
+                          <div className="text-[10px] bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 p-2.5 rounded-xl mb-4 text-left leading-relaxed h-[64px]">
+                            <span className="font-bold block mb-0.5">Alasan Pengajuan:</span>
+                            <span className="line-clamp-2">{comp.updateRequestReason}</span>
+                          </div>
+                        ) : (comp.rejectionReason && comp.status === 'rejected') ? (
+                          <div className="text-[10px] bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 p-2.5 rounded-xl mb-4 text-left leading-relaxed h-[64px]">
+                            <span className="font-bold block mb-0.5">Alasan Penolakan:</span>
+                            <span className="line-clamp-2">{comp.rejectionReason}</span>
+                          </div>
+                        ) : (
+                          <div className="text-[10px] bg-muted/20 border border-dashed border-border/80 text-muted-foreground p-2.5 rounded-xl mb-4 text-left leading-relaxed h-[64px] flex items-center justify-center font-medium italic">
+                            Tidak ada alasan yang dilampirkan
+                          </div>
+                        )}
+
                         {comp.status === 'review' && (
                           <div className="flex gap-2 mt-auto pt-4 border-t border-border">
                             <Button
@@ -940,6 +1062,36 @@ const CompanyVerifyPage: React.FC = () => {
             )}
           </CardContent>
         </Card>
+      )}
+
+      {/* Description Detail Modal */}
+      {showFullDescModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-card border border-border rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200 flex flex-col">
+            <div className="flex items-center justify-between bg-zinc-50 dark:bg-zinc-900/50 px-6 py-4 border-b border-border">
+              <h3 className="text-sm font-black uppercase tracking-wider text-zinc-900 dark:text-zinc-100">
+                {showFullDescModal.title}
+              </h3>
+              <button
+                onClick={() => setShowFullDescModal(null)}
+                className="text-muted-foreground hover:text-foreground border-none bg-transparent cursor-pointer"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <div className="p-6 max-h-[50vh] overflow-y-auto text-sm leading-relaxed text-foreground text-left">
+              {showFullDescModal.desc}
+            </div>
+            <div className="bg-zinc-50 dark:bg-zinc-900/50 px-6 py-4 border-t border-border flex justify-end">
+              <Button
+                onClick={() => setShowFullDescModal(null)}
+                className="h-9 text-xs font-bold px-5 rounded-xl"
+              >
+                Tutup
+              </Button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Floating Window Documentation Modal */}

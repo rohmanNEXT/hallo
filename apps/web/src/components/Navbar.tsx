@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
     setViewMode(mode);
     localStorage.setItem('jobseeker-currentViewMode', mode);
     if (mode === 'employer') {
-      router.push('/pembuat-kerja/employer');
+      router.push('/pembuat-kerja/lowongan');
     } else {
       router.push('/');
     }
@@ -198,7 +198,7 @@ const Navbar: React.FC = () => {
                 {/* Left Side: Logo & Main Nav */}
                 <div className="flex items-center gap-8">
                   <Link
-                    href="/pembuat-kerja/employer"
+                    href="/pembuat-kerja/lowongan"
                     className="flex items-center gap-1.5 hover:opacity-90 transition-opacity"
                   >
                     <div className="h-6 w-6 rounded-md bg-primary flex items-center justify-center">
@@ -214,20 +214,20 @@ const Navbar: React.FC = () => {
                   <nav className="hidden md:flex items-center gap-6">
                     {user?.employerRole !== 'HRD' && (
                       <Link
-                        href="/pembuat-kerja/employer?tab=lowongan"
+                        href="/pembuat-kerja/lowongan"
                         className="text-xs font-bold hover:text-primary transition-colors tracking-wide uppercase"
                       >
                         Lowongan
                       </Link>
                     )}
                     <Link
-                      href="/pembuat-kerja/employer?tab=kandidat"
+                      href="/pembuat-kerja/kandidat"
                       className="text-xs font-bold hover:text-primary transition-colors tracking-wide uppercase"
                     >
                       Kandidat
                     </Link>
                     <Link
-                      href="/pembuat-kerja/employer?tab=chat"
+                      href="/pembuat-kerja/chat"
                       className="text-xs font-bold hover:text-primary transition-colors tracking-wide uppercase"
                     >
                       Chat
@@ -235,14 +235,14 @@ const Navbar: React.FC = () => {
                     {user?.employerRole !== 'HRD' && (
                       <>
                         <Link
-                          href="/pembuat-kerja/employer?tab=talent"
+                          href="/pembuat-kerja/talent"
                           className="text-xs font-bold hover:text-primary transition-colors tracking-wide uppercase"
                         >
                           Talent Search
                         </Link>
 
                         <Link
-                          href="/moderation-center"
+                          href="/pembuat-kerja/admin-moderation"
                           className="text-xs font-bold hover:text-primary transition-colors tracking-wide uppercase text-rose-500 dark:text-rose-400"
                         >
                           Admin Moderation
@@ -259,7 +259,7 @@ const Navbar: React.FC = () => {
                     variant="ghost"
                     size="sm"
                     onClick={() => {
-                      router.push('/pembuat-kerja/employer?tab=coin-credit');
+                      router.push('/pembuat-kerja/dashboard?tab=coin-credit');
                     }}
                     className="h-8 gap-1.5 px-2 bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 rounded-lg cursor-pointer text-xs font-bold"
                   >
@@ -316,7 +316,7 @@ const Navbar: React.FC = () => {
                               <div
                                 key={notif.id}
                                 className="p-2 pr-7 border rounded-lg bg-muted/20 text-xs leading-snug relative group cursor-pointer hover:bg-muted/40 transition-colors"
-                                onClick={() => router.push('/pembuat-kerja/employer?tab=kandidat')}
+                                onClick={() => router.push('/pembuat-kerja/kandidat')}
                               >
                                 <button
                                   onClick={(e) => {
@@ -353,7 +353,7 @@ const Navbar: React.FC = () => {
                           <button
                             onClick={() => {
                               setIsNotificationsOpen(false);
-                              router.push('/pembuat-kerja/employer?tab=kandidat');
+                              router.push('/pembuat-kerja/kandidat');
                             }}
                             className="w-full mt-3 text-[10px] font-semibold text-primary hover:underline text-center cursor-pointer"
                           >
@@ -366,7 +366,7 @@ const Navbar: React.FC = () => {
 
                   {/* Chat Icon (Pelamar yang Chat) */}
                   <Link
-                    href="/pembuat-kerja/employer?tab=chat"
+                    href="/pembuat-kerja/chat"
                     className="flex items-center"
                     title="Chat Pelamar"
                   >
@@ -447,7 +447,7 @@ const Navbar: React.FC = () => {
                                 setIsProfileOpen(false);
                                 if (user.role === 'admin') {
                                   router.push(
-                                    '/pembuat-kerja/employer?tab=coin-credit',
+                                    '/pembuat-kerja/dashboard?tab=coin-credit',
                                   );
                                 } else {
                                   closeAllOthers('coin');
@@ -463,7 +463,7 @@ const Navbar: React.FC = () => {
                                 setIsProfileOpen(false);
                                 if (user.role === 'admin') {
                                   router.push(
-                                    '/pembuat-kerja/employer?tab=langganan',
+                                    '/pembuat-kerja/dashboard?tab=langganan',
                                   );
                                 } else {
                                   closeAllOthers('plan');
@@ -480,7 +480,7 @@ const Navbar: React.FC = () => {
                         <button
                           onClick={() => {
                             setIsProfileOpen(false);
-                            router.push('/pembuat-kerja/employer?tab=profile');
+                            router.push('/pembuat-kerja/dashboard?tab=profile');
                           }}
                           className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer font-bold"
                         >
@@ -492,7 +492,7 @@ const Navbar: React.FC = () => {
                           onClick={() => {
                             setIsProfileOpen(false);
                             router.push(
-                              '/pembuat-kerja/employer?tab=langganan',
+                              '/pembuat-kerja/dashboard?tab=langganan',
                             );
                           }}
                           className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer font-bold"
@@ -505,7 +505,7 @@ const Navbar: React.FC = () => {
                           onClick={() => {
                             setIsProfileOpen(false);
                             router.push(
-                              '/pembuat-kerja/employer?tab=coin-credit',
+                              '/pembuat-kerja/dashboard?tab=coin-credit',
                             );
                           }}
                           className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer font-bold"
@@ -518,7 +518,7 @@ const Navbar: React.FC = () => {
                           onClick={() => {
                             setIsProfileOpen(false);
                             router.push(
-                              '/pembuat-kerja/employer?tab=pengaturan',
+                              '/pembuat-kerja/dashboard?tab=pengaturan',
                             );
                           }}
                           className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer font-bold"
@@ -580,27 +580,27 @@ const Navbar: React.FC = () => {
                     ) : user?.role === 'admin' ? (
                       <>
                         <Link
-                          href="/pembuat-kerja/employer"
+                          href="/pembuat-kerja/lowongan"
                           className="text-sm font-semibold text-primary hover:underline transition-all"
                         >
                           Dasbor Pembuat Kerja
                         </Link>
                         {user?.employerRole !== 'HRD' && (
                           <Link
-                            href="/pembuat-kerja/employer?tab=lowongan"
+                            href="/pembuat-kerja/lowongan"
                             className="text-sm font-medium hover:text-primary transition-colors"
                           >
                             Lowongan Saya
                           </Link>
                         )}
                         <Link
-                          href="/pembuat-kerja/employer?tab=kandidat"
+                          href="/pembuat-kerja/kandidat"
                           className="text-sm font-medium hover:text-primary transition-colors"
                         >
                           Kandidat
                         </Link>
                         <Link
-                          href="/pembuat-kerja/employer?tab=chat"
+                          href="/pembuat-kerja/chat"
                           className="text-sm font-medium hover:text-primary transition-colors"
                         >
                           Chat
@@ -608,14 +608,14 @@ const Navbar: React.FC = () => {
                         {user?.employerRole !== 'HRD' && (
                           <>
                             <Link
-                              href="/pembuat-kerja/employer?tab=talent"
+                              href="/pembuat-kerja/talent"
                               className="text-sm font-medium hover:text-primary transition-colors"
                             >
                               Talent Search
                             </Link>
 
                             <Link
-                              href="/moderation-center"
+                              href="/pembuat-kerja/admin-moderation"
                               className="text-sm font-semibold text-rose-500 dark:text-rose-400 hover:text-rose-600 transition-colors"
                             >
                               Admin Moderation
@@ -838,7 +838,7 @@ const Navbar: React.FC = () => {
                                 onClick={() => {
                                   setIsProfileOpen(false);
                                   router.push(
-                                    '/pembuat-kerja/employer?tab=profile',
+                                    '/pembuat-kerja/dashboard?tab=profile',
                                   );
                                 }}
                                 className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer font-bold"
@@ -851,7 +851,7 @@ const Navbar: React.FC = () => {
                                 onClick={() => {
                                   setIsProfileOpen(false);
                                   router.push(
-                                    '/pembuat-kerja/employer?tab=langganan',
+                                    '/pembuat-kerja/dashboard?tab=langganan',
                                   );
                                 }}
                                 className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer font-bold"
@@ -864,7 +864,7 @@ const Navbar: React.FC = () => {
                                 onClick={() => {
                                   setIsProfileOpen(false);
                                   router.push(
-                                    '/pembuat-kerja/employer?tab=coin-credit',
+                                    '/pembuat-kerja/dashboard?tab=coin-credit',
                                   );
                                 }}
                                 className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer font-bold"
@@ -877,7 +877,7 @@ const Navbar: React.FC = () => {
                                 onClick={() => {
                                   setIsProfileOpen(false);
                                   router.push(
-                                    '/pembuat-kerja/employer?tab=pengaturan',
+                                    '/pembuat-kerja/dashboard?tab=pengaturan',
                                   );
                                 }}
                                 className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer font-bold"
@@ -992,7 +992,7 @@ const Navbar: React.FC = () => {
                         {user?.role === 'admin' ? (
                           <>
                             <Link
-                              href="/pembuat-kerja/employer"
+                              href="/pembuat-kerja/lowongan"
                               className="text-sm font-semibold hover:text-primary transition-colors py-2 border-b"
                               onClick={() => setIsMobileMenuOpen(false)}
                             >
@@ -1000,7 +1000,7 @@ const Navbar: React.FC = () => {
                             </Link>
                             {user?.employerRole !== 'HRD' && (
                               <Link
-                                href="/pembuat-kerja/employer?tab=lowongan"
+                                href="/pembuat-kerja/lowongan"
                                 className="text-sm font-semibold hover:text-primary transition-colors py-2 border-b"
                                 onClick={() => setIsMobileMenuOpen(false)}
                               >
@@ -1008,14 +1008,14 @@ const Navbar: React.FC = () => {
                               </Link>
                             )}
                             <Link
-                              href="/pembuat-kerja/employer?tab=kandidat"
+                              href="/pembuat-kerja/kandidat"
                               className="text-sm font-semibold hover:text-primary transition-colors py-2 border-b"
                               onClick={() => setIsMobileMenuOpen(false)}
                             >
                               Kandidat
                             </Link>
                             <Link
-                              href="/pembuat-kerja/employer?tab=chat"
+                              href="/pembuat-kerja/chat"
                               className="text-sm font-semibold hover:text-primary transition-colors py-2 border-b"
                               onClick={() => setIsMobileMenuOpen(false)}
                             >
@@ -1024,7 +1024,7 @@ const Navbar: React.FC = () => {
                             {user?.employerRole !== 'HRD' && (
                               <>
                                 <Link
-                                  href="/pembuat-kerja/employer?tab=talent"
+                                  href="/pembuat-kerja/talent"
                                   className="text-sm font-semibold hover:text-primary transition-colors py-2 border-b"
                                   onClick={() => setIsMobileMenuOpen(false)}
                                 >
@@ -1032,7 +1032,7 @@ const Navbar: React.FC = () => {
                                 </Link>
 
                                 <Link
-                                  href="/moderation-center"
+                                  href="/pembuat-kerja/admin-moderation"
                                   className="text-sm font-semibold hover:text-primary text-rose-500 dark:text-rose-400 transition-colors py-2"
                                   onClick={() => setIsMobileMenuOpen(false)}
                                 >

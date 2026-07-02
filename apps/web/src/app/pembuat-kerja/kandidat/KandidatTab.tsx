@@ -2119,7 +2119,7 @@ const KandidatTab: React.FC = () => {
                   <button
                     onClick={() => {
                       setSelectedDetailApp(null);
-                      router.push(`/pembuat-kerja/employer?tab=chat&appId=${selectedDetailApp.id}`);
+                      router.push(`/pembuat-kerja/chat&appId=${selectedDetailApp.id}`);
                     }}
                     className="text-xs font-bold text-muted-foreground hover:text-foreground cursor-pointer flex items-center gap-1 bg-transparent border-none p-0"
                   >

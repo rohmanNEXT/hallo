@@ -1,14 +1,18 @@
 'use client';
 
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function PembuatKerjaPage() {
+const PembuatKerjaPage: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace('/pembuat-kerja/employer');
+    router.replace('/pembuat-kerja/lowongan');
   }, [router]);
 
-  return null;
-}
+  const content = null;
+
+  return content;
+};
+
+export default PembuatKerjaPage;

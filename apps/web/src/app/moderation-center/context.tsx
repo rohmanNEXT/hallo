@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAppStore } from '@/store/store';
+import api from '@/lib/api';
 
 export interface MockReviewJob {
   id: string;
@@ -100,8 +101,14 @@ interface ModerationContextProps {
   viewedAppealIds: Set<string>;
   setViewedAppealIds: React.Dispatch<React.SetStateAction<Set<string>>>;
 
-  aiConfig: { apiKey: string; model: string; provider: string };
-  setAiConfig: React.Dispatch<React.SetStateAction<{ apiKey: string; model: string; provider: string }>>;
+  aiConfig: {
+    activeProvider: string;
+    providers: Record<string, { apiKey: string; model: string }>;
+  };
+  setAiConfig: React.Dispatch<React.SetStateAction<{
+    activeProvider: string;
+    providers: Record<string, { apiKey: string; model: string }>;
+  }>>;
 
   mockCompanies: MockCompany[];
   setMockCompanies: React.Dispatch<React.SetStateAction<MockCompany[]>>;
@@ -193,10 +200,31 @@ export const ModerationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
   // AI Config States
   const [aiConfig, setAiConfig] = useState({
-    apiKey: 'sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-    model: 'gpt-4o-mini',
-    provider: 'Gemini',
+    activeProvider: 'Gemini',
+    providers: {
+      OpenRouter: { apiKey: 'sk-or-xxxxxxxxxxxxxxxxxxxx', model: 'meta-llama/llama-3-70b-instruct' },
+      MaimaRouter: { apiKey: 'sk-mr-xxxxxxxxxxxxxxxxxxxx', model: 'maima-v1-standard' },
+      ChatGpt: { apiKey: 'sk-proj-xxxxxxxxxxxxxxxxxxxx', model: 'gpt-4o' },
+      Gemini: { apiKey: 'AIzaSyxxxxxxxxxxxxxxxxxxxx', model: 'gemini-1.5-pro' },
+      claude: { apiKey: 'sk-ant-xxxxxxxxxxxxxxxxxxxx', model: 'claude-3-5-sonnet' },
+      deepseek: { apiKey: 'sk-ds-xxxxxxxxxxxxxxxxxxxx', model: 'deepseek-chat' },
+      kimi: { apiKey: 'sk-km-xxxxxxxxxxxxxxxxxxxx', model: 'moonshot-v1-8k' },
+    }
   });
+
+  useEffect(() => {
+    const fetchAiConfig = async () => {
+      try {
+        const { data } = await api.get('/ai-config');
+        if (data && data.activeProvider && data.providers) {
+          setAiConfig(data);
+        }
+      } catch (error) {
+        console.error('Error fetching AI configuration from backend:', error);
+      }
+    };
+    fetchAiConfig();
+  }, []);
 
   const [mockCompanies, setMockCompanies] = useState<MockCompany[]>(() => {
     const verifiedTemplates = [
@@ -396,6 +424,8 @@ export const ModerationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         createdAt: '2026-06-01',
         rejectedAt: '2026-06-02',
         verifyType: 'update',
+        rejectionReason: 'Dokumen NIB baru yang dilampirkan buram dan tidak terbaca. Mohon unggah ulang dengan kualitas scan yang lebih jelas.',
+        updateRequestReason: 'Mengajukan pembaruan sertifikat halal dan dokumen perizinan domisili usaha yang baru.',
       },
       {
         id: 'COMP-108',
@@ -407,6 +437,7 @@ export const ModerationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         viewed: true,
         createdAt: '2026-05-01',
         rejectedAt: '2026-05-02',
+        rejectionReason: 'Nomor Pokok Wajib Pajak (NPWP) perusahaan setelah dicek tidak terdaftar di sistem DJP.',
       },
       {
         id: 'COMP-109',
@@ -418,6 +449,7 @@ export const ModerationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         viewed: true,
         createdAt: '2026-04-01',
         rejectedAt: '2026-04-02',
+        rejectionReason: 'Legalitas perusahaan SIUP/TDP sudah kadaluarsa sejak tahun 2024 dan belum diperpanjang.',
       },
       {
         id: 'COMP-110',
@@ -429,6 +461,7 @@ export const ModerationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         viewed: true,
         createdAt: '2026-02-01',
         rejectedAt: '2026-02-02',
+        rejectionReason: 'Tanda tangan direktur pada dokumen surat kuasa berbeda dengan KTP yang diunggah.',
       },
     ];
   });
