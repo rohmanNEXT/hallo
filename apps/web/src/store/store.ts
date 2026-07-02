@@ -9,6 +9,8 @@ import { createEmployerSlice, EmployerSlice } from './features/employerSlice';
 export interface AppState extends AuthSlice, BookmarkSlice, ChatSlice, ApplicationSlice, EmployerSlice {
   theme: string;
   setTheme: (theme: string) => void;
+  bannerIndex: number;
+  setBannerIndex: (index: number) => void;
 }
 
 export const useAppStore = create<AppState>()((set, get, store) => ({
@@ -25,6 +27,25 @@ export const useAppStore = create<AppState>()((set, get, store) => ({
         root.classList.remove("dark");
       }
     }
+  },
+  bannerIndex: typeof document !== 'undefined'
+    ? (() => {
+        const saved = document.cookie
+          .split('; ')
+          .find((r) => r.startsWith('banner_photo='));
+        if (saved) {
+          const val = parseInt(saved.split('=')[1], 10);
+          return isNaN(val) ? 0 : val;
+        }
+        return 0;
+      })()
+    : 0,
+  setBannerIndex: (index: number) => {
+    if (typeof document !== 'undefined') {
+      const expires = new Date(Date.now() + 365 * 864e5).toUTCString();
+      document.cookie = `banner_photo=${index}; expires=${expires}; path=/`;
+    }
+    set({ bannerIndex: index });
   },
   
   // Combine slices

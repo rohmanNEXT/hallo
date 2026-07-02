@@ -29,11 +29,16 @@ export const defaultUser: UserProfile = {
     verified: false,
     nib: "",
     name: "",
+    brandName: "",
     address: "",
     email: "",
     website: "",
     whatsapp: "",
+    waNumber: "",
     signature: "",
+    industry: "Teknologi & Informasi",
+    employeeCount: "11-50 Pegawai",
+    description: "",
   },
 };
 

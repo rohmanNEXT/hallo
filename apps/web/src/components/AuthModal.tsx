@@ -2,11 +2,21 @@
 
 import React, { useState } from 'react';
 import { useAppStore } from '@/store/store';
-import { X, Mail, Phone, User, Shield, Info, ArrowRight } from 'lucide-react';
+import {
+  LuX as X,
+  LuMail as Mail,
+  LuPhone as Phone,
+  LuUser as User,
+  LuShield as Shield,
+  LuInfo as Info,
+  LuArrowRight as ArrowRight,
+  LuSearch as Search,
+  LuBuilding2 as Building2,
+} from 'react-icons/lu';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-export default function AuthModal() {
+const AuthModal: React.FC = () => {
   const {
     isAuthModalOpen,
     authModalTab,
@@ -38,14 +48,11 @@ export default function AuthModal() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.trim()) {
-      setError('Email wajib diisi');
-      return;
-    }
+    const mockEmail = role === 'admin' ? 'recruiter@example.com' : 'budi.santoso@example.com';
     setError(null);
     setLoading(true);
     try {
-      const success = await login(email.trim());
+      const success = await login(mockEmail, role);
       if (success) {
         handleClose();
       } else {
@@ -139,16 +146,32 @@ export default function AuthModal() {
             )}
 
             <div className="space-y-3">
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  type="email"
-                  placeholder="Alamat Email Anda"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="pl-9 h-10 text-xs rounded-xl"
-                  required
-                />
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Masuk Sebagai</label>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setRole('user')}
+                    className={`py-2 px-3 text-xs font-bold rounded-xl border transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                      role === 'user'
+                        ? 'border-primary bg-primary/10 text-primary'
+                        : 'border-border hover:bg-muted text-muted-foreground'
+                    }`}
+                  >
+                    <Search className="w-4 h-4 shrink-0" /> Pencari Kerja
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setRole('admin')}
+                    className={`py-2 px-3 text-xs font-bold rounded-xl border transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                      role === 'admin'
+                        ? 'border-primary bg-primary/10 text-primary'
+                        : 'border-border hover:bg-muted text-muted-foreground'
+                    }`}
+                  >
+                    <Building2 className="w-4 h-4 shrink-0" /> Pembuat Kerja
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -157,7 +180,7 @@ export default function AuthModal() {
               <ArrowRight className="h-3.5 w-3.5" />
             </Button>
 
-            <div className="text-center text-xs text-muted-foreground mt-4 space-y-2">
+            <div className="text-center text-xs text-muted-foreground mt-4">
               <p>
                 Belum punya akun?{' '}
                 <button
@@ -166,16 +189,6 @@ export default function AuthModal() {
                   className="font-bold text-primary hover:underline cursor-pointer bg-transparent border-none p-0"
                 >
                   Daftar di sini
-                </button>
-              </p>
-              <p>
-                Lupa email terdaftar?{' '}
-                <button
-                  type="button"
-                  onClick={() => { setError(null); setAuthModal(true, 'forgot-email'); }}
-                  className="font-semibold text-primary hover:underline cursor-pointer bg-transparent border-none p-0"
-                >
-                  Cari Email
                 </button>
               </p>
             </div>
@@ -245,7 +258,7 @@ export default function AuthModal() {
                         : 'border-border hover:bg-muted text-muted-foreground'
                     }`}
                   >
-                    🔍 Pencari Kerja
+                    <Search className="w-4 h-4 shrink-0" /> Pencari Kerja
                   </button>
                   <button
                     type="button"
@@ -256,7 +269,7 @@ export default function AuthModal() {
                         : 'border-border hover:bg-muted text-muted-foreground'
                     }`}
                   >
-                    🏢 Pembuat Kerja
+                    <Building2 className="w-4 h-4 shrink-0" /> Pembuat Kerja
                   </button>
                 </div>
               </div>
@@ -337,4 +350,6 @@ export default function AuthModal() {
       </div>
     </div>
   );
-}
+};
+
+export default AuthModal;

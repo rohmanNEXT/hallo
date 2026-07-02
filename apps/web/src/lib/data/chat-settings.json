@@ -1,0 +1,21 @@
+{
+  "mode": "no-custom",
+  "configs": {
+    "Melamar": {
+      "isActive": true,
+      "customTemplateText": ""
+    },
+    "Terseleksi": {
+      "isActive": false,
+      "customTemplateText": ""
+    },
+    "Diterima": {
+      "isActive": false,
+      "customTemplateText": ""
+    },
+    "Ditutup": {
+      "isActive": false,
+      "customTemplateText": ""
+    }
+  }
+}

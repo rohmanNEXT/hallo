@@ -2,34 +2,42 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Hero from '@/components/Hero';
-import AppBanner from '@/components/AppBanner';
-import IndonesiaMap from '@/components/IndonesiaMap';
+import Hero from '@/components/pencari-kerja/Hero';
+import AppBanner from '@/components/pencari-kerja/AppBanner';
+import IndonesiaMap from '@/components/pencari-kerja/IndonesiaMap';
 import { useAppStore } from '@/store/store';
 import {
-  ShieldCheck,
-  Bookmark,
-  Flame,
-  ArrowRight,
-  ChevronLeft,
-  ChevronRight,
-} from 'lucide-react';
+  LuShieldCheck as ShieldCheck,
+  LuBookmark as Bookmark,
+  LuFlame as Flame,
+  LuArrowRight as ArrowRight,
+  LuChevronLeft as ChevronLeft,
+  LuChevronRight as ChevronRight,
+} from 'react-icons/lu';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import axios from 'axios';
 import { Job } from '@/lib/types';
+import Image from 'next/image';
 
 const Home: React.FC = () => {
   const [mounted, setMounted] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
-  const { bookmarks, toggleBookmark, theme } = useAppStore();
+  const { bookmarks, toggleBookmark, theme, isLoggedIn, user } = useAppStore();
 
   const [mockJobsData, setMockJobsData] = useState<Job[]>([]);
 
   useEffect(() => {
     setMounted(true);
+    if (typeof window !== 'undefined' && isLoggedIn && user?.role === 'admin') {
+      const savedMode = localStorage.getItem('jobseeker-currentViewMode');
+      if (savedMode === 'employer') {
+        router.push('/pembuat-kerja/employer');
+        return;
+      }
+    }
     const fetchJobs = async () => {
       try {
         const { data } = await axios.get<Job[]>('/data/jobs.json');
@@ -39,10 +47,10 @@ const Home: React.FC = () => {
       }
     };
     fetchJobs();
-  }, []);
+  }, [router]);
 
-  // 12 jobs per page (3x4 grid)
-  const jobsPerPage = 12;
+  // 9 jobs per page
+  const jobsPerPage = 9;
   const totalPages = Math.ceil(mockJobsData.length / jobsPerPage);
   const paginatedJobs = mockJobsData.slice(
     (currentPage - 1) * jobsPerPage,
@@ -81,7 +89,7 @@ const Home: React.FC = () => {
                 Lowongan Terbaru
               </h2>
             </div>
-            <Link href="/jobs" className="block shrink-0">
+            <Link href="/pencari-kerja/jobs" className="block shrink-0">
               <Button
                 variant="outline"
                 size="sm"
@@ -95,7 +103,7 @@ const Home: React.FC = () => {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 min-h-[3100px] sm:min-h-[1540px] lg:min-h-[1020px] content-start">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 content-start">
             {paginatedJobs.map((job) => {
               const cardBadges = [
                 ...(job.isPremium ? ['Perusahaan Premium'] : []),
@@ -116,18 +124,18 @@ const Home: React.FC = () => {
               return (
                 <div
                   key={job.id}
-                  onClick={() => router.push(`/jobs/${job.id}`)}
+                  onClick={() => router.push(`/pencari-kerja/jobs/${job.id}`)}
                   className="group relative flex flex-col justify-between rounded-2xl border border-border/70 p-4 cursor-pointer transition-all duration-300 shadow-sm hover:shadow-md hover:border-primary/50 bg-card text-left h-[240px]"
                 >
                   <div>
                     {/* Header: Logo, Title, and Bookmark */}
                     <div className="flex items-start justify-between mb-3.5">
                       <div className="h-10 w-10 rounded-xl bg-white flex items-center justify-center shrink-0 border border-border overflow-hidden">
-                        <img
+                        <Image
                           src={job.logo}
                           alt={job.company}
                           className="w-5.5 h-5.5 object-contain"
-                        />
+                         width={100} height={100} unoptimized />
                       </div>
                       <button
                         type="button"
@@ -228,13 +236,13 @@ const Home: React.FC = () => {
 
                   {/* Footer */}
                   <div className="flex items-center justify-between border-t pt-2.5 mt-auto">
-                    <span className="text-[11.5px] font-bold text-emerald-500">
+                    <span className="text-[12px] font-bold text-emerald-500">
                       {job.salary}
                     </span>
                     <div className="flex items-center gap-1.5 text-[10.5px] text-muted-foreground font-semibold">
                       <span>{job.postedAt}</span>
                       {job.isUrgent && (
-                        <Badge className="bg-red-500/15 hover:bg-red-500/25 text-red-600 dark:text-red-400 font-semibold text-[9.5px] px-1.5 py-0 h-4.5 border border-red-500/10 shadow-none flex items-center gap-0.5 ml-1">
+                        <Badge className="bg-red-500/15 hover:bg-red-500/25 text-red-600 dark:text-red-400 font-semibold text-[10px] px-1.5 py-0 h-4.5 border border-red-500/10 shadow-none flex items-center gap-0.5 ml-1">
                           <Flame className="h-2 w-2" />
                           Urgent
                         </Badge>
@@ -254,7 +262,7 @@ const Home: React.FC = () => {
                   variant="outline"
                   size="sm"
                   className={`h-9 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50 ${
-                    mounted && theme === 'white' ? '!text-black' : ''
+                    mounted && theme === 'white' ? 'text-black!' : ''
                   }`}
                   onClick={() => {
                     setCurrentPage((prev) => Math.max(prev - 1, 1));
@@ -332,7 +340,7 @@ const Home: React.FC = () => {
                   variant="outline"
                   size="sm"
                   className={`h-9 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50 ${
-                    mounted && theme === 'white' ? '!text-black' : ''
+                    mounted && theme === 'white' ? 'text-black!' : ''
                   }`}
                   onClick={() => {
                     setCurrentPage((prev) => Math.min(prev + 1, totalPages));

@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 6001",
     "build": "next build",
-    "serve": "next start -p $PORT",
+    "serve": "next start",
     "lint": "next lint",
     "test": "npx cypress verify & cypress run --component"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.0",
     "autoprefixer": "^10.5.0",
+    "axios": "^1.18.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cross-env": "^7.0.3",

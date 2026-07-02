@@ -36,6 +36,54 @@ export const createApplicationSlice: StateCreator<
       const updated = [newApp, ...currentApps];
       setLocalStorage("jobseeker-applications", updated);
       set({ applications: updated });
+
+      // Automatically add to recruiter side (employerApplications) and trigger welcome message
+      const store = get();
+      const currentEmployerApps = store.employerApplications || [];
+      const autoChatSettings = store.autoChatSettings;
+
+      let welcomeMsg = "";
+      if (autoChatSettings && autoChatSettings.configs && autoChatSettings.configs['Melamar'] && autoChatSettings.configs['Melamar'].isActive) {
+        const config = autoChatSettings.configs['Melamar'];
+        if (autoChatSettings.mode === "custom" && config.customTemplateText) {
+          welcomeMsg = config.customTemplateText;
+        } else {
+          welcomeMsg = "Halo [Nama Kandidat], terima kasih telah melamar posisi [Posisi] di [Nama Perusahaan]. Lamaran Anda telah kami terima dan sedang dalam proses peninjauan oleh tim HRD.";
+        }
+      }
+
+      // Replace placeholders
+      const candidateName = store.user?.name || "Kandidat";
+      welcomeMsg = welcomeMsg
+        .replace(/\[Nama Kandidat\]/g, candidateName)
+        .replace(/\[Posisi\]/g, jobTitle)
+        .replace(/\[Nama Perusahaan\]/g, company);
+
+      const timestamp = new Date().toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }) + ", " + new Date().toLocaleTimeString("id-ID", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      const newEmployerApp = {
+        id: newApp.id,
+        talentId: "talent-1",
+        jobId,
+        status: "Melamar",
+        date: newApp.date,
+        chatHistory: [
+          { sender: "user", content: `Halo rekruter, saya melamar lewat sistem. Kualifikasi saya sesuai.`, timestamp },
+          { sender: "company", content: welcomeMsg, timestamp }
+        ]
+      };
+
+      const updatedEmployerApps = [newEmployerApp, ...currentEmployerApps];
+      setLocalStorage("jobseeker-employerApplications", updatedEmployerApps);
+      set({ employerApplications: updatedEmployerApps });
+
       return true;
     } catch (error) {
       console.error("Apply job failed:", error);

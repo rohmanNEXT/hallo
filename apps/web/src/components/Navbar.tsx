@@ -1,30 +1,33 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import useAppStore from '@/store/store';
 import {
-  Search,
-  Bookmark,
-  MessageCircle,
-  Download,
-  Menu,
-  X,
-  User,
-  Settings,
-  LogOut,
-  FileText,
-  BellRing,
-  Coins,
-  Sparkles,
-  Check,
-} from 'lucide-react';
+  LuBookmark as Bookmark,
+  LuMessageCircle as MessageCircle,
+  LuDownload as Download,
+  LuMenu as Menu,
+  LuX as X,
+  LuUser as User,
+  LuSettings as Settings,
+  LuLogOut as LogOut,
+  LuFileText as FileText,
+  LuBell as Bell,
+  LuCoins as Coins,
+  LuSparkles as Sparkles,
+  LuCheck as Check,
+  LuBuilding2 as Building2,
+  LuLayoutDashboard as LayoutDashboard,
+} from 'react-icons/lu';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Input } from './ui/input';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Job, AppNotification } from '@/lib/types';
+import Image from 'next/image';
 
 const Navbar: React.FC = () => {
   const {
@@ -39,6 +42,32 @@ const Navbar: React.FC = () => {
     setTheme,
     upgradePlan,
   } = useAppStore(); // Using modular Zustand store (fixed export)
+
+  const router = useRouter();
+  const [viewMode, setViewMode] = useState<'seeker' | 'employer'>('seeker');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedMode = localStorage.getItem('jobseeker-currentViewMode') as
+        | 'seeker'
+        | 'employer';
+      if (savedMode) {
+        setViewMode(savedMode);
+      } else if (user?.role === 'admin') {
+        setViewMode('employer');
+      }
+    }
+  }, [user]);
+
+  const toggleViewMode = (mode: 'seeker' | 'employer') => {
+    setViewMode(mode);
+    localStorage.setItem('jobseeker-currentViewMode', mode);
+    if (mode === 'employer') {
+      router.push('/pembuat-kerja/employer');
+    } else {
+      router.push('/');
+    }
+  };
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -98,7 +127,7 @@ const Navbar: React.FC = () => {
           string,
           { title: string; company: string; location: string }
         > = {};
-        data.forEach((job) => {
+        data.forEach((job: any) => {
           map[job.id] = {
             title: job.title,
             company: job.company,
@@ -150,456 +179,857 @@ const Navbar: React.FC = () => {
       >
         <div className="w-full max-w-[90%] mx-auto px-4 md:px-8">
           <div className="flex h-16 items-center justify-between">
-            {/* Left side - Logo & Nav */}
-            <div className="flex items-center space-x-8">
-              <Link
-                href="/"
-                className="flex items-center space-x-1.5 hover:opacity-90 transition-opacity"
-              >
-                <div className="h-6 w-6 rounded-md bg-primary flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-sm">
-                    B
-                  </span>
-                </div>
-                <span className="font-bold text-base tracking-tight">
-                  BlueJob
-                </span>
-              </Link>
-              <nav className="hidden md:flex items-center gap-6">
-                {user?.role === 'admin' ? (
-                  <>
+            {mounted && isLoggedIn && user?.role === 'admin' ? (
+              <>
+                {/* Left Side: Logo & Main Nav */}
+                <div className="flex items-center gap-8">
+                  <Link
+                    href="/pembuat-kerja/employer"
+                    className="flex items-center gap-1.5 hover:opacity-90 transition-opacity"
+                  >
+                    <div className="h-6 w-6 rounded-md bg-primary flex items-center justify-center">
+                      <span className="text-primary-foreground font-bold text-sm">
+                        B
+                      </span>
+                    </div>
+                    <span className="font-bold text-base tracking-tight">
+                      BlueJob Recruiter
+                    </span>
+                  </Link>
+
+                  <nav className="hidden md:flex items-center gap-6">
+                    {user?.employerRole !== 'HRD' && (
+                      <Link
+                        href="/pembuat-kerja/employer?tab=lowongan"
+                        className="text-xs font-bold hover:text-primary transition-colors tracking-wide uppercase"
+                      >
+                        Lowongan
+                      </Link>
+                    )}
                     <Link
-                      href="/employer"
-                      className="text-sm font-semibold text-primary hover:underline transition-all"
-                    >
-                      Dasbor Pembuat Kerja
-                    </Link>
-                    <Link
-                      href="/employer?tab=lowongan"
-                      className="text-sm font-medium hover:text-primary transition-colors"
-                    >
-                      Lowongan Saya
-                    </Link>
-                    <Link
-                      href="/employer?tab=kandidat"
-                      className="text-sm font-medium hover:text-primary transition-colors"
+                      href="/pembuat-kerja/employer?tab=kandidat"
+                      className="text-xs font-bold hover:text-primary transition-colors tracking-wide uppercase"
                     >
                       Kandidat
                     </Link>
                     <Link
-                      href="/employer?tab=talent"
-                      className="text-sm font-medium hover:text-primary transition-colors"
+                      href="/pembuat-kerja/employer?tab=chat"
+                      className="text-xs font-bold hover:text-primary transition-colors tracking-wide uppercase"
                     >
-                      Talent Search
+                      Chat
                     </Link>
-                  </>
-                ) : (
-                  <>
-                    <Link
-                      href="/jobs"
-                      className="text-xs font-semibold hover:text-primary transition-colors"
-                    >
-                      Cari Lowongan
-                    </Link>
-                    <Link
-                      href="/companies"
-                      className="text-xs font-semibold hover:text-primary transition-colors"
-                    >
-                      Perusahaan
-                    </Link>
-                  </>
-                )}
-              </nav>
-            </div>
-
-            {/* Right side - User Actions & Panels */}
-            <div className="flex items-center gap-3">
-              {/* Download App */}
-              <Button
-                variant={!mounted || theme === 'white' ? 'default' : 'outline'}
-                size="sm"
-                className={`hidden sm:flex cursor-pointer ${!mounted || theme === 'white' ? 'bg-[#017eb7] hover:bg-[#016a9a] text-white border' : ''}`}
-                style={
-                  !mounted || theme === 'white'
-                    ? { borderColor: '#017eb7' }
-                    : undefined
-                }
-                onClick={() =>
-                  alert(
-                    'Unduh Aplikasi JobSeeker di Play Store atau App Store!',
-                  )
-                }
-              >
-                <Download className="h-4 w-4 mr-2" />
-                Download App
-              </Button>
-
-              {/* Chat Icon */}
-              <Link href="/dashboard?tab=chat">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="relative cursor-pointer"
-                >
-                  <MessageCircle className="h-5 w-5" />
-                  {mounted && isLoggedIn && (
-                    <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-primary text-[1-px] text-primary-foreground flex items-center justify-center font-bold">
-                      3
-                    </span>
-                  )}
-                </Button>
-              </Link>
-
-              {/* Notification Icon & Panel */}
-              <div className="relative notifications-container">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => {
-                    const nextState = !isNotificationsOpen;
-                    if (nextState) closeAllOthers('notifications');
-                    setIsNotificationsOpen(nextState);
-                  }}
-                  className="relative"
-                >
-                  <BellRing className="h-5 w-5 cursor-pointer" />
-                  {notifications.length > 0 && (
-                    <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-primary text-[10px] text-primary-foreground flex items-center justify-center font-bold">
-                      {notifications.length}
-                    </span>
-                  )}
-                </Button>
-
-                {/* Notification Popover */}
-                {isNotificationsOpen && (
-                  <div
-                    className="absolute right-[-60px] sm:right-0 mt-[21px] w-80 rounded-xl border p-4 shadow-2xl z-50"
-                    style={{
-                      backgroundColor: 'hsl(var(--card))',
-                      color: 'hsl(var(--card-foreground))',
-                    }}
-                  >
-                    <div className="flex items-center justify-between border-b pb-2 mb-3">
-                      <span className="font-semibold text-sm">Notifikasi</span>
-                      <button
-                        type="button"
-                        onClick={() => setIsNotificationsOpen(false)}
-                        className="text-muted-foreground hover:text-foreground"
-                      >
-                        <X className="h-4 w-4 cursor-pointer" />
-                      </button>
-                    </div>
-                    <div className="space-y-1.5 max-h-[350px] overflow-y-auto pr-1 smooth-scroll">
-                      {notifications.length === 0 ? (
-                        <div className="text-center py-6 text-xs text-muted-foreground font-semibold">
-                          Tidak ada notifikasi baru.
-                        </div>
-                      ) : (
-                        notifications.map((notif) => {
-                          let statusColor = 'text-destructive';
-                          if (notif.status === 'Interview')
-                            statusColor = 'text-amber-500';
-                          else if (notif.status === 'Lulus')
-                            statusColor = 'text-emerald-500';
-                          else if (notif.status === 'Review')
-                            statusColor = 'text-blue-500';
-
-                          return (
-                            <div
-                              key={notif.id}
-                              className="p-2 pr-7 border rounded-lg bg-muted/20 text-xs leading-snug relative group"
-                            >
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setNotifications(
-                                    notifications.filter(
-                                      (n) => n.id !== notif.id,
-                                    ),
-                                  );
-                                }}
-                                className="absolute top-2 right-2 text-muted-foreground hover:text-destructive opacity-40 hover:opacity-100 transition-all cursor-pointer"
-                                title="Hapus notifikasi"
-                              >
-                                <X className="h-3.5 w-3.5" />
-                              </button>
-                              <span className="font-bold text-foreground">
-                                {notif.company}
-                              </span>{' '}
-                              status lamaran Anda diperbarui ke{' '}
-                              <span className={`${statusColor} font-bold`}>
-                                {notif.status}
-                              </span>
-                              {notif.suffix}
-                              <span className="text-xs text-muted-foreground block mt-1">
-                                {notif.time}
-                              </span>
-                            </div>
-                          );
-                        })
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Profile Menu Dropdown */}
-              {!mounted ? (
-                <div className="w-16 h-8" />
-              ) : isLoggedIn && user ? (
-                <div className="relative profile-dropdown-container">
-                  <Button
-                    variant="ghost"
-                    className="flex h-10 w-10 items-center justify-center p-0 hover:bg-foreground/10 rounded-full cursor-pointer"
-                    onClick={() => {
-                      const nextState = !isProfileOpen;
-                      if (nextState) closeAllOthers('profile');
-                      setIsProfileOpen(nextState);
-                    }}
-                  >
-                    {user.profileImage ? (
-                      <img
-                        src={user.profileImage}
-                        alt={user.name}
-                        className="h-8 w-8 rounded-full object-cover"
-                      />
-                    ) : (
-                      <div className="h-8 w-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-sm">
-                        {user.name.charAt(0)}
-                      </div>
-                    )}
-                  </Button>
-
-                  {isProfileOpen && (
-                    <div
-                      className="absolute right-0 mt-[18px] w-60 rounded-xl border p-2 shadow-2xl z-50"
-                      style={{
-                        backgroundColor: 'hsl(var(--card))',
-                        color: 'hsl(var(--card-foreground))',
-                      }}
-                    >
-                      <div className="px-3 py-2 border-b mb-1">
-                        <div className="flex items-center gap-2">
-                          {user.profileImage ? (
-                            <img
-                              src={user.profileImage}
-                              alt={user.name}
-                              className="h-7 w-7 rounded-full object-cover"
-                            />
-                          ) : (
-                            <div className="h-7 w-7 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">
-                              {user.name.charAt(0)}
-                            </div>
-                          )}
-                          <div className="min-w-0">
-                            <div className="font-bold text-xs truncate">
-                              {user.name}
-                            </div>
-                            <div className="text-[10px] text-muted-foreground mt-1 truncate">
-                              {user.email}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="mt-2">
-                          <span
-                            className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold ${
-                              user.role === 'admin'
-                                ? 'bg-blue-500/15 text-blue-600'
-                                : 'bg-emerald-500/15 text-emerald-600'
-                            }`}
-                          >
-                            {user.role === 'admin'
-                              ? '🏢 Pembuat Kerja'
-                              : '🔍 Pencari Kerja'}
-                          </span>
-                        </div>
-                      </div>
-
-                      <Link
-                        href={
-                          user.role === 'admin'
-                            ? '/employer'
-                            : '/dashboard?tab=profile'
-                        }
-                        className="group flex items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg transition-all duration-75 cursor-pointer"
-                        onClick={() => setIsProfileOpen(false)}
-                      >
-                        <User className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
-                        {user.role === 'admin' ? 'Dasbor Saya' : 'Profil Saya'}
-                      </Link>
-
-                      {user.role === 'admin' ? (
-                        <>
-                          <div className="px-3 py-2 border-b">
-                            <div className="flex items-center justify-between text-[10px] text-muted-foreground font-semibold">
-                              <span>Plan: {user.plan}</span>
-                            </div>
-                            <div className="flex gap-2 mt-2">
-                              <button
-                                onClick={() => {
-                                  closeAllOthers('coin');
-                                  setIsCoinModalOpen(true);
-                                }}
-                                className="flex-1 text-[10px] font-semibold py-1 px-2 rounded-md bg-amber-500/20 hover:bg-amber-500/30 text-amber-700 transition-colors cursor-pointer"
-                              >
-                                Beli Koin
-                              </button>
-                              <button
-                                onClick={() => {
-                                  closeAllOthers('plan');
-                                  setIsPlanModalOpen(true);
-                                }}
-                                className="flex-1 text-[10px] font-semibold py-1 px-2 rounded-md bg-primary/10 hover:bg-primary/20 text-primary transition-colors cursor-pointer"
-                              >
-                                Upgrade Plan
-                              </button>
-                            </div>
-                          </div>
-                          <hr className="my-1 border-muted" />
-                        </>
-                      ) : (
-                        <>
-                          <Link
-                            href="/dashboard?tab=bookmark"
-                            className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer"
-                            onClick={() => setIsProfileOpen(false)}
-                          >
-                            <Bookmark className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
-                            Loker Disimpan
-                          </Link>
-
-                          <Link
-                            href="/dashboard?tab=lamaran"
-                            className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer"
-                            onClick={() => setIsProfileOpen(false)}
-                          >
-                            <FileText className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
-                            Lamaran Saya
-                          </Link>
-
-                          <button
-                            onClick={() => {
-                              closeAllOthers('settingWeb');
-                              setIsSettingWebOpen(true);
-                            }}
-                            className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer"
-                          >
-                            <Sparkles className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
-                            Setting Tema
-                          </button>
-
-                          <Link
-                            href="/dashboard?tab=settings"
-                            className="group flex items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg transition-all duration-75 cursor-pointer"
-                            onClick={() => setIsProfileOpen(false)}
-                          >
-                            <Settings className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
-                            Setting App
-                          </Link>
-                        </>
-                      )}
-
-                      <hr className="my-1 border-muted" />
-
-                      <button
-                        onClick={() => {
-                          setIsProfileOpen(false);
-                          logout();
-                        }}
-                        className="flex w-full items-center px-3 py-2 text-xs hover:bg-red-600/20 hover:text-white rounded-lg text-left transition-all duration-75 cursor-pointer"
-                      >
-                        <LogOut className="h-4 w-4 mr-2.5" />
-                        Keluar
-                      </button>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <Button size="sm" onClick={() => setAuthModal(true, 'login')}>
-                  Masuk
-                </Button>
-              )}
-
-              {/* Mobile Menu Toggle */}
-              <Button
-                variant="ghost"
-                size="icon"
-                className="md:hidden"
-                onClick={() => {
-                  const nextState = !isMobileMenuOpen;
-                  if (nextState) closeAllOthers('mobileMenu');
-                  setIsMobileMenuOpen(nextState);
-                }}
-              >
-                {isMobileMenuOpen ? (
-                  <X className="h-5 w-5" />
-                ) : (
-                  <Menu className="h-5 w-5" />
-                )}
-              </Button>
-
-              {/* Mobile Menu Panel */}
-              <AnimatePresence>
-                {isMobileMenuOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-16 left-0 right-0 border-b bg-background p-4 shadow-lg md:hidden flex flex-col gap-3 z-50"
-                  >
-                    {user?.role === 'admin' ? (
+                    {user?.employerRole !== 'HRD' && (
                       <>
                         <Link
-                          href="/employer"
-                          className="text-sm font-semibold hover:text-primary transition-colors py-2 border-b"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                          Dasbor Pembuat Kerja
-                        </Link>
-                        <Link
-                          href="/employer?tab=lowongan"
-                          className="text-sm font-semibold hover:text-primary transition-colors py-2 border-b"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                          Lowongan Saya
-                        </Link>
-                        <Link
-                          href="/employer?tab=kandidat"
-                          className="text-sm font-semibold hover:text-primary transition-colors py-2 border-b"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                          Kandidat
-                        </Link>
-                        <Link
-                          href="/employer?tab=talent"
-                          className="text-sm font-semibold hover:text-primary transition-colors py-2"
-                          onClick={() => setIsMobileMenuOpen(false)}
+                          href="/pembuat-kerja/employer?tab=talent"
+                          className="text-xs font-bold hover:text-primary transition-colors tracking-wide uppercase"
                         >
                           Talent Search
                         </Link>
+
+                        <Link
+                          href="/moderation-center"
+                          className="text-xs font-bold hover:text-primary transition-colors tracking-wide uppercase text-rose-500 dark:text-rose-400"
+                        >
+                          Admin Moderation
+                        </Link>
                       </>
-                    ) : (
+                    )}
+                  </nav>
+                </div>
+
+                {/* Right Side: Actions/Credit/Profile */}
+                <div className="flex items-center gap-6">
+                  {/* Credit (Coins) Info */}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      router.push('/pembuat-kerja/employer?tab=coin-credit');
+                    }}
+                    className="h-8 gap-1.5 px-2 bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 rounded-lg cursor-pointer text-xs font-bold"
+                  >
+                    <Coins className="h-4 w-4" />
+                    <span>{user.coins || 0} Koin</span>
+                  </Button>
+
+                  {/* Notification Icon */}
+                  <div className="relative notifications-container">
+                    <button
+                      onClick={() => {
+                        const nextState = !isNotificationsOpen;
+                        if (nextState) closeAllOthers('notifications');
+                        setIsNotificationsOpen(nextState);
+                      }}
+                      className="relative cursor-pointer p-1.5 text-muted-foreground hover:text-foreground transition-colors bg-transparent border-none flex items-center justify-center"
+                    >
+                      <Bell className="h-4.5 w-4.5" />
+                      {notifications.length > 0 && (
+                        <span className="absolute -top-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-primary/40 text-[8px] text-primary-foreground flex items-center justify-center font-bold shadow-sm">
+                          {notifications.length}
+                        </span>
+                      )}
+                    </button>
+
+                    {isNotificationsOpen && (
+                      <div
+                        className="absolute right-0 mt-[21px] w-80 rounded-xl border p-4 shadow-2xl z-50"
+                        style={{
+                          backgroundColor: 'hsl(var(--card))',
+                          color: 'hsl(var(--card-foreground))',
+                        }}
+                      >
+                        <div className="flex items-center justify-between border-b pb-2 mb-3">
+                          <span className="font-semibold text-sm">
+                            Notifikasi
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => setIsNotificationsOpen(false)}
+                            className="text-muted-foreground hover:text-foreground"
+                          >
+                            <X className="h-4 w-4 cursor-pointer" />
+                          </button>
+                        </div>
+                        <div className="space-y-1.5 max-h-[350px] overflow-y-auto pr-1 smooth-scroll">
+                          {notifications.length === 0 ? (
+                            <div className="text-center py-6 text-xs text-muted-foreground font-semibold">
+                              Tidak ada notifikasi baru.
+                            </div>
+                          ) : (
+                            notifications.map((notif) => {
+                              let statusColor = 'text-destructive';
+                              if (notif.status === 'Interview')
+                                statusColor = 'text-amber-500';
+                              else if (notif.status === 'Lulus')
+                                statusColor = 'text-emerald-500';
+                              else if (notif.status === 'Review')
+                                statusColor = 'text-blue-500';
+
+                              return (
+                                <div
+                                  key={notif.id}
+                                  className="p-2 pr-7 border rounded-lg bg-muted/20 text-xs leading-snug relative group"
+                                >
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setNotifications(
+                                        notifications.filter(
+                                          (n) => n.id !== notif.id,
+                                        ),
+                                      );
+                                    }}
+                                    className="absolute top-2 right-2 text-muted-foreground hover:text-destructive opacity-40 hover:opacity-100 transition-all cursor-pointer"
+                                    title="Hapus notifikasi"
+                                  >
+                                    <X className="h-3.5 w-3.5" />
+                                  </button>
+                                  <span className="font-bold text-foreground">
+                                    {notif.company}
+                                  </span>{' '}
+                                  status lamaran Anda diperbarui ke{' '}
+                                  <span className={`${statusColor} font-bold`}>
+                                    {notif.status}
+                                  </span>
+                                  {notif.suffix}
+                                  <span className="text-xs text-muted-foreground block mt-1">
+                                    {notif.time}
+                                  </span>
+                                </div>
+                              );
+                            })
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Profile Dropdown */}
+                  <div className="relative profile-dropdown-container">
+                    <Button
+                      variant="ghost"
+                      className="flex h-8 w-8 items-center justify-center p-0 hover:bg-foreground/10 rounded-full cursor-pointer"
+                      onClick={() => {
+                        const nextState = !isProfileOpen;
+                        if (nextState) closeAllOthers('profile');
+                        setIsProfileOpen(nextState);
+                      }}
+                    >
+                      {user.profileImage ? (
+                        <Image
+                          src={user.profileImage}
+                          alt={user.name}
+                          className="h-7 w-7 rounded-full object-cover"
+                         width={100} height={100} unoptimized />
+                      ) : (
+                        <div className="h-7 w-7 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">
+                          {user.name.charAt(0)}
+                        </div>
+                      )}
+                    </Button>
+
+                    {isProfileOpen && (
+                      <div
+                        className="absolute right-0 mt-[18px] w-60 rounded-xl border p-2 shadow-2xl z-50"
+                        style={{
+                          backgroundColor: 'hsl(var(--card))',
+                          color: 'hsl(var(--card-foreground))',
+                        }}
+                      >
+                        <div className="px-3 py-2 border-b mb-1">
+                          <div className="flex items-center gap-2">
+                            {user.profileImage ? (
+                              <Image
+                                src={user.profileImage}
+                                alt={user.name}
+                                className="h-7 w-7 rounded-full object-cover"
+                               width={100} height={100} unoptimized />
+                            ) : (
+                              <div className="h-7 w-7 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">
+                                {user.name.charAt(0)}
+                              </div>
+                            )}
+                            <div className="min-w-0">
+                              <div className="font-bold text-xs truncate">
+                                {user.name}
+                              </div>
+                              <div className="text-[10px] text-muted-foreground mt-1 truncate">
+                                {user.email}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="px-3 py-2 border-b">
+                          <div className="flex items-center justify-between text-[10px] text-muted-foreground font-semibold">
+                            <span>Plan: {user.plan}</span>
+                            <span>Coins: {user.coins || 0}</span>
+                          </div>
+                          <div className="flex gap-2 mt-2">
+                            <button
+                              onClick={() => {
+                                setIsProfileOpen(false);
+                                if (user.role === 'admin') {
+                                  router.push(
+                                    '/pembuat-kerja/employer?tab=coin-credit',
+                                  );
+                                } else {
+                                  closeAllOthers('coin');
+                                  setIsCoinModalOpen(true);
+                                }
+                              }}
+                              className="flex-1 text-[10px] font-semibold py-1 px-2 rounded-md bg-amber-500/20 hover:bg-amber-500/30 text-amber-700 transition-colors cursor-pointer"
+                            >
+                              Beli Koin
+                            </button>
+                            <button
+                              onClick={() => {
+                                setIsProfileOpen(false);
+                                if (user.role === 'admin') {
+                                  router.push(
+                                    '/pembuat-kerja/employer?tab=langganan',
+                                  );
+                                } else {
+                                  closeAllOthers('plan');
+                                  setIsPlanModalOpen(true);
+                                }
+                              }}
+                              className="flex-1 text-[10px] font-semibold py-1 px-2 rounded-md bg-primary/10 hover:bg-primary/20 text-primary transition-colors cursor-pointer"
+                            >
+                              Upgrade Plan
+                            </button>
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={() => {
+                            setIsProfileOpen(false);
+                            router.push('/pembuat-kerja/employer?tab=profile');
+                          }}
+                          className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer font-bold"
+                        >
+                          <User className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                          Profile Saya
+                        </button>
+
+                        <button
+                          onClick={() => {
+                            setIsProfileOpen(false);
+                            router.push(
+                              '/pembuat-kerja/employer?tab=langganan',
+                            );
+                          }}
+                          className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer font-bold"
+                        >
+                          <Sparkles className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                          Langganan
+                        </button>
+
+                        <button
+                          onClick={() => {
+                            setIsProfileOpen(false);
+                            router.push(
+                              '/pembuat-kerja/employer?tab=coin-credit',
+                            );
+                          }}
+                          className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer font-bold"
+                        >
+                          <Coins className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                          Coin & Credit
+                        </button>
+
+                        <button
+                          onClick={() => {
+                            setIsProfileOpen(false);
+                            router.push(
+                              '/pembuat-kerja/employer?tab=pengaturan',
+                            );
+                          }}
+                          className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer font-bold"
+                        >
+                          <Settings className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                          Pengaturan
+                        </button>
+
+                        <hr className="my-1 border-muted" />
+
+                        <button
+                          onClick={() => {
+                            setIsProfileOpen(false);
+                            logout();
+                          }}
+                          className="flex w-full items-center px-3 py-2 text-xs hover:bg-red-650/20 hover:text-white rounded-lg text-left transition-all duration-75 cursor-pointer font-bold text-red-600 dark:text-red-400"
+                        >
+                          <LogOut className="h-4 w-4 mr-2.5" />
+                          Keluar
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                {/* Left side - Logo & Nav */}
+                <div className="flex items-center space-x-8">
+                  <Link
+                    href="/"
+                    className="flex items-center space-x-1.5 hover:opacity-90 transition-opacity"
+                  >
+                    <div className="h-6 w-6 rounded-md bg-primary flex items-center justify-center">
+                      <span className="text-primary-foreground font-bold text-sm">
+                        B
+                      </span>
+                    </div>
+                    <span className="font-bold text-base tracking-tight">
+                      BlueJob
+                    </span>
+                  </Link>
+                  <nav className="hidden md:flex items-center gap-6">
+                    {!mounted ? (
                       <>
                         <Link
-                          href="/jobs"
-                          className="text-sm font-semibold hover:text-primary transition-colors py-2 border-b"
-                          onClick={() => setIsMobileMenuOpen(false)}
+                          href="/pencari-kerja/jobs"
+                          className="text-xs font-semibold hover:text-primary transition-colors"
                         >
                           Cari Lowongan
                         </Link>
                         <Link
-                          href="/companies"
-                          className="text-sm font-semibold hover:text-primary transition-colors py-2"
-                          onClick={() => setIsMobileMenuOpen(false)}
+                          href="/pencari-kerja/companies"
+                          className="text-xs font-semibold hover:text-primary transition-colors"
+                        >
+                          Perusahaan
+                        </Link>
+                      </>
+                    ) : user?.role === 'admin' ? (
+                      <>
+                        <Link
+                          href="/pembuat-kerja/employer"
+                          className="text-sm font-semibold text-primary hover:underline transition-all"
+                        >
+                          Dasbor Pembuat Kerja
+                        </Link>
+                        {user?.employerRole !== 'HRD' && (
+                          <Link
+                            href="/pembuat-kerja/employer?tab=lowongan"
+                            className="text-sm font-medium hover:text-primary transition-colors"
+                          >
+                            Lowongan Saya
+                          </Link>
+                        )}
+                        <Link
+                          href="/pembuat-kerja/employer?tab=kandidat"
+                          className="text-sm font-medium hover:text-primary transition-colors"
+                        >
+                          Kandidat
+                        </Link>
+                        <Link
+                          href="/pembuat-kerja/employer?tab=chat"
+                          className="text-sm font-medium hover:text-primary transition-colors"
+                        >
+                          Chat
+                        </Link>
+                        {user?.employerRole !== 'HRD' && (
+                          <>
+                            <Link
+                              href="/pembuat-kerja/employer?tab=talent"
+                              className="text-sm font-medium hover:text-primary transition-colors"
+                            >
+                              Talent Search
+                            </Link>
+
+                            <Link
+                              href="/moderation-center"
+                              className="text-sm font-semibold text-rose-500 dark:text-rose-400 hover:text-rose-600 transition-colors"
+                            >
+                              Admin Moderation
+                            </Link>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <Link
+                          href="/pencari-kerja/jobs"
+                          className="text-xs font-semibold hover:text-primary transition-colors"
+                        >
+                          Cari Lowongan
+                        </Link>
+                        <Link
+                          href="/pencari-kerja/companies"
+                          className="text-xs font-semibold hover:text-primary transition-colors"
                         >
                           Perusahaan
                         </Link>
                       </>
                     )}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                  </nav>
+                </div>
+
+                {/* Right side - User Actions & Panels */}
+                <div className="flex items-center gap-6">
+                  {/* Download App */}
+                  <Button
+                    variant={
+                      !mounted || theme === 'white' ? 'default' : 'outline'
+                    }
+                    size="sm"
+                    className={`hidden sm:flex cursor-pointer ${!mounted || theme === 'white' ? 'bg-[#017eb7] hover:bg-[#016a9a] text-white border' : ''}`}
+                    style={
+                      !mounted || theme === 'white'
+                        ? { borderColor: '#017eb7' }
+                        : undefined
+                    }
+                    onClick={() =>
+                      alert(
+                        'Unduh Aplikasi JobSeeker di Play Store atau App Store!',
+                      )
+                    }
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Download App
+                  </Button>
+
+                  {/* Chat Icon */}
+                  <Link
+                    href="/pencari-kerja/dashboard?tab=chat"
+                    className="flex items-center"
+                  >
+                    <button className="relative cursor-pointer p-1.5 text-muted-foreground hover:text-foreground transition-colors bg-transparent border-none flex items-center justify-center">
+                      <MessageCircle className="h-5 w-5" />
+                      {mounted && isLoggedIn && (
+                        <span className="absolute -top-0.5 -right-0.5 h-4.5 w-4.5 rounded-full bg-primary/40 text-[10px] text-primary-foreground flex items-center justify-center font-bold shadow-sm">
+                          3
+                        </span>
+                      )}
+                    </button>
+                  </Link>
+
+                  <div className="relative notifications-container">
+                    <button
+                      onClick={() => {
+                        const nextState = !isNotificationsOpen;
+                        if (nextState) closeAllOthers('notifications');
+                        setIsNotificationsOpen(nextState);
+                      }}
+                      className="relative cursor-pointer p-1.5 text-muted-foreground hover:text-foreground transition-colors bg-transparent border-none flex items-center justify-center"
+                    >
+                      <Bell className="h-5 w-5" />
+                      {notifications.length > 0 && (
+                        <span className="absolute -top-0.5 -right-0.5 h-4.5 w-4.5 rounded-full bg-primary/40 text-[10px] text-primary-foreground flex items-center justify-center font-bold shadow-sm">
+                          {notifications.length}
+                        </span>
+                      )}
+                    </button>
+
+                    {/* Notification Popover */}
+                    {isNotificationsOpen && (
+                      <div
+                        className="absolute right-[-60px] sm:right-0 mt-[21px] w-80 rounded-xl border p-4 shadow-2xl z-50"
+                        style={{
+                          backgroundColor: 'hsl(var(--card))',
+                          color: 'hsl(var(--card-foreground))',
+                        }}
+                      >
+                        <div className="flex items-center justify-between border-b pb-2 mb-3">
+                          <span className="font-semibold text-sm">
+                            Notifikasi
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => setIsNotificationsOpen(false)}
+                            className="text-muted-foreground hover:text-foreground"
+                          >
+                            <X className="h-4 w-4 cursor-pointer" />
+                          </button>
+                        </div>
+                        <div className="space-y-1.5 max-h-[350px] overflow-y-auto pr-1 smooth-scroll">
+                          {notifications.length === 0 ? (
+                            <div className="text-center py-6 text-xs text-muted-foreground font-semibold">
+                              Tidak ada notifikasi baru.
+                            </div>
+                          ) : (
+                            notifications.map((notif) => {
+                              let statusColor = 'text-destructive';
+                              if (notif.status === 'Interview')
+                                statusColor = 'text-amber-500';
+                              else if (notif.status === 'Lulus')
+                                statusColor = 'text-emerald-500';
+                              else if (notif.status === 'Review')
+                                statusColor = 'text-blue-500';
+
+                              return (
+                                <div
+                                  key={notif.id}
+                                  className="p-2 pr-7 border rounded-lg bg-muted/20 text-xs leading-snug relative group"
+                                >
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setNotifications(
+                                        notifications.filter(
+                                          (n) => n.id !== notif.id,
+                                        ),
+                                      );
+                                    }}
+                                    className="absolute top-2 right-2 text-muted-foreground hover:text-destructive opacity-40 hover:opacity-100 transition-all cursor-pointer"
+                                    title="Hapus notifikasi"
+                                  >
+                                    <X className="h-3.5 w-3.5" />
+                                  </button>
+                                  <span className="font-bold text-foreground">
+                                    {notif.company}
+                                  </span>{' '}
+                                  status lamaran Anda diperbarui ke{' '}
+                                  <span className={`${statusColor} font-bold`}>
+                                    {notif.status}
+                                  </span>
+                                  {notif.suffix}
+                                  <span className="text-xs text-muted-foreground block mt-1">
+                                    {notif.time}
+                                  </span>
+                                </div>
+                              );
+                            })
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Profile Menu Dropdown */}
+                  {!mounted ? (
+                    <div className="w-16 h-8" />
+                  ) : isLoggedIn && user ? (
+                    <div className="relative profile-dropdown-container">
+                      <Button
+                        variant="ghost"
+                        className="flex h-8 w-8 items-center justify-center p-0 hover:bg-foreground/10 rounded-full cursor-pointer"
+                        onClick={() => {
+                          const nextState = !isProfileOpen;
+                          if (nextState) closeAllOthers('profile');
+                          setIsProfileOpen(nextState);
+                        }}
+                      >
+                        {user.profileImage ? (
+                          <Image
+                            src={user.profileImage}
+                            alt={user.name}
+                            className="h-7 w-7 rounded-full object-cover"
+                           width={100} height={100} unoptimized />
+                        ) : (
+                          <div className="h-7 w-7 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">
+                            {user.name.charAt(0)}
+                          </div>
+                        )}
+                      </Button>
+
+                      {isProfileOpen && (
+                        <div
+                          className="absolute right-0 mt-[18px] w-60 rounded-xl border p-2 shadow-2xl z-50"
+                          style={{
+                            backgroundColor: 'hsl(var(--card))',
+                            color: 'hsl(var(--card-foreground))',
+                          }}
+                        >
+                          <div className="px-3 py-2 border-b mb-1">
+                            <div className="flex items-center gap-2">
+                              {user.profileImage ? (
+                                <Image
+                                  src={user.profileImage}
+                                  alt={user.name}
+                                  className="h-7 w-7 rounded-full object-cover"
+                                 width={100} height={100} unoptimized />
+                              ) : (
+                                <div className="h-7 w-7 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">
+                                  {user.name.charAt(0)}
+                                </div>
+                              )}
+                              <div className="min-w-0">
+                                <div className="font-bold text-xs truncate">
+                                  {user.name}
+                                </div>
+                                <div className="text-[10px] text-muted-foreground mt-1 truncate">
+                                  {user.email}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {user.role === 'admin' ? (
+                            <>
+                              <button
+                                onClick={() => {
+                                  setIsProfileOpen(false);
+                                  router.push(
+                                    '/pembuat-kerja/employer?tab=profile',
+                                  );
+                                }}
+                                className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer font-bold"
+                              >
+                                <User className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                                Profile Saya
+                              </button>
+
+                              <button
+                                onClick={() => {
+                                  setIsProfileOpen(false);
+                                  router.push(
+                                    '/pembuat-kerja/employer?tab=langganan',
+                                  );
+                                }}
+                                className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer font-bold"
+                              >
+                                <Sparkles className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                                Langganan
+                              </button>
+
+                              <button
+                                onClick={() => {
+                                  setIsProfileOpen(false);
+                                  router.push(
+                                    '/pembuat-kerja/employer?tab=coin-credit',
+                                  );
+                                }}
+                                className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer font-bold"
+                              >
+                                <Coins className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                                Coin & Credit
+                              </button>
+
+                              <button
+                                onClick={() => {
+                                  setIsProfileOpen(false);
+                                  router.push(
+                                    '/pembuat-kerja/employer?tab=pengaturan',
+                                  );
+                                }}
+                                className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer font-bold"
+                              >
+                                <Settings className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                                Pengaturan
+                              </button>
+                            </>
+                          ) : (
+                            <>
+                              <Link
+                                href="/pencari-kerja/dashboard?tab=profile"
+                                className="group flex items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg transition-all duration-75 cursor-pointer font-bold"
+                                onClick={() => setIsProfileOpen(false)}
+                              >
+                                <User className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                                Profil Saya
+                              </Link>
+
+                              <Link
+                                href="/pencari-kerja/dashboard?tab=bookmark"
+                                className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer"
+                                onClick={() => setIsProfileOpen(false)}
+                              >
+                                <Bookmark className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                                Loker Disimpan
+                              </Link>
+
+                              <Link
+                                href="/pencari-kerja/dashboard?tab=lamaran"
+                                className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer"
+                                onClick={() => setIsProfileOpen(false)}
+                              >
+                                <FileText className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                                Lamaran Saya
+                              </Link>
+
+                              <button
+                                onClick={() => {
+                                  setIsProfileOpen(false);
+                                  closeAllOthers('settingWeb');
+                                  setIsSettingWebOpen(true);
+                                }}
+                                className="group flex w-full items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg text-left transition-all duration-75 cursor-pointer"
+                              >
+                                <Sparkles className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                                Tema Web
+                              </button>
+
+                              <Link
+                                href="/pencari-kerja/dashboard?tab=pengaturan"
+                                className="group flex items-center px-3 py-2 text-xs hover:bg-primary hover:text-primary-foreground rounded-lg transition-all duration-75 cursor-pointer"
+                                onClick={() => setIsProfileOpen(false)}
+                              >
+                                <Settings className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                                Pengaturan
+                              </Link>
+                            </>
+                          )}
+
+                          <hr className="my-1 border-muted" />
+
+                          <button
+                            onClick={() => {
+                              setIsProfileOpen(false);
+                              logout();
+                            }}
+                            className="flex w-full items-center px-3 py-2 text-xs hover:bg-red-600/20 hover:text-white rounded-lg text-left transition-all duration-75 cursor-pointer"
+                          >
+                            <LogOut className="h-4 w-4 mr-2.5" />
+                            Keluar
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <Button
+                      size="sm"
+                      onClick={() => setAuthModal(true, 'login')}
+                    >
+                      Masuk
+                    </Button>
+                  )}
+
+                  {/* Mobile Menu Toggle */}
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="md:hidden"
+                    onClick={() => {
+                      const nextState = !isMobileMenuOpen;
+                      if (nextState) closeAllOthers('mobileMenu');
+                      setIsMobileMenuOpen(nextState);
+                    }}
+                  >
+                    {isMobileMenuOpen ? (
+                      <X className="h-5 w-5" />
+                    ) : (
+                      <Menu className="h-5 w-5" />
+                    )}
+                  </Button>
+
+                  {/* Mobile Menu Panel */}
+                  <AnimatePresence>
+                    {isMobileMenuOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="absolute top-16 left-0 right-0 border-b bg-background p-4 shadow-lg md:hidden flex flex-col gap-3 z-50"
+                      >
+                        {user?.role === 'admin' ? (
+                          <>
+                            <Link
+                              href="/pembuat-kerja/employer"
+                              className="text-sm font-semibold hover:text-primary transition-colors py-2 border-b"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              Dasbor Pembuat Kerja
+                            </Link>
+                            {user?.employerRole !== 'HRD' && (
+                              <Link
+                                href="/pembuat-kerja/employer?tab=lowongan"
+                                className="text-sm font-semibold hover:text-primary transition-colors py-2 border-b"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                              >
+                                Lowongan Saya
+                              </Link>
+                            )}
+                            <Link
+                              href="/pembuat-kerja/employer?tab=kandidat"
+                              className="text-sm font-semibold hover:text-primary transition-colors py-2 border-b"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              Kandidat
+                            </Link>
+                            <Link
+                              href="/pembuat-kerja/employer?tab=chat"
+                              className="text-sm font-semibold hover:text-primary transition-colors py-2 border-b"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              Chat
+                            </Link>
+                            {user?.employerRole !== 'HRD' && (
+                              <>
+                                <Link
+                                  href="/pembuat-kerja/employer?tab=talent"
+                                  className="text-sm font-semibold hover:text-primary transition-colors py-2 border-b"
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                  Talent Search
+                                </Link>
+
+                                <Link
+                                  href="/moderation-center"
+                                  className="text-sm font-semibold hover:text-primary text-rose-500 dark:text-rose-400 transition-colors py-2"
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                  Admin Moderation
+                                </Link>
+                              </>
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            <Link
+                              href="/pencari-kerja/jobs"
+                              className="text-sm font-semibold hover:text-primary transition-colors py-2 border-b"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              Cari Lowongan
+                            </Link>
+                            <Link
+                              href="/pencari-kerja/companies"
+                              className="text-sm font-semibold hover:text-primary transition-colors py-2"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              Perusahaan
+                            </Link>
+                          </>
+                        )}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </header>
@@ -712,7 +1142,7 @@ const Navbar: React.FC = () => {
                     <div className="flex items-center justify-between w-full">
                       {theme === th.id && (
                         <div className="h-4 w-4 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] font-bold ml-auto">
-                          ✓
+                          <Check className="w-3 h-3" />
                         </div>
                       )}
                     </div>

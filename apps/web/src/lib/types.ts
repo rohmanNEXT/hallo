@@ -22,16 +22,31 @@ export interface UserProfile {
   certificates: string[];
   profileImage?: string;
   role: "user" | "admin";
+  employerRole?: "MASTER_ADMIN" | "HRD";
+  hrdId?: string;
   plan: "Free" | "Starter" | "Platinum";
+  coins?: number;
+  emailVerified?: boolean;
   companyVerification?: {
     verified: boolean;
     nib: string;
     name: string;
+    brandName: string;
     address: string;
     email: string;
     website: string;
     whatsapp: string;
+    waNumber: string;
     signature: string;
+    industry: string;
+    employeeCount: string;
+    description: string;
+    logoUrl?: string;
+    picName?: string;
+    candidateWhatsapp?: string;
+    galleryImages?: string[];
+    galleryVideos?: string[];
+    workers?: any[];
   };
 }
 
