@@ -40,7 +40,6 @@ const POPULAR_CITIES = [
 const KotaPopuler: React.FC = () => {
   return (
     <section className="max-w-7xl mx-auto px-6 pt-22 pb-6">
-      <hr className="border-t border-border/60 mb-12" />
       <h2 className="text-xl md:text-2xl font-black text-center text-foreground mb-8">
         Kota-Kota Populer
       </h2>
