@@ -119,6 +119,20 @@ const Navbar: React.FC = () => {
   >({});
   const [notifications, setNotifications] = useState<AppNotification[]>([]);
 
+  type EmployerNotif = {
+    id: string;
+    applicantName: string;
+    position: string;
+    time: string;
+  };
+  const [employerNotifications, setEmployerNotifications] = useState<EmployerNotif[]>([
+    { id: 'en1', applicantName: 'Budi Santoso', position: 'Frontend Developer', time: '5 menit lalu' },
+    { id: 'en2', applicantName: 'Siti Rahayu', position: 'UI/UX Designer', time: '12 menit lalu' },
+    { id: 'en3', applicantName: 'Ahmad Fauzi', position: 'Backend Engineer', time: '1 jam lalu' },
+    { id: 'en4', applicantName: 'Dewi Lestari', position: 'Product Manager', time: '2 jam lalu' },
+  ]);
+  const [employerChatCount] = useState(3);
+
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -253,7 +267,7 @@ const Navbar: React.FC = () => {
                     <span>{user.coins || 0} Koin</span>
                   </Button>
 
-                  {/* Notification Icon */}
+                  {/* Notification Icon (Pelamar yang Apply) */}
                   <div className="relative notifications-container">
                     <button
                       onClick={() => {
@@ -262,11 +276,12 @@ const Navbar: React.FC = () => {
                         setIsNotificationsOpen(nextState);
                       }}
                       className="relative cursor-pointer p-1.5 text-muted-foreground hover:text-foreground transition-colors bg-transparent border-none flex items-center justify-center"
+                      title="Notifikasi Pelamar"
                     >
                       <Bell className="h-4.5 w-4.5" />
-                      {notifications.length > 0 && (
+                      {employerNotifications.length > 0 && (
                         <span className="absolute -top-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-primary/40 text-[8px] text-primary-foreground flex items-center justify-center font-bold shadow-sm">
-                          {notifications.length}
+                          {employerNotifications.length}
                         </span>
                       )}
                     </button>
@@ -281,7 +296,7 @@ const Navbar: React.FC = () => {
                       >
                         <div className="flex items-center justify-between border-b pb-2 mb-3">
                           <span className="font-semibold text-sm">
-                            Notifikasi
+                            Pelamar Baru
                           </span>
                           <button
                             type="button"
@@ -292,58 +307,78 @@ const Navbar: React.FC = () => {
                           </button>
                         </div>
                         <div className="space-y-1.5 max-h-[350px] overflow-y-auto pr-1 smooth-scroll">
-                          {notifications.length === 0 ? (
+                          {employerNotifications.length === 0 ? (
                             <div className="text-center py-6 text-xs text-muted-foreground font-semibold">
-                              Tidak ada notifikasi baru.
+                              Belum ada pelamar baru.
                             </div>
                           ) : (
-                            notifications.map((notif) => {
-                              let statusColor = 'text-destructive';
-                              if (notif.status === 'Interview')
-                                statusColor = 'text-amber-500';
-                              else if (notif.status === 'Lulus')
-                                statusColor = 'text-emerald-500';
-                              else if (notif.status === 'Review')
-                                statusColor = 'text-blue-500';
-
-                              return (
-                                <div
-                                  key={notif.id}
-                                  className="p-2 pr-7 border rounded-lg bg-muted/20 text-xs leading-snug relative group"
+                            employerNotifications.map((notif) => (
+                              <div
+                                key={notif.id}
+                                className="p-2 pr-7 border rounded-lg bg-muted/20 text-xs leading-snug relative group cursor-pointer hover:bg-muted/40 transition-colors"
+                                onClick={() => router.push('/pembuat-kerja/employer?tab=kandidat')}
+                              >
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setEmployerNotifications(
+                                      employerNotifications.filter((n) => n.id !== notif.id),
+                                    );
+                                  }}
+                                  className="absolute top-2 right-2 text-muted-foreground hover:text-destructive opacity-40 hover:opacity-100 transition-all cursor-pointer"
+                                  title="Hapus notifikasi"
                                 >
-                                  <button
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      setNotifications(
-                                        notifications.filter(
-                                          (n) => n.id !== notif.id,
-                                        ),
-                                      );
-                                    }}
-                                    className="absolute top-2 right-2 text-muted-foreground hover:text-destructive opacity-40 hover:opacity-100 transition-all cursor-pointer"
-                                    title="Hapus notifikasi"
-                                  >
-                                    <X className="h-3.5 w-3.5" />
-                                  </button>
-                                  <span className="font-bold text-foreground">
-                                    {notif.company}
-                                  </span>{' '}
-                                  status lamaran Anda diperbarui ke{' '}
-                                  <span className={`${statusColor} font-bold`}>
-                                    {notif.status}
-                                  </span>
-                                  {notif.suffix}
-                                  <span className="text-xs text-muted-foreground block mt-1">
-                                    {notif.time}
+                                  <X className="h-3.5 w-3.5" />
+                                </button>
+                                <div className="flex items-center gap-1.5 mb-0.5">
+                                  <div className="h-5 w-5 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-[10px] shrink-0">
+                                    {notif.applicantName.charAt(0)}
+                                  </div>
+                                  <span className="font-bold text-foreground truncate">
+                                    {notif.applicantName}
                                   </span>
                                 </div>
-                              );
-                            })
+                                melamar posisi{' '}
+                                <span className="font-bold text-primary">
+                                  {notif.position}
+                                </span>
+                                <span className="text-xs text-muted-foreground block mt-1">
+                                  {notif.time}
+                                </span>
+                              </div>
+                            ))
                           )}
                         </div>
+                        {employerNotifications.length > 0 && (
+                          <button
+                            onClick={() => {
+                              setIsNotificationsOpen(false);
+                              router.push('/pembuat-kerja/employer?tab=kandidat');
+                            }}
+                            className="w-full mt-3 text-[10px] font-semibold text-primary hover:underline text-center cursor-pointer"
+                          >
+                            Lihat semua pelamar →
+                          </button>
+                        )}
                       </div>
                     )}
                   </div>
+
+                  {/* Chat Icon (Pelamar yang Chat) */}
+                  <Link
+                    href="/pembuat-kerja/employer?tab=chat"
+                    className="flex items-center"
+                    title="Chat Pelamar"
+                  >
+                    <button className="relative cursor-pointer p-1.5 text-muted-foreground hover:text-foreground transition-colors bg-transparent border-none flex items-center justify-center">
+                      <MessageCircle className="h-4.5 w-4.5" />
+                      {employerChatCount > 0 && (
+                        <span className="absolute -top-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-primary/40 text-[8px] text-primary-foreground flex items-center justify-center font-bold shadow-sm">
+                          {employerChatCount}
+                        </span>
+                      )}
+                    </button>
+                  </Link>
 
                   {/* Profile Dropdown */}
                   <div className="relative profile-dropdown-container">
