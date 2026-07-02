@@ -22,27 +22,27 @@ const ModerationLayoutContent: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const menuItems = [
     {
-      path: '/moderation-center/review',
+      path: '/pembuat-kerja/moderation-center/review',
       label: 'Job Verification',
       icon: <FileSearch className="h-4 w-4 shrink-0" />,
     },
     {
-      path: '/moderation-center/restriction',
+      path: '/pembuat-kerja/moderation-center/restriction',
       label: 'Account Suspicion',
       icon: <UserX className="h-4 w-4 shrink-0" />,
     },
     {
-      path: '/moderation-center/appeals',
+      path: '/pembuat-kerja/moderation-center/appeals',
       label: 'Appeal Human',
       icon: <ClipboardSignature className="h-4 w-4 shrink-0" />,
     },
     {
-      path: '/moderation-center/companyverify',
+      path: '/pembuat-kerja/moderation-center/companyverify',
       label: 'Company Verify',
       icon: <Building2 className="h-4 w-4 shrink-0" />,
     },
     {
-      path: '/moderation-center/aiconfig',
+      path: '/pembuat-kerja/moderation-center/aiconfig',
       label: 'AI Config',
       icon: <Settings className="h-4 w-4 shrink-0" />,
     },

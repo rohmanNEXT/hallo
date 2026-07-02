@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import {
   LuSearch as Search,
   LuMapPin as MapPin,
@@ -19,6 +20,12 @@ import {
   LuX as X,
   LuFlame as Flame,
   LuQrCode as QrCode,
+  LuBookOpen as BookIcon,
+  LuAlertCircle as AlertIcon,
+  LuUpload as UploadIcon,
+  LuChevronLeft as ChevronLeft,
+  LuCheck as CheckIcon,
+  LuShieldAlert as ShieldAlert,
 } from 'react-icons/lu';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -37,6 +44,360 @@ import { Job, ProvinceData } from '@/lib/types';
 import Image from 'next/image';
 
 const PROVINCES = provincesData as ProvinceData[];
+
+const HELP_GUIDES = [
+  {
+    q: 'Bagaimana cara melamar pekerjaan?',
+    a: 'Anda dapat mencari lowongan kerja yang sesuai di halaman utama, klik kartu lowongan untuk melihat rincian lengkap, lalu tekan tombol "Lamar Sekarang". Anda dapat memantau status lamaran Anda secara real-time di Dashboard Pencari Kerja pada tab "Lamaran Saya".',
+  },
+  {
+    q: 'Mengapa akun saya berbadge Premium?',
+    a: 'Badge premium diberikan kepada kandidat dengan data profil lengkap untuk memudahkan perusahaan menemukan keahlian Anda.',
+  },
+  {
+    q: 'Apakah proses lamaran di platform ini dipungut biaya?',
+    a: 'Tidak. Seluruh proses melamar pekerjaan di platform kami adalah 100% gratis. Jika ada pemungutan biaya pendaftaran atau akomodasi dengan alasan apapun, segera laporkan perusahaan tersebut melalui fitur "Laporkan Lowongan" yang tersedia.',
+  },
+  {
+    q: 'Bagaimana cara mengganti kata sandi?',
+    a: 'Buka Dashboard Pencari Kerja, masuk ke bagian Profil atau Pengaturan Akun, lalu ubah kata sandi Anda di sana.',
+  },
+];
+
+const REPORT_FIELDS = [
+  { id: 'lowongan',      label: 'Lowongan' },
+  { id: 'perusahaan',   label: 'Perusahaan' },
+  { id: 'chat',         label: 'Chat' },
+  { id: 'keamanan_akun', label: 'Keamanan Akun' },
+  { id: 'pembayaran',   label: 'Pembayaran' },
+  { id: 'lainnya',      label: 'Lainnya' },
+];
+
+const REPORT_CATEGORIES: Record<string, string[]> = {
+  lowongan: ['Deskripsi Pekerjaan Tidak Jelas', 'Indikasi Penipuan', 'Terdapat Pemungutan Biaya', 'Perusahaan Pialang', 'Gaji Terlalu Rendah', 'Lowongan Tidak Layak (SARA / Kekerasan)', 'Lainnya'],
+  perusahaan: ['Informasi Perusahaan Tidak Valid', 'Indikasi Penipuan', 'Rekrutmen Bermasalah', 'Perusahaan Tidak Terdaftar', 'Lainnya'],
+  chat: ['Pesan Spam', 'Konten Tidak Pantas', 'Penipuan Melalui Chat', 'Pelecehan / Intimidasi', 'Lainnya'],
+  keamanan_akun: ['Akun Diretas', 'Phishing / Link Berbahaya', 'Data Pribadi Bocor', 'Login Tidak Dikenal', 'Lainnya'],
+  pembayaran: ['Pembayaran Gagal', 'Tagihan Tidak Sesuai', 'Refund Bermasalah', 'Biaya Rekrutmen Tidak Sah', 'Lainnya'],
+  lainnya: ['Masalah Teknis / Bug', 'Konten Tidak Pantas', 'Fitur Tidak Berjalan', 'Lainnya'],
+};
+
+interface HelpCenterModalProps {
+  onClose: () => void;
+}
+
+const HelpCenterModal: React.FC<HelpCenterModalProps> = ({ onClose }) => {
+  const [activeTab, setActiveTab] = useState<'guide' | 'report'>('guide');
+  const [reportStep, setReportStep] = useState<1 | 2>(1);
+  const [selectedField, setSelectedField] = useState('lowongan');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [additionalInfo, setAdditionalInfo] = useState('');
+  const [email, setEmail] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [files, setFiles] = useState<File[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const filteredGuides = HELP_GUIDES.filter(
+    (g) =>
+      g.q.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      g.a.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const selectedFiles = Array.from(e.target.files);
+      setFiles((prev) => [...prev, ...selectedFiles].slice(0, 5));
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    if (e.dataTransfer.files) {
+      const droppedFiles = Array.from(e.dataTransfer.files);
+      setFiles((prev) => [...prev, ...droppedFiles].slice(0, 5));
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedCategory || additionalInfo.length < 20) return;
+    setReportStep(2);
+  };
+
+  const resetReport = () => {
+    setSelectedField('lowongan');
+    setSelectedCategory('');
+    setAdditionalInfo('');
+    setEmail('');
+    setFiles([]);
+    setReportStep(1);
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div
+        className="absolute inset-0 bg-background/60 backdrop-blur-sm"
+        onClick={onClose}
+      />
+      <div className="relative w-full max-w-4xl rounded-[24px] border bg-card text-foreground shadow-2xl overflow-hidden flex flex-col max-h-[85vh] animate-in fade-in duration-200">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-border/60 shrink-0">
+          <div className="flex items-center gap-2">
+            <HelpIcon className="h-5 w-5 text-primary" />
+            <h2 className="text-sm font-bold text-foreground">
+              {activeTab === 'guide' ? 'Pusat Panduan & Bantuan' : 'Laporkan Kendala / Lowongan'}
+            </h2>
+          </div>
+          <button
+            onClick={onClose}
+            className="rounded-full p-1.5 text-muted-foreground hover:bg-accent hover:text-foreground cursor-pointer transition-colors bg-transparent border-none"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        {reportStep !== 3 && (
+          <div className="flex px-6 border-b border-border/40 shrink-0">
+            <button
+              onClick={() => {
+                setActiveTab('guide');
+                setReportStep(1);
+              }}
+              className={`pb-3 pt-3 font-bold text-xs border-b-2 -mb-[2px] transition-all cursor-pointer ${
+                activeTab === 'guide'
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              Pusat Panduan FAQ
+            </button>
+            <button
+              onClick={() => setActiveTab('report')}
+              className={`pb-3 pt-3 px-6 font-bold text-xs border-b-2 -mb-[2px] transition-all cursor-pointer ${
+                activeTab === 'report'
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              Laporkan Kendala
+            </button>
+          </div>
+        )}
+
+        <div className="flex-1 overflow-y-auto p-6 md:p-8 smooth-scroll">
+          {activeTab === 'guide' && (
+            <div className="space-y-6">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Cari panduan..."
+                  className="w-full pl-9 pr-4 py-2 rounded-xl border border-border bg-background text-xs focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-foreground"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {filteredGuides.map((guide, i) => (
+                  <div key={i} className="p-5 border border-border/70 rounded-2xl bg-muted/10 space-y-2">
+                    <h4 className="font-bold text-xs text-foreground flex items-start gap-1.5">
+                      <span className="text-primary font-black">Q:</span>
+                      {guide.q}
+                    </h4>
+                    <p className="text-[11px] text-muted-foreground leading-relaxed pl-4">
+                      {guide.a}
+                    </p>
+                  </div>
+                ))}
+                {filteredGuides.length === 0 && (
+                  <div className="col-span-2 text-center py-10 text-xs text-muted-foreground">
+                    Tidak menemukan kecocokan panduan.
+                  </div>
+                )}
+              </div>
+
+              <div className="text-center pt-4">
+                <Link
+                  href="/guide"
+                  onClick={onClose}
+                  className="inline-flex items-center gap-1 text-xs font-bold text-primary hover:underline"
+                >
+                  Lihat Halaman Panduan Lengkap <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'report' && (
+            <div>
+              {reportStep === 1 && (
+                <form onSubmit={handleSubmit} className="space-y-8">
+                  {/* Info banner */}
+                  <div className="flex items-start gap-3 p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-600 dark:text-emerald-500">
+                    <ShieldCheck className="h-5 w-5 shrink-0 mt-0.5" />
+                    <p className="text-xs leading-relaxed font-medium">
+                      Kami akan meninjau laporanmu dan mengambil tindakan yang dibutuhkan. Mohon berikan informasi sedetail mungkin. Laporan kamu akan tetap dirahasiakan.
+                    </p>
+                  </div>
+
+                  {/* 1. Bidang Kendala */}
+                  <div>
+                    <label className="block text-xs font-extrabold text-foreground mb-1">
+                      Bidang Kendala<span className="text-primary ml-0.5">*</span>
+                    </label>
+                    <p className="text-[10px] text-muted-foreground mb-3">Pilih bidang yang paling relevan dengan kendala yang kamu alami.</p>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                      {REPORT_FIELDS.map((f) => (
+                        <button
+                          key={f.id}
+                          type="button"
+                          onClick={() => { setSelectedField(f.id); setSelectedCategory(''); }}
+                          className={`px-3 py-2.5 rounded-xl border text-xs font-bold text-left transition-all cursor-pointer ${
+                            selectedField === f.id
+                              ? 'border-primary bg-primary/10 text-primary'
+                              : 'border-border bg-background hover:border-primary/40 hover:bg-muted/30 text-foreground'
+                          }`}
+                        >
+                          {f.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* 2. Kategori Kendala */}
+                  <div>
+                    <label className="block text-xs font-extrabold text-foreground mb-1">
+                      Kategori Kendala<span className="text-primary ml-0.5">*</span>
+                    </label>
+                    <p className="text-[10px] text-muted-foreground mb-3">Pilih kategori yang paling sesuai.</p>
+                    <div className="space-y-1">
+                      {(REPORT_CATEGORIES[selectedField] ?? []).map((cat) => (
+                        <label
+                          key={cat}
+                          className={`flex items-center gap-3 px-3 py-2.5 rounded-xl border cursor-pointer transition-all ${
+                            selectedCategory === cat
+                              ? 'border-primary/50 bg-primary/5'
+                              : 'border-transparent hover:bg-muted/30'
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            name="category"
+                            value={cat}
+                            checked={selectedCategory === cat}
+                            onChange={() => setSelectedCategory(cat)}
+                            className="accent-primary shrink-0"
+                          />
+                          <span className="text-xs font-semibold text-foreground">{cat}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* 3. Deskripsi Kendala */}
+                  <div>
+                    <label className="block text-xs font-extrabold text-foreground mb-1">
+                      Deskripsi Kendala<span className="text-primary ml-0.5">*</span>
+                    </label>
+                    <p className="text-[10px] text-muted-foreground mb-2">Jelaskan kendala secara lengkap agar tim kami dapat menangani dengan tepat (min. 20 karakter).</p>
+                    <div className="relative">
+                      <textarea
+                        value={additionalInfo}
+                        onChange={(e) => setAdditionalInfo(e.target.value.slice(0, 500))}
+                        placeholder="Tambahkan penjelasan yang lengkap agar kami dapat melakukan tindakan lebih lanjut yang diperlukan…"
+                        className="w-full h-28 p-3 rounded-xl border border-border bg-background text-xs focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-foreground resize-none"
+                      />
+                      <div className="flex justify-between items-center text-[10px] text-muted-foreground mt-1">
+                        <span>{additionalInfo.length < 20 && additionalInfo.length > 0 ? 'Minimal 20 karakter' : ''}</span>
+                        <span>{additionalInfo.length} / 500</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 4. Email Tujuan Bermasalah */}
+                  <div>
+                    <label className="block text-xs font-extrabold text-foreground mb-1">
+                      Email Tujuan Bermasalah
+                      <span className="text-muted-foreground font-normal ml-1.5">(opsional, jika terkait email)</span>
+                    </label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="contoh@email.com"
+                      className="w-full px-4 py-2.5 rounded-xl border border-border bg-background text-xs focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-foreground"
+                    />
+                  </div>
+
+                  {/* 5. Upload Bukti Pendukung */}
+                  <div>
+                    <label className="block text-xs font-extrabold text-foreground mb-1">Upload Bukti Pendukung</label>
+                    <p className="text-[10px] text-muted-foreground mb-3 leading-relaxed">
+                      Hanya jenis gambar (JPEG, JPG, PNG) yang diterima. Maksimal 5 file, masing-masing kurang dari 5MB. Upload gambar atau geser file kamu ke kotak di bawah ini.
+                    </p>
+                    <div
+                      onDragOver={(e) => e.preventDefault()}
+                      onDrop={handleDrop}
+                      onClick={() => fileInputRef.current?.click()}
+                      className="border-2 border-dashed border-border/80 hover:border-primary/50 transition-colors rounded-xl p-6 text-center cursor-pointer flex flex-col items-center justify-center gap-2 bg-muted/5"
+                    >
+                      <input type="file" ref={fileInputRef} onChange={handleFileChange} accept="image/png, image/jpeg, image/jpg" multiple className="hidden" />
+                      <UploadIcon className="h-6 w-6 text-muted-foreground" />
+                      <span className="text-[10px] font-bold text-foreground">+ Upload Gambar</span>
+                    </div>
+                    {files.length > 0 && (
+                      <div className="grid grid-cols-2 md:grid-cols-5 gap-3 pt-2">
+                        {files.map((file, i) => (
+                          <div key={i} className="relative p-2.5 border border-border/80 rounded-xl bg-muted/10 text-[10px] font-medium flex items-center justify-between">
+                            <span className="truncate pr-4">{file.name}</span>
+                            <button type="button" onClick={(e) => { e.stopPropagation(); setFiles((prev) => prev.filter((_, idx) => idx !== i)); }} className="text-muted-foreground hover:text-primary cursor-pointer p-0 bg-transparent border-none">
+                              <X className="h-3.5 w-3.5" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Submit */}
+                  <div className="flex justify-end pt-4 border-t border-border/40">
+                    <button
+                      type="submit"
+                      disabled={!selectedCategory || additionalInfo.length < 20}
+                      className="px-6 py-2.5 rounded-xl bg-primary text-primary-foreground text-xs font-bold hover:scale-102 transition-transform cursor-pointer shadow-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100"
+                    >
+                      Kirim Laporan
+                    </button>
+                  </div>
+                </form>
+              )}
+
+              {reportStep === 2 && (
+                <div className="flex flex-col items-center justify-center text-center py-10 space-y-4">
+                  <div className="h-16 w-16 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
+                    <CheckIcon className="h-8 w-8" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <h3 className="text-base font-black text-foreground">Laporan Berhasil Dikirim</h3>
+                    <p className="text-xs text-muted-foreground max-w-sm leading-relaxed">
+                      Terima kasih atas laporan Anda. Tim support kami akan segera meninjau laporan ini dalam waktu 1x24 jam.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => { resetReport(); onClose(); }}
+                    className="px-6 py-2.5 rounded-xl bg-primary text-primary-foreground text-xs font-bold hover:scale-102 transition-transform cursor-pointer shadow-sm mt-2"
+                  >
+                    Tutup Pusat Bantuan
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const JobsPage: React.FC = () => {
   const router = useRouter();
@@ -1157,59 +1518,7 @@ const JobsPage: React.FC = () => {
       </div>
 
       {isHelpOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div
-            className="absolute inset-0 bg-background/60 backdrop-blur-sm"
-            onClick={() => setIsHelpOpen(false)}
-          />
-          <div className="relative w-full max-w-md rounded-2xl border bg-card/95 p-6 shadow-2xl backdrop-blur-md">
-            <button
-              onClick={() => setIsHelpOpen(false)}
-              className="absolute right-4 top-4 rounded-full p-1.5 text-muted-foreground hover:bg-accent hover:text-foreground bg-transparent border-none cursor-pointer"
-            >
-              <X className="h-5 w-5" />
-            </button>
-
-            <div className="mb-4">
-              <h2 className="text-sm font-bold flex items-center gap-1">
-                <HelpIcon className="h-5 w-5 text-primary" />
-                Pusat Bantuan (Help Center)
-              </h2>
-              <p className="text-xs text-muted-foreground">
-                Pertanyaan yang sering ditanyakan mengenai portal lowongan kerja JobSeeker
-              </p>
-            </div>
-
-            <div className="space-y-3 max-h-80 overflow-y-auto pr-1 smooth-scroll text-xs">
-              <div>
-                <h4 className="font-bold text-foreground">
-                  1. Bagaimana cara melamar pekerjaan?
-                </h4>
-                <p className="text-muted-foreground mt-1">
-                  Anda cukup mengklik tombol &quot;Lamar Sekarang&quot; di detail lowongan kerja. Statusnya dapat dilacak langsung melalui menu &quot;Lamaran Saya&quot;.
-                </p>
-              </div>
-              <hr />
-              <div>
-                <h4 className="font-bold text-foreground">
-                  2. Mengapa akun saya berbadge Premium?
-                </h4>
-                <p className="text-muted-foreground mt-1">
-                  Badge premium diberikan kepada kandidat dengan data profil lengkap untuk memudahkan perusahaan menemukan keahlian Anda.
-                </p>
-              </div>
-              <hr />
-              <div>
-                <h4 className="font-bold text-foreground">
-                  3. Apakah pergantian tema tersimpan?
-                </h4>
-                <p className="text-muted-foreground mt-1">
-                  Ya, pilihan tema Anda disimpan otomatis di local storage browser Anda.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <HelpCenterModal onClose={() => setIsHelpOpen(false)} />
       )}
     </div>
   );

@@ -292,7 +292,6 @@ const IndonesiaMap: React.FC = () => {
 
   return (
     <section className="max-w-7xl mx-auto px-6 pt-22 pb-14">
-      <hr className="border-t border-border/60 mb-12" />
       <div className="bg-card rounded-[32px] px-6 py-8 md:p-10 flex flex-col items-center text-center border border-border overflow-hidden">
         {/* Top: Title Only */}
         <h2 className="text-2xl md:text-3xl font-extrabold text-foreground leading-tight mb-9.5">

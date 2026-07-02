@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 
 const AdminModerationPage: React.FC = () => {
   useEffect(() => {
-    window.location.href = '/moderation-center/review';
+    window.location.href = '/pembuat-kerja/moderation-center/review';
   }, []);
 
   const content = null;

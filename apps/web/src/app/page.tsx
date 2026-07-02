@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Hero from '@/components/pencari-kerja/Hero';
 import AppBanner from '@/components/pencari-kerja/AppBanner';
 import IndonesiaMap from '@/components/pencari-kerja/IndonesiaMap';
+import KotaPopuler from '@/components/pencari-kerja/KotaPopuler';
 import { useAppStore } from '@/store/store';
 import {
   LuShieldCheck as ShieldCheck,
@@ -261,7 +262,7 @@ const Home: React.FC = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  className={`h-9 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50 ${
+                  className={`h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50 ${
                     mounted && theme === 'white' ? 'text-black!' : ''
                   }`}
                   onClick={() => {
@@ -270,7 +271,6 @@ const Home: React.FC = () => {
                   disabled={currentPage === 1}
                 >
                   <ChevronLeft className="h-4 w-4" />
-                  <span>Previous</span>
                 </Button>
 
                 <div className="flex items-center gap-1">
@@ -339,7 +339,7 @@ const Home: React.FC = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  className={`h-9 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50 ${
+                  className={`h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50 ${
                     mounted && theme === 'white' ? 'text-black!' : ''
                   }`}
                   onClick={() => {
@@ -347,7 +347,6 @@ const Home: React.FC = () => {
                   }}
                   disabled={currentPage === totalPages}
                 >
-                  <span>Next</span>
                   <ChevronRight className="h-4 w-4" />
                 </Button>
               </div>
@@ -355,6 +354,7 @@ const Home: React.FC = () => {
           )}
         </section>
 
+        <KotaPopuler />
         <IndonesiaMap />
 
         <AppBanner />

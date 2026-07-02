@@ -34,6 +34,7 @@ import {
   LuTwitter,
   LuFacebook,
   LuYoutube,
+  LuFlag as Flag,
 } from 'react-icons/lu';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -43,6 +44,7 @@ import React from 'react';
 import axios from 'axios';
 import { Job, Company } from '@/lib/types';
 import Image from 'next/image';
+import ReportModal from '@/components/pencari-kerja/ReportModal';
 
 const JobDetailPage: React.FC = () => {
   const params = useParams();
@@ -58,6 +60,7 @@ const JobDetailPage: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [isCompanyDescExpanded, setIsCompanyDescExpanded] = useState(false);
+  const [isReportOpen, setIsReportOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -170,22 +173,12 @@ const JobDetailPage: React.FC = () => {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={handleShare}
-                className="text-xs font-semibold cursor-pointer"
+                onClick={() => setIsReportOpen(true)}
+                className="text-xs font-semibold cursor-pointer text-orange-500 border-orange-500/30 hover:bg-orange-500/10 hover:text-orange-500"
+                title="Laporkan Lowongan"
               >
-                <Share2 className="h-3.5 w-3.5 mr-1.5" />
-                {copied ? 'Tersalin!' : 'Bagikan'}
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => toggleBookmark(job.id)}
-                className={`text-xs font-semibold cursor-pointer ${isBookmarked ? 'text-primary border-primary bg-primary/5' : ''}`}
-              >
-                <Bookmark
-                  className={`h-3.5 w-3.5 mr-1.5 ${isBookmarked ? 'fill-primary/60' : ''}`}
-                />
-                {isBookmarked ? 'Tersimpan' : 'Simpan'}
+                <Flag className="h-3.5 w-3.5 mr-1.5" />
+                Laporkan
               </Button>
             </div>
           </div>
@@ -932,6 +925,12 @@ const JobDetailPage: React.FC = () => {
           </div>
         </div>
       </div>
+      <ReportModal
+        isOpen={isReportOpen}
+        onClose={() => setIsReportOpen(false)}
+        targetName={job.title}
+        targetType="lowongan"
+      />
     </>
   );
 };

@@ -185,10 +185,11 @@ const Navbar: React.FC = () => {
   return (
     <>
       <header
-        className="sticky top-0 z-40 w-full border-b bg-background/60 backdrop-blur-md shadow-sm"
+        className="sticky top-0 z-40 w-full border-b border-border/30 shadow-sm"
         style={{
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
+          backgroundColor: 'hsl(var(--background) / 0.65)',
+          backdropFilter: 'blur(24px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(24px) saturate(180%)',
         }}
       >
         <div className="w-full max-w-[90%] mx-auto px-4 md:px-8">
@@ -804,8 +805,11 @@ const Navbar: React.FC = () => {
                         <div
                           className="absolute right-0 mt-[18px] w-60 rounded-xl border p-2 shadow-2xl z-50"
                           style={{
-                            backgroundColor: 'hsl(var(--card))',
+                            backgroundColor: 'hsl(var(--card) / 0.75)',
+                            backdropFilter: 'blur(20px) saturate(180%)',
+                            WebkitBackdropFilter: 'blur(20px) saturate(180%)',
                             color: 'hsl(var(--card-foreground))',
+                            borderColor: 'hsl(var(--border) / 0.5)',
                           }}
                         >
                           <div className="px-3 py-2 border-b mb-1">

@@ -28,6 +28,8 @@ import { useAppStore } from '@/store/store';
 import axios from 'axios';
 import { CompanyProfile, Company, Job } from '@/lib/types';
 import Image from 'next/image';
+import { LuFlag as Flag } from 'react-icons/lu';
+import ReportModal from '@/components/pencari-kerja/ReportModal';
 
 const CompanyProfilePage: React.FC = () => {
   const params = useParams();
@@ -40,6 +42,7 @@ const CompanyProfilePage: React.FC = () => {
   const [allJobs, setAllJobs] = useState<Job[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredJobs, setFilteredJobs] = useState<any[]>([]);
+  const [isReportOpen, setIsReportOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -144,16 +147,27 @@ const CompanyProfilePage: React.FC = () => {
     <>
       <main className="min-h-screen bg-background py-10 pb-24">
         <div className="w-full max-w-[90%] mx-auto px-4 md:px-8">
-          {/* Back button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="mb-8 hover:bg-accent/40 cursor-pointer"
-            onClick={() => router.push('/pencari-kerja/companies')}
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Kembali
-          </Button>
+          {/* Back button row */}
+          <div className="flex items-center justify-between mb-8">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="hover:bg-accent/40 cursor-pointer"
+              onClick={() => router.push('/pencari-kerja/companies')}
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Kembali
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsReportOpen(true)}
+              className="text-xs font-semibold cursor-pointer text-orange-500 border-orange-500/30 hover:bg-orange-500/10 hover:text-orange-500"
+            >
+              <Flag className="h-3.5 w-3.5 mr-1.5" />
+              Laporkan
+            </Button>
+          </div>
 
           {/* Profile Header Banner Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
@@ -595,6 +609,12 @@ const CompanyProfilePage: React.FC = () => {
           </div>
         </div>
       </main>
+      <ReportModal
+        isOpen={isReportOpen}
+        onClose={() => setIsReportOpen(false)}
+        targetName={company.name}
+        targetType="perusahaan"
+      />
     </>
   );
 };

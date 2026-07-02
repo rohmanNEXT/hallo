@@ -723,10 +723,10 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
       </div>
 
       {/* Sub tabs navigation */}
-      <div className="flex">
+      <div className="flex gap-8 border-b border-border/40 w-full">
         <button
           onClick={() => setActiveSubTab('semua')}
-          className={`pb-3 px-6 font-bold text-xs border-b-2 transition-all cursor-pointer ${
+          className={`pb-3 font-bold text-xs border-b-2 -mb-[2px] transition-all cursor-pointer ${
             activeSubTab === 'semua'
               ? 'border-primary text-primary'
               : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -736,7 +736,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
         </button>
         <button
           onClick={() => setActiveSubTab('trash')}
-          className={`pb-3 px-6 font-bold text-xs border-b-2 transition-all cursor-pointer ${
+          className={`pb-3 font-bold text-xs border-b-2 -mb-[2px] transition-all cursor-pointer ${
             activeSubTab === 'trash'
               ? 'border-primary text-primary'
               : 'border-transparent text-muted-foreground hover:text-foreground'
