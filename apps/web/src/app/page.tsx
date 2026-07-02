@@ -80,7 +80,7 @@ const Home: React.FC = () => {
         </div>
 
         {/* Loker Terbaru Section */}
-        <section className="max-w-7xl mx-auto px-6 pt-28 pb-12 flex flex-col min-h-[600px]">
+        <section className="max-w-7xl mx-auto px-6 pt-28 pb-12 flex flex-col h-[1088px]">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
             <div className="text-left">
               <h2
