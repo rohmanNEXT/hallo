@@ -16,13 +16,34 @@ export const metadata: Metadata = {
   description: 'Platform pencarian kerja terbaik di Indonesia',
 };
 
+const themeScript = `
+  (function() {
+    try {
+      var raw = window.localStorage.getItem('jobseeker-theme');
+      if (raw) {
+        var theme = raw;
+        try { theme = JSON.parse(raw); } catch(e) {}
+        document.documentElement.setAttribute('data-theme', theme);
+        if (['dark', 'darkblue', 'charcoal', 'teal', 'emerald', 'burgundy'].indexOf(theme) !== -1) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }
+    } catch (e) {}
+  })();
+`;
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" data-theme="white">
+    <html lang="id" data-theme="white" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className={`${jakartaSans.className} tracking-[0.3px]`}>
         <ScrollDetector />
         <Navbar />

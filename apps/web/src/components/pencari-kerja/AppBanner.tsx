@@ -1,66 +1,84 @@
 'use client';
 
 import React from 'react';
-import { LuApple as Apple, LuPlay as Play } from 'react-icons/lu';
+import { LuApple, LuSmartphone } from 'react-icons/lu';
+import { SiGoogleplay } from 'react-icons/si';
 import Image from 'next/image';
 
 const AppBanner: React.FC = () => {
   return (
     <div className="max-w-3xl mx-auto my-86 mb-40 px-6">
-      <div className="bg-linear-to-br from-card to-card/90 border border-border/80 rounded-[24px] px-6 pt-6 md:px-10 md:pt-8 pb-0 shadow-[0_12px_35px_-10px_rgba(0,0,0,0.06)] flex flex-col md:flex-row items-center justify-between gap-6 relative">
+      <div className="relative overflow-hidden rounded-[28px] border border-border/50 bg-card/80 backdrop-blur-md shadow-[0_8px_40px_-12px_rgba(0,0,0,0.15)] flex flex-col md:flex-row items-center justify-between gap-0">
         {/* Left Side: Content */}
-        <div className="max-w-sm space-y-3 pb-6 md:pb-8 text-left z-10">
-          <h2 className="text-xl md:text-2xl font-extrabold text-foreground">
-            Download Aplikasi BlueJob
-          </h2>
-          <p className="text-xs text-foreground/80 dark:text-muted-foreground font-medium leading-relaxed pb-2.5">
-            Cari lowongan, panggilan wawancara, dan pesan HRD langsung dalam satu genggaman.
-          </p>
+        <div className="relative z-10 flex-1 px-8 py-6 md:py-8 space-y-2.5 text-left">
+          <div className="space-y-2.5 mb-4">
+            <h2 className="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white leading-snug">
+              <span className="block mb-1">Download</span>
+              <span className="block">Aplikasi Blue<span className="text-primary">Job</span></span>
+            </h2>
+            <p className="text-xs text-muted-foreground font-medium leading-relaxed max-w-xs">
+              Cari lowongan, panggilan wawancara, dan pesan HRD langsung dalam
+              satu genggaman.
+            </p>
+          </div>
 
-          <div className="flex flex-wrap gap-3 pt-1.5">
+          <div className="flex flex-wrap gap-3 pt-2">
             {/* App Store */}
-            <a
-              href="#"
-              onClick={(e) => e.preventDefault()}
-              className="flex items-center gap-2.5 bg-foreground/80 hover:bg-foreground/90 text-background rounded-full px-5 py-2 shadow-sm transition-all text-left group border border-border cursor-pointer"
+            <button
+              type="button"
+              className="bg-foreground/80 text-background rounded-full px-4 py-2 transition-all duration-200 hover:opacity-90 hover:scale-[1.02] active:scale-95 shadow-sm group cursor-pointer border-none flex items-center"
             >
-              <Apple className="w-4 h-4 text-background transition-transform group-hover:scale-110 fill-current" />
-              <div>
-                <p className="text-[8px] text-background/70 uppercase font-bold tracking-wider leading-none">
-                  Download on the
-                </p>
-                <p className="text-[12px] font-extrabold text-background mt-1 leading-none">
-                  App Store
-                </p>
-              </div>
-            </a>
+              <a
+                href="#"
+                onClick={(e) => e.preventDefault()}
+                className="flex items-center gap-2.5 text-left text-inherit"
+              >
+                <LuApple className="w-3.5 h-3.5 fill-current shrink-0" />
+                <div>
+                  <p className="text-[7px] text-background/60 uppercase font-semibold tracking-wider leading-none">
+                    Download on the
+                  </p>
+                  <p className="text-[11px] font-extrabold leading-snug">
+                    App Store
+                  </p>
+                </div>
+              </a>
+            </button>
 
             {/* Google Play */}
-            <a
-              href="#"
-              onClick={(e) => e.preventDefault()}
-              className="flex items-center gap-2.5 bg-foreground/80 hover:bg-foreground/90 text-background rounded-full px-5 py-2 shadow-sm transition-all text-left group border border-border cursor-pointer"
+            <button
+              type="button"
+              className="bg-foreground/80 text-background rounded-full px-4 py-2 transition-all duration-200 hover:opacity-90 hover:scale-[1.02] active:scale-95 shadow-sm group cursor-pointer border-none flex items-center"
             >
-              <Play className="w-4 h-4 text-background transition-transform group-hover:scale-110 fill-current" />
-              <div>
-                <p className="text-[8px] text-background/70 uppercase font-bold tracking-wider leading-none">
-                  Get it on
-                </p>
-                <p className="text-[12px] font-extrabold text-background mt-1 leading-none">
-                  Google Play
-                </p>
-              </div>
-            </a>
+              <a
+                href="#"
+                onClick={(e) => e.preventDefault()}
+                className="flex items-center gap-2.5 text-left text-inherit"
+              >
+                <SiGoogleplay className="w-3.5 h-3.5 shrink-0" />
+                <div>
+                  <p className="text-[7px] text-background/60 uppercase font-semibold tracking-wider leading-none">
+                    Get it on
+                  </p>
+                  <p className="text-[11px] font-extrabold leading-snug">
+                    Google Play
+                  </p>
+                </div>
+              </a>
+            </button>
           </div>
         </div>
 
         {/* Right Side: Mockup Image */}
-        <div className="w-[100px] md:w-[230px] shrink-0 self-end flex items-end z-10 relative mb-8">
+        <div className="relative z-10 w-[140px] md:w-[250px] shrink-0 self-center flex items-center right-4 md:right-8 translate-y-0.5 md:translate-y-1.5">
           <Image
             src="/phone_app_mockup.png"
-            alt="JobSeeker App Mockup"
-            className="w-full h-auto object-contain rounded-2xl drop-shadow-[0_-5px_25px_rgba(0,0,0,0.15)]"
-           width={100} height={100} unoptimized />
+            alt="BlueJob App Mockup"
+            className="w-full h-auto object-contain relative z-10 drop-shadow-2xl"
+            width={250}
+            height={360}
+            unoptimized
+          />
         </div>
       </div>
     </div>

@@ -141,7 +141,7 @@ const GuidePage: React.FC = () => {
         </div>
 
         {/* Footer Support Info */}
-        <div className="bg-gradient-to-r from-primary/10 via-background to-emerald-500/10 border border-border rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="bg-linear-to-r from-primary/10 via-background to-emerald-500/10 border border-border rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-center md:text-left">
             <h3 className="text-sm font-bold text-foreground flex items-center justify-center md:justify-start gap-1.5">
               <HelpIcon className="h-5 w-5 text-primary" />

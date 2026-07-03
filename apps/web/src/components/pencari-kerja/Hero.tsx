@@ -11,7 +11,7 @@ import {
 } from 'react-icons/lu';
 import provincesData from '../../lib/indonesia-regions.json';
 import Badge from '../ui/badge';
-import { useAppStore } from '@/store/store';
+import { useAppStore, useHasMounted } from '@/store/store';
 
 interface ProvinceItem {
   province: string;
@@ -21,7 +21,7 @@ interface ProvinceItem {
 const Hero: React.FC = () => {
   const router = useRouter();
   const { theme } = useAppStore();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useHasMounted();
   const [keyword, setKeyword] = useState('');
   const [location, setLocation] = useState('');
   const [provinces, setProvinces] = useState<string[]>([]);
@@ -50,10 +50,6 @@ const Hero: React.FC = () => {
     }
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  useEffect(() => {
-    setMounted(true);
   }, []);
 
   useEffect(() => {

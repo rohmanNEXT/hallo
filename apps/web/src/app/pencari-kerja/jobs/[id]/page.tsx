@@ -163,7 +163,11 @@ const JobDetailPage: React.FC = () => {
               variant="ghost"
               size="sm"
               onClick={() => router.push('/pencari-kerja/jobs')}
-              className="flex items-center gap-2 text-xs font-semibold hover:bg-primary/10 -ml-3 cursor-pointer"
+              className={`flex items-center gap-2 text-xs font-semibold -ml-3 cursor-pointer transition-all ${
+                mounted && theme === 'white'
+                  ? 'text-[#334155] hover:bg-[#eef5fa] hover:text-[#0f6dff]'
+                  : 'text-foreground hover:bg-white/10 hover:text-foreground'
+              }`}
             >
               <ArrowLeft className="h-4 w-4" />
               Kembali
@@ -765,7 +769,7 @@ const JobDetailPage: React.FC = () => {
             </div>
 
             {/* RIGHT SIDEBAR PANEL */}
-            <aside className="w-full lg:w-87 shrink-0 space-y-6 mr-10">
+            <aside className="w-full lg:w-87 shrink-0 space-y-6">
               {/* Loker Ini Dikelola Oleh */}
               <Card className="border border-border/70 bg-card/50 backdrop-blur-sm shadow-md mb-8">
                 <CardContent className="p-5 space-y-4">
@@ -815,7 +819,7 @@ const JobDetailPage: React.FC = () => {
                   Lowongan Lainnya Yang Sesuai
                 </h3>
 
-                <div className="space-y-3">
+                <div className="space-y-5">
                   {recommendedJobs.map((recJob) => (
                     <div
                       key={recJob.id}

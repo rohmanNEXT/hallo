@@ -152,8 +152,12 @@ const CompanyProfilePage: React.FC = () => {
             <Button
               variant="ghost"
               size="sm"
-              className="hover:bg-accent/40 cursor-pointer"
               onClick={() => router.push('/pencari-kerja/companies')}
+              className={`flex items-center gap-2 text-xs font-semibold cursor-pointer transition-all ${
+                mounted && theme === 'white'
+                  ? 'text-[#334155] hover:bg-[#eef5fa] hover:text-[#0f6dff]'
+                  : 'text-foreground hover:bg-white/10 hover:text-foreground'
+              }`}
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
               Kembali
@@ -498,7 +502,7 @@ const CompanyProfilePage: React.FC = () => {
                 </div>
 
                 {/* Jobs list - Max 10 boxes scrollable */}
-                <div className="space-y-3 max-h-[520px] overflow-y-auto pr-1 smooth-scroll">
+                <div className="space-y-5 max-h-[520px] overflow-y-auto pr-1 smooth-scroll">
                   {filteredJobs.length > 0 ? (
                     filteredJobs.map((job) => (
                       <div

@@ -21,7 +21,7 @@ import {
   LuFlame as Flame,
   LuQrCode as QrCode,
   LuBookOpen as BookIcon,
-  LuAlertCircle as AlertIcon,
+  LuCircleAlert as AlertIcon,
   LuUpload as UploadIcon,
   LuChevronLeft as ChevronLeft,
   LuCheck as CheckIcon,
@@ -36,7 +36,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { useAppStore } from '@/store/store';
+import { useAppStore, useHasMounted } from '@/store/store';
 import React from 'react';
 import provincesData from '@/lib/indonesia-regions.json';
 import axios from 'axios';
@@ -51,8 +51,8 @@ const HELP_GUIDES = [
     a: 'Anda dapat mencari lowongan kerja yang sesuai di halaman utama, klik kartu lowongan untuk melihat rincian lengkap, lalu tekan tombol "Lamar Sekarang". Anda dapat memantau status lamaran Anda secara real-time di Dashboard Pencari Kerja pada tab "Lamaran Saya".',
   },
   {
-    q: 'Mengapa akun saya berbadge Premium?',
-    a: 'Badge premium diberikan kepada kandidat dengan data profil lengkap untuk memudahkan perusahaan menemukan keahlian Anda.',
+    q: 'Bagaimana cara memperbarui profil saya?',
+    a: 'Anda dapat memperbarui profil melalui menu "Dashboard Pencari Kerja", lalu pilih tab "Profil Saya". Pastikan untuk mengisi pengalaman kerja dan keahlian terbaru agar lebih mudah dilirik perusahaan.',
   },
   {
     q: 'Apakah proses lamaran di platform ini dipungut biaya?',
@@ -139,7 +139,7 @@ const HelpCenterModal: React.FC<HelpCenterModalProps> = ({ onClose }) => {
         className="absolute inset-0 bg-background/60 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className="relative w-full max-w-4xl rounded-[24px] border bg-card text-foreground shadow-2xl overflow-hidden flex flex-col max-h-[85vh] animate-in fade-in duration-200">
+      <div className="relative w-full max-w-4xl rounded-[32px] border border-border/40 bg-background/95 backdrop-blur-xl text-foreground shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col max-h-[85vh] animate-in slide-in-from-bottom-4 fade-in duration-300">
         <div className="flex items-center justify-between px-6 py-4 border-b border-border/60 shrink-0">
           <div className="flex items-center gap-2">
             <HelpIcon className="h-5 w-5 text-primary" />
@@ -155,14 +155,14 @@ const HelpCenterModal: React.FC<HelpCenterModalProps> = ({ onClose }) => {
           </button>
         </div>
 
-        {reportStep !== 3 && (
+        {reportStep !== 2 && (
           <div className="flex px-6 border-b border-border/40 shrink-0">
             <button
               onClick={() => {
                 setActiveTab('guide');
                 setReportStep(1);
               }}
-              className={`pb-3 pt-3 font-bold text-xs border-b-2 -mb-[2px] transition-all cursor-pointer ${
+              className={`pb-3 pt-3 font-bold text-xs border-b-2 mb-[-2px] transition-all cursor-pointer ${
                 activeTab === 'guide'
                   ? 'border-primary text-primary'
                   : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -172,7 +172,7 @@ const HelpCenterModal: React.FC<HelpCenterModalProps> = ({ onClose }) => {
             </button>
             <button
               onClick={() => setActiveTab('report')}
-              className={`pb-3 pt-3 px-6 font-bold text-xs border-b-2 -mb-[2px] transition-all cursor-pointer ${
+              className={`pb-3 pt-3 px-6 font-bold text-xs border-b-2 mb-[-2px] transition-all cursor-pointer ${
                 activeTab === 'report'
                   ? 'border-primary text-primary'
                   : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -199,9 +199,9 @@ const HelpCenterModal: React.FC<HelpCenterModalProps> = ({ onClose }) => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {filteredGuides.map((guide, i) => (
-                  <div key={i} className="p-5 border border-border/70 rounded-2xl bg-muted/10 space-y-2">
+                  <div key={i} className="p-5 border border-border/40 rounded-3xl bg-gradient-to-br from-muted/20 to-transparent hover:border-primary/30 transition-all duration-300 space-y-2 shadow-sm hover:shadow-md">
                     <h4 className="font-bold text-xs text-foreground flex items-start gap-1.5">
-                      <span className="text-primary font-black">Q:</span>
+                      <span className="text-primary font-black drop-shadow-sm">Q:</span>
                       {guide.q}
                     </h4>
                     <p className="text-[11px] text-muted-foreground leading-relaxed pl-4">
@@ -404,7 +404,7 @@ const JobsPage: React.FC = () => {
   const searchParams = useSearchParams();
   const { bookmarks, toggleBookmark, applyJob, theme, setTheme } =
     useAppStore();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useHasMounted();
   const [mockJobsData, setMockJobsData] = useState<Job[]>([]);
 
   useEffect(() => {
@@ -415,7 +415,6 @@ const JobsPage: React.FC = () => {
   }, [searchParams]);
 
   useEffect(() => {
-    setMounted(true);
     const fetchJobs = async () => {
       try {
         const { data } = await axios.get<Job[]>('/data/jobs.json');
@@ -912,8 +911,8 @@ const JobsPage: React.FC = () => {
                           }
                           className={`px-3 py-1.5 text-xs rounded-full border transition-all cursor-pointer font-medium ${
                             workTypes.includes(type)
-                              ? 'bg-sky-500/15 text-sky-600 dark:text-sky-400 border-sky-500/15'
-                              : 'bg-muted/40 text-muted-foreground border-border/85 hover:bg-muted'
+                              ? 'bg-primary text-primary-foreground border-primary'
+                              : 'bg-background text-foreground border-border hover:bg-primary/10 hover:border-primary/40 hover:text-primary shadow-sm'
                           }`}
                         >
                           {type}
@@ -944,8 +943,8 @@ const JobsPage: React.FC = () => {
                           }
                           className={`px-3 py-1.5 text-xs rounded-full border transition-all cursor-pointer font-medium ${
                             workOptions.includes(opt)
-                              ? 'bg-sky-500/15 text-sky-600 dark:text-sky-400 border-sky-500/15'
-                              : 'bg-muted/40 text-muted-foreground border-border/85 hover:bg-muted'
+                              ? 'bg-primary text-primary-foreground border-primary'
+                              : 'bg-background text-foreground border-border hover:bg-primary/10 hover:border-primary/40 hover:text-primary shadow-sm'
                           }`}
                         >
                           {opt}
@@ -1273,8 +1272,8 @@ const JobsPage: React.FC = () => {
                           onClick={() => setLastUpdate(item.value)}
                           className={`px-3 py-1.5 text-xs rounded-full border transition-all cursor-pointer font-medium ${
                             lastUpdate === item.value
-                              ? 'bg-sky-500/15 text-sky-600 dark:text-sky-400 border-sky-500/15'
-                              : 'bg-muted/40 text-muted-foreground border-border/85 hover:bg-muted'
+                              ? 'bg-primary text-primary-foreground border-primary'
+                              : 'bg-background text-foreground border-border hover:bg-primary/10 hover:border-primary/40 hover:text-primary shadow-sm'
                           }`}
                         >
                           {item.label}

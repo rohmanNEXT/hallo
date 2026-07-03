@@ -202,13 +202,13 @@ const Navbar: React.FC = () => {
                     href="/pembuat-kerja/lowongan"
                     className="flex items-center gap-1.5 hover:opacity-90 transition-opacity"
                   >
-                    <div className="h-6 w-6 rounded-md bg-primary flex items-center justify-center">
+                    <div className="h-6 w-6 rounded-full bg-primary flex items-center justify-center">
                       <span className="text-primary-foreground font-bold text-sm">
                         B
                       </span>
                     </div>
-                    <span className="font-bold text-base tracking-tight">
-                      BlueJob Recruiter
+                    <span className="font-bold text-base tracking-tight text-slate-900 dark:text-white">
+                      Blue<span className="text-primary">Job</span> Recruiter
                     </span>
                   </Link>
 
@@ -553,13 +553,13 @@ const Navbar: React.FC = () => {
                     href="/"
                     className="flex items-center space-x-1.5 hover:opacity-90 transition-opacity"
                   >
-                    <div className="h-6 w-6 rounded-md bg-primary flex items-center justify-center">
+                    <div className="h-6 w-6 rounded-full bg-primary flex items-center justify-center">
                       <span className="text-primary-foreground font-bold text-sm">
                         B
                       </span>
                     </div>
-                    <span className="font-bold text-base tracking-tight">
-                      BlueJob
+                    <span className="font-bold text-base tracking-tight text-slate-900 dark:text-white">
+                      Blue<span className="text-primary">Job</span>
                     </span>
                   </Link>
                   <nav className="hidden md:flex items-center gap-6">

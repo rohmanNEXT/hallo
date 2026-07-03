@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { useState, useEffect } from 'react';
 import { getLocalStorage, setLocalStorage } from './zustand/helpers';
 import { createAuthSlice, AuthSlice } from './features/authSlice';
 import { createBookmarkSlice, BookmarkSlice } from './features/bookmarkSlice';
@@ -55,4 +56,18 @@ export const useAppStore = create<AppState>()((set, get, store) => ({
   ...createApplicationSlice(set, get, store),
   ...createEmployerSlice(set, get, store),
 }));
+
+let globalHasMounted = false;
+
+export const useHasMounted = () => {
+  const [mounted, setMounted] = useState(globalHasMounted);
+  useEffect(() => {
+    globalHasMounted = true;
+    if (!mounted) {
+      setMounted(true);
+    }
+  }, [mounted]);
+  return mounted;
+};
+
 export default useAppStore;
