@@ -40,7 +40,8 @@ interface DashboardProfileProps {
 export default function DashboardProfile({
   onNavigate,
 }: DashboardProfileProps) {
-  const { user, updateProfile, theme, bannerIndex, setBannerIndex } = useAppStore();
+  const { user, updateProfile, theme, bannerIndex, setBannerIndex } =
+    useAppStore();
   const [mounted, setMounted] = useState(false);
 
   // Per-section edit state
@@ -453,56 +454,111 @@ export default function DashboardProfile({
         }
       `}</style>
 
-      <div className="print-profile-root" style={{ background: '#09090b', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px 32px', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+      <div
+        className="print-profile-root"
+        style={{
+          background: '#09090b',
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: '40px 32px',
+          fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+        }}
+      >
         {/* Main Card */}
-        <div style={{
-          width: '100%', maxWidth: 680,
-          background: '#18181b',
-          borderRadius: 24,
-          border: '1px solid #27272a',
-          overflow: 'hidden',
-        }}>
+        <div
+          style={{
+            width: '100%',
+            maxWidth: 680,
+            background: '#18181b',
+            borderRadius: 24,
+            border: '1px solid #27272a',
+            overflow: 'hidden',
+          }}
+        >
           {/* Card Header — Centered */}
           <div style={{ padding: '48px 48px 32px', textAlign: 'center' }}>
             {/* Seeker Profile Image / Initial */}
-            <div style={{
-              width: 72, height: 72, borderRadius: 18, margin: '0 auto 20px',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 28, fontWeight: 800, color: 'white',
-              boxShadow: '0 4px 20px rgba(99,102,241,0.3)',
-              overflow: 'hidden',
-              background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
-            }}>
+            <div
+              style={{
+                width: 72,
+                height: 72,
+                borderRadius: 18,
+                margin: '0 auto 20px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 28,
+                fontWeight: 800,
+                color: 'white',
+                boxShadow: '0 4px 20px rgba(99,102,241,0.3)',
+                overflow: 'hidden',
+                background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+              }}
+            >
               {user.profileImage ? (
-                <Image src={user.profileImage} alt={user.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }}  width={100} height={100} unoptimized />
+                <Image
+                  src={user.profileImage}
+                  alt={user.name}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  width={100}
+                  height={100}
+                  unoptimized
+                />
               ) : (
                 user.name?.charAt(0) || 'U'
               )}
             </div>
 
             {/* Seeker Name */}
-            <h1 style={{
-              fontSize: 32, fontWeight: 800, color: '#fafafa',
-              margin: '0 0 4px', letterSpacing: '-0.5px', lineHeight: 1.2,
-            }}>
+            <h1
+              style={{
+                fontSize: 32,
+                fontWeight: 800,
+                color: '#fafafa',
+                margin: '0 0 4px',
+                letterSpacing: '-0.5px',
+                lineHeight: 1.2,
+              }}
+            >
               {user.name}
             </h1>
 
             {user.career && (
-              <p style={{ fontSize: 15, color: '#a78bfa', fontWeight: 600, margin: '0 0 16px' }}>
+              <p
+                style={{
+                  fontSize: 15,
+                  color: '#a78bfa',
+                  fontWeight: 600,
+                  margin: '0 0 16px',
+                }}
+              >
                 {user.career}
               </p>
             )}
 
             {/* Contact Row */}
-            <p style={{
-              fontSize: 12, color: '#71717a', fontWeight: 500, margin: '0 0 20px',
-              display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap',
-            }}>
+            <p
+              style={{
+                fontSize: 12,
+                color: '#71717a',
+                fontWeight: 500,
+                margin: '0 0 20px',
+                display: 'flex',
+                justifyContent: 'center',
+                gap: 16,
+                flexWrap: 'wrap',
+              }}
+            >
               {user.email && <span>{user.email}</span>}
               {user.waNumber && <span>{user.waNumber}</span>}
               {user.website && <span>{user.website}</span>}
-              {user.socialMedia && <span>LinkedIn: {user.socialMedia.replace('https://', '')}</span>}
+              {user.socialMedia && (
+                <span>
+                  LinkedIn: {user.socialMedia.replace('https://', '')}
+                </span>
+              )}
             </p>
 
             {/* Badges removed for PDF as per UX consistency */}
@@ -512,15 +568,43 @@ export default function DashboardProfile({
           <div style={{ height: 1, background: '#27272a', margin: '0 48px' }} />
 
           {/* Sections */}
-          <div style={{ padding: '32px 48px 40px', display: 'flex', flexDirection: 'column', gap: 28 }}>
-
+          <div
+            style={{
+              padding: '32px 48px 40px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 28,
+            }}
+          >
             {/* TENTANG SAYA */}
             {user.aboutMe && (
-              <div style={{ breakInside: 'avoid', pageBreakInside: 'avoid', paddingTop: 8 }}>
-                <h2 style={{ fontSize: 14, fontWeight: 800, color: '#fafafa', margin: '0 0 10px', letterSpacing: '0.02em' }}>
+              <div
+                style={{
+                  breakInside: 'avoid',
+                  pageBreakInside: 'avoid',
+                  paddingTop: 8,
+                }}
+              >
+                <h2
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 800,
+                    color: '#fafafa',
+                    margin: '0 0 10px',
+                    letterSpacing: '0.02em',
+                  }}
+                >
                   TENTANG SAYA
                 </h2>
-                <p style={{ fontSize: 13, color: '#a1a1aa', lineHeight: 1.9, margin: 0, fontWeight: 400 }}>
+                <p
+                  style={{
+                    fontSize: 13,
+                    color: '#a1a1aa',
+                    lineHeight: 1.9,
+                    margin: 0,
+                    fontWeight: 400,
+                  }}
+                >
                   {user.aboutMe}
                 </p>
               </div>
@@ -528,14 +612,44 @@ export default function DashboardProfile({
 
             {/* PENGALAMAN KERJA */}
             {user.experience && user.experience.length > 0 && (
-              <div style={{ breakInside: 'avoid', pageBreakInside: 'avoid', paddingTop: 8 }}>
-                <h2 style={{ fontSize: 14, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
+              <div
+                style={{
+                  breakInside: 'avoid',
+                  pageBreakInside: 'avoid',
+                  paddingTop: 8,
+                }}
+              >
+                <h2
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 800,
+                    color: '#fafafa',
+                    margin: '0 0 14px',
+                    letterSpacing: '0.02em',
+                  }}
+                >
                   PENGALAMAN KERJA
                 </h2>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <div
+                  style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+                >
                   {user.experience.map((exp: string, i: number) => (
-                    <div key={i} style={{ borderLeft: '2px solid #27272a', paddingLeft: 16, margin: '6px 0' }}>
-                      <p style={{ fontSize: 13, color: '#e4e4e7', fontWeight: 650, margin: '0 0 4px' }}>
+                    <div
+                      key={i}
+                      style={{
+                        borderLeft: '2px solid #27272a',
+                        paddingLeft: 16,
+                        margin: '6px 0',
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontSize: 13,
+                          color: '#e4e4e7',
+                          fontWeight: 650,
+                          margin: '0 0 4px',
+                        }}
+                      >
                         {exp}
                       </p>
                     </div>
@@ -546,14 +660,44 @@ export default function DashboardProfile({
 
             {/* PENDIDIKAN */}
             {user.education && user.education.length > 0 && (
-              <div style={{ breakInside: 'avoid', pageBreakInside: 'avoid', paddingTop: 8 }}>
-                <h2 style={{ fontSize: 14, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
+              <div
+                style={{
+                  breakInside: 'avoid',
+                  pageBreakInside: 'avoid',
+                  paddingTop: 8,
+                }}
+              >
+                <h2
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 800,
+                    color: '#fafafa',
+                    margin: '0 0 14px',
+                    letterSpacing: '0.02em',
+                  }}
+                >
                   PENDIDIKAN
                 </h2>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <div
+                  style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+                >
                   {user.education.map((edu: string, i: number) => (
-                    <div key={i} style={{ borderLeft: '2px solid #27272a', paddingLeft: 16, margin: '6px 0' }}>
-                      <p style={{ fontSize: 13, color: '#e4e4e7', fontWeight: 650, margin: '0 0 4px' }}>
+                    <div
+                      key={i}
+                      style={{
+                        borderLeft: '2px solid #27272a',
+                        paddingLeft: 16,
+                        margin: '6px 0',
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontSize: 13,
+                          color: '#e4e4e7',
+                          fontWeight: 650,
+                          margin: '0 0 4px',
+                        }}
+                      >
                         {edu}
                       </p>
                     </div>
@@ -564,16 +708,40 @@ export default function DashboardProfile({
 
             {/* KEAHLIAN */}
             {user.skill && user.skill.length > 0 && (
-              <div style={{ breakInside: 'avoid', pageBreakInside: 'avoid', paddingTop: 8 }}>
-                <h2 style={{ fontSize: 14, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
+              <div
+                style={{
+                  breakInside: 'avoid',
+                  pageBreakInside: 'avoid',
+                  paddingTop: 8,
+                }}
+              >
+                <h2
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 800,
+                    color: '#fafafa',
+                    margin: '0 0 14px',
+                    letterSpacing: '0.02em',
+                  }}
+                >
                   KEAHLIAN / SKILL
                 </h2>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                   {user.skill.map((skill: string, i: number) => (
-                    <span key={i} style={{
-                      padding: '4px 12px', borderRadius: 999, fontSize: 12, fontWeight: 600,
-                      background: '#27272a', color: '#e4e4e7', border: '1px solid #3f3f46'
-                    }}>{skill}</span>
+                    <span
+                      key={i}
+                      style={{
+                        padding: '4px 12px',
+                        borderRadius: 999,
+                        fontSize: 12,
+                        fontWeight: 600,
+                        background: '#27272a',
+                        color: '#e4e4e7',
+                        border: '1px solid #3f3f46',
+                      }}
+                    >
+                      {skill}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -581,14 +749,44 @@ export default function DashboardProfile({
 
             {/* ORGANISASI */}
             {user.organization && user.organization.length > 0 && (
-              <div style={{ breakInside: 'avoid', pageBreakInside: 'avoid', paddingTop: 8 }}>
-                <h2 style={{ fontSize: 14, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
+              <div
+                style={{
+                  breakInside: 'avoid',
+                  pageBreakInside: 'avoid',
+                  paddingTop: 8,
+                }}
+              >
+                <h2
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 800,
+                    color: '#fafafa',
+                    margin: '0 0 14px',
+                    letterSpacing: '0.02em',
+                  }}
+                >
                   ORGANISASI
                 </h2>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <div
+                  style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+                >
                   {user.organization.map((org: string, i: number) => (
-                    <div key={i} style={{ borderLeft: '2px solid #27272a', paddingLeft: 16, margin: '6px 0' }}>
-                      <p style={{ fontSize: 13, color: '#e4e4e7', fontWeight: 650, margin: '0 0 4px' }}>
+                    <div
+                      key={i}
+                      style={{
+                        borderLeft: '2px solid #27272a',
+                        paddingLeft: 16,
+                        margin: '6px 0',
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontSize: 13,
+                          color: '#e4e4e7',
+                          fontWeight: 650,
+                          margin: '0 0 4px',
+                        }}
+                      >
                         {org}
                       </p>
                     </div>
@@ -599,14 +797,44 @@ export default function DashboardProfile({
 
             {/* SERTIFIKASI */}
             {user.certificates && user.certificates.length > 0 && (
-              <div style={{ breakInside: 'avoid', pageBreakInside: 'avoid', paddingTop: 24 }}>
-                <h2 style={{ fontSize: 14, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
+              <div
+                style={{
+                  breakInside: 'avoid',
+                  pageBreakInside: 'avoid',
+                  paddingTop: 24,
+                }}
+              >
+                <h2
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 800,
+                    color: '#fafafa',
+                    margin: '0 0 14px',
+                    letterSpacing: '0.02em',
+                  }}
+                >
                   SERTIFIKASI
                 </h2>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <div
+                  style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+                >
                   {user.certificates.map((cert: string, i: number) => (
-                    <div key={i} style={{ borderLeft: '2px solid #27272a', paddingLeft: 16, margin: '6px 0' }}>
-                      <p style={{ fontSize: 13, color: '#e4e4e7', fontWeight: 650, margin: '0 0 4px' }}>
+                    <div
+                      key={i}
+                      style={{
+                        borderLeft: '2px solid #27272a',
+                        paddingLeft: 16,
+                        margin: '6px 0',
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontSize: 13,
+                          color: '#e4e4e7',
+                          fontWeight: 650,
+                          margin: '0 0 4px',
+                        }}
+                      >
                         {cert}
                       </p>
                     </div>
@@ -617,26 +845,79 @@ export default function DashboardProfile({
 
             {/* REFERENSI KERJA */}
             {user.jobReference && (
-              <div style={{ breakInside: 'avoid', pageBreakInside: 'avoid', paddingTop: 8 }}>
-                <h2 style={{ fontSize: 14, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
+              <div
+                style={{
+                  breakInside: 'avoid',
+                  pageBreakInside: 'avoid',
+                  paddingTop: 8,
+                }}
+              >
+                <h2
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 800,
+                    color: '#fafafa',
+                    margin: '0 0 14px',
+                    letterSpacing: '0.02em',
+                  }}
+                >
                   REFERENSI KERJA
                 </h2>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px 32px' }}>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '12px 32px',
+                  }}
+                >
                   {[
                     { label: 'Minat Kerja', value: user.jobReference.interest },
                     { label: 'Kota Pilihan', value: user.jobReference.city },
-                    { label: 'Ekspektasi Gaji', value: user.jobReference.salaryExpectation },
-                    { label: 'Opsi Kerja', value: user.jobReference.workOption },
-                  ].filter(item => item.value).map((item, i) => (
-                    <div key={i} style={{ padding: '8px 0', borderBottom: '1px solid #27272a' }}>
-                      <p style={{ fontSize: 12, fontWeight: 700, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 2px' }}>{item.label}</p>
-                      <p style={{ fontSize: 13, color: '#e4e4e7', fontWeight: 600, margin: 0 }}>{item.value}</p>
-                    </div>
-                  ))}
+                    {
+                      label: 'Ekspektasi Gaji',
+                      value: user.jobReference.salaryExpectation,
+                    },
+                    {
+                      label: 'Opsi Kerja',
+                      value: user.jobReference.workOption,
+                    },
+                  ]
+                    .filter((item) => item.value)
+                    .map((item, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          padding: '8px 0',
+                          borderBottom: '1px solid #27272a',
+                        }}
+                      >
+                        <p
+                          style={{
+                            fontSize: 12,
+                            fontWeight: 700,
+                            color: '#52525b',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.08em',
+                            margin: '0 0 2px',
+                          }}
+                        >
+                          {item.label}
+                        </p>
+                        <p
+                          style={{
+                            fontSize: 13,
+                            color: '#e4e4e7',
+                            fontWeight: 600,
+                            margin: 0,
+                          }}
+                        >
+                          {item.value}
+                        </p>
+                      </div>
+                    ))}
                 </div>
               </div>
             )}
-
           </div>
         </div>
       </div>
@@ -728,7 +1009,10 @@ export default function DashboardProfile({
                             alt={photo.label}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                             draggable={false}
-                           width={100} height={100} unoptimized />
+                            width={100}
+                            height={100}
+                            unoptimized
+                          />
                           <div className="absolute inset-0 bg-black/25 group-hover:bg-black/5 transition-all" />
                           <span className="absolute bottom-1 left-0 right-0 text-center text-[12px] font-bold text-white drop-shadow-md">
                             {photo.label}
@@ -760,7 +1044,10 @@ export default function DashboardProfile({
                             alt="Bing"
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                             draggable={false}
-                           width={100} height={100} unoptimized />
+                            width={100}
+                            height={100}
+                            unoptimized
+                          />
                           <div className="absolute inset-0 bg-black/25" />
                         </div>
                         <span className="text-[12px] font-bold text-foreground">
@@ -795,7 +1082,10 @@ export default function DashboardProfile({
                         src={user.profileImage}
                         alt="avatar"
                         className="w-full h-full object-cover"
-                       width={100} height={100} unoptimized />
+                        width={100}
+                        height={100}
+                        unoptimized
+                      />
                     ) : (
                       <div className="w-full h-full bg-card text-foreground flex items-center justify-center font-bold text-2xl border border-border">
                         {user.name?.charAt(0) ?? '?'}
@@ -954,7 +1244,7 @@ export default function DashboardProfile({
                 </div>
                 <div>
                   <label className="text-[12px] font-bold text-muted-foreground uppercase">
-                    Nomor Wa 
+                    Nomor Wa
                   </label>
                   <Input
                     value={formData.waNumber}
@@ -1079,7 +1369,11 @@ export default function DashboardProfile({
                     <div className="flex items-center justify-between bg-muted/40 border border-border/80 rounded-xl p-2.5">
                       <div className="flex items-center gap-2 min-w-0">
                         <span className="shrink-0 flex items-center">
-                          {formData.softFile.endsWith('.pdf') ? <FileText className="w-5 h-5" /> : <FileEdit className="w-5 h-5" />}
+                          {formData.softFile.endsWith('.pdf') ? (
+                            <FileText className="w-5 h-5" />
+                          ) : (
+                            <FileEdit className="w-5 h-5" />
+                          )}
                         </span>
                         <span className="text-xs font-bold truncate text-foreground">
                           {formData.softFile}
@@ -1163,8 +1457,8 @@ export default function DashboardProfile({
                         <span className="text-[12px] font-bold px-1.5 py-0.5 rounded-md bg-primary/10 border border-primary/20 text-muted-foreground uppercase shrink-0">
                           {user.softFile.split('.').pop()}
                         </span>
-                        <a 
-                          href="#" 
+                        <a
+                          href="#"
                           onClick={(e) => {
                             e.preventDefault();
                             window.print();
@@ -1917,57 +2211,75 @@ export default function DashboardProfile({
                     }
                     className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-foreground mt-1"
                   />
-                               <div>
-                  <label className="text-[12px] font-bold text-muted-foreground uppercase">
-                    Opsi Kerja
-                  </label>
-                  <div className="flex flex-wrap gap-3 mt-2">
-                    {['Remote', 'Hybrid', 'Onsite'].map((opt) => {
-                      const selectedOptions = (formData.jobReference?.workOption || 'Hybrid')
-                        .split(',')
-                        .map((s: any) => s.trim())
-                        .filter(Boolean);
-                      const isChecked = selectedOptions.includes(opt);
-                      return (
-                        <label key={opt} className="flex items-center gap-1.5 text-xs font-semibold cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={isChecked}
-                            onChange={(e) => {
-                              let newOptions;
-                              if (e.target.checked) {
-                                newOptions = [...selectedOptions, opt];
-                              } else {
-                                newOptions = selectedOptions.filter((o: string) => o !== opt);
-                              }
-                              setFormData({
-                                ...formData,
-                                jobReference: {
-                                  ...formData.jobReference,
-                                  workOption: newOptions.join(','),
-                                },
-                              });
-                            }}
-                            className="rounded border-border text-primary focus:ring-primary h-4 w-4 bg-background"
-                          />
-                          <span>{opt}</span>
-                        </label>
-                      );
-                    })}
-                  </div>
-                </div>   </div>
+                  <div>
+                    <label className="text-[12px] font-bold text-muted-foreground uppercase">
+                      Opsi Kerja
+                    </label>
+                    <div className="flex flex-wrap gap-3 mt-2">
+                      {['Remote', 'Hybrid', 'Onsite'].map((opt) => {
+                        const selectedOptions = (
+                          formData.jobReference?.workOption || 'Hybrid'
+                        )
+                          .split(',')
+                          .map((s: any) => s.trim())
+                          .filter(Boolean);
+                        const isChecked = selectedOptions.includes(opt);
+                        return (
+                          <label
+                            key={opt}
+                            className="flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              checked={isChecked}
+                              onChange={(e) => {
+                                let newOptions;
+                                if (e.target.checked) {
+                                  newOptions = [...selectedOptions, opt];
+                                } else {
+                                  newOptions = selectedOptions.filter(
+                                    (o: string) => o !== opt,
+                                  );
+                                }
+                                setFormData({
+                                  ...formData,
+                                  jobReference: {
+                                    ...formData.jobReference,
+                                    workOption: newOptions.join(','),
+                                  },
+                                });
+                              }}
+                              className="rounded border-border text-primary focus:ring-primary h-4 w-4 bg-background"
+                            />
+                            <span>{opt}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                  </div>{' '}
+                </div>
               </div>
             ) : (
               <div className="space-y-6 pt-1">
                 {/* Row 1: Bidang Minat */}
                 <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-2 md:gap-4 items-start">
-                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Bidang Minat</span>
+                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Bidang Minat
+                  </span>
                   <div className="space-y-2">
                     <div className="space-y-2.5 my-1">
                       {(() => {
-                        const roles = (user.jobReference?.interest || 'Software Engineering / Web Development').split(/\s*[\/,]\s*/).slice(0, 3);
+                        const roles = (
+                          user.jobReference?.interest ||
+                          'Software Engineering / Web Development'
+                        )
+                          .split(/\s*[\/,]\s*/)
+                          .slice(0, 3);
                         return roles.map((role: string, idx: number) => (
-                          <div key={idx} className="flex items-center gap-2 text-xs font-medium text-foreground/80">
+                          <div
+                            key={idx}
+                            className="flex items-center gap-2 text-xs font-medium text-foreground/80"
+                          >
                             <CircleCheck />
                             <span>{role}</span>
                           </div>
@@ -1979,7 +2291,9 @@ export default function DashboardProfile({
 
                 {/* Row 2: Tipe Pekerjaan */}
                 <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-2 md:gap-4 items-start pt-2 border-t border-border/45">
-                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Tipe Pekerjaan</span>
+                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Tipe Pekerjaan
+                  </span>
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 text-xs font-medium text-foreground/80">
                       <CircleCheck />
@@ -1998,7 +2312,9 @@ export default function DashboardProfile({
 
                 {/* Row 3: Ekspektasi Gaji Bulanan */}
                 <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-2 md:gap-4 items-start pt-2 border-t border-border/45">
-                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Ekspektasi Gaji Bulanan</span>
+                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Ekspektasi Gaji Bulanan
+                  </span>
                   <span className="text-sm font-bold text-foreground">
                     {user.jobReference?.salaryExpectation || 'IDR 5 jt - 8 jt'}
                   </span>
@@ -2006,27 +2322,37 @@ export default function DashboardProfile({
 
                 {/* Row 4: Preferensi Kota Kerja */}
                 <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-2 md:gap-4 items-start pt-2 border-t border-border/45">
-                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Preferensi Kota Kerja</span>
+                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Preferensi Kota Kerja
+                  </span>
                   <div className="flex items-center gap-2 text-xs font-medium text-foreground/80">
                     <CircleCheck />
-                    <span>{user.jobReference?.city || 'Jakarta Pusat'}, Jawa Timur</span>
+                    <span>
+                      {user.jobReference?.city || 'Jakarta Pusat'}, Jawa Timur
+                    </span>
                   </div>
-                                {/* Row 5: Bersedia Bekerja */}
-                <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-2 md:gap-4 items-start pt-2 border-t border-border/45">
-                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Bersedia Bekerja</span>
-                  <div className="space-y-2">
-                    {(user.jobReference?.workOption || 'Hybrid')
-                      .split(',')
-                      .map((s: string) => s.trim())
-                      .filter(Boolean)
-                      .map((opt: string, idx: number) => (
-                        <div key={idx} className="flex items-center gap-2 text-xs font-medium text-foreground/80">
-                          <CircleCheck />
-                          <span>{opt}</span>
-                        </div>
-                      ))}
-                  </div>
-                </div>   </div>
+                  {/* Row 5: Bersedia Bekerja */}
+                  <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-2 md:gap-4 items-start pt-2 border-t border-border/45">
+                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      Bersedia Bekerja
+                    </span>
+                    <div className="space-y-2">
+                      {(user.jobReference?.workOption || 'Hybrid')
+                        .split(',')
+                        .map((s: string) => s.trim())
+                        .filter(Boolean)
+                        .map((opt: string, idx: number) => (
+                          <div
+                            key={idx}
+                            className="flex items-center gap-2 text-xs font-medium text-foreground/80"
+                          >
+                            <CircleCheck />
+                            <span>{opt}</span>
+                          </div>
+                        ))}
+                    </div>
+                  </div>{' '}
+                </div>
               </div>
             )}
           </div>
