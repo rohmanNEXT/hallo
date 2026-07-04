@@ -1,0 +1,721 @@
+{
+  "verifiedTemplates": [
+    {
+      "name": "PT Astra International",
+      "industry": "Automotive"
+    },
+    {
+      "name": "PT Bank Central Asia",
+      "industry": "Banking"
+    },
+    {
+      "name": "PT Telkom Indonesia",
+      "industry": "Telecommunications"
+    },
+    {
+      "name": "PT Unilever Indonesia",
+      "industry": "Consumer Goods"
+    },
+    {
+      "name": "PT Gojek Teknologi",
+      "industry": "Technology"
+    },
+    {
+      "name": "PT Tokopedia Indonesia",
+      "industry": "E-Commerce"
+    },
+    {
+      "name": "PT Shopee Indonesia",
+      "industry": "E-Commerce"
+    },
+    {
+      "name": "PT Bukalapak",
+      "industry": "E-Commerce"
+    },
+    {
+      "name": "PT Traveloka",
+      "industry": "Travel & Tourism"
+    },
+    {
+      "name": "PT Grab Indonesia",
+      "industry": "Transportation"
+    },
+    {
+      "name": "PT Indofood Sukses Makmur",
+      "industry": "Food & Beverage"
+    },
+    {
+      "name": "PT Pertamina",
+      "industry": "Energy & Mining"
+    },
+    {
+      "name": "PT PLN (Persero)",
+      "industry": "Energy & Mining"
+    },
+    {
+      "name": "PT Mandiri Utama Finance",
+      "industry": "Finance"
+    },
+    {
+      "name": "PT Bank Negara Indonesia",
+      "industry": "Banking"
+    },
+    {
+      "name": "PT Garuda Indonesia",
+      "industry": "Aviation"
+    },
+    {
+      "name": "PT Semen Indonesia",
+      "industry": "Construction Material"
+    },
+    {
+      "name": "PT Kalbe Farma",
+      "industry": "Pharmaceutical"
+    },
+    {
+      "name": "PT Matahari Department Store",
+      "industry": "Retail"
+    },
+    {
+      "name": "PT XL Axiata",
+      "industry": "Telecommunications"
+    },
+    {
+      "name": "PT Indosat Ooredoo",
+      "industry": "Telecommunications"
+    },
+    {
+      "name": "PT Wijaya Karya",
+      "industry": "Construction"
+    },
+    {
+      "name": "PT Adaro Energy",
+      "industry": "Energy & Mining"
+    },
+    {
+      "name": "PT Kimia Farma",
+      "industry": "Pharmaceutical"
+    },
+    {
+      "name": "PT Bank Mandiri",
+      "industry": "Banking"
+    },
+    {
+      "name": "CV Karya Digital Nusantara",
+      "industry": "Software"
+    },
+    {
+      "name": "PT Inti Digitalindo",
+      "industry": "Technology"
+    },
+    {
+      "name": "PT Solusi Teknologi Bangsa",
+      "industry": "Technology"
+    },
+    {
+      "name": "PT Kreasi Media Utama",
+      "industry": "Media"
+    },
+    {
+      "name": "PT Inovasi Anak Negeri",
+      "industry": "Technology"
+    },
+    {
+      "name": "PT Maju Bersama Group",
+      "industry": "Conglomerate"
+    },
+    {
+      "name": "PT Bumi Resources",
+      "industry": "Energy & Mining"
+    },
+    {
+      "name": "PT Jasa Marga",
+      "industry": "Infrastructure"
+    },
+    {
+      "name": "PT Aneka Tambang",
+      "industry": "Energy & Mining"
+    },
+    {
+      "name": "PT Indika Energy",
+      "industry": "Energy & Mining"
+    },
+    {
+      "name": "PT Maybank Indonesia",
+      "industry": "Banking"
+    },
+    {
+      "name": "PT CIMB Niaga",
+      "industry": "Banking"
+    },
+    {
+      "name": "PT Danamon Indonesia",
+      "industry": "Banking"
+    },
+    {
+      "name": "PT Pegadaian",
+      "industry": "Finance"
+    },
+    {
+      "name": "PT Taspen",
+      "industry": "Finance"
+    },
+    {
+      "name": "PT Pos Indonesia",
+      "industry": "Logistics"
+    },
+    {
+      "name": "PT JNE Express",
+      "industry": "Logistics"
+    },
+    {
+      "name": "PT SiCepat Ekspres",
+      "industry": "Logistics"
+    },
+    {
+      "name": "PT J&T Express",
+      "industry": "Logistics"
+    },
+    {
+      "name": "PT Anteraja",
+      "industry": "Logistics"
+    },
+    {
+      "name": "PT Ninja Express",
+      "industry": "Logistics"
+    },
+    {
+      "name": "PT Lalamove Indonesia",
+      "industry": "Transportation"
+    },
+    {
+      "name": "PT Maxim Indonesia",
+      "industry": "Transportation"
+    },
+    {
+      "name": "PT Tiket.com",
+      "industry": "Travel & Tourism"
+    },
+    {
+      "name": "PT Pegipegi",
+      "industry": "Travel & Tourism"
+    },
+    {
+      "name": "PT OYO Life Indonesia",
+      "industry": "Hospitality"
+    },
+    {
+      "name": "PT Kopi Kenangan",
+      "industry": "Food & Beverage"
+    },
+    {
+      "name": "PT Sayurbox",
+      "industry": "Food & Beverage"
+    },
+    {
+      "name": "PT HappyFresh",
+      "industry": "Food & Beverage"
+    },
+    {
+      "name": "PT Klikdokter",
+      "industry": "Healthcare"
+    },
+    {
+      "name": "PT Alodokter",
+      "industry": "Healthcare"
+    },
+    {
+      "name": "PT Halodoc",
+      "industry": "Healthcare"
+    },
+    {
+      "name": "PT SehatQ",
+      "industry": "Healthcare"
+    },
+    {
+      "name": "PT PrimaKu",
+      "industry": "Healthcare"
+    },
+    {
+      "name": "PT Ruangguru",
+      "industry": "Education"
+    },
+    {
+      "name": "PT Zenius Education",
+      "industry": "Education"
+    },
+    {
+      "name": "PT Coursera Indonesia",
+      "industry": "Education"
+    },
+    {
+      "name": "PT Dicoding Indonesia",
+      "industry": "Education"
+    },
+    {
+      "name": "PT Sanbercode",
+      "industry": "Education"
+    },
+    {
+      "name": "PT Amartha",
+      "industry": "Finance"
+    },
+    {
+      "name": "PT OVO Finansial",
+      "industry": "Finance"
+    },
+    {
+      "name": "PT Dana Indonesia",
+      "industry": "Finance"
+    },
+    {
+      "name": "PT LinkAja",
+      "industry": "Finance"
+    },
+    {
+      "name": "PT Kredivo",
+      "industry": "Finance"
+    },
+    {
+      "name": "PT Akulaku Finance",
+      "industry": "Finance"
+    },
+    {
+      "name": "PT Moladin Digital Indonesia",
+      "industry": "Automotive"
+    },
+    {
+      "name": "PT Carro Indonesia",
+      "industry": "Automotive"
+    },
+    {
+      "name": "PT Stockbit Sekuritas",
+      "industry": "Finance"
+    },
+    {
+      "name": "PT Bibit Tumbuh Bersama",
+      "industry": "Finance"
+    },
+    {
+      "name": "PT Pluang",
+      "industry": "Finance"
+    },
+    {
+      "name": "PT Xendit",
+      "industry": "Finance"
+    },
+    {
+      "name": "PT Midtrans",
+      "industry": "Finance"
+    },
+    {
+      "name": "PT iPaymu",
+      "industry": "Finance"
+    },
+    {
+      "name": "PT Kata.ai",
+      "industry": "Technology"
+    }
+  ],
+  "joinDates": [
+    "2024-01-10",
+    "2024-02-14",
+    "2024-03-05",
+    "2024-04-20",
+    "2024-05-11",
+    "2024-06-08",
+    "2024-07-22",
+    "2024-08-17",
+    "2024-09-03",
+    "2024-10-30",
+    "2024-11-19",
+    "2024-12-01",
+    "2025-01-08",
+    "2025-02-22",
+    "2025-03-14",
+    "2025-04-09",
+    "2025-05-27",
+    "2025-06-06",
+    "2025-07-15",
+    "2025-08-04"
+  ],
+  "staticCompanies": [
+    {
+      "id": "COMP-101",
+      "name": "PT Global Data Indo",
+      "email": "hr@globaldata.com",
+      "status": "verified",
+      "industry": "Technology",
+      "joinedAt": "2026-06-20",
+      "viewed": true,
+      "createdAt": "2026-06-20",
+      "hasTeam": true
+    },
+    {
+      "id": "COMP-102",
+      "name": "Tech Startup XYZ",
+      "email": "hello@techxyz.io",
+      "status": "verified",
+      "industry": "Software",
+      "joinedAt": "2026-06-18",
+      "viewed": true,
+      "createdAt": "2026-06-18",
+      "hasTeam": false
+    },
+    {
+      "id": "COMP-103",
+      "name": "PT Media Kreatif",
+      "email": "admin@mediakreatif.co.id",
+      "status": "review",
+      "industry": "Media",
+      "joinedAt": "2026-06-25",
+      "viewed": false,
+      "createdAt": "2026-06-25",
+      "verifyType": "new",
+      "aiScore": 45
+    },
+    {
+      "id": "COMP-104",
+      "name": "Studio Pixel Utama",
+      "email": "design@pixelutama.com",
+      "status": "rejected",
+      "industry": "Design",
+      "joinedAt": "2026-06-22",
+      "viewed": true,
+      "createdAt": "2026-06-22",
+      "rejectedAt": "2026-06-23",
+      "verifyType": "old",
+      "aiScore": 30,
+      "rejectionReason": "Dokumen legalitas SIUP yang diunggah palsu atau hasil editan, nama direktur tidak sesuai dengan akta pendirian. Selain itu, alamat kantor yang tertera pada dokumen NIB berbeda dengan lokasi fisik yang tercantum di Google Maps. Berdasarkan pengecekan lebih lanjut, NPWP perusahaan juga tidak valid saat dicocokkan dengan basis data perpajakan. Kami mencurigai adanya upaya pemalsuan dokumen yang disengaja. Oleh karena itu, pengajuan verifikasi perusahaan ini ditolak secara permanen dan kami melarang perusahaan untuk mendaftar kembali menggunakan identitas yang sama. Keputusan ini bersifat mutlak berdasarkan panduan komunitas kami."
+    },
+    {
+      "id": "COMP-105",
+      "name": "Kreasi Anak Bangsa",
+      "email": "support@kreasianak.id",
+      "status": "review",
+      "industry": "Creative",
+      "joinedAt": "2026-07-01",
+      "viewed": false,
+      "createdAt": "2026-07-01",
+      "verifyType": "update",
+      "aiScore": 85,
+      "updateRequestReason": "Halo tim Admin JobStreet, kami ingin mengajukan pembaruan dokumen NIB karena perusahaan kami baru saja melakukan perubahan struktur kepengurusan dan menambah klasifikasi bidang usaha baru (KBLI). Kami juga telah melampirkan foto terbaru dari kantor fisik kami yang baru saja pindah alamat pada awal bulan ini. Selain itu, kami menyertakan scan KTP terbaru dari direktur utama yang baru beserta swafoto sesuai dengan panduan. Mohon agar pengajuan pembaruan data kami ini dapat segera diproses dan diverifikasi karena kami sedang membutuhkan akun ini untuk segera membuka lowongan pekerjaan dalam skala besar minggu depan. Jika ada dokumen tambahan yang kurang, mohon segera informasikan kepada kami melalui email. Terima kasih atas bantuannya."
+    },
+    {
+      "id": "COMP-106",
+      "name": "Logistik Nusantara",
+      "email": "info@logistiknusantara.co.id",
+      "status": "rejected",
+      "industry": "Logistics",
+      "joinedAt": "2026-06-10",
+      "viewed": true,
+      "createdAt": "2026-06-10",
+      "rejectedAt": "2026-06-11",
+      "verifyType": "new",
+      "aiScore": 40,
+      "rejectionReason": "Alamat kantor fiktif dan nomor telepon tidak dapat dihubungi setelah 3 kali percobaan verifikasi."
+    },
+    {
+      "id": "COMP-107",
+      "name": "Pangan Makmur PT",
+      "email": "hrd@panganmakmur.com",
+      "status": "rejected",
+      "industry": "Agriculture",
+      "joinedAt": "2026-06-01",
+      "viewed": true,
+      "createdAt": "2026-06-01",
+      "rejectedAt": "2026-06-02",
+      "verifyType": "update",
+      "rejectionReason": "Dokumen NIB baru yang dilampirkan buram dan tidak terbaca. Mohon unggah ulang dengan kualitas scan yang lebih jelas.",
+      "updateRequestReason": "Mengajukan pembaruan sertifikat halal dan dokumen perizinan domisili usaha yang baru."
+    },
+    {
+      "id": "COMP-108",
+      "name": "Tekno Solusindo",
+      "email": "biz@teknosolusindo.net",
+      "status": "rejected",
+      "industry": "Technology",
+      "joinedAt": "2026-05-01",
+      "viewed": true,
+      "createdAt": "2026-05-01",
+      "rejectedAt": "2026-05-02",
+      "rejectionReason": "Nomor Pokok Wajib Pajak (NPWP) perusahaan setelah dicek tidak terdaftar di sistem DJP."
+    },
+    {
+      "id": "COMP-109",
+      "name": "Karya Prima Utama",
+      "email": "contact@karyaprima.com",
+      "status": "rejected",
+      "industry": "Construction",
+      "joinedAt": "2026-04-01",
+      "viewed": true,
+      "createdAt": "2026-04-01",
+      "rejectedAt": "2026-04-02",
+      "rejectionReason": "Legalitas perusahaan SIUP/TDP sudah kadaluarsa sejak tahun 2024 dan belum diperpanjang."
+    },
+    {
+      "id": "COMP-110",
+      "name": "Sinergi Mulia Jaya",
+      "email": "sales@sinergimulia.com",
+      "status": "rejected",
+      "industry": "Services",
+      "joinedAt": "2026-02-01",
+      "viewed": true,
+      "createdAt": "2026-02-01",
+      "rejectedAt": "2026-02-02",
+      "rejectionReason": "Tanda tangan direktur pada dokumen surat kuasa berbeda dengan KTP yang diunggah."
+    }
+  ],
+  "staticReviewJobs": [
+    {
+      "id": "mock-review-1",
+      "title": "Remote Data Entry Clerk",
+      "company": "PT Global Data Indo",
+      "salary": 4500000,
+      "description": "Mencari staf data entry remote dengan komisi harian melimpah. Wajib membayar uang registrasi pendaftaran 50 ribu.",
+      "aiScore": 35,
+      "aiRecommendation": "Risiko Tinggi (Meminta uang pendaftaran)",
+      "status": "in review",
+      "serialId": "SRL-A1B2C3",
+      "createdAt": "2026-06-25"
+    },
+    {
+      "id": "mock-review-2",
+      "title": "Senior Frontend Engineer",
+      "company": "Tech Startup XYZ",
+      "salary": 18000000,
+      "description": "Membangun dashboard analisis data real-time menggunakan React, TypeScript, dan Tailwind CSS.",
+      "aiScore": 98,
+      "aiRecommendation": "Aman & Sesuai Kebijakan",
+      "status": "in review",
+      "serialId": "SRL-D4E5F6",
+      "createdAt": "2026-06-28"
+    }
+  ],
+  "jobTemplates": [
+    {
+      "title": "Social Media Specialist",
+      "company": "PT Media Kreatif",
+      "salary": 6000000,
+      "description": "Mengelola postingan harian, berinteraksi dengan audiens, dan menganalisis metrik media sosial.",
+      "aiScore": 92,
+      "aiRecommendation": "Aman & Sesuai Kebijakan"
+    },
+    {
+      "title": "Graphic Designer",
+      "company": "Studio Pixel Utama",
+      "salary": 7500000,
+      "description": "Membuat desain visual berkualitas tinggi untuk keperluan promosi digital dan cetak.",
+      "aiScore": 90,
+      "aiRecommendation": "Aman & Sesuai Kebijakan"
+    },
+    {
+      "title": "Admin Online Shop",
+      "company": "Toko Sukses Jaya",
+      "salary": 3500000,
+      "description": "Membalas chat pelanggan, mengemas barang, dan menginput resi pengiriman.",
+      "aiScore": 88,
+      "aiRecommendation": "Aman & Sesuai Kebijakan"
+    },
+    {
+      "title": "Staf Administrasi",
+      "company": "PT Finansial Mandiri",
+      "salary": 5000000,
+      "description": "Mengurus dokumen kantor, pengarsipan data keuangan, dan membantu koordinasi internal.",
+      "aiScore": 95,
+      "aiRecommendation": "Aman & Sesuai Kebijakan"
+    },
+    {
+      "title": "Content Writer",
+      "company": "Penerbit Wacana",
+      "salary": 5500000,
+      "description": "Menulis artikel SEO, naskah promosi, dan konten edukatif yang menarik pembaca.",
+      "aiScore": 89,
+      "aiRecommendation": "Aman & Sesuai Kebijakan"
+    }
+  ],
+  "staticAccounts": [
+    {
+      "email": "hr@tokopedia.com",
+      "name": "PT Tokopedia",
+      "role": "Company",
+      "violationCount": 0,
+      "status": "Active"
+    },
+    {
+      "email": "admin@scammer.com",
+      "name": "PT Cepat Kaya",
+      "role": "Company",
+      "violationCount": 2,
+      "status": "Suspended"
+    },
+    {
+      "email": "budi@gmail.com",
+      "name": "Budi Santoso",
+      "role": "User",
+      "violationCount": 1,
+      "status": "Active"
+    },
+    {
+      "email": "andi@gmail.com",
+      "name": "Andi Pratama",
+      "role": "User",
+      "violationCount": 2,
+      "status": "Suspended"
+    },
+    {
+      "email": "cyber@hack.com",
+      "name": "Cyber Hacker",
+      "role": "User",
+      "violationCount": 3,
+      "status": "Permanent Ban"
+    }
+  ],
+  "staticViolations": [
+    {
+      "id": "VIOL-001",
+      "email": "budi@gmail.com",
+      "name": "Budi Santoso",
+      "role": "User",
+      "violationType": "ID Chat Bermasalah",
+      "alertLevel": "Light Warning",
+      "finalAiReason": "Mengirim tautan phising pada obrolan ID CHAT-801",
+      "date": "2026-06-15",
+      "daysAgo": 9,
+      "blockType": "By Human",
+      "status": "Active"
+    },
+    {
+      "id": "VIOL-002",
+      "email": "admin@scammer.com",
+      "name": "PT Cepat Kaya",
+      "role": "Company",
+      "violationType": "Lowongan Bermasalah yang Lolos Publikasi",
+      "alertLevel": "Suspend 30 Days",
+      "finalAiReason": "Laporan pembayaran di luar aplikasi pada loker JOB-001",
+      "date": "2026-06-01",
+      "daysAgo": 23,
+      "blockType": "By AI",
+      "status": "Active"
+    },
+    {
+      "id": "VIOL-003",
+      "email": "oldscam@trash.com",
+      "name": "PT Penipu Ulung",
+      "role": "Company",
+      "violationType": "Pembayaran Tidak Sah",
+      "alertLevel": "Light Warning",
+      "finalAiReason": "Memodifikasi sistem transaksi API di loker",
+      "date": "2026-04-10",
+      "daysAgo": 75,
+      "blockType": "By AI",
+      "status": "Trashed"
+    },
+    {
+      "id": "VIOL-004",
+      "email": "cyber@hack.com",
+      "name": "Cyber Hacker",
+      "role": "User",
+      "violationType": "Pembayaran Tidak Sah",
+      "alertLevel": "Permanent Ban",
+      "finalAiReason": "Bypass payment gateway secara ilegal",
+      "date": "2026-04-01",
+      "daysAgo": 84,
+      "blockType": "By Human",
+      "status": "Trashed"
+    }
+  ],
+  "staticAppeals": [
+    {
+      "id": "APP-001",
+      "namaPelapor": "Budi Santoso",
+      "emailPelapor": "budi@gmail.com",
+      "namaPelaku": "PT Cepat Kaya",
+      "emailPelaku": "admin@scammer.com",
+      "status": "Pending",
+      "alasan": "Terdeteksi mengirim link luar sistem dan meminta uang admin melalui chat",
+      "tanggal": "19 Jun 2026",
+      "idChat": "CHAT-801",
+      "idLowongan": "N/A",
+      "alertLevel": "Light Warning"
+    },
+    {
+      "id": "APP-002",
+      "namaPelapor": "Siti Rahayu",
+      "emailPelapor": "siti@yahoo.com",
+      "namaPelaku": "PT Cepat Kaya",
+      "emailPelaku": "admin@scammer.com",
+      "status": "Pending",
+      "alasan": "Lowongan meminta biaya pendaftaran di luar platform sebesar Rp 150.000",
+      "tanggal": "18 Jun 2026",
+      "idChat": "N/A",
+      "idLowongan": "JOB-001",
+      "alertLevel": "Suspend 30 Days"
+    },
+    {
+      "id": "APP-003",
+      "namaPelapor": "Andi Pratama",
+      "emailPelapor": "andi@gmail.com",
+      "namaPelaku": "Cyber Hacker",
+      "emailPelaku": "cyber@hack.com",
+      "status": "Dismissed",
+      "alasan": "Spam berulang dan konten berbahaya di chat job application",
+      "tanggal": "15 Jun 2026",
+      "idChat": "CHAT-420",
+      "idLowongan": "N/A",
+      "alertLevel": "Permanent Ban"
+    }
+  ],
+  "appealTemplates": [
+    {
+      "pelapor": "Rizki Aditya",
+      "emailPelapor": "rizki.aditya@gmail.com",
+      "pelaku": "PT Karya Niaga",
+      "emailPelaku": "hrd@karya-niaga.com",
+      "alasan": "Perusahaan meminta biaya registrasi sebesar Rp 200.000 sebelum wawancara kerja dilaksanakan.",
+      "idChat": "N/A",
+      "idLowongan": "JOB-110",
+      "alertLevel": "Suspend 30 Days"
+    },
+    {
+      "pelapor": "Dewi Kartika",
+      "emailPelapor": "dewi.kartika@yahoo.com",
+      "pelaku": "Ahmad Faizal",
+      "emailPelaku": "faizal88@hotmail.com",
+      "alasan": "Mengirimkan pesan berisi tautan phising yang mengatasnamakan JobStreet kepada pelamar.",
+      "idChat": "CHAT-902",
+      "idLowongan": "N/A",
+      "alertLevel": "Permanent Ban"
+    },
+    {
+      "pelapor": "Fajar Nugroho",
+      "emailPelapor": "fajar.nugroho@gmail.com",
+      "pelaku": "PT Maju Terus",
+      "emailPelaku": "admin@majuterus.co.id",
+      "alasan": "Lowongan kerja fiktif, pelamar diminta mentransfer uang seragam Rp 350.000.",
+      "idChat": "N/A",
+      "idLowongan": "JOB-220",
+      "alertLevel": "Permanent Ban"
+    },
+    {
+      "pelapor": "Putri Handayani",
+      "emailPelapor": "putri.h@gmail.com",
+      "pelaku": "Rudi Hermawan",
+      "emailPelaku": "rudi.h@gmail.com",
+      "alasan": "Pengguna mengirim spam lamaran dan pesan tidak relevan ke banyak pelamar lain.",
+      "idChat": "CHAT-303",
+      "idLowongan": "N/A",
+      "alertLevel": "Light Warning"
+    },
+    {
+      "pelapor": "Agung Prasetyo",
+      "emailPelapor": "agung.pras@gmail.com",
+      "pelaku": "PT Digital Prima",
+      "emailPelaku": "info@digitalprima.id",
+      "alasan": "Informasi gaji yang dicantumkan sangat menyesatkan dan tidak sesuai dengan realita pekerjaan.",
+      "idChat": "N/A",
+      "idLowongan": "JOB-445",
+      "alertLevel": "Light Warning"
+    }
+  ]
+}

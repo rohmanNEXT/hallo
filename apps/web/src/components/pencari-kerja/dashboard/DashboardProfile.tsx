@@ -68,27 +68,28 @@ export default function DashboardProfile({
 
   const bannerPhotos = [
     {
-      url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80&auto=format&fit=crop',
+      url: '/images/banners/banner1.png?v=25',
       label: 'Pegunungan',
     },
     {
-      url: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80&auto=format&fit=crop',
+      url: '/images/banners/banner2.png?v=25',
       label: 'Hutan',
     },
     {
-      url: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1200&q=80&auto=format&fit=crop',
+      url: '/images/banners/banner3.png?v=25',
       label: 'Pantai',
     },
     {
-      url: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=80&auto=format&fit=crop',
+      url: '/images/banners/banner4.png?v=25',
       label: 'Kota',
     },
     {
-      url: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=80&auto=format&fit=crop',
-      label: 'Padang',
+      url: '/images/banners/banner5.png?v=25',
+      label: 'Laut',
+      copyright: 'Maldives Atolls',
     },
     {
-      url: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&q=80&auto=format&fit=crop',
+      url: '/images/banners/banner6.png?v=25',
       label: 'Salju',
     },
     {
@@ -570,7 +571,7 @@ export default function DashboardProfile({
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                   {user.skill.map((skill: string, i: number) => (
                     <span key={i} style={{
-                      padding: '4px 12px', borderRadius: 999, fontSize: 11, fontWeight: 600,
+                      padding: '4px 12px', borderRadius: 999, fontSize: 12, fontWeight: 600,
                       background: '#27272a', color: '#e4e4e7', border: '1px solid #3f3f46'
                     }}>{skill}</span>
                   ))}
@@ -628,7 +629,7 @@ export default function DashboardProfile({
                     { label: 'Opsi Kerja', value: user.jobReference.workOption },
                   ].filter(item => item.value).map((item, i) => (
                     <div key={i} style={{ padding: '8px 0', borderBottom: '1px solid #27272a' }}>
-                      <p style={{ fontSize: 10, fontWeight: 700, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 2px' }}>{item.label}</p>
+                      <p style={{ fontSize: 12, fontWeight: 700, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 2px' }}>{item.label}</p>
                       <p style={{ fontSize: 13, color: '#e4e4e7', fontWeight: 600, margin: 0 }}>{item.value}</p>
                     </div>
                   ))}
@@ -650,6 +651,7 @@ export default function DashboardProfile({
               className="h-32 md:h-36 bg-cover bg-center relative transition-all duration-300"
               style={{
                 backgroundImage: `url('${bannerPhotos[bannerIndex].url}')`,
+                backgroundPosition: 'center 35%',
               }}
             >
               <div className="absolute inset-0 bg-black/20" />
@@ -728,7 +730,7 @@ export default function DashboardProfile({
                             draggable={false}
                            width={100} height={100} unoptimized />
                           <div className="absolute inset-0 bg-black/25 group-hover:bg-black/5 transition-all" />
-                          <span className="absolute bottom-1 left-0 right-0 text-center text-[10px] font-bold text-white drop-shadow-md">
+                          <span className="absolute bottom-1 left-0 right-0 text-center text-[12px] font-bold text-white drop-shadow-md">
                             {photo.label}
                           </span>
                           {bannerIndex === idx && (
@@ -761,7 +763,7 @@ export default function DashboardProfile({
                            width={100} height={100} unoptimized />
                           <div className="absolute inset-0 bg-black/25" />
                         </div>
-                        <span className="text-[10px] font-bold text-foreground">
+                        <span className="text-[12px] font-bold text-foreground">
                           Mode Bing Image
                         </span>
                       </div>
@@ -801,7 +803,7 @@ export default function DashboardProfile({
                     )}
                     <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center gap-1 transition-opacity duration-200 text-white">
                       <Pencil className="h-4.5 w-4.5" />
-                      <span className="text-[10px] font-bold uppercase tracking-wider">
+                      <span className="text-[12px] font-bold uppercase tracking-wider">
                         Ubah
                       </span>
                     </div>
@@ -915,7 +917,7 @@ export default function DashboardProfile({
             {editSection === 'contact' ? (
               <div className="space-y-3 pt-1">
                 <div>
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                  <label className="text-[12px] font-bold text-muted-foreground uppercase">
                     Nama Lengkap
                   </label>
                   <Input
@@ -927,7 +929,7 @@ export default function DashboardProfile({
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                  <label className="text-[12px] font-bold text-muted-foreground uppercase">
                     Nama Panggilan
                   </label>
                   <Input
@@ -939,7 +941,7 @@ export default function DashboardProfile({
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                  <label className="text-[12px] font-bold text-muted-foreground uppercase">
                     Posisi
                   </label>
                   <Input
@@ -951,7 +953,7 @@ export default function DashboardProfile({
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                  <label className="text-[12px] font-bold text-muted-foreground uppercase">
                     Nomor Wa 
                   </label>
                   <Input
@@ -963,7 +965,7 @@ export default function DashboardProfile({
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                  <label className="text-[12px] font-bold text-muted-foreground uppercase">
                     Email
                   </label>
                   <Input
@@ -980,7 +982,7 @@ export default function DashboardProfile({
                 <div className="flex items-center gap-3">
                   <User className="h-3 w-3 text-muted-foreground shrink-0" />
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-semibold">
                       Nama Lengkap
                     </span>
                     <span className="text-xs font-bold text-foreground">
@@ -991,7 +993,7 @@ export default function DashboardProfile({
                 <div className="flex items-center gap-3">
                   <User className="h-3 w-3 text-muted-foreground shrink-0" />
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-semibold">
                       Nama Panggilan
                     </span>
                     <span className="text-xs font-bold text-foreground">
@@ -1002,7 +1004,7 @@ export default function DashboardProfile({
                 <div className="flex items-center gap-3">
                   <Briefcase className="h-3 w-3 text-muted-foreground shrink-0" />
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-semibold">
                       Posisi
                     </span>
                     <span className="text-xs font-bold text-foreground">
@@ -1013,7 +1015,7 @@ export default function DashboardProfile({
                 <div className="flex items-center gap-3">
                   <Phone className="h-3 w-3 text-muted-foreground shrink-0" />
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-semibold">
                       WhatsApp
                     </span>
                     <span className="text-xs font-bold text-foreground">
@@ -1024,7 +1026,7 @@ export default function DashboardProfile({
                 <div className="flex items-center gap-3">
                   <Mail className="h-3 w-3 text-muted-foreground shrink-0" />
                   <div className="min-w-0">
-                    <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-semibold">
                       Email
                     </span>
                     <span className="text-xs font-bold text-foreground block break-all">
@@ -1070,7 +1072,7 @@ export default function DashboardProfile({
             {editSection === 'links' ? (
               <div className="space-y-3 pt-1">
                 <div>
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1.5">
+                  <label className="text-[12px] font-bold text-muted-foreground uppercase block mb-1.5">
                     Resume
                   </label>
                   {formData.softFile ? (
@@ -1107,19 +1109,19 @@ export default function DashboardProfile({
                       <span className="text-xs font-bold text-foreground">
                         Pilih Berkas
                       </span>
-                      <span className="text-[10px] text-muted-foreground text-center">
+                      <span className="text-[12px] text-muted-foreground text-center">
                         PDF atau Word (Maks. 10MB)
                       </span>
                     </div>
                   )}
                   {uploadError && (
-                    <p className="text-[10px] font-bold text-rose-500 mt-1.5">
+                    <p className="text-[12px] font-bold text-rose-500 mt-1.5">
                       {uploadError}
                     </p>
                   )}
                 </div>
                 <div>
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                  <label className="text-[12px] font-bold text-muted-foreground uppercase">
                     Website Pribadi
                   </label>
                   <Input
@@ -1132,7 +1134,7 @@ export default function DashboardProfile({
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                  <label className="text-[12px] font-bold text-muted-foreground uppercase">
                     LinkedIn
                   </label>
                   <Input
@@ -1150,7 +1152,7 @@ export default function DashboardProfile({
                 <div className="flex items-center gap-3">
                   <FileText className="h-3 w-3 text-muted-foreground shrink-0" />
                   <div className="min-w-0 flex-1">
-                    <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-semibold">
                       Resume
                     </span>
                     {user.softFile ? (
@@ -1158,7 +1160,7 @@ export default function DashboardProfile({
                         <span className="text-xs font-bold text-foreground truncate block">
                           {user.softFile}
                         </span>
-                        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-primary/10 border border-primary/20 text-muted-foreground uppercase shrink-0">
+                        <span className="text-[12px] font-bold px-1.5 py-0.5 rounded-md bg-primary/10 border border-primary/20 text-muted-foreground uppercase shrink-0">
                           {user.softFile.split('.').pop()}
                         </span>
                         <a 
@@ -1183,7 +1185,7 @@ export default function DashboardProfile({
                 <div className="flex items-center gap-3">
                   <Globe className="h-3 w-3 text-muted-foreground shrink-0" />
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-semibold">
                       Website
                     </span>
                     {user.website ? (
@@ -1205,7 +1207,7 @@ export default function DashboardProfile({
                 <div className="flex items-center gap-3">
                   <Linkedin className="h-3 w-3 text-muted-foreground shrink-0" />
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-semibold">
                       LinkedIn
                     </span>
                     {user.socialMedia ? (
@@ -1263,7 +1265,7 @@ export default function DashboardProfile({
               <div className="space-y-4">
                 <div className="space-y-3 bg-background/40 p-4 rounded-xl border border-border/70">
                   <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                    <label className="text-[12px] font-bold text-muted-foreground uppercase block mb-1">
                       Posisi & Perusahaan
                     </label>
                     <Input
@@ -1275,7 +1277,7 @@ export default function DashboardProfile({
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                      <label className="text-[12px] font-bold text-muted-foreground uppercase block mb-1">
                         Tanggal Mulai
                       </label>
                       <Input
@@ -1286,7 +1288,7 @@ export default function DashboardProfile({
                       />
                     </div>
                     <div>
-                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                      <label className="text-[12px] font-bold text-muted-foreground uppercase block mb-1">
                         Tanggal Selesai
                       </label>
                       <Input
@@ -1399,7 +1401,7 @@ export default function DashboardProfile({
               <div className="space-y-4">
                 <div className="space-y-3 bg-background/40 p-4 rounded-xl border border-border/70">
                   <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                    <label className="text-[12px] font-bold text-muted-foreground uppercase block mb-1">
                       Institusi & Gelar
                     </label>
                     <Input
@@ -1411,7 +1413,7 @@ export default function DashboardProfile({
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                      <label className="text-[12px] font-bold text-muted-foreground uppercase block mb-1">
                         Tahun Mulai
                       </label>
                       <Input
@@ -1422,7 +1424,7 @@ export default function DashboardProfile({
                       />
                     </div>
                     <div>
-                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                      <label className="text-[12px] font-bold text-muted-foreground uppercase block mb-1">
                         Tahun Lulus
                       </label>
                       <Input
@@ -1728,7 +1730,7 @@ export default function DashboardProfile({
               <div className="space-y-4">
                 <div className="space-y-3 bg-background/40 p-4 rounded-xl border border-border/70">
                   <div>
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                    <label className="text-[12px] font-bold text-muted-foreground uppercase block mb-1">
                       Nama Organisasi & Peran
                     </label>
                     <Input
@@ -1740,7 +1742,7 @@ export default function DashboardProfile({
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                      <label className="text-[12px] font-bold text-muted-foreground uppercase block mb-1">
                         Tahun Mulai
                       </label>
                       <Input
@@ -1751,7 +1753,7 @@ export default function DashboardProfile({
                       />
                     </div>
                     <div>
-                      <label className="text-[10px] font-bold text-muted-foreground uppercase block mb-1">
+                      <label className="text-[12px] font-bold text-muted-foreground uppercase block mb-1">
                         Tahun Selesai
                       </label>
                       <Input
@@ -1863,7 +1865,7 @@ export default function DashboardProfile({
             {editSection === 'reference' ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
                 <div>
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                  <label className="text-[12px] font-bold text-muted-foreground uppercase">
                     Minat Pekerjaan
                   </label>
                   <Input
@@ -1881,7 +1883,7 @@ export default function DashboardProfile({
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                  <label className="text-[12px] font-bold text-muted-foreground uppercase">
                     Kota / Lokasi
                   </label>
                   <Input
@@ -1899,7 +1901,7 @@ export default function DashboardProfile({
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                  <label className="text-[12px] font-bold text-muted-foreground uppercase">
                     Ekspektasi Gaji
                   </label>
                   <Input
@@ -1916,7 +1918,7 @@ export default function DashboardProfile({
                     className="h-9 text-xs font-semibold focus-visible:ring-1 focus-visible:ring-foreground mt-1"
                   />
                                <div>
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                  <label className="text-[12px] font-bold text-muted-foreground uppercase">
                     Opsi Kerja
                   </label>
                   <div className="flex flex-wrap gap-3 mt-2">
@@ -2047,7 +2049,7 @@ export default function DashboardProfile({
 
             {/* Upload dari perangkat */}
             <div className="space-y-2 mb-4">
-              <label className="text-[10px] font-bold text-muted-foreground uppercase block">
+              <label className="text-[12px] font-bold text-muted-foreground uppercase block">
                 Upload dari Perangkat
               </label>
               <label className="relative border-2 border-dashed border-border/70 hover:border-primary/50 rounded-xl p-4 flex flex-col items-center justify-center gap-1.5 bg-background/25 group cursor-pointer transition-all">
@@ -2076,7 +2078,7 @@ export default function DashboardProfile({
                 <span className="text-xs font-bold text-foreground">
                   Pilih Foto
                 </span>
-                <span className="text-[10px] text-muted-foreground">
+                <span className="text-[12px] text-muted-foreground">
                   JPG, PNG, WEBP (Maks. 5MB)
                 </span>
               </label>

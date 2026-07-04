@@ -68,7 +68,7 @@ export default function DashboardBookmarks() {
                 >
                   <div 
                     className="flex items-center gap-3 min-w-0 cursor-pointer flex-1"
-                    onClick={() => window.location.href = `/jobs/${job.id}`}
+                    onClick={() => window.location.href = `/pencari-kerja/jobs/${job.id}`}
                   >
                     {/* Company Logo */}
                     <div className="h-9 w-9 bg-white border border-border/70 rounded-xl p-1.5 flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
@@ -86,7 +86,7 @@ export default function DashboardBookmarks() {
                       <span className="text-xs font-bold text-foreground block truncate hover:text-primary transition-colors">
                         {job.title}
                       </span>
-                      <span className="text-[10px] text-muted-foreground font-medium block mt-1">
+                      <span className="text-[12px] text-muted-foreground font-medium block mt-1">
                         {job.company} • {job.location} • {job.workOption}
                       </span>
                     </div>
@@ -95,10 +95,10 @@ export default function DashboardBookmarks() {
                   {/* Actions */}
                   <div className="flex items-center gap-1.5">
                     <Button
-                      onClick={() => window.location.href = `/jobs/${job.id}`}
+                      onClick={() => window.location.href = `/pencari-kerja/jobs/${job.id}`}
                       variant="ghost"
                       size="icon"
-                      className="h-8 w-8 text-muted-foreground hover:text-foreground cursor-pointer"
+                      className="h-9 w-9 text-muted-foreground hover:text-foreground cursor-pointer"
                       title="Lihat Detail"
                     >
                       <ExternalLink className="h-3.5 w-3.5" />
@@ -113,7 +113,7 @@ export default function DashboardBookmarks() {
                       }}
                       variant="ghost"
                       size="icon"
-                      className="h-8 w-8 text-rose-500 hover:text-rose-600 hover:bg-rose-500/10 cursor-pointer"
+                      className="h-9 w-9 text-rose-500 hover:text-rose-600 hover:bg-rose-500/10 cursor-pointer"
                       title="Hapus Bookmark"
                     >
                       <Trash2 className="h-3.5 w-3.5" />
@@ -133,14 +133,13 @@ export default function DashboardBookmarks() {
             <Button
               variant="outline"
               size="sm"
-              className={`h-9 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50 ${
+              className={`h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50 ${
                 theme === 'white' ? 'text-black!' : ''
               }`}
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
             >
               <ChevronLeft className="h-4 w-4" />
-              <span>Previous</span>
             </Button>
 
             <div className="flex items-center gap-1">
@@ -211,7 +210,7 @@ export default function DashboardBookmarks() {
             <Button
               variant="outline"
               size="sm"
-              className={`h-9 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50 ${
+              className={`h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50 ${
                 theme === 'white' ? 'text-black!' : ''
               }`}
               onClick={() =>
@@ -219,7 +218,6 @@ export default function DashboardBookmarks() {
               }
               disabled={currentPage === totalPages}
             >
-              <span>Next</span>
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>

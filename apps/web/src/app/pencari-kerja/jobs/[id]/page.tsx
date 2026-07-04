@@ -40,66 +40,70 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { useAppStore } from '@/store/store';
+import useAuth from '@/hooks/useAuth';
+import useJobs from '@/hooks/useJobs';
+import useCompanies from '@/hooks/useCompanies';
 import React from 'react';
-import axios from 'axios';
 import { Job, Company } from '@/lib/types';
+import { shortenLocation } from '@/lib/utils';
 import Image from 'next/image';
 import ReportModal from '@/components/pencari-kerja/ReportModal';
+
+import LoadingSpinner from '@/components/ui/loading-spinner';
 
 const JobDetailPage: React.FC = () => {
   const params = useParams();
   const router = useRouter();
   const jobId = params.id as string;
 
-  const { bookmarks, toggleBookmark, applyJob, user, theme } = useAppStore();
+  const { bookmarks, toggleBookmark, applyJob, theme } = useAppStore();
+  const { user } = useAuth();
+  const { data: jobs = [] } = useJobs();
+  const { data: companies = [] } = useCompanies();
+
   const [job, setJob] = useState<Job | null>(null);
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [companies, setCompanies] = useState<Company[]>([]);
   const [appliedJobs, setAppliedJobs] = useState<string[]>([]);
   const [isApplying, setIsApplying] = useState(false);
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [isCompanyDescExpanded, setIsCompanyDescExpanded] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
+  const companyDescRef = React.useRef<HTMLParagraphElement>(null);
+  const [showCompanyDescButton, setShowCompanyDescButton] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const fetchData = async () => {
-      try {
-        const [jobsRes, companiesRes] = await Promise.all([
-          axios.get<Job[]>('/data/jobs.json'),
-          axios.get<Company[]>('/data/companies.json')
-        ]);
-        const jobsData = jobsRes.data;
-        const companiesData = companiesRes.data;
-        setJobs(jobsData);
-        setCompanies(companiesData);
-        const found = jobsData.find((j) => j.id === jobId) || jobsData[0];
-        if (found) {
-          setJob(found);
-        }
-      } catch (err) {
-        console.error('Failed to fetch details:', err);
+  }, []);
+
+  useEffect(() => {
+    const el = companyDescRef.current;
+    if (!el) return;
+
+    const check = () => {
+      if (!isCompanyDescExpanded) {
+        setShowCompanyDescButton(el.scrollHeight > el.clientHeight);
       }
     };
-    if (jobId) {
-      fetchData();
+
+    // Run check initially
+    check();
+
+    // Also run check if window resizes
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, [job, companies, isCompanyDescExpanded]);
+
+  useEffect(() => {
+    if (jobs && jobs.length > 0 && jobId) {
+      const found = jobs.find((j) => j.id === jobId) || jobs[0];
+      if (found) {
+        setJob(found);
+      }
     }
-  }, [jobId]);
+  }, [jobs, jobId]);
 
-  if (!mounted) return null;
-
-  if (!job) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
-        <div className="flex flex-col items-center gap-3">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
-          <p className="text-sm text-muted-foreground font-medium">
-            Memuat Detail Lowongan...
-          </p>
-        </div>
-      </div>
-    );
+  if (!mounted || !job) {
+    return <LoadingSpinner />;
   }
 
   const foundCompany = companies.find(
@@ -118,18 +122,36 @@ const JobDetailPage: React.FC = () => {
       : job.companyDetails.instagram,
   };
 
-  // Filter recommendations based on matching category or title keyword
+  // Filter recommendations based on matching category or title keyword, prioritized by shared categories/field
   const recommendedJobs = jobs
-    .filter(
-      (j) =>
-        j.id !== job.id &&
-        (j.company === job.company ||
-          j.categories.some((cat) => job.categories.includes(cat)) ||
-          j.title
-            .toLowerCase()
-            .split(' ')
-            .some((word) => job.title.toLowerCase().includes(word))),
-    )
+    .filter((j) => j.id !== job.id)
+    .map((j) => {
+      let score = 0;
+      // Prioritize shared categories (bidang) heavily
+      const sharedCategories = j.categories.filter((cat) =>
+        job.categories.includes(cat),
+      ).length;
+      score += sharedCategories * 10;
+
+      // Same company
+      if (j.company === job.company) {
+        score += 5;
+      }
+
+      // Title word matches (excluding short words)
+      const commonTitleWords = j.title
+        .toLowerCase()
+        .split(/\s+/)
+        .filter(
+          (word) => word.length > 2 && job.title.toLowerCase().includes(word),
+        ).length;
+      score += commonTitleWords * 2;
+
+      return { job: j, score };
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .map((item) => item.job)
     .slice(0, 3);
 
   const handleApply = async () => {
@@ -178,7 +200,7 @@ const JobDetailPage: React.FC = () => {
                 variant="outline"
                 size="sm"
                 onClick={() => setIsReportOpen(true)}
-                className="text-xs font-semibold cursor-pointer text-orange-500 border-orange-500/30 hover:bg-orange-500/10 hover:text-orange-500"
+                className="text-xs font-semibold cursor-pointer text-orange-500 border-orange-500/30 hover:bg-orange-500/10 hover:text-orange-500 h-8 px-3"
                 title="Laporkan Lowongan"
               >
                 <Flag className="h-3.5 w-3.5 mr-1.5" />
@@ -205,7 +227,10 @@ const JobDetailPage: React.FC = () => {
                           src={job.logo}
                           alt={job.company}
                           className="w-full h-full object-contain"
-                         width={100} height={100} unoptimized />
+                          width={100}
+                          height={100}
+                          unoptimized
+                        />
                       ) : (
                         job.logo
                       )}
@@ -221,7 +246,7 @@ const JobDetailPage: React.FC = () => {
                           {job.company}
                         </span>
                         {job.isVerified && (
-                          <ShieldCheck className="h-4 w-4 text-emerald-500 shrink-0" />
+                          <ShieldCheck className="h-4 w-4 text-blue-500 shrink-0" />
                         )}
                       </div>
                     </div>
@@ -415,7 +440,7 @@ const JobDetailPage: React.FC = () => {
                               : 'bg-background/50 border border-border/80 text-muted-foreground'
                           }`}
                         >
-                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                          <CheckCircle2 className="h-3.5 w-3.5 text-blue-500 shrink-0" />
                           {benefit}
                         </Badge>
                       ))}
@@ -463,15 +488,20 @@ const JobDetailPage: React.FC = () => {
                         Tentang {job.company}
                       </h2>
                       {job.isVerified && (
-                        <ShieldCheck className="h-4.5 w-4.5 text-emerald-500 shrink-0" />
+                        <ShieldCheck className="h-3.5 w-3.5 text-blue-500 shrink-0" />
                       )}
                     </div>
                     <button
-                      onClick={() => router.push(`/pencari-kerja/companies/${companyId}`)}
-                      className="text-xs text-primary hover:text-primary/80 transition-colors font-semibold flex items-center gap-1 cursor-pointer"
+                      onClick={() =>
+                        router.push(`/pencari-kerja/companies/${companyId}`)
+                      }
+                      className="text-xs text-primary hover:text-primary/80 transition-colors font-semibold flex items-center gap-1 cursor-pointer p-0 bg-transparent border-none"
                     >
                       Lihat Profil Perusahaan
-                      <ExternalLink className="h-3 w-3 shrink-0 ml-0.5" strokeWidth={2.5} />
+                      <ExternalLink
+                        className="h-3 w-3 shrink-0 ml-0.5"
+                        strokeWidth={2.5}
+                      />
                     </button>
                   </div>
 
@@ -512,25 +542,36 @@ const JobDetailPage: React.FC = () => {
                   </div>
 
                   <div className="py-3">
-                    <p className={`text-xs text-muted-foreground leading-relaxed transition-all duration-300 ${isCompanyDescExpanded ? '' : 'line-clamp-5'}`}>
+                    <p
+                      ref={companyDescRef}
+                      className={`text-xs text-muted-foreground leading-relaxed transition-all duration-300 ${isCompanyDescExpanded ? '' : 'line-clamp-5'}`}
+                    >
                       {foundCompany
                         ? foundCompany.description
                         : job.companyDetails.description}
                     </p>
-                    {((foundCompany ? foundCompany.description : job.companyDetails.description) || '').length > 250 && (
+                    {showCompanyDescButton && (
                       <button
-                        onClick={() => setIsCompanyDescExpanded(!isCompanyDescExpanded)}
+                        onClick={() =>
+                          setIsCompanyDescExpanded(!isCompanyDescExpanded)
+                        }
                         className="text-xs text-primary hover:text-primary/80 transition-all duration-200 hover:underline font-semibold mt-2.5 cursor-pointer flex items-center gap-1"
                       >
                         {isCompanyDescExpanded ? (
                           <>
                             Sembunyikan
-                            <LuChevronUp className="h-3.5 w-3.5 shrink-0" strokeWidth={2.5} />
+                            <LuChevronUp
+                              className="h-3.5 w-3.5 shrink-0"
+                              strokeWidth={2.5}
+                            />
                           </>
                         ) : (
                           <>
                             Lihat semua
-                            <LuChevronDown className="h-3.5 w-3.5 shrink-0" strokeWidth={2.5} />
+                            <LuChevronDown
+                              className="h-3.5 w-3.5 shrink-0"
+                              strokeWidth={2.5}
+                            />
                           </>
                         )}
                       </button>
@@ -596,62 +637,68 @@ const JobDetailPage: React.FC = () => {
                   </div>
 
                   {/* Company Workers */}
-                  <div className="border-t pt-4 mt-4!">
-                    <h3 className="text-xs font-bold text-foreground mb-3.5">
-                      Tim Kami
-                    </h3>
-                    <div className="flex flex-wrap gap-3">
-                      {job.companyDetails.workers.map((worker, i) => {
-                        const roles = [
-                          'Chief Executive Officer (CEO)',
-                          'Head of HR Department',
-                          'Lead Product Designer',
-                          'Senior Engineering Manager',
-                        ];
-                        const role = roles[i % roles.length];
-                        const avatars = [
-                          'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-                          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
-                          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80',
-                          'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
-                        ];
-                        const avatarUrl = avatars[i % avatars.length];
-                        return (
-                          <div
-                            key={i}
-                            className="flex items-center justify-between gap-3 p-2 pr-4 rounded-full border bg-background/50 hover:bg-background transition-colors text-sm"
-                          >
-                            <div className="flex items-center gap-3 min-w-0">
-                              <div className="h-8 w-8 rounded-full overflow-hidden shrink-0 border border-border">
-                                <Image
-                                  src={avatarUrl}
-                                  alt={worker}
-                                  className="w-full h-full object-cover"
-                                 width={100} height={100} unoptimized />
-                              </div>
-                              <div className="min-w-0">
-                                <div className="font-bold text-xs text-foreground leading-none truncate">
-                                  {worker}
+                  {job.companyDetails.workers &&
+                    job.companyDetails.workers.length > 0 && (
+                      <div className="border-t pt-4 mt-4!">
+                        <h3 className="text-xs font-bold text-foreground mb-3.5">
+                          Tim Kami
+                        </h3>
+                        <div className="flex flex-wrap gap-3">
+                          {job.companyDetails.workers.map((worker, i) => {
+                            const roles = [
+                              'Chief Executive Officer (CEO)',
+                              'Head of HR Department',
+                              'Lead Product Designer',
+                              'Senior Engineering Manager',
+                            ];
+                            const role = roles[i % roles.length];
+                            const avatars = [
+                              'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+                              'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
+                              'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80',
+                              'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
+                            ];
+                            const avatarUrl = avatars[i % avatars.length];
+                            return (
+                              <div
+                                key={i}
+                                className="flex items-center justify-between gap-3 p-2 pr-4 rounded-full border bg-background/50 hover:bg-background transition-colors text-sm"
+                              >
+                                <div className="flex items-center gap-3 min-w-0">
+                                  <div className="h-8 w-8 rounded-full overflow-hidden shrink-0 border border-border">
+                                    <Image
+                                      src={avatarUrl}
+                                      alt={worker}
+                                      className="w-full h-full object-cover"
+                                      width={100}
+                                      height={100}
+                                      unoptimized
+                                    />
+                                  </div>
+                                  <div className="min-w-0">
+                                    <div className="font-bold text-xs text-foreground leading-none truncate">
+                                      {worker}
+                                    </div>
+                                    <div className="text-xs font-normal text-muted-foreground leading-none mt-1 truncate">
+                                      {role}
+                                    </div>
+                                  </div>
                                 </div>
-                                <div className="text-xs font-normal text-muted-foreground leading-none mt-1 truncate">
-                                  {role}
-                                </div>
+                                <a
+                                  href={`https://linkedin.com/in/${worker.toLowerCase().replace(/\s+/g, '')}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-muted-foreground hover:text-primary transition-colors p-1 shrink-0 ml-3 border-l pl-3 cursor-pointer"
+                                  title={`LinkedIn ${worker}`}
+                                >
+                                  <LuLinkedin className="h-4 w-4" />
+                                </a>
                               </div>
-                            </div>
-                            <a
-                              href={`https://linkedin.com/in/${worker.toLowerCase().replace(/\s+/g, '')}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-muted-foreground hover:text-primary transition-colors p-1 shrink-0 ml-3 border-l pl-3 cursor-pointer"
-                              title={`LinkedIn ${worker}`}
-                            >
-                              <LuLinkedin className="h-4 w-4" />
-                            </a>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
                 </CardContent>
               </Card>
 
@@ -664,34 +711,39 @@ const JobDetailPage: React.FC = () => {
                   {recommendedJobs.map((recJob) => (
                     <div
                       key={recJob.id}
-                      onClick={() => router.push(`/pencari-kerja/jobs/${recJob.id}`)}
+                      onClick={() =>
+                        router.push(`/pencari-kerja/jobs/${recJob.id}`)
+                      }
                       className="group relative flex flex-col justify-between rounded-xl border border-border/70 py-4 px-5 cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:border-primary/50 bg-card"
                     >
                       <div className="flex flex-col justify-between h-full">
                         <div>
                           {/* Header: Logo, Title, and Bookmark */}
                           <div className="flex items-start justify-between mb-4">
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-3 flex-1 min-w-0">
                               <div className="h-11 w-11 rounded-xl bg-white flex items-center justify-center shrink-0 border border-border overflow-hidden">
                                 <Image
                                   src={recJob.logo}
                                   alt={recJob.company}
                                   className="w-full h-full object-contain"
-                                 width={100} height={100} unoptimized />
+                                  width={100}
+                                  height={100}
+                                  unoptimized
+                                />
                               </div>
-                              <div className="min-w-0">
+                              <div className="min-w-0 flex-1">
                                 <h3 className="font-bold text-[14px] text-foreground group-hover:text-primary transition-colors leading-tight truncate">
                                   {recJob.title}
                                 </h3>
-                                <p className="text-xs text-muted-foreground truncate font-medium mt-1 flex items-center gap-1">
-                                  <span className="truncate">
+                                <p className="text-xs text-muted-foreground font-medium mt-1 flex items-center gap-1 overflow-hidden">
+                                  <span className="truncate shrink min-w-0">
                                     {recJob.company}
                                   </span>
                                   {recJob.isVerified && (
-                                    <ShieldCheck className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                                    <ShieldCheck className="h-3.5 w-3.5 text-blue-500 shrink-0" />
                                   )}
-                                  <span className="shrink-0">
-                                    • {recJob.location}
+                                  <span className="truncate shrink min-w-0">
+                                    • {shortenLocation(recJob.location)}
                                   </span>
                                 </p>
                               </div>
@@ -774,16 +826,19 @@ const JobDetailPage: React.FC = () => {
               <Card className="border border-border/70 bg-card/50 backdrop-blur-sm shadow-md mb-8">
                 <CardContent className="p-5 space-y-4">
                   <h3 className="text-xs font-bold text-muted-foreground/80 tracking-wide">
-                    Dikelola oleh 
+                    Dikelola oleh
                   </h3>
 
                   <div className="flex items-center gap-3 pt-1">
                     {job.managedBy.avatar ? (
-                       <Image
+                      <Image
                         src={job.managedBy.avatar}
                         alt={job.managedBy.name}
                         className="h-9 w-9 rounded-full object-cover border border-border"
-                       width={100} height={100} unoptimized />
+                        width={100}
+                        height={100}
+                        unoptimized
+                      />
                     ) : (
                       <div className="h-9 w-9 rounded-full border border-border bg-primary/20 text-primary flex items-center justify-center font-bold text-xs shadow-inner">
                         {job.managedBy.name.charAt(0)}
@@ -823,34 +878,39 @@ const JobDetailPage: React.FC = () => {
                   {recommendedJobs.map((recJob) => (
                     <div
                       key={recJob.id}
-                      onClick={() => router.push(`/pencari-kerja/jobs/${recJob.id}`)}
+                      onClick={() =>
+                        router.push(`/pencari-kerja/jobs/${recJob.id}`)
+                      }
                       className="group relative flex flex-col justify-between rounded-xl border border-border/70 py-4 px-5 cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:border-primary/50 bg-card"
                     >
                       <div className="flex flex-col justify-between h-full">
                         <div>
                           {/* Header: Logo, Title, and Bookmark */}
                           <div className="flex items-start justify-between mb-4">
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-3 flex-1 min-w-0">
                               <div className="h-11 w-11 rounded-xl bg-white flex items-center justify-center shrink-0 border border-border overflow-hidden">
                                 <Image
                                   src={recJob.logo}
                                   alt={recJob.company}
                                   className="w-full h-full object-contain"
-                                 width={100} height={100} unoptimized />
+                                  width={100}
+                                  height={100}
+                                  unoptimized
+                                />
                               </div>
-                              <div className="min-w-0">
+                              <div className="min-w-0 flex-1">
                                 <h3 className="font-bold text-[14px] text-foreground group-hover:text-primary transition-colors leading-tight truncate">
                                   {recJob.title}
                                 </h3>
-                                <p className="text-xs text-muted-foreground truncate font-medium mt-1 flex items-center gap-1">
-                                  <span className="truncate">
+                                <p className="text-xs text-muted-foreground font-medium mt-1 flex items-center gap-1 overflow-hidden">
+                                  <span className="truncate shrink min-w-0">
                                     {recJob.company}
                                   </span>
                                   {recJob.isVerified && (
-                                    <ShieldCheck className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                                    <ShieldCheck className="h-3.5 w-3.5 text-blue-500 shrink-0" />
                                   )}
-                                  <span className="shrink-0">
-                                    • {recJob.location}
+                                  <span className="truncate shrink min-w-0">
+                                    • {shortenLocation(recJob.location)}
                                   </span>
                                 </p>
                               </div>

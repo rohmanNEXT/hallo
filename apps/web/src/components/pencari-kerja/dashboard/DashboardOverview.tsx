@@ -88,37 +88,78 @@ export default function DashboardOverview({
   };
 
   // Change photo with crossfade + save to store
-  const changePhoto = (idx: number) => {
-    if (idx === bannerIndex) return;
-    setPrevIndex(bannerIndex);
-    setFading(true);
-    setBannerIndex(idx);
-    setTimeout(() => setFading(false), 700);
-  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   const bannerPhotos = [
     {
-      url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80&auto=format&fit=crop',
+      url: '/images/banners/banner1.png?v=25',
       label: 'Pegunungan',
     },
     {
-      url: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80&auto=format&fit=crop',
+      url: '/images/banners/banner2.png?v=25',
       label: 'Hutan',
     },
     {
-      url: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1200&q=80&auto=format&fit=crop',
+      url: '/images/banners/banner3.png?v=25',
       label: 'Pantai',
     },
     {
-      url: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=80&auto=format&fit=crop',
+      url: '/images/banners/banner4.png?v=25',
       label: 'Kota',
     },
     {
-      url: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=80&auto=format&fit=crop',
-      label: 'Padang',
+      url: '/images/banners/banner5.png?v=25',
+      label: 'Laut',
+      copyright: 'Maldives Atolls',
     },
     {
-      url: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&q=80&auto=format&fit=crop',
+      url: '/images/banners/banner6.png?v=25',
       label: 'Salju',
     },
     {
@@ -127,6 +168,16 @@ export default function DashboardOverview({
       copyright: 'Realtime Bing Image of the Day',
     },
   ];
+
+  const changePhoto = (idx: number) => {
+    if (idx === bannerIndex) return;
+    setPrevIndex(bannerIndex);
+    setFading(true);
+    setBannerIndex(idx);
+    setTimeout(() => setFading(false), 700);
+  };
+
+
 
   useEffect(() => {
     setMounted(true);
@@ -167,6 +218,7 @@ export default function DashboardOverview({
           className="absolute inset-0 rounded-3xl bg-cover bg-center transition-opacity duration-700"
           style={{
             backgroundImage: `url('${bannerPhotos[prevIndex].url}')`,
+            backgroundPosition: 'center 35%',
             opacity: fading ? 1 : 0,
           }}
         />
@@ -175,6 +227,7 @@ export default function DashboardOverview({
           className="absolute inset-0 rounded-3xl bg-cover bg-center transition-opacity duration-700"
           style={{
             backgroundImage: `url('${bannerPhotos[bannerIndex].url}')`,
+            backgroundPosition: 'center 35%',
             opacity: fading ? 0 : 1,
           }}
         />
@@ -262,7 +315,7 @@ export default function DashboardOverview({
                       draggable={false}
                      width={100} height={100} unoptimized />
                     <div className="absolute inset-0 bg-black/25 group-hover:bg-black/5 transition-all" />
-                    <span className="absolute bottom-1 left-0 right-0 text-center text-[10px] font-bold text-white drop-shadow-md">
+                    <span className="absolute bottom-1 left-0 right-0 text-center text-[12px] font-bold text-white drop-shadow-md">
                       {photo.label}
                     </span>
                     {bannerIndex === idx && (
@@ -293,7 +346,7 @@ export default function DashboardOverview({
                      width={100} height={100} unoptimized />
                     <div className="absolute inset-0 bg-black/25" />
                   </div>
-                  <span className="text-[10px] font-bold text-foreground">
+                  <span className="text-[12px] font-bold text-foreground">
                     Mode Bing Image
                   </span>
                 </div>
@@ -354,7 +407,7 @@ export default function DashboardOverview({
                 <span className="text-xl md:text-2xl font-black text-foreground">
                   {stat.value}
                 </span>
-                <span className="text-[10px] font-bold text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all inline-flex items-center">
+                <span className="text-[12px] font-bold text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all inline-flex items-center">
                   Detail <ChevronRight className="h-3 w-3" />
                 </span>
               </div>
@@ -419,7 +472,7 @@ export default function DashboardOverview({
                         <LuBuilding2 className="w-5 h-5 text-muted-foreground" />
                       )}
                       {app.status === 'Lulus' && (
-                        <div className="absolute -bottom-1 -right-1 bg-emerald-500 rounded-full w-4 h-4 flex items-center justify-center border-2 border-card text-[10px] text-white">
+                        <div className="absolute -bottom-1 -right-1 bg-emerald-500 rounded-full w-4 h-4 flex items-center justify-center border-2 border-card text-[12px] text-white">
                           <LuCheck className="w-2.5 h-2.5" />
                         </div>
                       )}
@@ -428,14 +481,14 @@ export default function DashboardOverview({
                       <span className="text-xs font-bold text-foreground block truncate">
                         {app.jobTitle}
                       </span>
-                      <span className="text-[10px] text-muted-foreground font-medium block mt-1">
+                      <span className="text-[12px] text-muted-foreground font-medium block mt-1">
                         {app.company} • Melamar pada {app.date || '-'}
                       </span>
                     </div>
                   </div>
 
                   <span
-                    className={`text-[10px] font-bold px-2 py-0.5 rounded shrink-0 select-none flex items-center gap-1 ${
+                    className={`text-[12px] font-bold px-2 py-0.5 rounded shrink-0 select-none flex items-center gap-1 ${
                       app.status === 'Interview'
                         ? 'bg-blue-500/10 text-blue-500'
                         : app.status === 'Lulus'
@@ -473,7 +526,7 @@ export default function DashboardOverview({
 
             {/* Progress Bar */}
             <div className="space-y-1.5">
-              <div className="flex items-center justify-between text-[10px] font-bold mb-2.5">
+              <div className="flex items-center justify-between text-[12px] font-bold mb-2.5">
                 <span
                   className={`${
                     profileStrength === 100

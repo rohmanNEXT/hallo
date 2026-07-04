@@ -52,7 +52,7 @@ const SidebarPembuat: React.FC<SidebarProps> = ({
             <div className="font-extrabold text-sm text-foreground truncate">
               {user.name}
             </div>
-            <div className="text-[10px] text-muted-foreground truncate font-medium mt-0.5 max-w-[110px] lg:max-w-[140px]">
+            <div className="text-[12px] text-muted-foreground truncate font-medium mt-0.5 max-w-[110px] lg:max-w-[140px]">
               {user.email}
             </div>
           </div>

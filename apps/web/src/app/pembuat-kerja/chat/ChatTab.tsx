@@ -20,6 +20,7 @@ import { Badge } from '@/components/ui/badge';
 import MultiSelectJob from '@/components/ui/multi-select-job';
 import { calculateHalloScore } from '../kandidat/KandidatTab';
 import Image from 'next/image';
+import LoadingSpinner from '@/components/ui/loading-spinner';
 
 const ChatTab: React.FC = () => {
   const {
@@ -104,7 +105,7 @@ const ChatTab: React.FC = () => {
     }
   }, [filteredAppsByRole, appIdParam]);
 
-  if (!mounted || !user) return null;
+  if (!mounted || !user) return <LoadingSpinner />;
 
   const activeApp = filteredAppsByRole.find((app) => {
     if (app.id !== activeAppId) return false;

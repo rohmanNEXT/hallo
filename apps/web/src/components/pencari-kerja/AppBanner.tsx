@@ -26,7 +26,7 @@ const AppBanner: React.FC = () => {
             {/* App Store */}
             <button
               type="button"
-              className="bg-foreground/80 text-background rounded-full px-4 py-2 transition-all duration-200 hover:opacity-90 hover:scale-[1.02] active:scale-95 shadow-sm group cursor-pointer border-none flex items-center"
+              className="bg-foreground/80 text-background rounded-full px-5 py-2.5 transition-all duration-200 hover:opacity-90 hover:scale-[1.02] active:scale-95 shadow-sm group cursor-pointer border-none flex items-center"
             >
               <a
                 href="#"
@@ -35,8 +35,8 @@ const AppBanner: React.FC = () => {
               >
                 <LuApple className="w-3.5 h-3.5 fill-current shrink-0" />
                 <div>
-                  <p className="text-[7px] text-background/60 uppercase font-semibold tracking-wider leading-none">
-                    Download on the
+                  <p className="text-[7px] text-background/60 uppercase font-semibold tracking-wider leading-none mb-0.5">
+                    Get it on
                   </p>
                   <p className="text-[11px] font-extrabold leading-snug">
                     App Store
@@ -48,7 +48,7 @@ const AppBanner: React.FC = () => {
             {/* Google Play */}
             <button
               type="button"
-              className="bg-foreground/80 text-background rounded-full px-4 py-2 transition-all duration-200 hover:opacity-90 hover:scale-[1.02] active:scale-95 shadow-sm group cursor-pointer border-none flex items-center"
+              className="bg-foreground/80 text-background rounded-full px-5 py-2.5 transition-all duration-200 hover:opacity-90 hover:scale-[1.02] active:scale-95 shadow-sm group cursor-pointer border-none flex items-center"
             >
               <a
                 href="#"
@@ -57,7 +57,7 @@ const AppBanner: React.FC = () => {
               >
                 <SiGoogleplay className="w-3.5 h-3.5 shrink-0" />
                 <div>
-                  <p className="text-[7px] text-background/60 uppercase font-semibold tracking-wider leading-none">
+                  <p className="text-[7px] text-background/60 uppercase font-semibold tracking-wider leading-none mb-0.5">
                     Get it on
                   </p>
                   <p className="text-[11px] font-extrabold leading-snug">

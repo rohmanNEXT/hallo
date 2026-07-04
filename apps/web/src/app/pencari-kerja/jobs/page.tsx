@@ -136,10 +136,10 @@ const HelpCenterModal: React.FC<HelpCenterModalProps> = ({ onClose }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div
-        className="absolute inset-0 bg-background/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-background/40 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className="relative w-full max-w-4xl rounded-[32px] border border-border/40 bg-background/95 backdrop-blur-xl text-foreground shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col max-h-[85vh] animate-in slide-in-from-bottom-4 fade-in duration-300">
+      <div className="relative w-full max-w-4xl rounded-[32px] border border-border/50 bg-background/40 backdrop-blur-2xl text-foreground shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col max-h-[85vh] animate-in slide-in-from-bottom-4 fade-in duration-300">
         <div className="flex items-center justify-between px-6 py-4 border-b border-border/60 shrink-0">
           <div className="flex items-center gap-2">
             <HelpIcon className="h-5 w-5 text-primary" />
@@ -763,12 +763,9 @@ const JobsPage: React.FC = () => {
 
               {isLocationOpen && (
                 <div
-                  style={{ backgroundColor: 'hsl(var(--popover))' }}
-                  className={`absolute top-full left-0 right-0 mt-1 z-100 rounded-lg border shadow-xl overflow-hidden ${
-                    mounted && theme === 'white'
+                  className={`absolute top-full left-0 right-0 mt-1 z-100 rounded-lg border shadow-xl overflow-hidden bg-popover/40 backdrop-blur-2xl ${mounted && theme === 'white'
                       ? 'border-[#d2e2f0]'
-                      : 'border-border'
-                  }`}
+                      : 'border-border/50'}`}
                 >
                   <div
                     className={`p-2 border-b ${mounted && theme === 'white' ? 'border-[#d2e2f0]' : 'border-border/60'}`}

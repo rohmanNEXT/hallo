@@ -165,10 +165,10 @@ export default function DashboardApplications({
 
                     {/* Middle section: Timeline Lamaran */}
                     <div className="flex-1 min-w-[180px] space-y-1 md:pl-4">
-                      <span className="text-[10px] font-bold text-foreground block">
+                      <span className="text-[12px] font-bold text-foreground block">
                         Timeline Lamaran
                       </span>
-                      <ul className="text-[10px] text-muted-foreground space-y-1 font-medium list-none p-0 m-0">
+                      <ul className="text-[12px] text-muted-foreground space-y-1 font-medium list-none p-0 m-0">
                         <li className="flex items-center gap-1 mt-1">
                           <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/75 inline-block shrink-0 mr-1"></span>
                           <span>Dilamar</span>
@@ -189,7 +189,7 @@ export default function DashboardApplications({
                     {/* Right section badge */}
                     <div className="absolute w-20 top-0 right-0 md:relative md:top-auto md:right-auto shrink-0">
                       <span
-                        className={`text-[10px] font-bold px-2 py-0.5 rounded select-none ${
+                        className={`text-[12px] font-bold px-2 py-0.5 rounded select-none ${
                           app.status === 'Interview'
                             ? 'bg-blue-500/10 text-blue-500'
                             : app.status === 'Lulus'
@@ -216,7 +216,7 @@ export default function DashboardApplications({
                     <button
                       onClick={() =>
                         router.push(
-                          `/jobs?search=${encodeURIComponent(app.jobTitle)}`,
+                          `/pencari-kerja/jobs?search=${encodeURIComponent(app.jobTitle)}`,
                         )
                       }
                       className="p-1.5 hover:bg-muted rounded-full transition-colors cursor-pointer text-muted-foreground hover:text-foreground"

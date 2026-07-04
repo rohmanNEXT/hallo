@@ -100,7 +100,7 @@ const ReportModal: React.FC<ReportModalProps> = ({
       />
 
       {/* Modal */}
-      <div className="relative w-full max-w-2xl bg-background rounded-2xl shadow-2xl border border-border overflow-hidden">
+      <div className="relative w-full max-w-2xl bg-background/40 backdrop-blur-2xl rounded-2xl shadow-2xl border border-border/50 overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-border">
           <h2 className="text-base font-extrabold text-foreground">

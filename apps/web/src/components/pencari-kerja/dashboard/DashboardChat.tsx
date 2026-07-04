@@ -151,7 +151,7 @@ export default function DashboardChat() {
         {/* Header */}
         <div className="p-4 border-b border-border/60 flex items-center justify-between">
           <span className="font-bold text-xs">Chat</span>
-          <span className="text-[10px] bg-primary/15 text-primary px-2 py-0.5 rounded-full font-bold">
+          <span className="text-[12px] bg-primary/15 text-primary px-2 py-0.5 rounded-full font-bold">
             {contacts.filter((c) => c.unread > 0).length} Baru
           </span>
         </div>
@@ -187,7 +187,7 @@ export default function DashboardChat() {
             >
               {/* Logo */}
               <div className="relative h-8 w-8 bg-white border border-border/70 rounded-xl p-1 flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
-                <span className="text-[10px] font-black text-muted-foreground">
+                <span className="text-[12px] font-black text-muted-foreground">
                   {contact.logo}
                 </span>
                 {contact.online && (
@@ -201,18 +201,18 @@ export default function DashboardChat() {
                   <span className="text-xs font-bold text-foreground truncate">
                     {contact.name}
                   </span>
-                  <span className="text-[10px] text-muted-foreground/60">
+                  <span className="text-[12px] text-muted-foreground/60">
                     {contact.time}
                   </span>
                 </div>
-                <p className="text-[10px] text-muted-foreground truncate mt-1 font-medium">
+                <p className="text-[12px] text-muted-foreground truncate mt-1 font-medium">
                   {contact.lastMessage}
                 </p>
               </div>
 
               {/* Unread dot */}
               {contact.unread > 0 && (
-                <span className="h-3.5 w-3.5 bg-primary text-primary-foreground text-[8px] font-bold rounded-full flex items-center justify-center shrink-0">
+                <span className="h-3.5 w-3.5 bg-primary text-primary-foreground text-[12px] font-bold rounded-full flex items-center justify-center shrink-0">
                   {contact.unread}
                 </span>
               )}
@@ -237,7 +237,7 @@ export default function DashboardChat() {
               <ArrowLeft className="h-4.5 w-4.5" />
             </button>
             <div className="h-8 w-8 bg-white border border-border/70 rounded-xl p-1.5 flex items-center justify-center shrink-0 overflow-hidden">
-              <span className="text-[10px] font-black text-muted-foreground">
+              <span className="text-[12px] font-black text-muted-foreground">
                 {activeContact.logo}
               </span>
             </div>
@@ -249,7 +249,7 @@ export default function DashboardChat() {
                 <span
                   className={`h-1.5 w-1.5 rounded-full ${activeContact.online ? 'bg-emerald-500' : 'bg-muted-foreground'}`}
                 />
-                <span className="text-[10px] text-muted-foreground font-medium">
+                <span className="text-[12px] text-muted-foreground font-medium">
                   {activeContact.online ? 'Online' : 'Offline'}
                 </span>
               </div>
@@ -298,7 +298,7 @@ export default function DashboardChat() {
                             className="bg-transparent border-b border-primary-foreground/50 text-white focus:outline-none w-full text-[12px]"
                             autoFocus
                           />
-                          <div className="flex justify-end gap-1.5 text-[10px]">
+                          <div className="flex justify-end gap-1.5 text-[12px]">
                             <button
                               onClick={() => {
                                 if (editInput.trim()) {
@@ -323,7 +323,7 @@ export default function DashboardChat() {
                           <p className="leading-relaxed whitespace-pre-wrap">
                             {msg.content}
                           </p>
-                          <div className="flex items-center justify-between mt-1 gap-3 opacity-75 text-[8px]">
+                          <div className="flex items-center justify-between mt-1 gap-3 opacity-75 text-[12px]">
                             <span>{msg.timestamp}</span>
                             {isUser && (
                               <div className="flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -373,7 +373,7 @@ export default function DashboardChat() {
               <p className="text-xs font-bold text-muted-foreground">
                 Tidak ada pesan
               </p>
-              <p className="text-[10px] text-muted-foreground/80 mt-1">
+              <p className="text-[12px] text-muted-foreground/80 mt-1">
                 Ketik pesan di bawah untuk memulai percakapan.
               </p>
             </div>

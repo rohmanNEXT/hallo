@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useAppStore } from '@/store/store';
+import useAuth from '@/hooks/useAuth';
 import {
   LuX as X,
   LuMail as Mail,
@@ -21,10 +22,9 @@ const AuthModal: React.FC = () => {
     isAuthModalOpen,
     authModalTab,
     setAuthModal,
-    login,
-    register,
     forgotEmail,
   } = useAppStore();
+  const { login, register } = useAuth();
 
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -52,14 +52,10 @@ const AuthModal: React.FC = () => {
     setError(null);
     setLoading(true);
     try {
-      const success = await login(mockEmail, role);
-      if (success) {
-        handleClose();
-      } else {
-        setError('Login gagal. Silakan coba lagi.');
-      }
+      await login({ email: mockEmail, role });
+      handleClose();
     } catch (err) {
-      setError('Terjadi kesalahan saat masuk.');
+      setError('Login gagal. Silakan coba lagi.');
     } finally {
       setLoading(false);
     }
@@ -74,19 +70,15 @@ const AuthModal: React.FC = () => {
     setError(null);
     setLoading(true);
     try {
-      const success = await register({
+      await register({
         name: name.trim(),
         email: email.trim(),
         waNumber: waNumber.trim(),
-        role,
+        role: role,
       });
-      if (success) {
-        handleClose();
-      } else {
-        setError('Pendaftaran gagal. Silakan coba lagi.');
-      }
+      handleClose();
     } catch (err) {
-      setError('Terjadi kesalahan saat mendaftar.');
+      setError('Pendaftaran gagal. Silakan coba lagi.');
     } finally {
       setLoading(false);
     }

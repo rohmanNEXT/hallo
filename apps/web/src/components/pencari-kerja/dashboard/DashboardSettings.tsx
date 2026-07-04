@@ -116,7 +116,7 @@ export default function DashboardSettings() {
           {/* Email Row */}
           <div className="p-3.5 flex items-center justify-between gap-5">
             <div className="space-y-0.5 flex-1 pr-4">
-              <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block">
+              <span className="text-[12px] font-bold text-muted-foreground uppercase tracking-wider block">
                 Email
               </span>
               {isEditingEmail ? (
@@ -151,7 +151,7 @@ export default function DashboardSettings() {
                     </button>
                   </div>
                   {emailFormik.touched.email && emailFormik.errors.email && (
-                    <span className="text-[10px] text-rose-500 font-bold">{emailFormik.errors.email}</span>
+                    <span className="text-[12px] text-rose-500 font-bold">{emailFormik.errors.email}</span>
                   )}
                 </form>
               ) : (
@@ -173,7 +173,7 @@ export default function DashboardSettings() {
           {/* WhatsApp Row */}
           <div className="p-3.5 flex items-center justify-between gap-5">
             <div className="space-y-0.5 flex-1 pr-4">
-              <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block">
+              <span className="text-[12px] font-bold text-muted-foreground uppercase tracking-wider block">
                 WhatsApp
               </span>
               {isEditingWa ? (
@@ -208,7 +208,7 @@ export default function DashboardSettings() {
                     </button>
                   </div>
                   {waFormik.touched.waNumber && waFormik.errors.waNumber && (
-                    <span className="text-[10px] text-rose-500 font-bold">{waFormik.errors.waNumber}</span>
+                    <span className="text-[12px] text-rose-500 font-bold">{waFormik.errors.waNumber}</span>
                   )}
                 </form>
               ) : (
@@ -231,7 +231,7 @@ export default function DashboardSettings() {
           <div className="p-3.5">
             {isChangingPassword ? (
               <form onSubmit={passwordFormik.handleSubmit} className="space-y-2.5 pt-0.5">
-                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block">
+                <span className="text-[12px] font-bold text-muted-foreground uppercase tracking-wider block">
                   Ubah Kata Sandi
                 </span>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
@@ -246,7 +246,7 @@ export default function DashboardSettings() {
                       className="h-8 text-xs"
                     />
                     {passwordFormik.touched.oldPassword && passwordFormik.errors.oldPassword && (
-                      <span className="text-[10px] text-rose-500 font-bold">{passwordFormik.errors.oldPassword}</span>
+                      <span className="text-[12px] text-rose-500 font-bold">{passwordFormik.errors.oldPassword}</span>
                     )}
                   </div>
                   <div>
@@ -260,7 +260,7 @@ export default function DashboardSettings() {
                       className="h-8 text-xs"
                     />
                     {passwordFormik.touched.newPassword && passwordFormik.errors.newPassword && (
-                      <span className="text-[10px] text-rose-500 font-bold">{passwordFormik.errors.newPassword}</span>
+                      <span className="text-[12px] text-rose-500 font-bold">{passwordFormik.errors.newPassword}</span>
                     )}
                   </div>
                   <div>
@@ -274,7 +274,7 @@ export default function DashboardSettings() {
                       className="h-8 text-xs"
                     />
                     {passwordFormik.touched.confirmPassword && passwordFormik.errors.confirmPassword && (
-                      <span className="text-[10px] text-rose-500 font-bold">{passwordFormik.errors.confirmPassword}</span>
+                      <span className="text-[12px] text-rose-500 font-bold">{passwordFormik.errors.confirmPassword}</span>
                     )}
                   </div>
                 </div>
@@ -283,7 +283,7 @@ export default function DashboardSettings() {
                     type="button"
                     variant="outline"
                     size="sm"
-                    className="h-7 text-[10px] cursor-pointer px-3"
+                    className="h-7 text-[12px] cursor-pointer px-3"
                     onClick={() => {
                       setIsChangingPassword(false);
                       passwordFormik.resetForm();
@@ -291,7 +291,7 @@ export default function DashboardSettings() {
                   >
                     Batal
                   </Button>
-                  <Button type="submit" size="sm" className="h-7 text-[10px] cursor-pointer px-3">
+                  <Button type="submit" size="sm" className="h-7 text-[12px] cursor-pointer px-3">
                     Simpan Kata Sandi
                   </Button>
                 </div>
@@ -299,7 +299,7 @@ export default function DashboardSettings() {
             ) : (
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block">
+                  <span className="text-[12px] font-bold text-muted-foreground uppercase tracking-wider block">
                     Kata Sandi
                   </span>
                   <span className="text-xs font-semibold text-foreground block">
@@ -340,7 +340,7 @@ export default function DashboardSettings() {
                 }`}
               >
                 <div className="flex items-center gap-2 min-w-0">
-                  <span className="text-[10px] font-extrabold text-foreground/60 tracking-wider shrink-0 w-4 text-left">{lang.code}</span>
+                  <span className="text-[12px] font-extrabold text-foreground/60 tracking-wider shrink-0 w-4 text-left">{lang.code}</span>
                   <div className="h-3 w-px bg-border/80 shrink-0" />
                   <span className="text-xs font-semibold text-foreground truncate ml-1">{lang.label}</span>
                 </div>
@@ -394,7 +394,7 @@ export default function DashboardSettings() {
                       </span>
                     )}
                   </div>
-                  <span className={`text-[10px] font-semibold tracking-wide leading-none ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
+                  <span className={`text-[12px] font-semibold tracking-wide leading-none ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
                     {t.label}
                   </span>
                 </button>
@@ -418,7 +418,7 @@ export default function DashboardSettings() {
                     ? 'Notifikasi Email Kandidat Baru'
                     : 'Notifikasi Rekomendasi Loker Harian'}
                 </span>
-                <span className="text-[10px] md:text-[12px] text-muted-foreground font-medium block leading-normal">
+                <span className="text-[12px] md:text-[12px] text-muted-foreground font-medium block leading-normal">
                   {user?.role === 'admin'
                     ? 'Kirim email pemberitahuan instan setiap kali ada kandidat baru melamar di lowongan Anda'
                     : 'Terima email pemberitahuan harian dari loker.id jika ada rekomendasi loker yang sesuai dengan minatmu'}
@@ -446,7 +446,7 @@ export default function DashboardSettings() {
                     ? 'Rekomendasi Kandidat Mingguan'
                     : 'Notifikasi Rekomendasi Loker Mingguan'}
                 </span>
-                <span className="text-[10px] md:text-[12px] text-muted-foreground font-medium block leading-normal">
+                <span className="text-[12px] md:text-[12px] text-muted-foreground font-medium block leading-normal">
                   {user?.role === 'admin'
                     ? 'Dapatkan kurasi mingguan talent terbaik yang cocok untuk kriteria rekrutmen Anda'
                     : 'Terima email pemberitahuan mingguan dari loker.id jika ada rekomendasi loker yang sesuai dengan minatmu'}
@@ -481,7 +481,7 @@ export default function DashboardSettings() {
                 <span className="text-[12px] md:text-xs font-bold text-rose-500 block">
                   Hapus akun secara permanen
                 </span>
-                <span className="text-[10px] text-rose-500/80 font-medium block mt-1">
+                <span className="text-[12px] text-rose-500/80 font-medium block mt-1">
                   Semua data Anda (lamaran, chat, profil) akan dihapus selamanya.
                 </span>
               </div>

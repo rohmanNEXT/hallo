@@ -132,7 +132,7 @@ const LanggananTab: React.FC = () => {
                         ? 'Rp 0'
                         : `Rp ${pl.price.toLocaleString('id-ID')}`}
                       {pl.price > 0 && (
-                        <span className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider">
+                        <span className="text-[12px] text-muted-foreground font-semibold uppercase tracking-wider">
                           {' '}
                           / bulan
                         </span>
@@ -146,7 +146,7 @@ const LanggananTab: React.FC = () => {
                     {pl.features.map((feature, fIdx) => (
                       <li
                         key={fIdx}
-                        className="flex items-start gap-2 text-[10.5px] text-foreground/80 font-semibold leading-relaxed"
+                        className="flex items-start gap-2 text-[12px] text-foreground/80 font-semibold leading-relaxed"
                       >
                         <Check className="w-3.5 h-3.5 text-emerald-500 mt-0.5 shrink-0" />
                         <span>{feature}</span>

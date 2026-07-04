@@ -90,9 +90,11 @@ interface LowonganTabProps {
   updateTabInUrl: (tab: string) => void;
 }
 
+import useAuth from '@/hooks/useAuth';
+
 const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
+  const { user } = useAuth();
   const {
-    user,
     employerJobs,
     addEmployerJob,
     updateEmployerJobStatus,
@@ -906,7 +908,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
           {!isVerified ? (
             <div className="flex flex-col items-center justify-center text-center py-20 bg-card border border-border rounded-3xl p-8 shadow-sm">
               <div className="h-16 w-16 rounded-full bg-blue-500/10 text-blue-500 flex items-center justify-center mb-6">
-                <Building2 className="h-8 w-8" />
+                <Building2 className="h-9 w-9" />
               </div>
               <h3 className="text-xl font-bold text-foreground mb-2">
                 Profil Perusahaan Belum Lengkap
@@ -1161,14 +1163,13 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="h-9 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                      className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
                       onClick={() =>
                         setCurrentPage((prev) => Math.max(prev - 1, 1))
                       }
                       disabled={currentPage === 1}
                     >
                       <ChevronLeft className="h-4 w-4" />
-                      <span>Previous</span>
                     </Button>
 
                     <div className="flex items-center gap-1">
@@ -1227,13 +1228,12 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="h-9 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                      className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
                       onClick={() =>
                         setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                       }
                       disabled={currentPage === totalPages}
                     >
-                      <span>Next</span>
                       <ChevronRight className="h-4 w-4" />
                     </Button>
                   </div>
@@ -2875,7 +2875,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
             </button>
 
             <div className="h-16 w-16 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center mx-auto">
-              <MailWarning className="h-8 w-8" />
+              <MailWarning className="h-9 w-9" />
             </div>
 
             <div className="space-y-2">

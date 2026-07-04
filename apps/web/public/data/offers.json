@@ -1,0 +1,68 @@
+[
+  {
+    "id": "offer-1",
+    "companyName": "Google Indonesia",
+    "companyLogo": "/images/companies/google.svg",
+    "jobTitle": "Senior Frontend Engineer",
+    "salaryRange": "Rp 35.000.000 - Rp 50.000.000",
+    "location": "Jakarta (Hybrid)",
+    "message": "Halo Budi,\n\nKami melihat profil Anda di platform kami dan sangat terkesan dengan portofolio Next.js serta pengalaman Anda.\n\nDetail Penawaran:\n1. Posisi: Senior Frontend Engineer\n2. Gaji: Rp 35.000.000 - Rp 50.000.000\n3. Fasilitas: Asuransi keluarga, ESOP, bonus tahunan.\n4. Lokasi: Jakarta (Hybrid)\n5. Jam Kerja: Fleksibel\n6. Libur: 20 hari per tahun\n7. Tunjangan: Gym, makan siang, transportasi.\n\nKami ingin mengundang Anda ke kantor kami untuk mendiskusikan penawaran ini lebih lanjut.\nApakah Anda bersedia menjadwalkan panggilan diskusi minggu ini untuk membahas langkah berikutnya?\n\nTerima kasih,\nTim Rekrutmen Google Indonesia",
+    "date": "14 Juni 2026",
+    "status": "Menunggu"
+  },
+  {
+    "id": "offer-2",
+    "companyName": "Shopee Indonesia",
+    "companyLogo": "/images/companies/shopee.svg",
+    "jobTitle": "React Developer",
+    "salaryRange": "Rp 18.000.000 - Rp 25.000.000",
+    "location": "Jakarta (Onsite)",
+    "message": "Halo Budi Santoso, tim rekrutmen kami mengundang Anda untuk interview tahap pertama untuk posisi React Developer. Silakan hubungi kami untuk memilih jadwal.",
+    "date": "12 Juni 2026",
+    "status": "Diterima"
+  },
+  {
+    "id": "offer-3",
+    "companyName": "Gojek Tokopedia (GoTo)",
+    "companyLogo": "/images/companies/gojek.svg",
+    "jobTitle": "Frontend Engineer (Mobile Web)",
+    "salaryRange": "Rp 25.000.000 - Rp 35.000.000",
+    "location": "Jakarta (Remote)",
+    "message": "Halo Budi, terima kasih telah merespons kontak kami. Kami ingin mengabarkan bahwa posisi ini telah terisi oleh kandidat lain. Tetap terhubung untuk peluang masa depan.",
+    "date": "10 Juni 2026",
+    "status": "Ditolak"
+  },
+  {
+    "id": "offer-4",
+    "companyName": "Traveloka",
+    "companyLogo": "/images/companies/traveloka.svg",
+    "jobTitle": "UI/UX Designer",
+    "salaryRange": "Rp 15.000.000 - Rp 22.000.000",
+    "location": "Jakarta (Hybrid)",
+    "message": "Halo Budi, tim desain kami sangat menyukai portofolio desain interaksi yang Anda buat. Kami ingin mengundang Anda untuk sesi portfolio review dan wawancara teknis minggu depan.",
+    "date": "08 Juni 2026",
+    "status": "Menunggu"
+  },
+  {
+    "id": "offer-5",
+    "companyName": "Tokopedia",
+    "companyLogo": "/images/companies/tokopedia.svg",
+    "jobTitle": "Full Stack Developer",
+    "salaryRange": "Rp 20.000.000 - Rp 30.000.000",
+    "location": "Tangerang (Hybrid)",
+    "message": "Halo Budi, selamat! Berdasarkan hasil tes teknis Anda yang luar biasa, kami senang sekali untuk menawarkan posisi Full Stack Developer di tim Fintech kami. Surat Penawaran Kerja (Offering Letter) resmi telah dikirim ke email Anda.",
+    "date": "05 Juni 2026",
+    "status": "Diterima"
+  },
+  {
+    "id": "offer-6",
+    "companyName": "Grab Indonesia",
+    "companyLogo": "/images/companies/grab.svg",
+    "jobTitle": "Mobile Engineer (React Native)",
+    "salaryRange": "Rp 22.000.000 - Rp 32.000.000",
+    "location": "Jakarta (Onsite)",
+    "message": "Halo Budi, terima kasih telah meluangkan waktu untuk mengikuti rangkaian tes rekrutmen kami. Setelah melakukan evaluasi mendalam, mohon maaf kami belum dapat melanjutkan lamaran Anda ke tahap berikutnya.",
+    "date": "02 Juni 2026",
+    "status": "Ditolak"
+  }
+]

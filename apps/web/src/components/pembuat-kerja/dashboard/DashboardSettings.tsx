@@ -123,7 +123,7 @@ const DashboardSettings: React.FC = () => {
           {/* Email Row */}
           <div className="p-3.5 flex items-center justify-between gap-5">
             <div className="space-y-0.5 flex-1 pr-4">
-              <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block">
+              <span className="text-[12px] font-bold text-muted-foreground uppercase tracking-wider block">
                 Email
               </span>
               {isEditingEmail ? (
@@ -174,7 +174,7 @@ const DashboardSettings: React.FC = () => {
           {/* WhatsApp Row */}
           <div className="p-3.5 flex items-center justify-between gap-5">
             <div className="space-y-0.5 flex-1 pr-4">
-              <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block">
+              <span className="text-[12px] font-bold text-muted-foreground uppercase tracking-wider block">
                 WhatsApp
               </span>
               {isEditingWa ? (
@@ -228,7 +228,7 @@ const DashboardSettings: React.FC = () => {
           <div className="p-3.5">
             {isChangingPassword ? (
               <form onSubmit={handleChangePasswordSubmit} className="space-y-2.5 pt-0.5">
-                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block">
+                <span className="text-[12px] font-bold text-muted-foreground uppercase tracking-wider block">
                   Ubah Kata Sandi
                 </span>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
@@ -259,7 +259,7 @@ const DashboardSettings: React.FC = () => {
                     type="button"
                     variant="outline"
                     size="sm"
-                    className="h-7 text-[10px] cursor-pointer px-3"
+                    className="h-7 text-[12px] cursor-pointer px-3"
                     onClick={() => {
                       setIsChangingPassword(false);
                       setOldPassword('');
@@ -269,7 +269,7 @@ const DashboardSettings: React.FC = () => {
                   >
                     Batal
                   </Button>
-                  <Button type="submit" size="sm" className="h-7 text-[10px] cursor-pointer px-3">
+                  <Button type="submit" size="sm" className="h-7 text-[12px] cursor-pointer px-3">
                     Simpan Kata Sandi
                   </Button>
                 </div>
@@ -277,7 +277,7 @@ const DashboardSettings: React.FC = () => {
             ) : (
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block">
+                  <span className="text-[12px] font-bold text-muted-foreground uppercase tracking-wider block">
                     Kata Sandi
                   </span>
                   <span className="text-xs font-semibold text-foreground block">
@@ -317,7 +317,7 @@ const DashboardSettings: React.FC = () => {
                 }`}
               >
                 <div className="flex items-center gap-2 min-w-0">
-                  <span className="text-[10px] font-extrabold text-foreground/60 tracking-wider shrink-0 w-4 text-left">{lang.code}</span>
+                  <span className="text-[12px] font-extrabold text-foreground/60 tracking-wider shrink-0 w-4 text-left">{lang.code}</span>
                   <div className="h-3 w-px bg-border/80 shrink-0" />
                   <span className="text-xs font-semibold text-foreground truncate ml-1">{lang.label}</span>
                 </div>
@@ -370,7 +370,7 @@ const DashboardSettings: React.FC = () => {
                       </span>
                     )}
                   </div>
-                  <span className={`text-[10px] font-semibold tracking-wide leading-none ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
+                  <span className={`text-[12px] font-semibold tracking-wide leading-none ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
                     {t.label}
                   </span>
                 </button>
@@ -393,7 +393,7 @@ const DashboardSettings: React.FC = () => {
                     ? 'Notifikasi Email Kandidat Baru'
                     : 'Notifikasi Rekomendasi Loker Harian'}
                 </span>
-                <span className="text-[10px] md:text-[12px] text-muted-foreground font-medium block leading-normal">
+                <span className="text-[12px] md:text-[12px] text-muted-foreground font-medium block leading-normal">
                   {user?.role === 'admin'
                     ? 'Kirim email pemberitahuan instan setiap kali ada kandidat baru melamar di lowongan Anda'
                     : 'Terima email pemberitahuan harian dari loker.id jika ada rekomendasi loker yang sesuai dengan minatmu'}
@@ -420,7 +420,7 @@ const DashboardSettings: React.FC = () => {
                     ? 'Rekomendasi Kandidat Mingguan'
                     : 'Notifikasi Rekomendasi Loker Mingguan'}
                 </span>
-                <span className="text-[10px] md:text-[12px] text-muted-foreground font-medium block leading-normal">
+                <span className="text-[12px] md:text-[12px] text-muted-foreground font-medium block leading-normal">
                   {user?.role === 'admin'
                     ? 'Dapatkan kurasi mingguan talent terbaik yang cocok untuk kriteria rekrutmen Anda'
                     : 'Terima email pemberitahuan mingguan dari loker.id jika ada rekomendasi loker yang sesuai dengan minatmu'}
@@ -455,7 +455,7 @@ const DashboardSettings: React.FC = () => {
                 <span className="text-[12px] md:text-xs font-bold text-rose-500 block">
                   Hapus akun secara permanen
                 </span>
-                <span className="text-[10px] text-rose-500/80 font-medium block mt-1">
+                <span className="text-[12px] text-rose-500/80 font-medium block mt-1">
                   Semua data Anda (lamaran, chat, profil) akan dihapus selamanya.
                 </span>
               </div>

@@ -75,7 +75,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             <div
               className={
                 isPencari
-                  ? 'text-[10px] text-muted-foreground truncate font-medium mt-0.5 max-w-[110px] lg:max-w-[140px]'
+                  ? 'text-[12px] text-muted-foreground truncate font-medium mt-0.5 max-w-[110px] lg:max-w-[140px]'
                   : 'text-xs text-muted-foreground truncate font-medium mt-1 max-w-[110px] lg:max-w-[140px] block'
               }
             >

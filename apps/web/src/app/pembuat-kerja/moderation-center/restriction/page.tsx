@@ -743,20 +743,16 @@ const AccountSuspicionPage: React.FC = () => {
                     {totalDbPages >= 1 && (
                       <div className="flex justify-center items-center gap-4 mt-4 pt-4 border-t border-border/40 text-xs flex-none">
                         <div className="flex items-center gap-1.5">
-                          <Button
-                            variant="outline"
+                          <Button variant="outline"
                             size="sm"
-                            className="h-8 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
-                            onClick={() =>
-                              setCurrentPage((prev) =>
+                            className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                            onClick={() =>setCurrentPage((prev) =>
                                 Math.max(prev - 1, 1),
                               )
                             }
                             disabled={currentPage === 1}
                           >
-                            <ChevronLeft className="h-4 w-4" />
-                            <span>Previous</span>
-                          </Button>
+                            <ChevronLeft className="h-4 w-4" /></Button>
                           <div className="flex items-center gap-1">
                             {(() => {
                               const renderedElements: React.ReactNode[] = [];
@@ -766,7 +762,7 @@ const AccountSuspicionPage: React.FC = () => {
                                   <Button
                                     key={i}
                                     variant="outline"
-                                    className="h-8 w-8 text-xs font-bold transition-all rounded-lg cursor-pointer shadow-sm"
+                                    className="h-9 w-9 text-xs font-bold transition-all rounded-lg cursor-pointer shadow-sm"
                                     style={
                                       isCurrent
                                         ? {
@@ -791,20 +787,17 @@ const AccountSuspicionPage: React.FC = () => {
                               return renderedElements;
                             })()}
                           </div>
-                          <Button
-                            variant="outline"
+                          <Button variant="outline"
                             size="sm"
-                            className="h-8 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
-                            onClick={() =>
-                              setCurrentPage((prev) =>
+                            className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                            onClick={() =>setCurrentPage((prev) =>
                                 Math.min(prev + 1, totalDbPages),
                               )
                             }
                             disabled={currentPage === totalDbPages}
                           >
-                            <span>Next</span>
-                            <ChevronRight className="h-4 w-4" />
-                          </Button>
+                            
+                            <ChevronRight className="h-4 w-4" /></Button>
                         </div>
                       </div>
                     )}
@@ -988,20 +981,16 @@ const AccountSuspicionPage: React.FC = () => {
                     {totalHistoryPages >= 1 && (
                       <div className="flex justify-center items-center gap-4 mt-4 pt-4 border-t border-border/40 text-xs flex-none">
                         <div className="flex items-center gap-1.5">
-                          <Button
-                            variant="outline"
+                          <Button variant="outline"
                             size="sm"
-                            className="h-8 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
-                            onClick={() =>
-                              setCurrentPage((prev) =>
+                            className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                            onClick={() =>setCurrentPage((prev) =>
                                 Math.max(prev - 1, 1),
                               )
                             }
                             disabled={currentPage === 1}
                           >
-                            <ChevronLeft className="h-4 w-4" />
-                            <span>Previous</span>
-                          </Button>
+                            <ChevronLeft className="h-4 w-4" /></Button>
                           <div className="flex items-center gap-1">
                             {(() => {
                               const renderedElements: React.ReactNode[] = [];
@@ -1015,7 +1004,7 @@ const AccountSuspicionPage: React.FC = () => {
                                   <Button
                                     key={i}
                                     variant="outline"
-                                    className="h-8 w-8 text-xs font-bold transition-all rounded-lg cursor-pointer shadow-sm"
+                                    className="h-9 w-9 text-xs font-bold transition-all rounded-lg cursor-pointer shadow-sm"
                                     style={
                                       isCurrent
                                         ? {
@@ -1040,20 +1029,17 @@ const AccountSuspicionPage: React.FC = () => {
                               return renderedElements;
                             })()}
                           </div>
-                          <Button
-                            variant="outline"
+                          <Button variant="outline"
                             size="sm"
-                            className="h-8 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
-                            onClick={() =>
-                              setCurrentPage((prev) =>
+                            className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                            onClick={() =>setCurrentPage((prev) =>
                                 Math.min(prev + 1, totalHistoryPages),
                               )
                             }
                             disabled={currentPage === totalHistoryPages}
                           >
-                            <span>Next</span>
-                            <ChevronRight className="h-4 w-4" />
-                          </Button>
+                            
+                            <ChevronRight className="h-4 w-4" /></Button>
                         </div>
                       </div>
                     )}
@@ -1131,7 +1117,7 @@ const AccountSuspicionPage: React.FC = () => {
           <div className="bg-card w-full max-w-2xl rounded-3xl border border-border/80 shadow-2xl overflow-hidden relative animate-in zoom-in-95 duration-200">
             <button
               onClick={() => setShowFullDescModal(null)}
-              className="absolute top-4 right-4 h-8 w-8 rounded-full hover:bg-muted flex items-center justify-center text-muted-foreground transition-colors z-10"
+              className="absolute top-4 right-4 h-9 w-9 rounded-full hover:bg-muted flex items-center justify-center text-muted-foreground transition-colors z-10"
             >
               <X className="h-4 w-4" />
             </button>

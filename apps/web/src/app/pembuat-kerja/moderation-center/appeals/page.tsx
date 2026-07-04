@@ -412,7 +412,7 @@ const AppealHumanPage: React.FC = () => {
                             !showAppealFilterFloating,
                           )
                         }
-                        className={`h-8 w-8 p-0 rounded-lg border flex items-center justify-center cursor-pointer shadow-none transition-all ${
+                        className={`h-9 w-9 p-0 rounded-lg border flex items-center justify-center cursor-pointer shadow-none transition-all ${
                           showAppealFilterFloating ||
                           showAppealOnlyUnviewed ||
                           appealStartFromNumber !== '' ||
@@ -527,7 +527,7 @@ const AppealHumanPage: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pr-1">
                     {filteredAppeals.length === 0 ? (
                       <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed border-border rounded-2xl col-span-2">
-                        <ClipboardSignature className="h-8 w-8 text-muted-foreground/30 mb-2" />
+                        <ClipboardSignature className="h-9 w-9 text-muted-foreground/30 mb-2" />
                         <p className="text-xs text-muted-foreground">
                           Tidak ada appeal dengan status ini
                         </p>
@@ -703,18 +703,14 @@ const AppealHumanPage: React.FC = () => {
                 {totalAppealPages >= 1 && (
                   <div className="flex justify-center items-center gap-4 mt-4 pt-4 border-t border-border/40 text-xs flex-none">
                     <div className="flex items-center gap-1.5">
-                      <Button
-                        variant="outline"
+                      <Button variant="outline"
                         size="sm"
-                        className="h-8 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
-                        onClick={() =>
-                          setCurrentPage((prev) => Math.max(prev - 1, 1))
+                        className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                        onClick={() =>setCurrentPage((prev) => Math.max(prev - 1, 1))
                         }
                         disabled={currentPage === 1}
                       >
-                        <ChevronLeft className="h-4 w-4" />
-                        <span>Previous</span>
-                      </Button>
+                        <ChevronLeft className="h-4 w-4" /></Button>
                       <div className="flex items-center gap-1">
                         {(() => {
                           const renderedElements: React.ReactNode[] = [];
@@ -724,7 +720,7 @@ const AppealHumanPage: React.FC = () => {
                               <Button
                                 key={i}
                                 variant="outline"
-                                className="h-8 w-8 text-xs font-bold transition-all rounded-lg cursor-pointer shadow-sm"
+                                className="h-9 w-9 text-xs font-bold transition-all rounded-lg cursor-pointer shadow-sm"
                                 style={
                                   isCurrent
                                     ? {
@@ -745,20 +741,17 @@ const AppealHumanPage: React.FC = () => {
                           return renderedElements;
                         })()}
                       </div>
-                      <Button
-                        variant="outline"
+                      <Button variant="outline"
                         size="sm"
-                        className="h-8 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
-                        onClick={() =>
-                          setCurrentPage((prev) =>
+                        className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                        onClick={() =>setCurrentPage((prev) =>
                             Math.min(prev + 1, totalAppealPages),
                           )
                         }
                         disabled={currentPage === totalAppealPages}
                       >
-                        <span>Next</span>
-                        <ChevronRight className="h-4 w-4" />
-                      </Button>
+                        
+                        <ChevronRight className="h-4 w-4" /></Button>
                     </div>
                   </div>
                 )}

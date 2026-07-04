@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   LuBookOpen as BookIcon,
@@ -9,9 +9,11 @@ import {
   LuUser as UserIcon,
   LuBuilding2 as BuildingIcon,
   LuCircle as HelpIcon,
-  LuChevronLeft as ChevronLeft,
+  LuArrowLeft as ArrowLeft,
 } from 'react-icons/lu';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
+import { Button } from '@/components/ui/button';
+import { useAppStore } from '@/store/store';
 
 const GUIDES_SEEKER = [
   {
@@ -28,7 +30,7 @@ const GUIDES_SEEKER = [
   },
   {
     q: 'Bagaimana cara mengganti kata sandi atau email saya?',
-    a: 'Buka Dashboard Pencari Kerja, arahkan ke tab "Pengaturan Akun" atau "Profil". Anda dapat memperbarui informasi login dan keamanan Anda di sana dengan melakukan verifikasi email terlebih dahulu.',
+    a: 'Buka pengaturan akun di Dashboard Anda, lalu pilih tab "Keamanan". Anda dapat memperbarui kata sandi lama Anda dengan yang baru di bagian tersebut.',
   },
 ];
 
@@ -53,35 +55,46 @@ const GUIDES_EMPLOYER = [
 
 const GuidePage: React.FC = () => {
   const router = useRouter();
+  const { theme } = useAppStore();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <main className="min-h-screen bg-background text-foreground py-10 md:py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto space-y-12">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-border/60">
-          <div className="space-y-2">
-            <button
-              onClick={() => router.back()}
-              className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground hover:text-primary transition-colors cursor-pointer bg-transparent border-none p-0 mb-2"
-            >
-              <ChevronLeft className="h-4 w-4" /> Kembali
-            </button>
+        <div className="space-y-4">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => router.back()}
+            className={`flex items-center gap-2 text-xs font-semibold -ml-3 cursor-pointer transition-all ${
+              mounted && theme === 'white'
+                ? 'text-[#334155] hover:bg-[#eef5fa] hover:text-[#0f6dff]'
+                : 'text-foreground hover:bg-white/10 hover:text-foreground'
+            }`}
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Kembali
+          </Button>
+
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <h1 className="text-3xl font-black tracking-tight text-foreground flex items-center gap-2">
               <BookIcon className="h-8 w-8 text-primary" />
               Pusat Panduan & Bantuan
             </h1>
-            <p className="text-sm text-muted-foreground">
-              Temukan jawaban tercepat untuk semua pertanyaan Anda mengenai platform rekrutmen kami.
-            </p>
-          </div>
-          
-          <div className="relative w-full max-w-sm">
-            <SearchIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <input
-              type="text"
-              placeholder="Cari panduan..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border bg-card/50 text-xs focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all font-medium text-foreground placeholder:text-muted-foreground/60"
-            />
+            
+            <div className="relative w-full max-w-sm">
+              <SearchIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="Cari panduan..."
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border bg-card/50 text-xs focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all font-medium text-foreground placeholder:text-muted-foreground/60"
+              />
+            </div>
           </div>
         </div>
 
@@ -95,7 +108,6 @@ const GuidePage: React.FC = () => {
               </div>
               <div>
                 <h2 className="text-lg font-bold text-foreground">Panduan Pencari Kerja</h2>
-                <p className="text-xs text-muted-foreground">Tips melamar, melacak pekerjaan, dan memperbarui profil</p>
               </div>
             </div>
 
@@ -121,7 +133,6 @@ const GuidePage: React.FC = () => {
               </div>
               <div>
                 <h2 className="text-lg font-bold text-foreground">Panduan Pembuat Kerja</h2>
-                <p className="text-xs text-muted-foreground">Memasang loker, menyaring pelamar, dan integrasi AI</p>
               </div>
             </div>
 

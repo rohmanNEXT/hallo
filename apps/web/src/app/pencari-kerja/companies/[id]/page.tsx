@@ -27,6 +27,7 @@ import { Badge } from '@/components/ui/badge';
 import { useAppStore } from '@/store/store';
 import axios from 'axios';
 import { CompanyProfile, Company, Job } from '@/lib/types';
+import { shortenLocation } from '@/lib/utils';
 import Image from 'next/image';
 import { LuFlag as Flag } from 'react-icons/lu';
 import ReportModal from '@/components/pencari-kerja/ReportModal';
@@ -43,6 +44,7 @@ const CompanyProfilePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredJobs, setFilteredJobs] = useState<any[]>([]);
   const [isReportOpen, setIsReportOpen] = useState(false);
+  const [similarCompanies, setSimilarCompanies] = useState<any[]>([]);
 
   useEffect(() => {
     setMounted(true);
@@ -50,7 +52,7 @@ const CompanyProfilePage: React.FC = () => {
       try {
         const [companiesRes, jobsRes] = await Promise.all([
           axios.get<Company[]>('/data/companies.json'),
-          axios.get<Job[]>('/data/jobs.json')
+          axios.get<Job[]>('/data/jobs.json'),
         ]);
         const companiesList = companiesRes.data;
         const jobsList = jobsRes.data;
@@ -69,6 +71,7 @@ const CompanyProfilePage: React.FC = () => {
               : `${foundCompany.totalEmployees} Karyawan`,
             rating: foundCompany.rating,
             isPremium: foundCompany.isPremium,
+            isVerified: foundCompany.isVerified,
             description: foundCompany.description,
             website: `https://${foundCompany.name.toLowerCase().replace(/\s+/g, '')}.com`,
             linkedin: `https://linkedin.com/company/${foundCompany.name.toLowerCase().replace(/\s+/g, '-')}`,
@@ -104,22 +107,43 @@ const CompanyProfilePage: React.FC = () => {
               {
                 name: 'Budi Santoso',
                 position: 'Chief Executive Officer (CEO)',
-                image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80',
+                image:
+                  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80',
               },
               {
                 name: 'Siti Rahma',
                 position: 'Head of HR Department',
-                image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80',
+                image:
+                  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80',
               },
             ],
           };
           setCompany(profile);
 
           const matching = jobsList.filter(
-            (j) => j.company.toLowerCase() === foundCompany.name.toLowerCase()
+            (j) => j.company.toLowerCase() === foundCompany.name.toLowerCase(),
           );
           setCompanyJobs(matching);
           setFilteredJobs(matching);
+
+          const similar = companiesList
+            .filter(
+              (c) =>
+                c.industry === foundCompany.industry &&
+                c.id !== foundCompany.id,
+            )
+            .slice(0, 3)
+            .map((c) => {
+              const cJobs = jobsList.filter(
+                (j) => j.company.toLowerCase() === c.name.toLowerCase(),
+              );
+              return {
+                ...c,
+                openJobs: c.openJobs,
+                featuredJobs: cJobs.slice(0, 2),
+              };
+            });
+          setSimilarCompanies(similar);
         }
       } catch (err) {
         console.error('Failed to load company profile:', err);
@@ -166,7 +190,7 @@ const CompanyProfilePage: React.FC = () => {
               variant="outline"
               size="sm"
               onClick={() => setIsReportOpen(true)}
-              className="text-xs font-semibold cursor-pointer text-orange-500 border-orange-500/30 hover:bg-orange-500/10 hover:text-orange-500"
+              className="text-xs font-semibold cursor-pointer text-orange-500 border-orange-500/30 hover:bg-orange-500/10 hover:text-orange-500 h-8 px-3"
             >
               <Flag className="h-3.5 w-3.5 mr-1.5" />
               Laporkan
@@ -184,7 +208,10 @@ const CompanyProfilePage: React.FC = () => {
                       src={company.logo}
                       alt={company.name}
                       className="w-full h-full object-contain"
-                     width={100} height={100} unoptimized />
+                      width={100}
+                      height={100}
+                      unoptimized
+                    />
                   </div>
 
                   <div className="space-y-2">
@@ -192,8 +219,8 @@ const CompanyProfilePage: React.FC = () => {
                       <h1 className="text-xl font-extrabold tracking-tight text-foreground">
                         {company.name}
                       </h1>
-                      {company.isPremium && (
-                        <ShieldCheck className="h-5 w-5 text-emerald-500 shrink-0" />
+                      {company.isVerified && (
+                        <ShieldCheck className="h-4 w-4 text-blue-500 shrink-0" />
                       )}
                     </div>
 
@@ -295,7 +322,7 @@ const CompanyProfilePage: React.FC = () => {
               {/* Separate Tim Kami Box Card */}
               <div className="bg-card/45 backdrop-blur-md rounded-2xl border p-6 md:p-8 mb-6">
                 <h2 className="text-base font-bold border-b pb-2.5 mb-5.5">
-                  Tim Kami 
+                  Tim Kami
                 </h2>
                 <div className="flex flex-wrap gap-3">
                   {company.workers.map((worker, i) => (
@@ -308,7 +335,10 @@ const CompanyProfilePage: React.FC = () => {
                           src={worker.image}
                           alt={worker.name}
                           className="h-8 w-8 rounded-full object-cover shrink-0 border border-border"
-                         width={100} height={100} unoptimized />
+                          width={100}
+                          height={100}
+                          unoptimized
+                        />
                       ) : (
                         <div className="h-8 w-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xs border shrink-0">
                           {worker.image}
@@ -414,7 +444,7 @@ const CompanyProfilePage: React.FC = () => {
                           : 'bg-background/50 border border-border/80 text-muted-foreground'
                       }`}
                     >
-                      <Check className="w-3 h-3 mr-1" />
+                      <Check className="w-3 h-3 mr-1 text-blue-500" />
                       {benefit}
                     </Badge>
                   ))}
@@ -438,7 +468,10 @@ const CompanyProfilePage: React.FC = () => {
                         src={imgUrl}
                         alt={`${company.name} Gallery ${i + 1}`}
                         className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
-                       width={100} height={100} unoptimized />
+                        width={100}
+                        height={100}
+                        unoptimized
+                      />
                     </div>
                   ))}
                 </div>
@@ -507,34 +540,39 @@ const CompanyProfilePage: React.FC = () => {
                     filteredJobs.map((job) => (
                       <div
                         key={job.id}
-                        onClick={() => router.push(`/pencari-kerja/jobs/${job.id}`)}
+                        onClick={() =>
+                          router.push(`/pencari-kerja/jobs/${job.id}`)
+                        }
                         className="group relative flex flex-col justify-between rounded-xl border border-border/70 py-4 px-5 cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:border-primary/50 bg-card"
                       >
                         <div className="flex flex-col justify-between h-full">
                           <div>
                             {/* Header: Logo, Title, and Bookmark */}
-                            <div className="flex items-start justify-between mb-4">
-                              <div className="flex items-center gap-3">
+                            <div className="flex items-start justify-between mb-4 gap-4 pr-1">
+                              <div className="flex items-center gap-3 flex-1 min-w-0">
                                 <div className="h-11 w-11 rounded-xl bg-white flex items-center justify-center shrink-0 border border-border overflow-hidden">
                                   <Image
                                     src={company.logo}
                                     alt={company.name}
                                     className="w-full h-full object-contain"
-                                   width={100} height={100} unoptimized />
+                                    width={100}
+                                    height={100}
+                                    unoptimized
+                                  />
                                 </div>
-                                <div className="min-w-0">
+                                <div className="min-w-0 flex-1">
                                   <h3 className="font-bold text-[14px] text-foreground group-hover:text-primary transition-colors leading-tight truncate">
                                     {job.title}
                                   </h3>
-                                  <p className="text-xs text-muted-foreground truncate font-medium mt-1 flex items-center gap-1">
-                                    <span className="truncate">
+                                  <p className="text-xs text-muted-foreground font-medium mt-1 flex items-center gap-1 overflow-hidden">
+                                    <span className="truncate shrink min-w-0">
                                       {company.name}
                                     </span>
-                                    {company.isPremium && (
-                                      <ShieldCheck className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                                    {job.isVerified && (
+                                      <ShieldCheck className="h-3.5 w-3.5 text-blue-500 shrink-0" />
                                     )}
-                                    <span className="shrink-0">
-                                      • {job.location}
+                                    <span className="truncate shrink min-w-0">
+                                      • {shortenLocation(job.location)}
                                     </span>
                                   </p>
                                 </div>
@@ -611,6 +649,158 @@ const CompanyProfilePage: React.FC = () => {
               </section>
             </div>
           </div>
+
+          {/* Perusahaan serupa dalam industri */}
+          {similarCompanies.length > 0 && (
+            <section className="mt-24">
+              <h2 className="text-lg font-extrabold tracking-tight text-foreground mb-10">
+                Perusahaan serupa dalam industri{' '}
+                <span className="text-[#0f6dff]">{company.industry}</span>
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                {similarCompanies.map((simCompany) => (
+                  <div
+                    key={simCompany.id}
+                    className="group border bg-card/45 backdrop-blur-md rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:border-primary/30 flex flex-col justify-between"
+                  >
+                    <div>
+                      {/* Top Row: Logo, Name, Location */}
+                      <div className="flex items-start gap-4">
+                        <div className="h-12 w-12 rounded-xl bg-white border flex items-center justify-center p-2 overflow-hidden shrink-0 shadow-sm">
+                          <Image
+                            src={simCompany.logo}
+                            alt={simCompany.name}
+                            className="w-full h-full object-contain"
+                            width={100}
+                            height={100}
+                            unoptimized
+                          />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-1">
+                            <span
+                              onClick={() =>
+                                router.push(
+                                  `/pencari-kerja/companies/${simCompany.id}`,
+                                )
+                              }
+                              className="font-bold text-sm text-foreground hover:text-primary transition-colors cursor-pointer truncate block max-w-full"
+                            >
+                              {simCompany.name}
+                            </span>
+                            {simCompany.isPremium && (
+                              <ShieldCheck className="h-3.5 w-3.5 text-[#0f6dff] shrink-0" />
+                            )}
+                          </div>
+                          <p className="text-xs text-muted-foreground mt-0.5 truncate">
+                            {simCompany.location}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Meta: Industry & Job Count */}
+                      <div className="flex items-center gap-4 mt-4 text-xs text-muted-foreground border-b pb-4">
+                        <span className="flex items-center gap-1.5">
+                          <Building2 className="h-3.5 w-3.5" />
+                          {simCompany.industry}
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                          <Briefcase className="h-3.5 w-3.5" />
+                          {simCompany.openJobs} lowongan
+                        </span>
+                      </div>
+
+                      {/* Featured Jobs Preview List */}
+                      {simCompany.featuredJobs &&
+                      simCompany.featuredJobs.length > 0 ? (
+                        <div className="space-y-4 mt-4">
+                          {simCompany.featuredJobs.map(
+                            (job: any, index: number) => (
+                              <div
+                                key={job.id}
+                                className={index > 0 ? 'border-t pt-4' : ''}
+                              >
+                                <div className="flex items-start justify-between gap-2">
+                                  <span
+                                    onClick={() =>
+                                      router.push(
+                                        `/pencari-kerja/jobs/${job.id}`,
+                                      )
+                                    }
+                                    className="font-bold text-xs text-foreground line-clamp-1 flex-1 hover:text-primary transition-colors cursor-pointer"
+                                  >
+                                    {job.title}
+                                  </span>
+                                  <span className="text-[12px] font-bold text-emerald-500 shrink-0">
+                                    {job.salary}
+                                  </span>
+                                </div>
+
+                                {/* Badges container with reserved height for 2 rows */}
+                                <div className="flex flex-wrap gap-1 mt-3 min-h-[52px] content-start">
+                                  {[
+                                    job.workType,
+                                    job.experienceLevel,
+                                    job.educationLevel,
+                                    job.categories?.[0],
+                                  ]
+                                    .filter(Boolean)
+                                    .map((badgeText, idx) => (
+                                      <Badge
+                                        key={idx}
+                                        variant="outline"
+                                        className={`text-[12px] font-normal px-2.5 py-0.5 rounded-full h-6 flex items-center shrink-0 ${
+                                          mounted && theme === 'white'
+                                            ? 'bg-[#eef5fa] border border-[#d2e2f0] text-[#334155]'
+                                            : 'bg-background/50 border border-border/80 text-muted-foreground'
+                                        }`}
+                                      >
+                                        {badgeText}
+                                      </Badge>
+                                    ))}
+                                  {job.skills?.length > 1 && (
+                                    <Badge
+                                      variant="outline"
+                                      className={`text-[12px] font-normal px-2.5 py-0.5 rounded-full h-6 flex items-center shrink-0 ${
+                                        mounted && theme === 'white'
+                                          ? 'bg-[#eef5fa] border border-[#d2e2f0] text-[#334155]'
+                                          : 'bg-background/50 border border-border/80 text-muted-foreground'
+                                      }`}
+                                    >
+                                      +{job.skills.length}
+                                    </Badge>
+                                  )}
+                                </div>
+                              </div>
+                            ),
+                          )}
+                        </div>
+                      ) : (
+                        <div className="text-xs text-muted-foreground py-6 text-center">
+                          Tidak ada lowongan aktif.
+                        </div>
+                      )}
+                    </div>
+
+                    {simCompany.featuredJobs &&
+                      simCompany.featuredJobs.length > 0 && (
+                        <span
+                          onClick={() =>
+                            router.push(
+                              `/pencari-kerja/jobs/${simCompany.featuredJobs[0].id}`,
+                            )
+                          }
+                          className="text-xs font-semibold text-[#0f6dff] hover:underline mt-4 cursor-pointer inline-block self-start"
+                        >
+                          Lihat loker
+                        </span>
+                      )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </main>
       <ReportModal

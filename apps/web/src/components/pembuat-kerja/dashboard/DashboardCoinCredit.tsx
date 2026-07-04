@@ -57,7 +57,7 @@ export default function CoinCreditTab() {
                 <CustomCoinsIcon />
               </div>
               <div>
-                <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-wider block leading-none">
+                <span className="text-[12px] font-bold text-muted-foreground uppercase tracking-wider block leading-none">
                   Saldo Anda
                 </span>
                 <span className="text-sm font-black text-amber-500 tracking-tight leading-none mt-1 block">
@@ -74,7 +74,7 @@ export default function CoinCreditTab() {
             <h4 className="font-extrabold text-xs uppercase tracking-wider text-muted-foreground">
               Beli Paket Koin
             </h4>
-            <span className="text-[10px] font-medium text-muted-foreground/80">
+            <span className="text-[12px] font-medium text-muted-foreground/80">
               Rp 1.000 / Koin
             </span>
           </div>
@@ -101,7 +101,7 @@ export default function CoinCreditTab() {
                   <h5 className="font-black text-base text-foreground mt-3">
                     {pack.amount} Koin
                   </h5>
-                  <p className="text-[9px] text-muted-foreground font-bold mt-1 uppercase tracking-wider">
+                  <p className="text-[12px] text-muted-foreground font-bold mt-1 uppercase tracking-wider">
                     {pack.desc}
                   </p>
                 </div>
@@ -115,7 +115,7 @@ export default function CoinCreditTab() {
             {showCustomInputInCard ? (
               <div className="border border-emerald-500/40 p-4 rounded-2xl flex flex-col justify-between h-44 bg-card/90 shadow-xl animate-in fade-in duration-200">
                 <div className="space-y-1">
-                  <label className="text-[9px] font-black uppercase text-muted-foreground block tracking-wider">
+                  <label className="text-[12px] font-black uppercase text-muted-foreground block tracking-wider">
                     Jumlah Koin Kustom
                   </label>
                   <Input
@@ -127,7 +127,7 @@ export default function CoinCreditTab() {
                     min="1"
                     autoFocus
                   />
-                  <span className="text-[11px] font-black text-emerald-500 block mt-1">
+                  <span className="text-[12px] font-black text-emerald-500 block mt-1">
                     {customCoins && Number(customCoins) > 0
                       ? `Rp ${(Number(customCoins) * 1000).toLocaleString('id-ID')}`
                       : 'Rp 0'}
@@ -139,7 +139,7 @@ export default function CoinCreditTab() {
                       e.stopPropagation();
                       setShowCustomInputInCard(false);
                     }}
-                    className="flex-1 text-[10px] font-bold h-8 rounded-lg border border-border/80 bg-background hover:bg-muted cursor-pointer transition-colors"
+                    className="flex-1 text-[12px] font-bold h-8 rounded-lg border border-border/80 bg-background hover:bg-muted cursor-pointer transition-colors"
                   >
                     Batal
                   </button>
@@ -160,7 +160,7 @@ export default function CoinCreditTab() {
                       setCustomCoins('');
                       setShowCustomInputInCard(false);
                     }}
-                    className="flex-1 text-[10px] font-bold h-8 rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 cursor-pointer border-none transition-colors"
+                    className="flex-1 text-[12px] font-bold h-8 rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 cursor-pointer border-none transition-colors"
                   >
                     Beli
                   </button>
@@ -178,7 +178,7 @@ export default function CoinCreditTab() {
                   <h5 className="font-black text-base text-foreground mt-3">
                     Custom Koin
                   </h5>
-                  <p className="text-[9px] text-muted-foreground font-bold mt-1 uppercase tracking-wider">
+                  <p className="text-[12px] text-muted-foreground font-bold mt-1 uppercase tracking-wider">
                     Beli Sesuai Kebutuhan
                   </p>
                 </div>
@@ -230,14 +230,14 @@ export default function CoinCreditTab() {
                     <span className="p-2 rounded-xl bg-background/50 border border-border/40 group-hover:bg-background transition-colors">
                       {addon.icon}
                     </span>
-                    <span className="text-[10px] font-bold text-amber-500 px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20">
+                    <span className="text-[12px] font-bold text-amber-500 px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20">
                       {addon.cost} Koin
                     </span>
                   </div>
                   <h5 className="font-bold text-[13px] text-foreground leading-snug mt-3">
                     {addon.title}
                   </h5>
-                  <p className="text-[10px] text-muted-foreground font-medium mt-1.5 leading-normal">
+                  <p className="text-[12px] text-muted-foreground font-medium mt-1.5 leading-normal">
                     {addon.desc}
                   </p>
                 </div>
@@ -258,7 +258,7 @@ export default function CoinCreditTab() {
                       }
                     }}
                     variant="outline"
-                    className="w-full text-[10px] font-extrabold h-8.5 rounded-xl cursor-pointer border-amber-500/20 text-amber-600 hover:bg-amber-500/5 hover:text-amber-700 flex items-center justify-center gap-1.5 transition-colors"
+                    className="w-full text-[12px] font-extrabold h-8.5 rounded-xl cursor-pointer border-amber-500/20 text-amber-600 hover:bg-amber-500/5 hover:text-amber-700 flex items-center justify-center gap-1.5 transition-colors"
                   >
                     <CustomCoinsIcon />
                     <span>Tukar {addon.cost} Koin</span>

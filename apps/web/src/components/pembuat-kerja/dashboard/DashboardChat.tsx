@@ -113,7 +113,7 @@ const ChatSettingTab: React.FC = () => {
                 <span className="font-bold text-sm">Mode Tanpa Custom</span>
                 {mode === 'no-custom' && <span className="h-2 w-2 rounded-full bg-primary" />}
               </div>
-              <span className="text-[11px] leading-relaxed text-muted-foreground">Menggunakan template balasan standar dari sistem.</span>
+              <span className="text-[12px] leading-relaxed text-muted-foreground">Menggunakan template balasan standar dari sistem.</span>
             </button>
 
             <button
@@ -129,7 +129,7 @@ const ChatSettingTab: React.FC = () => {
                 <span className="font-bold text-sm">Mode Custom</span>
                 {mode === 'custom' && <span className="h-2 w-2 rounded-full bg-primary" />}
               </div>
-              <span className="text-[11px] leading-relaxed text-muted-foreground">Ketik dan sesuaikan sendiri pesan template yang unik.</span>
+              <span className="text-[12px] leading-relaxed text-muted-foreground">Ketik dan sesuaikan sendiri pesan template yang unik.</span>
             </button>
           </div>
         </div>
@@ -168,7 +168,7 @@ const ChatSettingTab: React.FC = () => {
           </div>
           
           <div className="bg-muted/20 border border-border/50 p-3 rounded-xl">
-            <p className="text-[11px] text-muted-foreground leading-relaxed">
+            <p className="text-[12px] text-muted-foreground leading-relaxed">
               <strong>Info:</strong> Pengaturan di bawah ini hanya berlaku untuk status <span className="font-bold text-foreground">&quot;{selectedStatus}&quot;</span>.
               {selectedStatus === "Melamar" && " Pesan akan dikirim otomatis saat kandidat baru melamar."}
               {selectedStatus !== "Melamar" && ` Pesan akan dikirim otomatis saat Anda mengubah status pelamar menjadi ${selectedStatus}.`}
@@ -187,10 +187,10 @@ const ChatSettingTab: React.FC = () => {
                   <Sparkles className="h-4 w-4 text-primary" />
                   <span className="text-xs font-bold text-foreground">Template Baku ({selectedStatus})</span>
                 </div>
-                <p className="text-[11px] text-foreground leading-relaxed italic bg-background/80 p-3 rounded-xl border border-border/50">
+                <p className="text-[12px] text-foreground leading-relaxed italic bg-background/80 p-3 rounded-xl border border-border/50">
                   &quot;{currentSystemTemplate}&quot;
                 </p>
-                <p className="text-[10px] text-muted-foreground mt-3">
+                <p className="text-[12px] text-muted-foreground mt-3">
                   *Pesan ini akan dikirim secara otomatis tanpa perlu modifikasi. Anda hanya perlu memastikan fiturnya dalam keadaan <strong className="text-foreground">Aktif</strong> di atas.
                 </p>
               </div>
@@ -202,7 +202,7 @@ const ChatSettingTab: React.FC = () => {
             <div className="space-y-4 pt-2">
               <div className="flex items-center justify-between">
                 <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider block">Tulis Template Pesan</label>
-                <span className="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded-md font-bold flex items-center gap-1">
+                <span className="text-[12px] text-primary bg-primary/10 px-2 py-0.5 rounded-md font-bold flex items-center gap-1">
                   <Sparkles className="h-3 w-3" />
                   Customizable
                 </span>
@@ -217,7 +217,7 @@ const ChatSettingTab: React.FC = () => {
               />
               
               {/* Result Preview */}
-              <div className="bg-primary/5 border border-primary/20 rounded-2xl p-4 text-[11px] text-foreground leading-relaxed">
+              <div className="bg-primary/5 border border-primary/20 rounded-2xl p-4 text-[12px] text-foreground leading-relaxed">
                 <p className="font-bold text-primary mb-2">Result / Pratinjau:</p>
                 <p className="italic text-muted-foreground whitespace-pre-wrap">
                   {currentConfig.customTemplateText 
@@ -226,7 +226,7 @@ const ChatSettingTab: React.FC = () => {
                 </p>
               </div>
 
-              <div className="bg-muted/40 border border-border/60 rounded-2xl p-3.5 text-[10px] text-muted-foreground leading-relaxed space-y-1">
+              <div className="bg-muted/40 border border-border/60 rounded-2xl p-3.5 text-[12px] text-muted-foreground leading-relaxed space-y-1">
                 <p className="font-bold text-foreground uppercase mb-1">Panduan Penggunaan Placeholders:</p>
                 <p>Gunakan tag berikut untuk mengisi data dinamis kandidat secara otomatis:</p>
                 <ul className="list-disc pl-4 space-y-0.5">
@@ -254,11 +254,11 @@ const ChatSettingTab: React.FC = () => {
                  <div key={status} className={`p-4 rounded-xl border ${isActive ? 'border-primary/40 bg-primary/5' : 'border-border/60 bg-muted/30'} flex flex-col gap-2`}>
                    <div className="flex items-center justify-between">
                      <span className="text-sm font-bold text-foreground">{status}</span>
-                     <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${isActive ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'bg-muted-foreground/20 text-muted-foreground'}`}>
+                     <span className={`text-[12px] px-2 py-0.5 rounded-full font-bold ${isActive ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'bg-muted-foreground/20 text-muted-foreground'}`}>
                        {isActive ? 'Aktif' : 'Mati'}
                      </span>
                    </div>
-                   <p className="text-[11px] text-muted-foreground italic line-clamp-3">
+                   <p className="text-[12px] text-muted-foreground italic line-clamp-3">
                      &quot;{templateText}&quot;
                    </p>
                  </div>

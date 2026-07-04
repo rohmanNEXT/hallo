@@ -1,43 +1,52 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 const POPULAR_CITIES = [
   {
     name: 'DKI Jakarta',
-    img: 'https://images.unsplash.com/photo-1555899434-94d1368aa7af?auto=format&fit=crop&w=400&h=250&q=80',
+    img: '/images/cities/jakarta.png',
   },
   {
     name: 'Banten',
-    img: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=400&h=250&q=80',
+    img: '/images/cities/banten.png',
   },
   {
     name: 'Bandung',
-    img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=400&h=250&q=80',
+    img: '/images/cities/bandung.png',
   },
   {
     name: 'Bekasi',
-    img: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=400&h=250&q=80',
+    img: '/images/cities/bekasi.png',
   },
   {
     name: 'Surabaya',
-    img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=400&h=250&q=80',
+    img: '/images/cities/surabaya.png',
   },
   {
     name: 'Bogor',
-    img: 'https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=400&h=250&q=80',
+    img: '/images/cities/bogor.png',
   },
   {
     name: 'Bali',
-    img: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=400&h=250&q=80',
+    img: '/images/cities/bali.png',
   },
   {
     name: 'DI Yogyakarta',
-    img: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=400&h=250&q=80',
+    img: '/images/cities/yogyakarta.png',
   },
 ];
 
 const KotaPopuler: React.FC = () => {
+  const router = useRouter();
+
+  const handleCityClick = (cityName: string) => {
+    const params = new URLSearchParams();
+    params.set('location', cityName);
+    router.push(`/pencari-kerja/jobs?${params.toString()}`);
+  };
+
   return (
     <section className="max-w-7xl mx-auto px-6 pt-22 pb-6">
       <h2 className="text-xl md:text-2xl font-black text-center text-foreground mb-8.5">
@@ -47,6 +56,7 @@ const KotaPopuler: React.FC = () => {
         {POPULAR_CITIES.map((city) => (
           <div
             key={city.name}
+            onClick={() => handleCityClick(city.name)}
             className="relative overflow-hidden rounded-3xl aspect-video flex items-center justify-center cursor-pointer group transition-all duration-300 border border-border/40 hover:border-primary/50 shadow-sm hover:scale-102 hover:shadow-lg"
           >
             {/* Background Image */}

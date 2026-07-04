@@ -137,16 +137,15 @@ const AiConfigPage: React.FC = () => {
               <Button
                 variant="outline"
                 size="sm"
-                className="h-8 gap-1 px-3 border border-border/60 text-xs font-semibold opacity-50 cursor-not-allowed"
+                className="h-9 w-9 border border-border/60 text-xs font-semibold opacity-50 cursor-not-allowed"
                 disabled
               >
-                <ChevronLeft className="h-4 w-4" />
-                <span>Previous</span>
-              </Button>
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
               <div className="flex items-center gap-1">
                 <Button
                   variant="outline"
-                  className="h-8 w-8 text-xs font-bold transition-all rounded-lg cursor-not-allowed shadow-sm bg-foreground text-background border-foreground"
+                  className="h-9 w-9 text-xs font-bold transition-all rounded-lg cursor-not-allowed shadow-sm bg-foreground text-background border-foreground"
                   disabled
                 >
                   1
@@ -155,12 +154,11 @@ const AiConfigPage: React.FC = () => {
               <Button
                 variant="outline"
                 size="sm"
-                className="h-8 gap-1 px-3 border border-border/60 text-xs font-semibold opacity-50 cursor-not-allowed"
+                className="h-9 w-9 border border-border/60 text-xs font-semibold opacity-50 cursor-not-allowed"
                 disabled
               >
-                <span>Next</span>
-                <ChevronRight className="h-4 w-4" />
-              </Button>
+              <ChevronRight className="h-4 w-4" />
+            </Button>
             </div>
           </div>
         </CardContent>

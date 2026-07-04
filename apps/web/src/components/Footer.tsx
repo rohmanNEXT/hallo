@@ -2,20 +2,37 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { LuMail as Mail, LuPhone as Phone, LuMapPin as MapPin, LuFacebook as Facebook, LuTwitter as Twitter, LuLinkedin as Linkedin, LuInstagram as Instagram } from 'react-icons/lu';
+import {
+  LuMail as Mail,
+  LuPhone as Phone,
+  LuMapPin as MapPin,
+  LuFacebook as Facebook,
+  LuTwitter as Twitter,
+  LuLinkedin as Linkedin,
+  LuInstagram as Instagram,
+} from 'react-icons/lu';
+
+import Image from 'next/image';
 
 const Footer: React.FC = () => {
   return (
     <footer className="pt-12 pb-6 border-t border-border bg-card/20">
-      <div className="w-full max-w-[90%] mx-auto px-4 md:px-8">
+      <div className="w-full max-w-[90%] mx-auto px-4.5 md:px-8.5">
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Column 1: Branding and Socials */}
           <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <span className="text-foreground font-extrabold text-2xl">J</span>
-              <span className="font-bold text-lg text-foreground tracking-tight">
-                JobSeeker
+            <div className="flex items-center gap-1.5">
+              <div className="h-7 w-7 relative flex items-center justify-center -ml-2.5 -mr-1.5">
+                <Image
+                  src="/logo.png"
+                  alt="BlueJob Logo"
+                  fill
+                  className="object-contain scale-[1.7]"
+                />
+              </div>
+              <span className="font-semibold text-lg text-foreground tracking-tight">
+                Blue<span className="font-bold text-primary">Job</span>
               </span>
             </div>
             <p className="text-xs text-muted-foreground font-normal leading-relaxed max-w-xs">
@@ -53,7 +70,7 @@ const Footer: React.FC = () => {
           {/* Column 2: Tautan Cepat */}
           <div className="space-y-3">
             <h4 className="text-sm font-bold text-foreground">Tautan Cepat</h4>
-            <ul className="space-y-2 text-xs font-normal text-muted-foreground"> 
+            <ul className="space-y-2 text-xs font-normal text-muted-foreground">
               <li>
                 <Link
                   href="/pencari-kerja/jobs"

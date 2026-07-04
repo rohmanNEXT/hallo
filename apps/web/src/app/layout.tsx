@@ -6,6 +6,8 @@ import Footer from '@/components/Footer';
 import AuthModal from '@/components/AuthModal';
 import ScrollDetector from '@/components/ScrollDetector';
 
+import ReactQueryProvider from '@/providers/ReactQueryProvider';
+
 const jakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   display: 'swap',
@@ -45,11 +47,13 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className={`${jakartaSans.className} tracking-[0.3px]`}>
-        <ScrollDetector />
-        <Navbar />
-        {children}
-        <AuthModal />
-        <Footer />
+        <ReactQueryProvider>
+          <ScrollDetector />
+          <Navbar />
+          {children}
+          <AuthModal />
+          <Footer />
+        </ReactQueryProvider>
       </body>
     </html>
   );

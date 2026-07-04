@@ -29,22 +29,19 @@ export const useAppStore = create<AppState>()((set, get, store) => ({
       }
     }
   },
-  bannerIndex: typeof document !== 'undefined'
+  bannerIndex: typeof window !== 'undefined'
     ? (() => {
-        const saved = document.cookie
-          .split('; ')
-          .find((r) => r.startsWith('banner_photo='));
+        const saved = localStorage.getItem('banner_photo');
         if (saved) {
-          const val = parseInt(saved.split('=')[1], 10);
+          const val = parseInt(saved, 10);
           return isNaN(val) ? 0 : val;
         }
         return 0;
       })()
     : 0,
   setBannerIndex: (index: number) => {
-    if (typeof document !== 'undefined') {
-      const expires = new Date(Date.now() + 365 * 864e5).toUTCString();
-      document.cookie = `banner_photo=${index}; expires=${expires}; path=/`;
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('banner_photo', index.toString());
     }
     set({ bannerIndex: index });
   },

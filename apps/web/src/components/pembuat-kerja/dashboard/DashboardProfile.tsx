@@ -93,38 +93,86 @@ const ProfileTab: React.FC = () => {
     }
   }, [user]);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const bannerPhotos = [
     {
-      url: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80&auto=format&fit=crop',
-      label: 'Kantor',
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80&auto=format&fit=crop',
+      url: '/images/banners/banner1.png?v=25',
       label: 'Pegunungan',
     },
     {
-      url: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80&auto=format&fit=crop',
+      url: '/images/banners/banner2.png?v=25',
       label: 'Hutan',
     },
     {
-      url: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1200&q=80&auto=format&fit=crop',
+      url: '/images/banners/banner3.png?v=25',
       label: 'Pantai',
     },
     {
-      url: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=80&auto=format&fit=crop',
+      url: '/images/banners/banner4.png?v=25',
       label: 'Kota',
     },
     {
-      url: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=80&auto=format&fit=crop',
-      label: 'Padang',
+      url: '/images/banners/banner5.png?v=25',
+      label: 'Laut',
+      copyright: 'Maldives Atolls',
     },
     {
-      url: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&q=80&auto=format&fit=crop',
+      url: '/images/banners/banner6.png?v=25',
       label: 'Salju',
     },
     {
-      url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&q=80&auto=format&fit=crop',
+      url: 'https://bing.biturl.top/?resolution=1920&format=image&index=0',
       label: 'Bing Image',
+      copyright: 'Realtime Bing Image of the Day',
     },
   ];
 
@@ -483,7 +531,7 @@ const ProfileTab: React.FC = () => {
               width: 72, height: 72, borderRadius: 18, margin: '0 auto 20px',
               background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 28, fontWeight: 800, color: 'white',
+              fontSize: '12px'8, fontWeight: 800, color: 'white',
               boxShadow: '0 4px 20px rgba(99,102,241,0.3)',
             }}>
               {infoFormik.values.brandName?.charAt(0) || 'C'}
@@ -491,7 +539,7 @@ const ProfileTab: React.FC = () => {
 
             {/* Company Name */}
             <h1 style={{
-              fontSize: 32, fontWeight: 800, color: '#fafafa',
+              fontSize: '12px'2, fontWeight: 800, color: '#fafafa',
               margin: '0 0 4px', letterSpacing: '-0.5px', lineHeight: 1.2,
             }}>
               {infoFormik.values.brandName || user.name || 'Company Profile'}
@@ -499,14 +547,14 @@ const ProfileTab: React.FC = () => {
 
             {/* Legal Name / Subtitle */}
             {infoFormik.values.legalName && (
-              <p style={{ fontSize: 15, color: '#a78bfa', fontWeight: 600, margin: '0 0 16px' }}>
+              <p style={{ fontSize: '12px'5, color: '#a78bfa', fontWeight: 600, margin: '0 0 16px' }}>
                 {infoFormik.values.legalName}
               </p>
             )}
 
             {/* Contact Row */}
             <p style={{
-              fontSize: 12, color: '#71717a', fontWeight: 500, margin: '0 0 20px',
+              fontSize: '12px'2, color: '#71717a', fontWeight: 500, margin: '0 0 20px',
               display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap',
             }}>
               {infoFormik.values.industry && <span>{infoFormik.values.industry}</span>}
@@ -518,13 +566,13 @@ const ProfileTab: React.FC = () => {
             <div style={{ display: 'flex', justifyContent: 'center', gap: 8, flexWrap: 'wrap' }}>
               {isVerified && (
                 <span style={{
-                  padding: '4px 12px', borderRadius: 999, fontSize: 11, fontWeight: 700,
+                  padding: '4px 12px', borderRadius: 999, fontSize: '12px', fontWeight: 700,
                   background: 'rgba(16,185,129,0.15)', color: '#34d399', border: '1px solid rgba(16,185,129,0.3)',
                 }}><Check className="w-3 h-3 mr-1 inline" /> Terverifikasi</span>
               )}
               {isPremium && (
                 <span style={{
-                  padding: '4px 12px', borderRadius: 999, fontSize: 11, fontWeight: 700,
+                  padding: '4px 12px', borderRadius: 999, fontSize: '12px', fontWeight: 700,
                   background: 'rgba(245,158,11,0.15)', color: '#fbbf24', border: '1px solid rgba(245,158,11,0.3)',
                 }}><Star className="w-3 h-3 mr-1 inline" /> Premium</span>
               )}
@@ -540,10 +588,10 @@ const ProfileTab: React.FC = () => {
             {/* TENTANG PERUSAHAAN */}
             {infoFormik.values.description && (
               <div style={{ breakInside: 'avoid', pageBreakInside: 'avoid', paddingTop: 8 }}>
-                <h2 style={{ fontSize: 14, fontWeight: 800, color: '#fafafa', margin: '0 0 10px', letterSpacing: '0.02em' }}>
+                <h2 style={{ fontSize: '12px'4, fontWeight: 800, color: '#fafafa', margin: '0 0 10px', letterSpacing: '0.02em' }}>
                   TENTANG PERUSAHAAN
                 </h2>
-                <p style={{ fontSize: 13, color: '#a1a1aa', lineHeight: 1.9, margin: 0, fontWeight: 400 }}>
+                <p style={{ fontSize: '12px'3, color: '#a1a1aa', lineHeight: 1.9, margin: 0, fontWeight: 400 }}>
                   {infoFormik.values.description}
                 </p>
               </div>
@@ -551,7 +599,7 @@ const ProfileTab: React.FC = () => {
 
             {/* INFORMASI */}
             <div style={{ breakInside: 'avoid', pageBreakInside: 'avoid', paddingTop: 8 }}>
-              <h2 style={{ fontSize: 14, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
+              <h2 style={{ fontSize: '12px'4, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
                 INFORMASI
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px 32px' }}>
@@ -564,8 +612,8 @@ const ProfileTab: React.FC = () => {
                   { label: 'WhatsApp', value: infoFormik.values.candidateWhatsapp ? `+62${infoFormik.values.candidateWhatsapp}` : '' },
                 ].filter(item => item.value).map((item, i) => (
                   <div key={i} style={{ padding: '8px 0', borderBottom: '1px solid #27272a' }}>
-                    <p style={{ fontSize: 10, fontWeight: 700, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 2px' }}>{item.label}</p>
-                    <p style={{ fontSize: 13, color: '#e4e4e7', fontWeight: 600, margin: 0 }}>{item.value}</p>
+                    <p style={{ fontSize: '12px', fontWeight: 700, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 2px' }}>{item.label}</p>
+                    <p style={{ fontSize: '12px'3, color: '#e4e4e7', fontWeight: 600, margin: 0 }}>{item.value}</p>
                   </div>
                 ))}
               </div>
@@ -574,7 +622,7 @@ const ProfileTab: React.FC = () => {
             {/* TIM KAMI */}
             {workers.length > 0 && (
               <div style={{ breakInside: 'avoid', pageBreakInside: 'avoid', paddingTop: 8 }}>
-                <h2 style={{ fontSize: 14, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
+                <h2 style={{ fontSize: '12px'4, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
                   TIM KAMI
                 </h2>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
@@ -588,7 +636,7 @@ const ProfileTab: React.FC = () => {
                         width: 34, height: 34, borderRadius: '50%',
                         background: 'linear-gradient(135deg, #6366f1, #a78bfa)',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: 14, fontWeight: 800, color: 'white', flexShrink: 0, overflow: 'hidden',
+                        fontSize: '12px'4, fontWeight: 800, color: 'white', flexShrink: 0, overflow: 'hidden',
                       }}>
                         {w.image?.startsWith('http') || w.image?.startsWith('data:') ? (
                           <Image src={w.image} alt={w.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }}  width={100} height={100} unoptimized />
@@ -597,8 +645,8 @@ const ProfileTab: React.FC = () => {
                         )}
                       </div>
                       <div>
-                        <p style={{ fontSize: 12, fontWeight: 700, color: '#fafafa', margin: 0, lineHeight: 1.2 }}>{w.name}</p>
-                        <p style={{ fontSize: 10, color: '#71717a', margin: '2px 0 0', fontWeight: 500 }}>{w.position}</p>
+                        <p style={{ fontSize: '12px'2, fontWeight: 700, color: '#fafafa', margin: 0, lineHeight: 1.2 }}>{w.name}</p>
+                        <p style={{ fontSize: '12px', color: '#71717a', margin: '2px 0 0', fontWeight: 500 }}>{w.position}</p>
                       </div>
                     </div>
                   ))}
@@ -609,7 +657,7 @@ const ProfileTab: React.FC = () => {
             {/* GALERI KANTOR */}
             {galleryImages.length > 0 && (
               <div style={{ breakInside: 'avoid', pageBreakInside: 'avoid', paddingTop: 24 }}>
-                <h2 style={{ fontSize: 14, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
+                <h2 style={{ fontSize: '12px'4, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
                   GALERI KANTOR
                 </h2>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
@@ -633,6 +681,7 @@ const ProfileTab: React.FC = () => {
           className="h-26 md:h-36 bg-cover bg-center relative transition-all duration-300"
           style={{
             backgroundImage: `url('${isPremium ? (bannerPhotos[bannerIndex !== undefined ? bannerIndex : 0]?.url || bannerPhotos[0].url) : bannerPhotos[4].url}')`,
+            backgroundPosition: 'center 35%',
           }}
         >
           <div className="absolute inset-0 bg-black/20" />
@@ -692,7 +741,6 @@ const ProfileTab: React.FC = () => {
                   <X className="h-3.5 w-3.5 text-white" />
                 </button>
               </div>
-
               <div className="p-3.5 space-y-3">
                 <div className="grid grid-cols-3 gap-2.5">
                   {bannerPhotos.slice(0, 6).map((photo, idx) => (
@@ -715,7 +763,7 @@ const ProfileTab: React.FC = () => {
                         draggable={false}
                        width={100} height={100} unoptimized />
                       <div className="absolute inset-0 bg-black/25 group-hover:bg-black/5 transition-all" />
-                      <span className="absolute bottom-1 left-0 right-0 text-center text-[10px] font-bold text-white drop-shadow-md">
+                      <span className="absolute bottom-1 left-0 right-0 text-center text-[12px] font-bold text-white drop-shadow-md">
                         {photo.label}
                       </span>
                       {bannerIndex === idx && (
@@ -735,7 +783,7 @@ const ProfileTab: React.FC = () => {
                   className={`w-full relative rounded-xl overflow-hidden h-[46px] cursor-pointer group transition-all flex items-center justify-between px-3 border-none ${
                     bannerIndex === 6
                       ? 'ring-2 ring-primary ring-offset-1 ring-offset-background bg-primary/10 border-primary/30'
-                      : 'hover:bg-muted/50 border-border/60 bg-background/25'
+                      : 'hover:bg-muted/55 border-border/60 bg-background/25'
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -748,7 +796,7 @@ const ProfileTab: React.FC = () => {
                        width={100} height={100} unoptimized />
                       <div className="absolute inset-0 bg-black/25" />
                     </div>
-                    <span className="text-[10px] font-bold text-foreground">
+                    <span className="text-[12px] font-bold text-foreground">
                       Mode Bing Image
                     </span>
                   </div>
@@ -784,7 +832,7 @@ const ProfileTab: React.FC = () => {
                 )}
                 <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center gap-1 transition-opacity duration-200 text-white">
                   <PencilIcon className="h-4 w-4" />
-                  <span className="text-[9px] font-bold uppercase tracking-wider">
+                  <span className="text-[12px] font-bold uppercase tracking-wider">
                     Ubah
                   </span>
                 </div>
@@ -797,22 +845,22 @@ const ProfileTab: React.FC = () => {
                 {/* Badges: Verifikasi & Premium */}
                 <div className="flex flex-wrap items-center gap-2 justify-center sm:justify-start">
                   {isVerified ? (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/90 text-white font-extrabold text-[10px] border border-emerald-400/50 shadow-md">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/90 text-white font-extrabold text-[12px] border border-emerald-400/50 shadow-md">
                       <ShieldCheck className="h-3 w-3" />
                       Terverifikasi
                     </span>
                   ) : (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-500/80 text-white font-extrabold text-[10px] border border-slate-400/50 shadow-sm">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-500/80 text-white font-extrabold text-[12px] border border-slate-400/50 shadow-sm">
                       Belum Verifikasi
                     </span>
                   )}
                   {isPremium ? (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/90 text-white font-extrabold text-[10px] border border-amber-400/50 shadow-md">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/90 text-white font-extrabold text-[12px] border border-amber-400/50 shadow-md">
                       <CheckCircle className="h-3 w-3 text-white" />
                       Premium
                     </span>
                   ) : (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-500/80 text-white font-extrabold text-[10px] border border-slate-400/50 shadow-sm">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-500/80 text-white font-extrabold text-[12px] border border-slate-400/50 shadow-sm">
                       Standard Plan
                     </span>
                   )}
@@ -852,7 +900,7 @@ const ProfileTab: React.FC = () => {
           </h3>
           <div className="flex items-center gap-2">
             {!isPremium ? (
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20 text-[10.5px] font-extrabold uppercase">
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20 text-[12px] font-extrabold uppercase">
                 Hanya Premium
               </span>
             ) : (
@@ -902,7 +950,7 @@ const ProfileTab: React.FC = () => {
         <div className="space-y-4">
           <div className="flex items-center justify-between border-b pb-1.5 border-border/50">
             <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Foto Kantor (Maks 3)</span>
-            <span className="text-[10px] text-muted-foreground font-semibold">{galleryImages.length}/3</span>
+            <span className="text-[12px] text-muted-foreground font-semibold">{galleryImages.length}/3</span>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {galleryImages.map((imgUrl, i) => (
@@ -936,7 +984,7 @@ const ProfileTab: React.FC = () => {
                   className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                 />
                 <Upload className="h-5 w-5 text-muted-foreground group-hover:scale-110 transition-transform" />
-                <span className="text-[10px] font-bold text-foreground">Upload Foto</span>
+                <span className="text-[12px] font-bold text-foreground">Upload Foto</span>
               </div>
             )}
           </div>
@@ -946,7 +994,7 @@ const ProfileTab: React.FC = () => {
         <div className="space-y-4 pt-4">
           <div className="flex items-center justify-between border-b pb-1.5 border-border/50">
             <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Video Kantor (Maks 3)</span>
-            <span className="text-[10px] text-muted-foreground font-semibold">{galleryVideos.length}/3</span>
+            <span className="text-[12px] text-muted-foreground font-semibold">{galleryVideos.length}/3</span>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {galleryVideos.map((vidUrl, i) => (
@@ -980,7 +1028,7 @@ const ProfileTab: React.FC = () => {
                   className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                 />
                 <Upload className="h-5 w-5 text-muted-foreground group-hover:scale-110 transition-transform" />
-                <span className="text-[10px] font-bold text-foreground">Upload Video</span>
+                <span className="text-[12px] font-bold text-foreground">Upload Video</span>
               </div>
             )}
           </div>
@@ -994,9 +1042,9 @@ const ProfileTab: React.FC = () => {
             Tim Kami
           </h3>
           <div className="flex items-center gap-2">
-            <span className="text-[10px] text-muted-foreground font-semibold mr-1">{workers.length}/6</span>
+            <span className="text-[12px] text-muted-foreground font-semibold mr-1">{workers.length}/6</span>
             {!isPremium ? (
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20 text-[10.5px] font-extrabold uppercase">
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20 text-[12px] font-extrabold uppercase">
                 Hanya Premium
               </span>
             ) : (
@@ -1096,7 +1144,7 @@ const ProfileTab: React.FC = () => {
           <div className="space-y-3 p-4 border border-border/60 rounded-2xl bg-muted/20">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-black uppercase text-muted-foreground">Nama</label>
+                <label className="text-[12px] font-black uppercase text-muted-foreground">Nama</label>
                 <Input
                   placeholder="Nama anggota tim"
                   value={newWorkerName}
@@ -1105,7 +1153,7 @@ const ProfileTab: React.FC = () => {
                 />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-black uppercase text-muted-foreground">Jabatan</label>
+                <label className="text-[12px] font-black uppercase text-muted-foreground">Jabatan</label>
                 <Input
                   placeholder="Jabatan/Posisi"
                   value={newWorkerPosition}
@@ -1117,7 +1165,7 @@ const ProfileTab: React.FC = () => {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-black uppercase text-muted-foreground">Foto Anggota (Opsional)</label>
+                <label className="text-[12px] font-black uppercase text-muted-foreground">Foto Anggota (Opsional)</label>
                 <div className="flex items-center gap-3">
                   <div className="relative border border-dashed border-border/85 hover:border-primary/50 rounded-xl px-3 py-1.5 flex items-center justify-center gap-1.5 bg-background/25 cursor-pointer text-xs font-bold text-foreground">
                     <input
@@ -1137,7 +1185,7 @@ const ProfileTab: React.FC = () => {
                 </div>
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-black uppercase text-muted-foreground">LinkedIn URL (Opsional)</label>
+                <label className="text-[12px] font-black uppercase text-muted-foreground">LinkedIn URL (Opsional)</label>
                 <Input
                   placeholder="https://linkedin.com/in/..."
                   value={newWorkerLinkedin}
@@ -1182,19 +1230,19 @@ const ProfileTab: React.FC = () => {
               )}
               <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center gap-1 transition-opacity duration-200 text-white">
                 <PencilIcon className="h-4.5 w-4.5" />
-                <span className="text-[10px] font-bold uppercase tracking-wider">
+                <span className="text-[12px] font-bold uppercase tracking-wider">
                   Ubah Foto
                 </span>
               </div>
             </button>
-            <span className="text-[10px] text-muted-foreground mt-3">
+            <span className="text-[12px] text-muted-foreground mt-3">
               (Maks: 200 KB, JPG, JPEG, PNG, atau WEBP)
             </span>
           </div>
 
           {/* NIB Perusahaan */}
           <div className="flex flex-col gap-1.5 pt-4 border-t border-border/50">
-            <label className="text-[10px] font-black uppercase text-muted-foreground">
+            <label className="text-[12px] font-black uppercase text-muted-foreground">
               NIB Perusahaan
             </label>
             <div className="flex justify-between items-center rounded-xl border border-border bg-background px-3 py-2">
@@ -1218,7 +1266,7 @@ const ProfileTab: React.FC = () => {
                 <span>Upload</span>
               </button>
             </div>
-            <span className="text-[10px] text-muted-foreground mt-0.5">
+            <span className="text-[12px] text-muted-foreground mt-0.5">
               (Maks: 2 MB, PDF, JPG, JPEG, atau PNG)
             </span>
           </div>
@@ -1233,13 +1281,13 @@ const ProfileTab: React.FC = () => {
               <h3 className="text-sm font-black text-slate-800 dark:text-slate-200 uppercase tracking-wider">
                 Informasi Dasar
               </h3>
-              <p className="text-[10px] text-muted-foreground font-semibold">
+              <p className="text-[12px] text-muted-foreground font-semibold">
                 Sisa batas edit bulan ini: {Math.max(0, 2 - checkAndGetEditLimit().count)}/2 kali
               </p>
             </div>
             <div className="flex items-center gap-2">
               {isVerified && !isPremium ? (
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20 text-[10.5px] font-extrabold uppercase">
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20 text-[12px] font-extrabold uppercase">
                   Hanya Premium
                 </span>
               ) : !isEditingInfo ? (
@@ -1287,7 +1335,7 @@ const ProfileTab: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Nama Brand */}
               <div className="flex flex-col gap-1.5 relative">
-                <label className="text-[10px] font-black uppercase text-muted-foreground flex items-center gap-1">
+                <label className="text-[12px] font-black uppercase text-muted-foreground flex items-center gap-1">
                   <span>Nama Brand</span><span className="text-rose-500">*</span>
                   <button
                     type="button"
@@ -1309,18 +1357,18 @@ const ProfileTab: React.FC = () => {
                   disabled={!isEditingInfo}
                 />
                 {showBrandInfo && (
-                  <div className="absolute z-40 top-12 left-0 right-0 bg-slate-900 dark:bg-slate-950 text-white border border-border/80 rounded-xl p-3 shadow-xl text-[10px] font-semibold leading-relaxed animate-in fade-in duration-200">
+                  <div className="absolute z-40 top-12 left-0 right-0 bg-slate-900 dark:bg-slate-950 text-white border border-border/80 rounded-xl p-3 shadow-xl text-[12px] font-semibold leading-relaxed animate-in fade-in duration-200">
                     Nama brand/merek perusahaan yang tampil ke publik. Edit maks. 1–2 kali per bulan.
                   </div>
                 )}
                 {infoFormik.touched.brandName && infoFormik.errors.brandName && (
-                  <span className="text-[10px] font-semibold text-rose-500">{infoFormik.errors.brandName}</span>
+                  <span className="text-[12px] font-semibold text-rose-500">{infoFormik.errors.brandName}</span>
                 )}
               </div>
 
               {/* Nama Legal */}
               <div className="flex flex-col gap-1.5 relative">
-                <label className="text-[10px] font-black uppercase text-muted-foreground flex items-center gap-1">
+                <label className="text-[12px] font-black uppercase text-muted-foreground flex items-center gap-1">
                   <span>Nama Legal</span>
                   <button
                     type="button"
@@ -1341,7 +1389,7 @@ const ProfileTab: React.FC = () => {
                   disabled={!isEditingInfo}
                 />
                 {showLegalInfo && (
-                  <div className="absolute z-40 top-12 left-0 right-0 bg-slate-900 dark:bg-slate-950 text-white border border-border/80 rounded-xl p-3 shadow-xl text-[10px] font-semibold leading-relaxed animate-in fade-in duration-200">
+                  <div className="absolute z-40 top-12 left-0 right-0 bg-slate-900 dark:bg-slate-950 text-white border border-border/80 rounded-xl p-3 shadow-xl text-[12px] font-semibold leading-relaxed animate-in fade-in duration-200">
                     Nama legal/resmi perusahaan. Edit maks. 2 kali per tahun.
                   </div>
                 )}
@@ -1351,7 +1399,7 @@ const ProfileTab: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Industri Perusahaan */}
               <div className="flex flex-col gap-1.5 relative">
-                <label className="text-[10px] font-black uppercase text-muted-foreground flex items-center gap-1">
+                <label className="text-[12px] font-black uppercase text-muted-foreground flex items-center gap-1">
                   <span>Industri Perusahaan</span><span className="text-rose-500">*</span>
                   <button
                     type="button"
@@ -1381,18 +1429,18 @@ const ProfileTab: React.FC = () => {
                   <option value="Lainnya">Lainnya</option>
                 </select>
                 {showIndustryInfo && (
-                  <div className="absolute z-40 top-12 left-0 right-0 bg-slate-900 dark:bg-slate-950 text-white border border-border/80 rounded-xl p-3 shadow-xl text-[10px] font-semibold leading-relaxed animate-in fade-in duration-200">
+                  <div className="absolute z-40 top-12 left-0 right-0 bg-slate-900 dark:bg-slate-950 text-white border border-border/80 rounded-xl p-3 shadow-xl text-[12px] font-semibold leading-relaxed animate-in fade-in duration-200">
                     Kategori industri utama perusahaan. Edit maks. 1–2 kali per bulan.
                   </div>
                 )}
                 {infoFormik.touched.industry && infoFormik.errors.industry && (
-                  <span className="text-[10px] font-semibold text-rose-500">{infoFormik.errors.industry}</span>
+                  <span className="text-[12px] font-semibold text-rose-500">{infoFormik.errors.industry}</span>
                 )}
               </div>
 
               {/* Jumlah Pegawai */}
               <div className="flex flex-col gap-1.5 relative">
-                <label className="text-[10px] font-black uppercase text-muted-foreground flex items-center gap-1">
+                <label className="text-[12px] font-black uppercase text-muted-foreground flex items-center gap-1">
                   <span>Jumlah Pegawai</span><span className="text-rose-500">*</span>
                   <button
                     type="button"
@@ -1421,19 +1469,19 @@ const ProfileTab: React.FC = () => {
                   <option value="500+ Pegawai">500+ Pegawai</option>
                 </select>
                 {showEmployeeInfo && (
-                  <div className="absolute z-40 top-12 left-0 right-0 bg-slate-900 dark:bg-slate-950 text-white border border-border/80 rounded-xl p-3 shadow-xl text-[10px] font-semibold leading-relaxed animate-in fade-in duration-200">
+                  <div className="absolute z-40 top-12 left-0 right-0 bg-slate-900 dark:bg-slate-950 text-white border border-border/80 rounded-xl p-3 shadow-xl text-[12px] font-semibold leading-relaxed animate-in fade-in duration-200">
                     Jumlah kisaran total karyawan. Edit maks. 1–2 kali per bulan.
                   </div>
                 )}
                 {infoFormik.touched.employeeCount && infoFormik.errors.employeeCount && (
-                  <span className="text-[10px] font-semibold text-rose-500">{infoFormik.errors.employeeCount}</span>
+                  <span className="text-[12px] font-semibold text-rose-500">{infoFormik.errors.employeeCount}</span>
                 )}
               </div>
             </div>
 
             {/* Link Website */}
             <div className="flex flex-col gap-1.5 relative">
-              <label className="text-[10px] font-black uppercase text-muted-foreground flex items-center gap-1">
+              <label className="text-[12px] font-black uppercase text-muted-foreground flex items-center gap-1">
                 <span>Link Website/Social Media</span>
                 <button
                   type="button"
@@ -1456,18 +1504,18 @@ const ProfileTab: React.FC = () => {
                 disabled={!isEditingInfo}
               />
               {showWebsiteInfo && (
-                <div className="absolute z-40 top-12 left-0 right-0 bg-slate-900 dark:bg-slate-950 text-white border border-border/80 rounded-xl p-3 shadow-xl text-[10px] font-semibold leading-relaxed animate-in fade-in duration-200">
+                <div className="absolute z-40 top-12 left-0 right-0 bg-slate-900 dark:bg-slate-950 text-white border border-border/80 rounded-xl p-3 shadow-xl text-[12px] font-semibold leading-relaxed animate-in fade-in duration-200">
                   Tautan website/sosial media perusahaan. Bebas edit kapan saja.
                 </div>
               )}
               {infoFormik.touched.website && infoFormik.errors.website && (
-                <span className="text-[10px] font-semibold text-rose-500">{infoFormik.errors.website}</span>
+                <span className="text-[12px] font-semibold text-rose-500">{infoFormik.errors.website}</span>
               )}
             </div>
 
             {/* Deskripsi Perusahaan */}
             <div className="flex flex-col gap-1.5 relative">
-              <label className="text-[10px] font-black uppercase text-muted-foreground flex items-center gap-1">
+              <label className="text-[12px] font-black uppercase text-muted-foreground flex items-center gap-1">
                 <span>Deskripsi Perusahaan (minimal 75 karakter)</span><span className="text-rose-500">*</span>
                 <button
                   type="button"
@@ -1491,18 +1539,18 @@ const ProfileTab: React.FC = () => {
                 disabled={!isEditingInfo}
               />
               {showDescriptionInfo && (
-                <div className="absolute z-40 bottom-full mb-1 left-0 right-0 bg-slate-900 dark:bg-slate-950 text-white border border-border/80 rounded-xl p-3 shadow-xl text-[10px] font-semibold leading-relaxed animate-in fade-in duration-200">
+                <div className="absolute z-40 bottom-full mb-1 left-0 right-0 bg-slate-900 dark:bg-slate-950 text-white border border-border/80 rounded-xl p-3 shadow-xl text-[12px] font-semibold leading-relaxed animate-in fade-in duration-200">
                   Deskripsi perusahaan. Edit maks. 1–2 kali per bulan.
                 </div>
               )}
               {infoFormik.touched.description && infoFormik.errors.description && (
-                <span className="text-[10px] font-semibold text-rose-500">{infoFormik.errors.description}</span>
+                <span className="text-[12px] font-semibold text-rose-500">{infoFormik.errors.description}</span>
               )}
             </div>
 
             {/* Nama PIC */}
             <div className="flex flex-col gap-1.5 relative">
-              <label className="text-[10px] font-black uppercase text-muted-foreground flex items-center gap-1">
+              <label className="text-[12px] font-black uppercase text-muted-foreground flex items-center gap-1">
                 <span>Nama PIC</span><span className="text-rose-500">*</span>
                 <button
                   type="button"
@@ -1525,12 +1573,12 @@ const ProfileTab: React.FC = () => {
                 disabled={!isEditingInfo}
               />
               {showPicInfo && (
-                <div className="absolute z-40 top-12 left-0 right-0 bg-slate-900 dark:bg-slate-950 text-white border border-border/80 rounded-xl p-3 shadow-xl text-[10px] font-semibold leading-relaxed animate-in fade-in duration-200">
+                <div className="absolute z-40 top-12 left-0 right-0 bg-slate-900 dark:bg-slate-950 text-white border border-border/80 rounded-xl p-3 shadow-xl text-[12px] font-semibold leading-relaxed animate-in fade-in duration-200">
                   Nama Person In Charge (PIC) perusahaan. Bebas edit kapan saja.
                 </div>
               )}
               {infoFormik.touched.picName && infoFormik.errors.picName && (
-                <span className="text-[10px] font-semibold text-rose-500">{infoFormik.errors.picName}</span>
+                <span className="text-[12px] font-semibold text-rose-500">{infoFormik.errors.picName}</span>
               )}
             </div>
           </div>
@@ -1548,7 +1596,7 @@ const ProfileTab: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* No Whatsapp */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-black uppercase text-muted-foreground">
+                <label className="text-[12px] font-black uppercase text-muted-foreground">
                   No Whatsapp<span className="text-rose-500">*</span>
                 </label>
                 <Input
@@ -1560,7 +1608,7 @@ const ProfileTab: React.FC = () => {
 
               {/* Email */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-black uppercase text-muted-foreground">
+                <label className="text-[12px] font-black uppercase text-muted-foreground">
                   Email<span className="text-rose-500">*</span>
                 </label>
                 <Input
@@ -1573,7 +1621,7 @@ const ProfileTab: React.FC = () => {
 
               {/* No. WhatsApp untuk dihubungi kandidat */}
               <div className="flex flex-col gap-1.5 relative">
-                <label className="text-[10px] font-black uppercase text-muted-foreground flex items-center gap-1">
+                <label className="text-[12px] font-black uppercase text-muted-foreground flex items-center gap-1">
                   <span>No. WhatsApp untuk dihubungi kandidat</span>
                   <button
                     type="button"
@@ -1596,12 +1644,12 @@ const ProfileTab: React.FC = () => {
                   disabled={!isEditingInfo}
                 />
                 {showCandidateWaInfo && (
-                  <div className="absolute z-40 bottom-full mb-1 left-0 right-0 bg-slate-900 dark:bg-slate-950 text-white border border-border/80 rounded-xl p-3 shadow-xl text-[10px] font-semibold leading-relaxed animate-in fade-in duration-200">
+                  <div className="absolute z-40 bottom-full mb-1 left-0 right-0 bg-slate-900 dark:bg-slate-950 text-white border border-border/80 rounded-xl p-3 shadow-xl text-[12px] font-semibold leading-relaxed animate-in fade-in duration-200">
                     Nomor WA yang akan dihubungi kandidat. Bebas edit kapan saja.
                   </div>
                 )}
                 {infoFormik.touched.candidateWhatsapp && infoFormik.errors.candidateWhatsapp && (
-                  <span className="text-[10px] font-semibold text-rose-500">{infoFormik.errors.candidateWhatsapp}</span>
+                  <span className="text-[12px] font-semibold text-rose-500">{infoFormik.errors.candidateWhatsapp}</span>
                 )}
               </div>
 
@@ -1643,7 +1691,7 @@ const ProfileTab: React.FC = () => {
                   <label className="text-xs font-bold text-foreground">
                     Alasan Request Update <span className="text-rose-500">*</span>
                   </label>
-                  <span className={`text-[10px] font-bold ${updateReason.length < 300 ? 'text-rose-500' : 'text-emerald-500'}`}>
+                  <span className={`text-[12px] font-bold ${updateReason.length < 300 ? 'text-rose-500' : 'text-emerald-500'}`}>
                     {updateReason.length}/300 Karakter
                   </span>
                 </div>
@@ -1656,7 +1704,7 @@ const ProfileTab: React.FC = () => {
                   }`}
                 />
                 {updateReason.length > 0 && updateReason.length < 300 && (
-                  <p className="text-[10px] font-semibold text-rose-500">
+                  <p className="text-[12px] font-semibold text-rose-500">
                     Alasan pengajuan terlalu singkat. Silakan jabarkan detail alasan perubahan dokumen Anda minimal 300 karakter.
                   </p>
                 )}
@@ -1778,7 +1826,7 @@ const ProfileTab: React.FC = () => {
             </div>
             
             <div className="p-6 space-y-4">
-              <span className="text-[10px] font-black uppercase text-muted-foreground">UPLOAD DARI PERANGKAT</span>
+              <span className="text-[12px] font-black uppercase text-muted-foreground">UPLOAD DARI PERANGKAT</span>
               <div className="relative border-2 border-dashed border-border/80 hover:border-primary/50 rounded-2xl p-8 text-center bg-muted/10 group cursor-pointer transition-all">
                 <input
                   type="file"
@@ -1793,7 +1841,7 @@ const ProfileTab: React.FC = () => {
                 <div className="flex flex-col items-center gap-2">
                   <ImageIcon className="h-8 w-8 text-muted-foreground group-hover:text-primary group-hover:scale-105 transition-all duration-200" />
                   <span className="text-xs font-bold text-foreground mt-1">Pilih Foto</span>
-                  <span className="text-[10px] text-muted-foreground font-semibold">JPG, PNG, WEBP (Maks. 5MB)</span>
+                  <span className="text-[12px] text-muted-foreground font-semibold">JPG, PNG, WEBP (Maks. 5MB)</span>
                 </div>
               </div>
             </div>

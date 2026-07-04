@@ -1905,16 +1905,13 @@ const KandidatTab: React.FC = () => {
             {totalPages >= 1 && (
               <div className="flex justify-center items-center gap-4 mt-6 pt-4 text-xs">
                 <div className="flex items-center gap-1.5">
-                  <Button
-                    variant="outline"
+                  <Button variant="outline"
                     size="sm"
-                    className="h-9 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
-                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                    className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                    onClick={() =>setCurrentPage((prev) => Math.max(prev - 1, 1))}
                     disabled={currentPage === 1}
                   >
-                    <ChevronLeft className="h-4 w-4" />
-                    <span>Previous</span>
-                  </Button>
+                    <ChevronLeft className="h-4 w-4" /></Button>
 
                   <div className="flex items-center gap-1">
                     {(() => {
@@ -1975,16 +1972,14 @@ const KandidatTab: React.FC = () => {
                     })()}
                   </div>
 
-                  <Button
-                    variant="outline"
+                  <Button variant="outline"
                     size="sm"
-                    className="h-9 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
-                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                    className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                    onClick={() =>setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                     disabled={currentPage === totalPages}
                   >
-                    <span>Next</span>
-                    <ChevronRight className="h-4 w-4" />
-                  </Button>
+                    
+                    <ChevronRight className="h-4 w-4" /></Button>
                 </div>
               </div>
             )}

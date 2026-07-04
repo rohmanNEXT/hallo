@@ -2278,7 +2278,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                           e.stopPropagation();
                           setViewingTalentProfile(talent);
                         }}
-                        className="h-8 w-8 rounded-xl bg-zinc-100 dark:bg-zinc-800/40 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300 flex items-center justify-center transition-all cursor-pointer border border-zinc-300 dark:border-zinc-700/80 shadow-2xs hover:scale-105 active:scale-95 shrink-0"
+                        className="h-9 w-9 rounded-xl bg-zinc-100 dark:bg-zinc-800/40 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300 flex items-center justify-center transition-all cursor-pointer border border-zinc-300 dark:border-zinc-700/80 shadow-2xs hover:scale-105 active:scale-95 shrink-0"
                         title="Lihat Detail Profil"
                       >
                         <Eye className="w-4 h-4" />
@@ -2313,12 +2313,11 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
               <Button
                 variant="outline"
                 size="sm"
-                className="h-9 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
                 onClick={() => setTalentPage((p) => Math.max(p - 1, 1))}
                 disabled={talentPage === 1}
               >
                 <ChevronLeft className="h-4 w-4" />
-                <span>Previous</span>
               </Button>
 
               <div className="flex items-center gap-1">
@@ -2381,13 +2380,12 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
               <Button
                 variant="outline"
                 size="sm"
-                className="h-9 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
                 onClick={() =>
                   setTalentPage((p) => Math.min(p + 1, totalTalentPages))
                 }
                 disabled={talentPage === totalTalentPages}
               >
-                <span>Next</span>
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </div>

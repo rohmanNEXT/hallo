@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import useAppStore from '@/store/store';
+import useAuth from '@/hooks/useAuth';
 import {
   LuBookmark as Bookmark,
   LuMessageCircle as MessageCircle,
@@ -30,14 +31,13 @@ import { Job, AppNotification } from '@/lib/types';
 import Image from 'next/image';
 
 const Navbar: React.FC = () => {
+  const { user, logout } = useAuth();
   const {
-    user,
     isLoggedIn,
     bookmarks,
     sendChatMessage,
     setChatOpen,
     setAuthModal,
-    logout,
     theme,
     setTheme,
     upgradePlan,
@@ -125,11 +125,33 @@ const Navbar: React.FC = () => {
     position: string;
     time: string;
   };
-  const [employerNotifications, setEmployerNotifications] = useState<EmployerNotif[]>([
-    { id: 'en1', applicantName: 'Budi Santoso', position: 'Frontend Developer', time: '5 menit lalu' },
-    { id: 'en2', applicantName: 'Siti Rahayu', position: 'UI/UX Designer', time: '12 menit lalu' },
-    { id: 'en3', applicantName: 'Ahmad Fauzi', position: 'Backend Engineer', time: '1 jam lalu' },
-    { id: 'en4', applicantName: 'Dewi Lestari', position: 'Product Manager', time: '2 jam lalu' },
+  const [employerNotifications, setEmployerNotifications] = useState<
+    EmployerNotif[]
+  >([
+    {
+      id: 'en1',
+      applicantName: 'Budi Santoso',
+      position: 'Frontend Developer',
+      time: '5 menit lalu',
+    },
+    {
+      id: 'en2',
+      applicantName: 'Siti Rahayu',
+      position: 'UI/UX Designer',
+      time: '12 menit lalu',
+    },
+    {
+      id: 'en3',
+      applicantName: 'Ahmad Fauzi',
+      position: 'Backend Engineer',
+      time: '1 jam lalu',
+    },
+    {
+      id: 'en4',
+      applicantName: 'Dewi Lestari',
+      position: 'Product Manager',
+      time: '2 jam lalu',
+    },
   ]);
   const [employerChatCount] = useState(3);
 
@@ -184,15 +206,16 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <header
-        className="sticky top-0 z-40 w-full border-b border-border/30 shadow-sm"
-        style={{
-          backgroundColor: 'hsl(var(--background) / 0.65)',
-          backdropFilter: 'blur(24px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-        }}
-      >
-        <div className="w-full max-w-[90%] mx-auto px-4 md:px-8">
+      <header className="sticky top-0 z-40 w-full border-b border-border/30 shadow-sm">
+        <div
+          className="absolute inset-0 -z-10"
+          style={{
+            backgroundColor: 'hsl(var(--background) / 0.60)',
+            backdropFilter: 'blur(24px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+          }}
+        />
+        <div className="w-full max-w-[90%] mx-auto px-3 md:px-6">
           <div className="flex h-16 items-center justify-between">
             {mounted && isLoggedIn && user?.role === 'admin' ? (
               <>
@@ -202,13 +225,17 @@ const Navbar: React.FC = () => {
                     href="/pembuat-kerja/lowongan"
                     className="flex items-center gap-1.5 hover:opacity-90 transition-opacity"
                   >
-                    <div className="h-6 w-6 rounded-full bg-primary flex items-center justify-center">
-                      <span className="text-primary-foreground font-bold text-sm">
-                        B
-                      </span>
+                    <div className="h-7 w-7 relative flex items-center justify-center -mr-1.5">
+                      <Image
+                        src="/logo.png"
+                        alt="BlueJob Logo"
+                        fill
+                        className="object-contain scale-[1.7]"
+                      />
                     </div>
-                    <span className="font-bold text-base tracking-tight text-slate-900 dark:text-white">
-                      Blue<span className="text-primary">Job</span> Recruiter
+                    <span className="font-semibold text-base tracking-tight text-slate-900 dark:text-white">
+                      Blue<span className="font-bold text-primary">Job</span>{' '}
+                      Recruiter
                     </span>
                   </Link>
 
@@ -288,13 +315,7 @@ const Navbar: React.FC = () => {
                     </button>
 
                     {isNotificationsOpen && (
-                      <div
-                        className="absolute right-0 mt-[21px] w-80 rounded-xl border p-4 shadow-2xl z-50"
-                        style={{
-                          backgroundColor: 'hsl(var(--card))',
-                          color: 'hsl(var(--card-foreground))',
-                        }}
-                      >
+                      <div className="absolute right-0 mt-[21px] w-80 rounded-xl border border-border/50 bg-card/40 backdrop-blur-2xl text-card-foreground p-4 shadow-2xl z-50">
                         <div className="flex items-center justify-between border-b pb-2 mb-3">
                           <span className="font-semibold text-sm">
                             Pelamar Baru
@@ -317,13 +338,17 @@ const Navbar: React.FC = () => {
                               <div
                                 key={notif.id}
                                 className="p-2 pr-7 border rounded-lg bg-muted/20 text-xs leading-snug relative group cursor-pointer hover:bg-muted/40 transition-colors"
-                                onClick={() => router.push('/pembuat-kerja/kandidat')}
+                                onClick={() =>
+                                  router.push('/pembuat-kerja/kandidat')
+                                }
                               >
                                 <button
                                   onClick={(e) => {
                                     e.stopPropagation();
                                     setEmployerNotifications(
-                                      employerNotifications.filter((n) => n.id !== notif.id),
+                                      employerNotifications.filter(
+                                        (n) => n.id !== notif.id,
+                                      ),
                                     );
                                   }}
                                   className="absolute top-2 right-2 text-muted-foreground hover:text-destructive opacity-40 hover:opacity-100 transition-all cursor-pointer"
@@ -397,9 +422,12 @@ const Navbar: React.FC = () => {
                           src={user.profileImage}
                           alt={user.name}
                           className="h-7 w-7 rounded-full object-cover"
-                         width={100} height={100} unoptimized />
+                          width={100}
+                          height={100}
+                          unoptimized
+                        />
                       ) : (
-                        <div className="h-7 w-7 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">
+                        <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary/80 to-primary text-white flex items-center justify-center font-bold text-xs shadow-sm">
                           {user.name.charAt(0)}
                         </div>
                       )}
@@ -407,11 +435,7 @@ const Navbar: React.FC = () => {
 
                     {isProfileOpen && (
                       <div
-                        className="absolute right-0 mt-[18px] w-60 rounded-xl border p-2 shadow-2xl z-50"
-                        style={{
-                          backgroundColor: 'hsl(var(--card))',
-                          color: 'hsl(var(--card-foreground))',
-                        }}
+                        className="absolute right-0 mt-[18px] w-60 rounded-xl border border-border/50 bg-card/40 backdrop-blur-2xl p-2 shadow-2xl z-50 text-card-foreground"
                       >
                         <div className="px-3 py-2 border-b mb-1">
                           <div className="flex items-center gap-2">
@@ -420,9 +444,12 @@ const Navbar: React.FC = () => {
                                 src={user.profileImage}
                                 alt={user.name}
                                 className="h-7 w-7 rounded-full object-cover"
-                               width={100} height={100} unoptimized />
+                                width={100}
+                                height={100}
+                                unoptimized
+                              />
                             ) : (
-                              <div className="h-7 w-7 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">
+                              <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary/80 to-primary text-white flex items-center justify-center font-bold text-xs shadow-sm">
                                 {user.name.charAt(0)}
                               </div>
                             )}
@@ -551,15 +578,18 @@ const Navbar: React.FC = () => {
                 <div className="flex items-center space-x-8">
                   <Link
                     href="/"
-                    className="flex items-center space-x-1.5 hover:opacity-90 transition-opacity"
+                    className="flex items-center gap-1.5 hover:opacity-90 transition-opacity"
                   >
-                    <div className="h-6 w-6 rounded-full bg-primary flex items-center justify-center">
-                      <span className="text-primary-foreground font-bold text-sm">
-                        B
-                      </span>
+                    <div className="h-7 w-7 relative flex items-center justify-center -mr-1.5">
+                      <Image
+                        src="/logo.png"
+                        alt="BlueJob Logo"
+                        fill
+                        className="object-contain scale-[1.7]"
+                      />
                     </div>
-                    <span className="font-bold text-base tracking-tight text-slate-900 dark:text-white">
-                      Blue<span className="text-primary">Job</span>
+                    <span className="font-semibold text-base tracking-tight text-slate-900 dark:text-white">
+                      Blue<span className="font-bold text-primary">Job</span>
                     </span>
                   </Link>
                   <nav className="hidden md:flex items-center gap-6">
@@ -701,13 +731,7 @@ const Navbar: React.FC = () => {
 
                     {/* Notification Popover */}
                     {isNotificationsOpen && (
-                      <div
-                        className="absolute right-[-60px] sm:right-0 mt-[21px] w-80 rounded-xl border p-4 shadow-2xl z-50"
-                        style={{
-                          backgroundColor: 'hsl(var(--card))',
-                          color: 'hsl(var(--card-foreground))',
-                        }}
-                      >
+                      <div className="absolute right-[-60px] sm:right-0 mt-[21px] w-80 rounded-xl border border-border/50 bg-card/40 backdrop-blur-2xl text-card-foreground p-4 shadow-2xl z-50">
                         <div className="flex items-center justify-between border-b pb-2 mb-3">
                           <span className="font-semibold text-sm">
                             Notifikasi
@@ -793,25 +817,19 @@ const Navbar: React.FC = () => {
                             src={user.profileImage}
                             alt={user.name}
                             className="h-7 w-7 rounded-full object-cover"
-                           width={100} height={100} unoptimized />
+                            width={100}
+                            height={100}
+                            unoptimized
+                          />
                         ) : (
-                          <div className="h-7 w-7 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">
+                          <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary/80 to-primary text-white flex items-center justify-center font-bold text-xs shadow-sm">
                             {user.name.charAt(0)}
                           </div>
                         )}
                       </Button>
 
                       {isProfileOpen && (
-                        <div
-                          className="absolute right-0 mt-[18px] w-60 rounded-xl border p-2 shadow-2xl z-50"
-                          style={{
-                            backgroundColor: 'hsl(var(--card) / 0.75)',
-                            backdropFilter: 'blur(20px) saturate(180%)',
-                            WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-                            color: 'hsl(var(--card-foreground))',
-                            borderColor: 'hsl(var(--border) / 0.5)',
-                          }}
-                        >
+                        <div className="absolute right-0 mt-[18px] w-60 rounded-xl border border-border/50 bg-card/40 backdrop-blur-2xl text-card-foreground p-2 shadow-2xl z-50">
                           <div className="px-3 py-2 border-b mb-1">
                             <div className="flex items-center gap-2">
                               {user.profileImage ? (
@@ -819,9 +837,12 @@ const Navbar: React.FC = () => {
                                   src={user.profileImage}
                                   alt={user.name}
                                   className="h-7 w-7 rounded-full object-cover"
-                                 width={100} height={100} unoptimized />
+                                  width={100}
+                                  height={100}
+                                  unoptimized
+                                />
                               ) : (
-                                <div className="h-7 w-7 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">
+                                <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary/80 to-primary text-white flex items-center justify-center font-bold text-xs shadow-sm">
                                   {user.name.charAt(0)}
                                 </div>
                               )}
@@ -1203,10 +1224,10 @@ const Navbar: React.FC = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="cursor-pointer h-8 text-[10px] font-semibold"
+                  className="cursor-pointer h-8 text-xs font-semibold"
                   onClick={() => setTheme('white')}
                 >
-                  RESET DEFAULT
+                  Reset Default
                 </Button>
               </div>
             </motion.div>

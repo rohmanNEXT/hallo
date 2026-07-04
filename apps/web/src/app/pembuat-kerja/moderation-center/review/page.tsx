@@ -496,7 +496,7 @@ const JobVerificationPage: React.FC = () => {
                           onClick={() =>
                             setShowFilterFloating(!showFilterFloating)
                           }
-                          className={`h-8 w-8 p-0 rounded-lg border flex items-center justify-center cursor-pointer shadow-none transition-all ${
+                          className={`h-9 w-9 p-0 rounded-lg border flex items-center justify-center cursor-pointer shadow-none transition-all ${
                             showFilterFloating ||
                             showOnlyUnviewed ||
                             startFromNumber !== ''
@@ -825,20 +825,16 @@ const JobVerificationPage: React.FC = () => {
               {totalPages >= 1 && (
                 <div className="flex justify-center items-center gap-4 mt-6 pt-4 border-t border-border/40 text-xs">
                   <div className="flex items-center gap-1.5">
-                    <Button
-                      variant="outline"
+                    <Button variant="outline"
                       size="sm"
-                      className="h-8 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
-                      onClick={() =>
-                        setCurrentPage((prev) =>
+                      className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                      onClick={() =>setCurrentPage((prev) =>
                           Math.max(prev - 1, 1),
                         )
                       }
                       disabled={currentPage === 1}
                     >
-                      <ChevronLeft className="h-4 w-4" />
-                      <span>Previous</span>
-                    </Button>
+                      <ChevronLeft className="h-4 w-4" /></Button>
 
                     <div className="flex items-center gap-1">
                       {(() => {
@@ -850,7 +846,7 @@ const JobVerificationPage: React.FC = () => {
                             <Button
                               key={pageNum}
                               variant="outline"
-                              className="h-8 w-8 text-xs font-bold transition-all rounded-lg cursor-pointer shadow-sm"
+                              className="h-9 w-9 text-xs font-bold transition-all rounded-lg cursor-pointer shadow-sm"
                               style={
                                 isCurrent
                                   ? {
@@ -925,20 +921,17 @@ const JobVerificationPage: React.FC = () => {
                       })()}
                     </div>
 
-                    <Button
-                      variant="outline"
+                    <Button variant="outline"
                       size="sm"
-                      className="h-8 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
-                      onClick={() =>
-                        setCurrentPage((prev) =>
+                      className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                      onClick={() =>setCurrentPage((prev) =>
                           Math.min(prev + 1, totalPages),
                         )
                       }
                       disabled={currentPage === totalPages}
                     >
-                      <span>Next</span>
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
+                      
+                      <ChevronRight className="h-4 w-4" /></Button>
                   </div>
                 </div>
               )}

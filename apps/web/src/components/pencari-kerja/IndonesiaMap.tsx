@@ -2,7 +2,9 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { LuCompass as Compass, LuFilter as Filter, LuBriefcase as Briefcase } from 'react-icons/lu';
+import { Badge } from '@/components/ui/badge';
 import { useAppStore } from '@/store/store';
+import useJobs from '@/hooks/useJobs';
 
 interface Hotspot {
   city: string;
@@ -20,28 +22,89 @@ const IndonesiaMap: React.FC = () => {
   const [minJobs, setMinJobs] = useState(48);
   const [activeCity, setActiveCity] = useState<string | null>(null);
   const { theme } = useAppStore();
+  const { data: jobs = [] } = useJobs();
 
-  const hotspots: Hotspot[] = [
-    { city: 'Jakarta', count: 48, lat: -6.2088, lng: 106.8456 },
-    { city: 'Surabaya', count: 45, lat: -7.2575, lng: 112.7521 },
-    { city: 'Yogyakarta', count: 35, lat: -7.7956, lng: 110.3695 },
-    { city: 'Bandung', count: 32, lat: -6.9175, lng: 107.6191 },
-    { city: 'Makassar', count: 29, lat: -5.1477, lng: 119.4327 },
-    { city: 'Semarang', count: 27, lat: -6.9932, lng: 110.4203 },
-    { city: 'Batam', count: 26, lat: 1.0829, lng: 104.0305 },
-    { city: 'Pekanbaru', count: 25, lat: 0.5071, lng: 101.4478 },
-    { city: 'Medan', count: 24, lat: 3.5952, lng: 98.6722 },
-    { city: 'Samarinda', count: 24, lat: -0.5021, lng: 117.1536 },
-    { city: 'Palembang', count: 23, lat: -2.9761, lng: 104.7754 },
-    { city: 'Banjarmasin', count: 23, lat: -3.3186, lng: 114.5944 },
-    { city: 'Balikpapan', count: 22, lat: -1.2654, lng: 116.8312 },
-    { city: 'Pontianak', count: 22, lat: -0.0263, lng: 109.3425 },
-    { city: 'Denpasar', count: 21, lat: -8.6705, lng: 115.2126 },
-    { city: 'Manado', count: 21, lat: 1.4748, lng: 124.8428 },
-    { city: 'Jayapura', count: 20, lat: -2.541, lng: 140.669 },
-    { city: 'Kupang', count: 19, lat: -10.1772, lng: 123.607 },
-    { city: 'Ambon', count: 18, lat: -3.6954, lng: 128.1814 },
-  ];
+  const CITY_COORDINATES: Record<string, { lat: number; lng: number }> = {
+    'Jakarta': { lat: -6.2088, lng: 106.8456 },
+    'Jakarta Pusat': { lat: -6.1823, lng: 106.8428 },
+    'Jakarta Selatan': { lat: -6.2838, lng: 106.8048 },
+    'Jakarta Barat': { lat: -6.1683, lng: 106.7588 },
+    'Jakarta Timur': { lat: -6.2628, lng: 106.8822 },
+    'Jakarta Utara': { lat: -6.1361, lng: 106.9006 },
+    'Surabaya': { lat: -7.2575, lng: 112.7521 },
+    'Yogyakarta': { lat: -7.7956, lng: 110.3695 },
+    'Bandung': { lat: -6.9175, lng: 107.6191 },
+    'Makassar': { lat: -5.1477, lng: 119.4327 },
+    'Semarang': { lat: -6.9932, lng: 110.4203 },
+    'Medan': { lat: 3.5952, lng: 98.6722 },
+    'Denpasar': { lat: -8.6705, lng: 115.2126 },
+    'Bekasi': { lat: -6.2383, lng: 106.9756 },
+    'Tangerang': { lat: -6.1761, lng: 106.6382 },
+    'Tangerang Selatan': { lat: -6.3227, lng: 106.7085 },
+    'Depok': { lat: -6.4071, lng: 106.8158 },
+    'Batam': { lat: 1.0829, lng: 104.0305 },
+    'Pekanbaru': { lat: 0.5071, lng: 101.4478 },
+    'Samarinda': { lat: -0.5021, lng: 117.1536 },
+    'Palembang': { lat: -2.9761, lng: 104.7754 },
+    'Banjarmasin': { lat: -3.3186, lng: 114.5944 },
+    'Balikpapan': { lat: -1.2654, lng: 116.8312 },
+    'Pontianak': { lat: -0.0263, lng: 109.3425 },
+    'Manado': { lat: 1.4748, lng: 124.8428 },
+    'Jayapura': { lat: -2.541, lng: 140.669 },
+    'Kupang': { lat: -10.1772, lng: 123.607 },
+    'Ambon': { lat: -3.6954, lng: 128.1814 },
+    'Surakarta': { lat: -7.5561, lng: 110.8316 },
+    'Malang': { lat: -7.9797, lng: 112.6304 },
+    'Bogor': { lat: -6.5971, lng: 106.7932 },
+    'Gresik': { lat: -7.1648, lng: 112.6517 },
+    'Sidoarjo': { lat: -7.4478, lng: 112.7183 },
+    'Sleman': { lat: -7.7126, lng: 110.3340 },
+    'Bantul': { lat: -7.8860, lng: 110.3297 },
+  };
+
+  const hotspots = React.useMemo(() => {
+    if (jobs.length === 0) return [];
+    
+    const cityCounts: Record<string, number> = {};
+    jobs.forEach(job => {
+      if (job.location) {
+        const city = job.location.split(',')[0].trim();
+        cityCounts[city] = (cityCounts[city] || 0) + 1;
+      }
+    });
+
+    const generatedHotspots: Hotspot[] = [];
+    Object.entries(cityCounts).forEach(([city, count]) => {
+      if (count > 0) {
+        if (CITY_COORDINATES[city]) {
+          generatedHotspots.push({
+            city,
+            count,
+            lat: CITY_COORDINATES[city].lat,
+            lng: CITY_COORDINATES[city].lng,
+          });
+        } else {
+          // Fallback logic for unmapped cities: Put them near center/Jakarta roughly but jittered
+          // so they don't stack on top of each other
+          const jitterLat = -2.5 + (Math.random() * 8 - 4); // Spread vertically across indonesia
+          const jitterLng = 117.0 + (Math.random() * 20 - 10); // Spread horizontally
+          generatedHotspots.push({
+            city,
+            count,
+            lat: jitterLat,
+            lng: jitterLng,
+          });
+        }
+      }
+    });
+    
+    return generatedHotspots;
+  }, [jobs]);
+
+  const maxJobCount = React.useMemo(() => {
+    if (jobs.length === 0) return 48;
+    return jobs.length;
+  }, [jobs.length]);
 
   // Dynamically load Leaflet JS & CSS from CDN
   useEffect(() => {
@@ -198,7 +261,7 @@ const IndonesiaMap: React.FC = () => {
         html: `
           <span class="relative flex h-3.5 w-3.5 items-center justify-center">
             <span class="animate-slow-ping absolute inline-flex h-full w-full rounded-full bg-primary/40 opacity-50"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary opacity-85 border border-white/70"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary opacity-60 border border-white/70"></span>
           </span>
         `,
         className: 'custom-div-icon',
@@ -226,10 +289,10 @@ const IndonesiaMap: React.FC = () => {
         marker
           .bindTooltip(
             `
-            <div class="custom-map-tooltip-inner px-2 py-1 text-[10px] font-bold rounded-lg shadow-md select-none">
-              <div class="text-primary font-extrabold text-[12px] mb-0.5">${hs.city}</div>
-              <div class="text-emerald-500 font-extrabold flex items-center gap-1">
-                <span class="font-extrabold">${hs.count} Loker</span>
+            <div class="custom-map-tooltip-inner px-3 py-2 rounded-xl shadow-lg cursor-text select-text flex flex-col items-start min-w-[100px]">
+              <div class="text-primary font-semibold text-sm tracking-tight mb-1">${hs.city}</div>
+              <div class="text-emerald-500 font-semibold text-xs">
+                ${hs.count} Loker
               </div>
             </div>
           `,
@@ -267,10 +330,10 @@ const IndonesiaMap: React.FC = () => {
           marker
             .bindTooltip(
               `
-            <div class="custom-map-tooltip-inner px-2 py-1 text-[10px] font-bold rounded-lg shadow-md select-none">
-              <div class="text-primary font-extrabold text-[12px] mb-0.5">${hs.city}</div>
-              <div class="text-emerald-500 font-extrabold flex items-center gap-1">
-                <span class="font-extrabold">${hs.count} Loker</span>
+            <div class="custom-map-tooltip-inner px-3 py-2 rounded-xl shadow-lg cursor-text select-text flex flex-col items-start min-w-[100px]">
+              <div class="text-primary font-semibold text-sm tracking-tight mb-1">${hs.city}</div>
+              <div class="text-emerald-500 font-semibold text-xs">
+                ${hs.count} Loker
               </div>
             </div>
           `,
@@ -288,7 +351,7 @@ const IndonesiaMap: React.FC = () => {
         }
       });
     });
-  }, [leafletLoaded, minJobs, theme, activeCity]);
+  }, [leafletLoaded, minJobs, theme, activeCity, hotspots]);
 
   return (
     <section className="max-w-7xl mx-auto px-6 pt-22 pb-14">
@@ -299,7 +362,7 @@ const IndonesiaMap: React.FC = () => {
         </h2>
 
         {/* Middle: Leaflet Map (Fixed & Non-interactive) */}
-        <div className="w-full max-w-4xl h-[290px] md:h-[390px] mb-5.5 border border-border/60 rounded-2xl overflow-hidden relative shadow-md bg-muted/20">
+        <div className="w-full max-w-4xl h-[290px] md:h-[390px] mb-10 border border-border/60 rounded-2xl overflow-hidden relative shadow-md bg-muted/20">
           <div ref={mapContainerRef} className="w-full h-full z-10" />
           {!leafletLoaded && (
             <div className="absolute inset-0 flex items-center justify-center bg-background/80 z-20 text-xs font-bold text-muted-foreground">
@@ -311,36 +374,43 @@ const IndonesiaMap: React.FC = () => {
         {/* Bottom: Filter Slider */}
         <div className="w-full max-w-xs p-5 rounded-2xl bg-background/50 border border-border/80 space-y-3 text-center">
           <div className="text-center">
-            <span className="text-[10px] md:text-xs font-bold text-muted-foreground uppercase tracking-widest block mb-3">
-              FILTER JUMLAH LOWONGAN
+            <span className="text-sm font-medium text-muted-foreground block mb-4">
+              Jumlah Lowongan
             </span>
           </div>
 
           <div className="space-y-2 px-3">
-            <div className="relative flex items-center pt-2">
+            <div className="relative flex items-center">
               <input
                 type="range"
-                min="18"
-                max="48"
-                value={66 - minJobs}
-                onChange={(e) => setMinJobs(66 - Number(e.target.value))}
-                className="w-full h-1 rounded-lg appearance-none cursor-pointer custom-slider focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+                min="0"
+                max={maxJobCount}
+                value={maxJobCount - minJobs}
+                onChange={(e) => setMinJobs(maxJobCount - Number(e.target.value))}
+                className="w-full h-1 rounded-lg appearance-none cursor-pointer custom-slider focus:outline-none transition-all"
                 style={{
-                  background: `linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) ${(((66 - minJobs) - 18) / (48 - 18)) * 100}%, #3f3f46 ${(((66 - minJobs) - 18) / (48 - 18)) * 100}%, #3f3f46 100%)`,
+                  background: `linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) ${(((maxJobCount - minJobs) - 0) / (maxJobCount - 0)) * 100}%, #3f3f46 ${(((maxJobCount - minJobs) - 0) / (maxJobCount - 0)) * 100}%, #3f3f46 100%)`,
                 }}
               />
             </div>
 
-            <div className="flex justify-between text-[12px] text-muted-foreground font-semibold px-3 mt-6">
-              <span className="translate-x-1 inline-block">48</span>
-              <span>18 </span>
+            <div className="flex justify-between text-[12px] text-muted-foreground font-semibold px-3 mt-4">
+              <span className="translate-x-1 inline-block">{maxJobCount}</span>
+              <span>0</span>
             </div>
           </div>
 
-          <div className="pt-0">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-foreground/10 text-foreground border border-foreground/20 text-xs font-extrabold tracking-wide">
+          <div className="pt-2">
+            <Badge
+              variant="outline"
+              className={`text-[12px] font-normal px-2.5 py-0.5 h-6 ${
+                leafletLoaded && theme === 'white'
+                  ? 'bg-[#eef5fa] border border-[#d2e2f0] text-[#334155]'
+                  : 'bg-background/50 border border-border/80 text-muted-foreground'
+              }`}
+            >
               {minJobs} Lowongan
-            </span>
+            </Badge>
           </div>
         </div>
       </div>
@@ -456,9 +526,9 @@ const IndonesiaMap: React.FC = () => {
           width: 14px !important;
           height: 14px !important;
           border-radius: 50% !important;
-          background: hsl(var(--primary)) !important;
-          border: 2.5px solid #ffffff !important;
-          box-shadow: 0 2px 5px hsl(var(--primary) / 0.35) !important;
+          background: hsl(var(--primary) / 0.6) !important;
+          border: none !important;
+          box-shadow: none !important;
           cursor: pointer !important;
           margin-top: -5px !important; /* Center the thumb vertically on a 4px track */
           transition:
@@ -478,9 +548,9 @@ const IndonesiaMap: React.FC = () => {
           width: 14px !important;
           height: 14px !important;
           border-radius: 50% !important;
-          background: hsl(var(--primary)) !important;
-          border: 2.5px solid #ffffff !important;
-          box-shadow: 0 2px 5px hsl(var(--primary) / 0.35) !important;
+          background: hsl(var(--primary) / 0.6) !important;
+          border: none !important;
+          box-shadow: none !important;
           cursor: pointer !important;
           box-sizing: border-box !important;
           transition:

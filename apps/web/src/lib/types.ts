@@ -146,6 +146,7 @@ export interface CompanyProfile {
   totalEmployees: string;
   rating: number;
   isPremium: boolean;
+  isVerified: boolean;
   description: string;
   website: string;
   linkedin: string;

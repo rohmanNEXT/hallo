@@ -154,7 +154,7 @@ const CompanyVerifyPage: React.FC = () => {
               <div className="border border-border/80 bg-card rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xs">
                 <div className="flex items-center gap-4">
                   <div className="h-16 w-16 bg-white border border-border/80 rounded-2xl flex items-center justify-center shadow-xs overflow-hidden shrink-0">
-                    <Building2 className="h-8 w-8 text-primary" />
+                    <Building2 className="h-9 w-9 text-primary" />
                   </div>
                   <div className="text-left">
                     <h4 className="text-base font-black text-foreground">
@@ -274,7 +274,7 @@ const CompanyVerifyPage: React.FC = () => {
                       <div className="mt-3 bg-card border border-rose-500/20 rounded-xl p-3 space-y-2">
                         <p className="font-bold text-[10px] text-rose-500 uppercase tracking-wide">Template Alasan Penolakan AI:</p>
                         <p className="text-[11px] text-muted-foreground italic bg-muted/30 p-2.5 rounded-lg border border-border/40">
-                          "Berdasarkan pemindaian AI dari sistem moderasi, berkas dokumen legalitas (SIUP/NIB) yang diunggah terdeteksi memiliki rekayasa digital pada metadata file. Harap ajukan verifikasi ulang dengan melampirkan berkas scan dokumen asli tanpa suntingan."
+                          &quot;Berdasarkan pemindaian AI dari sistem moderasi, berkas dokumen legalitas (SIUP/NIB) yang diunggah terdeteksi memiliki rekayasa digital pada metadata file. Harap ajukan verifikasi ulang dengan melampirkan berkas scan dokumen asli tanpa suntingan.&quot;
                         </p>
                         <Button
                           size="sm"
@@ -409,7 +409,7 @@ const CompanyVerifyPage: React.FC = () => {
                             <img
                               src={member.avatar}
                               alt={member.name}
-                              className="h-8 w-8 rounded-full object-cover border border-border"
+                              className="h-9 w-9 rounded-full object-cover border border-border"
                             />
                             <div className="text-left shrink-0">
                               <p className="text-xs font-black text-foreground leading-none">
@@ -439,7 +439,7 @@ const CompanyVerifyPage: React.FC = () => {
                     </span>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 pb-4">
                       <div className="flex items-start gap-3">
-                        <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
                           <Building2 className="h-4 w-4" />
                         </div>
                         <div className="text-left">
@@ -453,7 +453,7 @@ const CompanyVerifyPage: React.FC = () => {
                       </div>
 
                       <div className="flex items-start gap-3">
-                        <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
                           <MapPin className="h-4 w-4" />
                         </div>
                         <div className="text-left">
@@ -467,7 +467,7 @@ const CompanyVerifyPage: React.FC = () => {
                       </div>
 
                       <div className="flex items-start gap-3">
-                        <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
                           <Users className="h-4 w-4" />
                         </div>
                         <div className="text-left">
@@ -755,7 +755,7 @@ const CompanyVerifyPage: React.FC = () => {
                       onClick={() =>
                         setShowCompanyFilterDropdown(!showCompanyFilterDropdown)
                       }
-                      className={`h-8 w-8 p-0 rounded-lg border flex items-center justify-center cursor-pointer shadow-none transition-all ${
+                      className={`h-9 w-9 p-0 rounded-lg border flex items-center justify-center cursor-pointer shadow-none transition-all ${
                         showCompanyFilterDropdown || companyFilter !== 'all'
                           ? 'bg-zinc-900 border-zinc-900 text-zinc-50 dark:bg-zinc-100 dark:border-zinc-100 dark:text-zinc-900 shadow-sm'
                           : 'bg-background border-border text-muted-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-foreground'
@@ -885,7 +885,7 @@ const CompanyVerifyPage: React.FC = () => {
                                 comp.status === 'verified' ? 'profile' : 'document',
                               );
                             }}
-                            className="h-8 w-8 rounded-xl bg-zinc-100 dark:bg-zinc-800/40 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300 flex items-center justify-center transition-all cursor-pointer border border-zinc-300 dark:border-zinc-700/80 shadow-2xs hover:scale-105 active:scale-95 shrink-0"
+                            className="h-9 w-9 rounded-xl bg-zinc-100 dark:bg-zinc-800/40 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300 flex items-center justify-center transition-all cursor-pointer border border-zinc-300 dark:border-zinc-700/80 shadow-2xs hover:scale-105 active:scale-95 shrink-0"
                             title="Profile Detail"
                           >
                             <Eye className="w-4 h-4" />
@@ -1003,18 +1003,14 @@ const CompanyVerifyPage: React.FC = () => {
             {totalCompanyPages >= 1 && (
               <div className="flex justify-center items-center gap-4 mt-4 pt-4 border-t border-border/40 text-xs flex-none">
                 <div className="flex items-center gap-1.5">
-                  <Button
-                    variant="outline"
+                  <Button variant="outline"
                     size="sm"
-                    className="h-8 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
-                    onClick={() =>
-                      setCompanyCurrentPage((prev) => Math.max(prev - 1, 1))
+                    className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                    onClick={() =>setCompanyCurrentPage((prev) => Math.max(prev - 1, 1))
                     }
                     disabled={companyCurrentPage === 1}
                   >
-                    <ChevronLeft className="h-4 w-4" />
-                    <span>Previous</span>
-                  </Button>
+                    <ChevronLeft className="h-4 w-4" /></Button>
                   <div className="flex items-center gap-1">
                     {(() => {
                       const renderedElements: React.ReactNode[] = [];
@@ -1024,7 +1020,7 @@ const CompanyVerifyPage: React.FC = () => {
                           <Button
                             key={i}
                             variant="outline"
-                            className="h-8 w-8 text-xs font-bold transition-all rounded-lg cursor-pointer shadow-sm"
+                            className="h-9 w-9 text-xs font-bold transition-all rounded-lg cursor-pointer shadow-sm"
                             style={
                               isCurrent
                                 ? {
@@ -1043,20 +1039,17 @@ const CompanyVerifyPage: React.FC = () => {
                       return renderedElements;
                     })()}
                   </div>
-                  <Button
-                    variant="outline"
+                  <Button variant="outline"
                     size="sm"
-                    className="h-8 gap-1 px-3 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
-                    onClick={() =>
-                      setCompanyCurrentPage((prev) =>
+                    className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                    onClick={() =>setCompanyCurrentPage((prev) =>
                         Math.min(prev + 1, totalCompanyPages),
                       )
                     }
                     disabled={companyCurrentPage === totalCompanyPages}
                   >
-                    <span>Next</span>
-                    <ChevronRight className="h-4 w-4" />
-                  </Button>
+                    
+                    <ChevronRight className="h-4 w-4" /></Button>
                 </div>
               </div>
             )}
@@ -1135,7 +1128,7 @@ const CompanyVerifyPage: React.FC = () => {
                 setRejectModalCompanyId(null);
                 setRejectReason('');
               }}
-              className="absolute top-4 right-4 h-8 w-8 rounded-full hover:bg-muted flex items-center justify-center text-muted-foreground transition-colors z-10"
+              className="absolute top-4 right-4 h-9 w-9 rounded-full hover:bg-muted flex items-center justify-center text-muted-foreground transition-colors z-10"
             >
               <X className="h-4 w-4" />
             </button>

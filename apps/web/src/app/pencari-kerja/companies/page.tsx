@@ -327,8 +327,7 @@ const CompanyList: React.FC = () => {
               />
               {isSortOpen && (
                 <div
-                  style={{ backgroundColor: 'hsl(var(--popover))' }}
-                  className="absolute top-full right-0 mt-1 z-100 rounded-lg border border-border shadow-xl overflow-hidden min-w-[160px]"
+                  className="absolute top-full right-0 mt-1 z-100 rounded-lg border border-border/50 bg-popover/40 backdrop-blur-2xl shadow-xl overflow-hidden min-w-[160px]"
                 >
                   {sortOptions.map((opt) => (
                     <button
