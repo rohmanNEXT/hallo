@@ -531,7 +531,7 @@ const ProfileTab: React.FC = () => {
               width: 72, height: 72, borderRadius: 18, margin: '0 auto 20px',
               background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '12px'8, fontWeight: 800, color: 'white',
+              fontSize: 18, fontWeight: 800, color: 'white',
               boxShadow: '0 4px 20px rgba(99,102,241,0.3)',
             }}>
               {infoFormik.values.brandName?.charAt(0) || 'C'}
@@ -539,7 +539,7 @@ const ProfileTab: React.FC = () => {
 
             {/* Company Name */}
             <h1 style={{
-              fontSize: '12px'2, fontWeight: 800, color: '#fafafa',
+              fontSize: 12, fontWeight: 800, color: '#fafafa',
               margin: '0 0 4px', letterSpacing: '-0.5px', lineHeight: 1.2,
             }}>
               {infoFormik.values.brandName || user.name || 'Company Profile'}
@@ -547,14 +547,14 @@ const ProfileTab: React.FC = () => {
 
             {/* Legal Name / Subtitle */}
             {infoFormik.values.legalName && (
-              <p style={{ fontSize: '12px'5, color: '#a78bfa', fontWeight: 600, margin: '0 0 16px' }}>
+              <p style={{ fontSize: 15, color: '#a78bfa', fontWeight: 600, margin: '0 0 16px' }}>
                 {infoFormik.values.legalName}
               </p>
             )}
 
             {/* Contact Row */}
             <p style={{
-              fontSize: '12px'2, color: '#71717a', fontWeight: 500, margin: '0 0 20px',
+              fontSize: 12, color: '#71717a', fontWeight: 500, margin: '0 0 20px',
               display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap',
             }}>
               {infoFormik.values.industry && <span>{infoFormik.values.industry}</span>}
@@ -588,10 +588,10 @@ const ProfileTab: React.FC = () => {
             {/* TENTANG PERUSAHAAN */}
             {infoFormik.values.description && (
               <div style={{ breakInside: 'avoid', pageBreakInside: 'avoid', paddingTop: 8 }}>
-                <h2 style={{ fontSize: '12px'4, fontWeight: 800, color: '#fafafa', margin: '0 0 10px', letterSpacing: '0.02em' }}>
+                <h2 style={{ fontSize: 14, fontWeight: 800, color: '#fafafa', margin: '0 0 10px', letterSpacing: '0.02em' }}>
                   TENTANG PERUSAHAAN
                 </h2>
-                <p style={{ fontSize: '12px'3, color: '#a1a1aa', lineHeight: 1.9, margin: 0, fontWeight: 400 }}>
+                <p style={{ fontSize: 13, color: '#a1a1aa', lineHeight: 1.9, margin: 0, fontWeight: 400 }}>
                   {infoFormik.values.description}
                 </p>
               </div>
@@ -599,7 +599,7 @@ const ProfileTab: React.FC = () => {
 
             {/* INFORMASI */}
             <div style={{ breakInside: 'avoid', pageBreakInside: 'avoid', paddingTop: 8 }}>
-              <h2 style={{ fontSize: '12px'4, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
+              <h2 style={{ fontSize: 14, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
                 INFORMASI
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px 32px' }}>
@@ -613,7 +613,7 @@ const ProfileTab: React.FC = () => {
                 ].filter(item => item.value).map((item, i) => (
                   <div key={i} style={{ padding: '8px 0', borderBottom: '1px solid #27272a' }}>
                     <p style={{ fontSize: '12px', fontWeight: 700, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 2px' }}>{item.label}</p>
-                    <p style={{ fontSize: '12px'3, color: '#e4e4e7', fontWeight: 600, margin: 0 }}>{item.value}</p>
+                    <p style={{ fontSize: 13, color: '#e4e4e7', fontWeight: 600, margin: 0 }}>{item.value}</p>
                   </div>
                 ))}
               </div>
@@ -622,7 +622,7 @@ const ProfileTab: React.FC = () => {
             {/* TIM KAMI */}
             {workers.length > 0 && (
               <div style={{ breakInside: 'avoid', pageBreakInside: 'avoid', paddingTop: 8 }}>
-                <h2 style={{ fontSize: '12px'4, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
+                <h2 style={{ fontSize: 14, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
                   TIM KAMI
                 </h2>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
@@ -636,7 +636,7 @@ const ProfileTab: React.FC = () => {
                         width: 34, height: 34, borderRadius: '50%',
                         background: 'linear-gradient(135deg, #6366f1, #a78bfa)',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: '12px'4, fontWeight: 800, color: 'white', flexShrink: 0, overflow: 'hidden',
+                        fontSize: 14, fontWeight: 800, color: 'white', flexShrink: 0, overflow: 'hidden',
                       }}>
                         {w.image?.startsWith('http') || w.image?.startsWith('data:') ? (
                           <Image src={w.image} alt={w.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }}  width={100} height={100} unoptimized />
@@ -645,7 +645,7 @@ const ProfileTab: React.FC = () => {
                         )}
                       </div>
                       <div>
-                        <p style={{ fontSize: '12px'2, fontWeight: 700, color: '#fafafa', margin: 0, lineHeight: 1.2 }}>{w.name}</p>
+                        <p style={{ fontSize: 12, fontWeight: 700, color: '#fafafa', margin: 0, lineHeight: 1.2 }}>{w.name}</p>
                         <p style={{ fontSize: '12px', color: '#71717a', margin: '2px 0 0', fontWeight: 500 }}>{w.position}</p>
                       </div>
                     </div>
@@ -657,7 +657,7 @@ const ProfileTab: React.FC = () => {
             {/* GALERI KANTOR */}
             {galleryImages.length > 0 && (
               <div style={{ breakInside: 'avoid', pageBreakInside: 'avoid', paddingTop: 24 }}>
-                <h2 style={{ fontSize: '12px'4, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
+                <h2 style={{ fontSize: 14, fontWeight: 800, color: '#fafafa', margin: '0 0 14px', letterSpacing: '0.02em' }}>
                   GALERI KANTOR
                 </h2>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>

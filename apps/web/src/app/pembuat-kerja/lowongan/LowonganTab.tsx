@@ -42,6 +42,11 @@ import {
   LuFileText as FileText,
   LuLink as Link,
   LuRocket as Rocket,
+  LuArrowLeft as ArrowLeft,
+  LuMapPin as MapPin,
+  LuClock as Clock,
+  LuDollarSign as DollarSign,
+  LuShieldCheck as ShieldCheck,
 } from 'react-icons/lu';
 import provincesData from '@/lib/indonesia-regions.json';
 import { ProvinceData } from '@/lib/types';
@@ -159,7 +164,9 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
   // Job Posting State
   const [showAddJobModal, setShowAddJobModal] = useState(false);
   const [showVerifyPromptModal, setShowVerifyPromptModal] = useState(false);
+  const [viewingJob, setViewingJob] = useState<any | null>(null);
   const [showEmailVerifyModal, setShowEmailVerifyModal] = useState(false);
+  const [showTrashAlert, setShowTrashAlert] = useState(true);
   const [pendingAction, setPendingAction] = useState<{
     type: 'post' | 'delete';
     id?: string;
@@ -674,7 +681,179 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      {viewingJob ? (
+        /* ============ DETAIL VIEW ============ */
+        <div className="w-full space-y-6 animate-in fade-in duration-300">
+          <Button
+            onClick={() => setViewingJob(null)}
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-2 text-xs font-semibold hover:bg-muted border border-border cursor-pointer bg-background"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            <span>Kembali ke Semua Lowongan</span>
+          </Button>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="md:col-span-2 space-y-6">
+              {/* Job Header Card */}
+              <Card className="border border-border/70 bg-card/50 backdrop-blur-sm shadow-md overflow-hidden">
+                <CardContent className="p-5 md:p-6">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="h-[60px] w-[60px] rounded-xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/15 overflow-hidden p-2 shrink-0">
+                      <span className="text-xl font-black text-emerald-600">
+                        {(viewingJob.company || user?.companyVerification?.brandName || 'C').charAt(0)}
+                      </span>
+                    </div>
+                    <div>
+                      <h1 className="text-[20px] font-bold text-foreground tracking-tight leading-tight">
+                        {viewingJob.title}
+                      </h1>
+                      <div className="flex items-center gap-1.5 mt-1">
+                        <span className="text-[14px] font-bold text-emerald-500">
+                          {viewingJob.company || user?.companyVerification?.brandName}
+                        </span>
+                        <ShieldCheck className="h-4 w-4 text-emerald-500 shrink-0" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2.5 text-xs text-muted-foreground">
+                      <Clock className="h-4 w-4 shrink-0 text-muted-foreground/60" />
+                      <span>{viewingJob.workType || 'Penuh Waktu'}</span>
+                    </div>
+                    <div className="flex items-center gap-2.5 text-xs text-muted-foreground">
+                      <MapPin className="h-4 w-4 shrink-0 text-muted-foreground/60" />
+                      <span>
+                        <span className="text-red-500 font-medium">{viewingJob.workLocationType || 'On-site'}</span>
+                        <span className="mx-1.5">•</span>
+                        <span className="text-muted-foreground font-medium">{viewingJob.location || 'Jakarta, Indonesia'}</span>
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2.5 text-xs text-muted-foreground">
+                      <DollarSign className="h-4 w-4 shrink-0 text-muted-foreground/60" />
+                      <span className="font-black text-emerald-600">
+                        {viewingJob.salaryMin && viewingJob.salaryMax
+                          ? `Rp ${viewingJob.salaryMin.toLocaleString('id-ID')} – ${viewingJob.salaryMax.toLocaleString('id-ID')}`
+                          : `Rp ${(viewingJob.salaryMin || viewingJob.salary || 0).toLocaleString('id-ID')}`
+                        } / bln
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-border/40">
+                    <Badge className={`border-none font-bold text-[12px] px-2 py-0.5 uppercase rounded-full ${
+                      viewingJob.status === 'aktif' ? 'bg-emerald-500/15 text-emerald-600' :
+                      viewingJob.status === 'nonaktif' ? 'bg-amber-500/15 text-amber-600' :
+                      'bg-muted text-muted-foreground'
+                    }`}>
+                      {statusMap[viewingJob.status?.toLowerCase()] || viewingJob.status}
+                    </Badge>
+                    {viewingJob.badge && (
+                      <Badge className="bg-orange-500/10 text-orange-600 border-none font-bold text-[12px] px-2 py-0.5 uppercase rounded-full">
+                        {viewingJob.badge}
+                      </Badge>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Persyaratan, Skill, Benefit */}
+              <Card className="border border-border/70 bg-card shadow-md">
+                <CardContent className="p-6 space-y-6">
+                  {/* 1. Persyaratan */}
+                  <div>
+                    <h2 className="text-xs font-bold uppercase text-muted-foreground tracking-wider mb-3">Persyaratan</h2>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="outline" className="text-[12px] font-normal px-2.5 py-0.5 h-6 bg-background/50 border border-border text-muted-foreground">
+                        {viewingJob.workType || 'Penuh Waktu'}
+                      </Badge>
+                      <Badge variant="outline" className="text-[12px] font-normal px-2.5 py-0.5 h-6 bg-background/50 border border-border text-muted-foreground">
+                        {viewingJob.workLocationType || 'On-site'}
+                      </Badge>
+                      <Badge variant="outline" className="text-[12px] font-normal px-2.5 py-0.5 h-6 bg-background/50 border border-border text-muted-foreground">
+                        {viewingJob.location || 'Jakarta, Indonesia'}
+                      </Badge>
+                    </div>
+                  </div>
+
+                  {/* 2. Skill */}
+                  {viewingJob.requirements && (
+                    <div>
+                      <h2 className="text-xs font-bold uppercase text-muted-foreground tracking-wider mb-3">Skill</h2>
+                      <div className="flex flex-wrap gap-2">
+                        {(typeof viewingJob.requirements === 'string'
+                          ? viewingJob.requirements.split(',').map((req: string) => req.trim())
+                          : Array.isArray(viewingJob.requirements)
+                            ? viewingJob.requirements
+                            : []
+                        ).filter(Boolean).map((req: any, i: number) => (
+                          <Badge key={i} variant="outline" className="text-[12px] font-normal px-2.5 py-0.5 h-6 bg-background/50 border border-border text-muted-foreground">
+                            {String(req)}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 3. Benefit */}
+                  {viewingJob.benefits && (
+                    <div>
+                      <h2 className="text-xs font-bold uppercase text-muted-foreground tracking-wider mb-3">Benefit Kerja</h2>
+                      <div className="flex flex-wrap gap-2">
+                        {(typeof viewingJob.benefits === 'string'
+                          ? viewingJob.benefits.split(',').map((benefit: string) => benefit.trim())
+                          : Array.isArray(viewingJob.benefits)
+                            ? viewingJob.benefits
+                            : []
+                        ).filter(Boolean).map((benefit: any, i: number) => (
+                          <Badge key={i} variant="outline" className="text-[12px] font-normal px-2.5 py-0.5 h-6 rounded-full flex items-center gap-1.5 bg-background/50 border border-border text-muted-foreground">
+                            <CheckCircle className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                            {String(benefit)}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* Description */}
+              {viewingJob.description && (
+                <Card className="border border-border/70 bg-card shadow-md">
+                  <CardContent className="p-6 space-y-4">
+                    <h2 className="text-base font-bold text-foreground border-b pb-2 mb-4">Deskripsi Pekerjaan</h2>
+                    <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{viewingJob.description}</p>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-6">
+
+              {!['in review', 'in-review', 'ditolak'].includes(viewingJob.status?.toLowerCase()) && (
+                <div className="bg-card border border-border rounded-2xl p-6 shadow-sm space-y-3">
+                  <h3 className="font-extrabold text-sm text-foreground tracking-tight border-b pb-2">INFO LOWONGAN</h3>
+                  <div className="space-y-3 text-xs">
+                    <div>
+                      <span className="text-[11px] text-muted-foreground uppercase font-black tracking-wide block">ID Lowongan</span>
+                      <span className="font-mono font-bold text-foreground">{viewingJob.id}</span>
+                    </div>
+                    {viewingJob.date && (
+                      <div>
+                        <span className="text-[11px] text-muted-foreground uppercase font-black tracking-wide block">Tanggal Posting</span>
+                        <span className="font-semibold text-foreground">{viewingJob.date}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card className="border border-border/80 shadow-sm bg-card text-card-foreground">
           <CardContent className="p-5 flex items-center justify-between">
             <div>
@@ -725,7 +904,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
       </div>
 
       {/* Sub tabs navigation */}
-      <div className="flex gap-8 border-b border-border/40 w-full">
+      <div className="flex gap-8 w-full">
         <button
           onClick={() => setActiveSubTab('semua')}
           className={`pb-3 font-bold text-xs border-b-2 -mb-[2px] transition-all cursor-pointer ${
@@ -824,7 +1003,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
 
             {/* Dihapus Pada Filter */}
             <div className="space-y-1.5">
-              <label className="text-[10px] font-bold text-muted-foreground uppercase">
+              <label className="text-[12px] font-bold text-muted-foreground uppercase">
                 Dihapus Pada
               </label>
               <CustomSelect
@@ -842,7 +1021,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
 
             {/* Urutkan Filter */}
             <div className="space-y-1.5">
-              <label className="text-[10px] font-bold text-muted-foreground uppercase">
+              <label className="text-[12px] font-bold text-muted-foreground uppercase">
                 Urutkan
               </label>
               <CustomSelect
@@ -905,6 +1084,21 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
             </div>
           </div>
 
+          {activeSubTab === 'trash' && showTrashAlert && (
+            <div className="py-2 px-3 bg-amber-500/5 border border-amber-500/10 dark:border-amber-500/20 text-amber-800 dark:text-amber-300 rounded-xl text-[12px] font-semibold flex items-center justify-between shadow-xs max-w-2xl">
+              <div className="flex gap-2.5 items-center">
+                <AlertTriangle className="h-3.5 w-3.5 shrink-0 text-amber-600 dark:text-amber-400" />
+                <span>Lowongan di Tempat Sampah akan dihapus secara permanen jika sudah melewati 3 bulan.</span>
+              </div>
+              <button
+                onClick={() => setShowTrashAlert(false)}
+                className="p-1 rounded-lg hover:bg-amber-500/15 text-amber-600 hover:text-amber-800 dark:text-amber-400 dark:hover:text-amber-200 transition-colors cursor-pointer border-none bg-transparent flex items-center justify-center shrink-0 ml-4"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            </div>
+          )}
+
           {!isVerified ? (
             <div className="flex flex-col items-center justify-center text-center py-20 bg-card border border-border rounded-3xl p-8 shadow-sm">
               <div className="h-16 w-16 rounded-full bg-blue-500/10 text-blue-500 flex items-center justify-center mb-6">
@@ -949,7 +1143,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                               <h4 className="font-extrabold text-xs text-foreground uppercase truncate max-w-[160px]">
                                 {filteredJobs.findIndex(j => j.id === job.id) + 1}. {job.title}
                               </h4>
-                              <div className="flex flex-wrap gap-1 items-center mt-0.5 text-[10px] text-muted-foreground font-semibold">
+                              <div className="flex flex-wrap gap-1 items-center mt-0.5 text-[12px] text-muted-foreground font-semibold">
                                 <span>
                                   {job.location || 'Jakarta, Indonesia'}
                                 </span>
@@ -961,12 +1155,12 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                             </div>
                             <div className="flex items-center gap-1 shrink-0">
                               {job.badge && (
-                                <Badge className="bg-orange-500/10 text-orange-600 hover:bg-orange-500/15 border-none font-bold text-[10px] px-1.5 uppercase rounded-full">
+                                <Badge className="bg-orange-500/10 text-orange-600 hover:bg-orange-500/15 border-none font-bold text-[12px] px-1.5 uppercase rounded-full">
                                   {job.badge}
                                 </Badge>
                               )}
                               <Badge
-                                className={`border-none font-bold text-[10px] px-1.5 uppercase rounded-full ${
+                                className={`border-none font-bold text-[12px] px-1.5 uppercase rounded-full ${
                                   job.status === 'aktif'
                                     ? 'bg-emerald-500/15 text-emerald-600'
                                     : job.status === 'nonaktif'
@@ -987,7 +1181,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                           </p>
 
                           {job.status === 'trash' && (
-                            <p className="text-[10px] text-rose-500 font-extrabold bg-rose-500/10 rounded-lg px-2 py-0.5 inline-block mt-1">
+                            <p className="text-[12px] text-rose-500 font-extrabold bg-rose-500/10 rounded-lg px-2 py-0.5 inline-block mt-1">
                               Dihapus: {getDaysLeftInTrash(job.deletedAt)} hari
                               tersisa sebelum dihapus permanen
                             </p>
@@ -995,7 +1189,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
 
                           {job.requirements && (
                             <div className="flex flex-wrap gap-1.5 mt-2">
-                              <span className="text-[10px] px-2 py-0.5 rounded bg-secondary/60 border border-border/80 text-secondary-foreground font-bold truncate max-w-[180px]">
+                              <span className="text-[12px] px-2 py-0.5 rounded bg-secondary/60 border border-border/80 text-secondary-foreground font-bold truncate max-w-[180px]">
                                 {job.requirements}
                               </span>
                             </div>
@@ -1016,7 +1210,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                                 <Button
                                   variant="outline"
                                   size="sm"
-                                  className="text-[10px] font-bold h-7 px-2 border-emerald-500/30 text-emerald-600 hover:bg-emerald-500/10 cursor-pointer flex items-center gap-1"
+                                  className="text-[12px] font-bold h-7 px-2 border-emerald-500/30 text-emerald-600 hover:bg-emerald-500/10 cursor-pointer flex items-center gap-1"
                                   onClick={() => {
                                     restoreEmployerJob(job.id);
                                     showToast(
@@ -1031,7 +1225,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                                 <Button
                                   variant="outline"
                                   size="sm"
-                                  className="text-[10px] font-bold h-7 px-2 border-rose-500/30 text-rose-600 hover:bg-rose-500/10 cursor-pointer flex items-center gap-1"
+                                  className="text-[12px] font-bold h-7 px-2 border-rose-500/30 text-rose-600 hover:bg-rose-500/10 cursor-pointer flex items-center gap-1"
                                   onClick={() => {
                                     setConfirmDeleteId(job.id);
                                   }}
@@ -1045,7 +1239,19 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                                 <Button
                                   variant="outline"
                                   size="sm"
-                                  className="text-[10px] font-bold h-7 px-2 border-border hover:bg-muted cursor-pointer flex items-center gap-1"
+                                  className="text-[12px] font-bold h-7 px-2 border-border hover:bg-muted cursor-pointer flex items-center gap-1"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setViewingJob(job);
+                                  }}
+                                >
+                                  <Eye className="h-3 w-3" />
+                                  Lihat Detail
+                                </Button>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="text-[12px] font-bold h-7 px-2 border-border hover:bg-muted cursor-pointer flex items-center gap-1"
                                   onClick={() => {
                                     setEditingJobId(job.id);
                                     formik.setValues({
@@ -1104,7 +1310,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                                 <Button
                                   variant="outline"
                                   size="sm"
-                                  className={`text-[10px] font-bold h-7 px-2 border cursor-pointer ${
+                                  className={`text-[12px] font-bold h-7 px-2 border cursor-pointer ${
                                     job.status === 'aktif'
                                       ? 'border-emerald-500/30 text-emerald-600 hover:bg-emerald-500/10'
                                       : 'border-amber-500/30 text-amber-600 hover:bg-amber-500/10'
@@ -1243,6 +1449,8 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
           )}
         </div>
       </div>
+        </>
+      )}
 
       {showAddJobModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-2">
@@ -1292,7 +1500,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                   }`}
                 >
                   <span
-                    className={`h-4.5 w-4.5 rounded-full flex items-center justify-center text-[9px] font-black transition-all ${
+                    className={`h-4.5 w-4.5 rounded-full flex items-center justify-center text-[12px] font-black transition-all ${
                       modalStep === 1
                         ? 'bg-primary text-white'
                         : 'bg-secondary text-muted-foreground'
@@ -1300,7 +1508,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                   >
                     1
                   </span>
-                  <span className="text-[10px] font-bold">Informasi Dasar</span>
+                  <span className="text-[12px] font-bold">Informasi Dasar</span>
                 </div>
 
                 <div className="flex-1 h-0.5 bg-border/40 rounded-full overflow-hidden mx-0.5">
@@ -1319,7 +1527,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                   }`}
                 >
                   <span
-                    className={`h-4.5 w-4.5 rounded-full flex items-center justify-center text-[9px] font-black transition-all ${
+                    className={`h-4.5 w-4.5 rounded-full flex items-center justify-center text-[12px] font-black transition-all ${
                       modalStep === 2
                         ? 'bg-primary text-white'
                         : modalStep > 2
@@ -1329,7 +1537,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                   >
                     2
                   </span>
-                  <span className="text-[10px] font-bold">Detail Lowongan</span>
+                  <span className="text-[12px] font-bold">Detail Lowongan</span>
                 </div>
 
                 <div className="flex-1 h-0.5 bg-border/40 rounded-full overflow-hidden mx-0.5">
@@ -1346,7 +1554,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                   }`}
                 >
                   <span
-                    className={`h-4.5 w-4.5 rounded-full flex items-center justify-center text-[9px] font-black transition-all ${
+                    className={`h-4.5 w-4.5 rounded-full flex items-center justify-center text-[12px] font-black transition-all ${
                       modalStep === 3
                         ? 'bg-primary text-white'
                         : 'bg-secondary text-muted-foreground'
@@ -1354,7 +1562,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                   >
                     3
                   </span>
-                  <span className="text-[10px] font-bold">
+                  <span className="text-[12px] font-bold">
                     Pertanyaan Screening
                   </span>
                 </div>
@@ -1502,7 +1710,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                               setSalaryType('fixed');
                               formik.setFieldValue('salaryMax', '');
                             }}
-                            className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all cursor-pointer shadow-none ${
+                            className={`px-3 py-1.5 text-[12px] font-bold rounded-lg transition-all cursor-pointer shadow-none ${
                               salaryType === 'fixed'
                                 ? 'bg-primary text-white shadow-none border-none outline-none'
                                 : 'text-muted-foreground hover:text-foreground hover:bg-zinc-800/20 shadow-none'
@@ -1513,7 +1721,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                           <button
                             type="button"
                             onClick={() => setSalaryType('range')}
-                            className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all cursor-pointer shadow-none ${
+                            className={`px-3 py-1.5 text-[12px] font-bold rounded-lg transition-all cursor-pointer shadow-none ${
                               salaryType === 'range'
                                 ? 'bg-primary text-white shadow-none border-none outline-none'
                                 : 'text-muted-foreground hover:text-foreground hover:bg-zinc-800/20 shadow-none'
@@ -1537,7 +1745,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                           />
                           {formik.touched.salaryMin &&
                             formik.errors.salaryMin && (
-                              <div className="text-rose-500 text-[10px] font-bold mt-0.5">
+                              <div className="text-rose-500 text-[12px] font-bold mt-0.5">
                                 {formik.errors.salaryMin}
                               </div>
                             )}
@@ -1545,7 +1753,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                       ) : (
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div className="flex flex-col gap-1">
-                            <span className="text-[10px] font-bold text-muted-foreground uppercase">
+                            <span className="text-[12px] font-bold text-muted-foreground uppercase">
                               Minimum
                             </span>
                             <Input
@@ -1559,13 +1767,13 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                             />
                             {formik.touched.salaryMin &&
                               formik.errors.salaryMin && (
-                                <div className="text-rose-500 text-[10px] font-bold mt-0.5">
+                                <div className="text-rose-500 text-[12px] font-bold mt-0.5">
                                   {formik.errors.salaryMin}
                                 </div>
                               )}
                           </div>
                           <div className="flex flex-col gap-1">
-                            <span className="text-[10px] font-bold text-muted-foreground uppercase">
+                            <span className="text-[12px] font-bold text-muted-foreground uppercase">
                               Maksimum
                             </span>
                             <Input
@@ -1579,7 +1787,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                             />
                             {formik.touched.salaryMax &&
                               formik.errors.salaryMax && (
-                                <div className="text-rose-500 text-[10px] font-bold mt-0.5">
+                                <div className="text-rose-500 text-[12px] font-bold mt-0.5">
                                   {formik.errors.salaryMax}
                                 </div>
                               )}
@@ -1744,7 +1952,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                                       )}
                                       {filtered.length === 0 &&
                                         !skillSearch.trim() && (
-                                          <div className="text-center text-muted-foreground text-[10px] py-2">
+                                          <div className="text-center text-muted-foreground text-[12px] py-2">
                                             Tidak ada keahlian tersedia
                                           </div>
                                         )}
@@ -1928,7 +2136,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                                       )}
                                       {filtered.length === 0 &&
                                         !benefitSearch.trim() && (
-                                          <div className="text-center text-muted-foreground text-[10px] py-2">
+                                          <div className="text-center text-muted-foreground text-[12px] py-2">
                                             Tidak ada benefit tersedia
                                           </div>
                                         )}
@@ -1979,7 +2187,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                     </div>
 
                     <div className="space-y-3">
-                      <h5 className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">
+                      <h5 className="text-[12px] font-black uppercase tracking-wider text-muted-foreground">
                         Special Badge & Promosi
                       </h5>
                       <div className="flex gap-4">
@@ -2040,7 +2248,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                       {/* SECTION A: Pertanyaan Wajib (Tidak Dapat Dihapus) */}
                       <div className="space-y-3">
                         <h4 className="font-extrabold text-xs text-foreground uppercase tracking-wide flex items-center gap-2">
-                          <span className="h-5 w-5 rounded-full bg-[#2d3d3a]/10 text-[#2d3d3a] dark:text-[#a0c5bd] flex items-center justify-center text-[10px] font-black">
+                          <span className="h-5 w-5 rounded-full bg-[#2d3d3a]/10 text-[#2d3d3a] dark:text-[#a0c5bd] flex items-center justify-center text-[12px] font-black">
                             A
                           </span>
                           <span>Pertanyaan Wajib (Tidak Dapat Dihapus)</span>
@@ -2058,7 +2266,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                             >
                               <div className="w-full flex items-center justify-between py-2 px-3 bg-secondary/10 text-left">
                                 <div className="flex items-center gap-2.5 min-w-0 flex-1">
-                                  <span className="text-[10px] font-black text-muted-foreground uppercase">
+                                  <span className="text-[12px] font-black text-muted-foreground uppercase">
                                     {idx + 1}.
                                   </span>
                                   <span className="font-extrabold text-xs text-foreground truncate flex-1">
@@ -2067,7 +2275,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                                 </div>
                                 <AccordionTrigger className="p-0 bg-transparent hover:bg-transparent hover:no-underline w-6 h-6 flex items-center justify-center shrink-0 ml-3" />
                               </div>
-                              <AccordionContent className="py-2.5 px-3 border-t border-border/60 bg-background/50 text-[10px] font-semibold text-muted-foreground italic">
+                              <AccordionContent className="py-2.5 px-3 border-t border-border/60 bg-background/50 text-[12px] font-semibold text-muted-foreground italic">
                                 * Kandidat wajib mengunggah file untuk
                                 pertanyaan ini saat melamar lowongan.
                               </AccordionContent>
@@ -2082,7 +2290,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                       <div className="space-y-4">
                         <div className="flex justify-between items-center flex-wrap gap-2">
                           <h4 className="font-extrabold text-xs text-foreground uppercase tracking-wide flex items-center gap-2">
-                            <span className="h-5 w-5 rounded-full bg-[#2d3d3a]/10 text-[#2d3d3a] dark:text-[#a0c5bd] flex items-center justify-center text-[10px] font-black">
+                            <span className="h-5 w-5 rounded-full bg-[#2d3d3a]/10 text-[#2d3d3a] dark:text-[#a0c5bd] flex items-center justify-center text-[12px] font-black">
                               B
                             </span>
                             <span>Pertanyaan Custom</span>
@@ -2091,7 +2299,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                             type="button"
                             variant="outline"
                             onClick={() => setShowAddQuestionModal(true)}
-                            className="h-8 text-[10px] font-bold rounded-xl border-primary/20 text-primary hover:bg-primary/10 gap-1 shrink-0 cursor-pointer"
+                            className="h-8 text-[12px] font-bold rounded-xl border-primary/20 text-primary hover:bg-primary/10 gap-1 shrink-0 cursor-pointer"
                           >
                             <Plus className="h-3 w-3" />
                             <span>Tambah Pertanyaan</span>
@@ -2127,7 +2335,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                                       >
                                         <GripVertical className="h-3.5 w-3.5" />
                                       </div>
-                                      <span className="text-[10px] font-black text-muted-foreground uppercase shrink-0">
+                                      <span className="text-[12px] font-black text-muted-foreground uppercase shrink-0">
                                         {idx + 1}.
                                       </span>
                                       <span className="font-extrabold text-xs text-foreground truncate flex-1">
@@ -2135,7 +2343,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                                       </span>
                                       <Badge
                                         variant="outline"
-                                        className="text-[8px] font-black uppercase tracking-wider bg-primary/10 border-primary/20 text-primary rounded-full shrink-0"
+                                        className="text-[12px] font-black uppercase tracking-wider bg-primary/10 border-primary/20 text-primary rounded-full shrink-0"
                                       >
                                         {q.type === 'short_input'
                                           ? 'Input Pendek'
@@ -2176,7 +2384,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                                       {/* Edit Question text & type */}
                                       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                                         <div className="md:col-span-2 flex flex-col gap-1">
-                                          <label className="text-[10px] font-bold text-foreground">
+                                          <label className="text-[12px] font-bold text-foreground">
                                             Pertanyaan
                                           </label>
                                           <Input
@@ -2191,7 +2399,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                                           />
                                         </div>
                                         <div className="flex flex-col gap-1">
-                                          <label className="text-[10px] font-bold text-foreground">
+                                          <label className="text-[12px] font-bold text-foreground">
                                             Tipe Jawaban
                                           </label>
                                           <select
@@ -2239,7 +2447,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                                         q.type === 'radio') && (
                                         <div className="space-y-2 border-t pt-3 border-border/60 mt-1">
                                           <div className="flex justify-between items-center">
-                                            <label className="text-[10px] font-extrabold text-foreground uppercase tracking-wider">
+                                            <label className="text-[12px] font-extrabold text-foreground uppercase tracking-wider">
                                               Pilihan Jawaban (Opsi)
                                             </label>
                                             <button
@@ -2247,7 +2455,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                                               onClick={() =>
                                                 addOptionToQuestion(q.id)
                                               }
-                                              className="text-[10px] font-black text-primary hover:underline flex items-center gap-1 border-none bg-transparent cursor-pointer"
+                                              className="text-[12px] font-black text-primary hover:underline flex items-center gap-1 border-none bg-transparent cursor-pointer"
                                             >
                                               <Plus className="h-3 w-3" />
                                               <span>Tambah Opsi</span>
@@ -2300,7 +2508,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                                         q.type === 'language_list') && (
                                         <div className="space-y-2 border-t pt-3 border-border/60 mt-1">
                                           <div className="flex justify-between items-center">
-                                            <label className="text-[10px] font-extrabold text-foreground uppercase tracking-wider">
+                                            <label className="text-[12px] font-extrabold text-foreground uppercase tracking-wider">
                                               Daftar Item (
                                               {q.type === 'skill_list'
                                                 ? 'Keahlian'
@@ -2312,7 +2520,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                                               onClick={() =>
                                                 addOptionToQuestion(q.id)
                                               }
-                                              className="text-[10px] font-black text-primary hover:underline flex items-center gap-1 border-none bg-transparent cursor-pointer"
+                                              className="text-[12px] font-black text-primary hover:underline flex items-center gap-1 border-none bg-transparent cursor-pointer"
                                             >
                                               <Plus className="h-3 w-3" />
                                               <span>Tambah Item</span>
@@ -2366,12 +2574,12 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
 
                                       {/* Preset info for fixed lists */}
                                       {q.type === 'yes_no' && (
-                                        <p className="text-[10px] font-semibold text-muted-foreground italic">
+                                        <p className="text-[12px] font-semibold text-muted-foreground italic">
                                           * Pilihan otomatis diset: Ya / Tidak
                                         </p>
                                       )}
                                       {q.type === 'proficiency_level' && (
-                                        <p className="text-[10px] font-semibold text-muted-foreground italic">
+                                        <p className="text-[12px] font-semibold text-muted-foreground italic">
                                           * Pilihan otomatis diset: Tidak
                                           Berpengalaman, Dasar, Menengah, Mahir,
                                           Ahli
@@ -2384,7 +2592,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                             ))}
                           </Accordion>
                         ) : (
-                          <div className="text-center py-8 border-2 border-dashed border-border/60 rounded-2xl text-[11px] text-muted-foreground bg-secondary/5">
+                          <div className="text-center py-8 border-2 border-dashed border-border/60 rounded-2xl text-[12px] text-muted-foreground bg-secondary/5">
                             Belum ada pertanyaan custom. Klik &quot;+ Tambah
                             Pertanyaan&quot; untuk memulai.
                           </div>
@@ -2432,7 +2640,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                       );
                     }
                   }}
-                  className="h-8 rounded-full border-primary/20 hover:border-primary/45 text-[#a0c5bd] bg-primary/5 hover:bg-primary/10 font-bold text-[11.5px] px-4 cursor-pointer transition-all"
+                  className="h-8 rounded-full border-primary/20 hover:border-primary/45 text-[#a0c5bd] bg-primary/5 hover:bg-primary/10 font-bold text-[12px] px-4 cursor-pointer transition-all"
                 >
                   Simpan Draf
                 </Button>
@@ -2442,7 +2650,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                     type="button"
                     variant="outline"
                     onClick={() => setModalStep(modalStep === 3 ? 2 : 1)}
-                    className="h-8 rounded-full font-bold text-[11.5px] px-4 cursor-pointer border-border/80 hover:bg-secondary/40 transition-all"
+                    className="h-8 rounded-full font-bold text-[12px] px-4 cursor-pointer border-border/80 hover:bg-secondary/40 transition-all"
                   >
                     Kembali
                   </Button>
@@ -2478,7 +2686,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                         );
                       }
                     }}
-                    className="h-8 rounded-full bg-linear-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold text-[11.5px] px-5 cursor-pointer shadow-md shadow-emerald-500/10 hover:shadow-lg hover:shadow-emerald-500/20 active:scale-95 transition-all"
+                    className="h-8 rounded-full bg-linear-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold text-[12px] px-5 cursor-pointer shadow-md shadow-emerald-500/10 hover:shadow-lg hover:shadow-emerald-500/20 active:scale-95 transition-all"
                   >
                     Lanjut
                   </Button>
@@ -2495,7 +2703,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                         showToast('Harap isi deskripsi lowongan!', 'error');
                       }
                     }}
-                    className="h-8 rounded-full bg-linear-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold text-[11.5px] px-5 cursor-pointer shadow-md shadow-emerald-500/10 hover:shadow-lg hover:shadow-emerald-500/20 active:scale-95 transition-all"
+                    className="h-8 rounded-full bg-linear-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold text-[12px] px-5 cursor-pointer shadow-md shadow-emerald-500/10 hover:shadow-lg hover:shadow-emerald-500/20 active:scale-95 transition-all"
                   >
                     Lanjut
                   </Button>
@@ -2503,7 +2711,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                   <Button
                     key="btn-submit-step3"
                     type="submit"
-                    className="h-8 rounded-full bg-linear-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold text-[11.5px] px-5 cursor-pointer shadow-md shadow-emerald-500/10 hover:shadow-lg hover:shadow-emerald-500/20 active:scale-95 transition-all"
+                    className="h-8 rounded-full bg-linear-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold text-[12px] px-5 cursor-pointer shadow-md shadow-emerald-500/10 hover:shadow-lg hover:shadow-emerald-500/20 active:scale-95 transition-all"
                   >
                     {editingJobId
                       ? <><Save className="w-4 h-4 mr-2" /> Simpan Perubahan</>
@@ -2639,7 +2847,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                     >
                       Pilih dari preset / Upload
                     </button>
-                    <p className="text-[10px] text-muted-foreground">
+                    <p className="text-[12px] text-muted-foreground">
                       Maks: 200 KB, JPG, JPEG, PNG, atau WEBP
                     </p>
                   </div>
@@ -2648,7 +2856,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
 
               {/* Basic Info */}
               <div className="space-y-3">
-                <h5 className="text-[10px] font-black uppercase tracking-wider text-muted-foreground/60 border-b pb-1.5">
+                <h5 className="text-[12px] font-black uppercase tracking-wider text-muted-foreground/60 border-b pb-1.5">
                   Informasi Dasar
                 </h5>
 
@@ -2666,7 +2874,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                   />
                   {companyFormik.touched.brandName &&
                     companyFormik.errors.brandName && (
-                      <div className="text-rose-500 text-[10px] font-bold">
+                      <div className="text-rose-500 text-[12px] font-bold">
                         {companyFormik.errors.brandName}
                       </div>
                     )}
@@ -2773,11 +2981,11 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                   />
                   {companyFormik.touched.description &&
                     companyFormik.errors.description && (
-                      <div className="text-rose-500 text-[10px] font-bold">
+                      <div className="text-rose-500 text-[12px] font-bold">
                         {companyFormik.errors.description}
                       </div>
                     )}
-                  <div className="text-[10px] text-muted-foreground text-right font-medium">
+                  <div className="text-[12px] text-muted-foreground text-right font-medium">
                     {companyFormik.values.description.length} / 75 karakter
                     minimum
                   </div>
@@ -2807,7 +3015,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                       Upload
                     </Button>
                   </div>
-                  <p className="text-[10px] text-muted-foreground">
+                  <p className="text-[12px] text-muted-foreground">
                     (Maks: 2 MB, PDF, JPG, JPEG, atau PNG)
                   </p>
                 </div>
@@ -2834,7 +3042,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                     />
                   </div>
                   {/* Alert Box for candidate delivery */}
-                  <div className="p-3 bg-primary/10 border border-primary/20 text-primary rounded-xl text-[10px] font-bold flex gap-2.5 mt-2">
+                  <div className="p-3 bg-primary/10 border border-primary/20 text-primary rounded-xl text-[12px] font-bold flex gap-2.5 mt-2">
                     <Info className="h-4 w-4 shrink-0" />
                     <span>
                       Lamaran kandidat akan dikirimkan ke email yang didaftarkan
@@ -2947,6 +3155,8 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
           </Card>
         </div>
       )}
+
+
     </div>
   );
 };

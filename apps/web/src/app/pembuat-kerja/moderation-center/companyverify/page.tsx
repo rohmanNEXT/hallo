@@ -42,7 +42,7 @@ const CompanyVerifyPage: React.FC = () => {
   const [showDoc, setShowDoc] = useState(false);
   const [companyVerifyTab, setCompanyVerifyTab] = useState<
     'database' | 'review' | 'rejected'
-  >('database');
+  >('review');
   const [companySearchQuery, setCompanySearchQuery] = useState('');
   const [companyFilter, setCompanyFilter] = useState<
     'all' | '1week' | '3weeks' | '1month' | '2months' | '3months'
@@ -143,7 +143,7 @@ const CompanyVerifyPage: React.FC = () => {
                 <ArrowLeft className="h-4 w-4" />
                 <span>Kembali</span>
               </Button>
-              <span className="text-[10px] font-bold text-muted-foreground uppercase">
+              <span className="text-[12px] font-bold text-muted-foreground uppercase">
                 Profile Detail
               </span>
             </div>
@@ -166,7 +166,7 @@ const CompanyVerifyPage: React.FC = () => {
                     <div className="flex items-center gap-2">
                       <Badge
                         variant="outline"
-                        className={`font-bold text-[9px] ${
+                        className={`font-bold text-[12px] ${
                           viewingCompanyProfile.status === 'verified'
                             ? 'text-emerald-500 border-emerald-500/30 bg-emerald-500/5'
                             : viewingCompanyProfile.status === 'review'
@@ -184,7 +184,7 @@ const CompanyVerifyPage: React.FC = () => {
                         viewingCompanyProfile.verifyType && (
                           <Badge
                             variant="outline"
-                            className={`font-bold text-[9px] ${
+                            className={`font-bold text-[12px] ${
                               viewingCompanyProfile.verifyType === 'old'
                                 ? 'text-blue-500 border-blue-500/30 bg-blue-500/5'
                                 : viewingCompanyProfile.verifyType === 'new'
@@ -199,7 +199,7 @@ const CompanyVerifyPage: React.FC = () => {
                                 : 'REQUEST UPDATE'}
                           </Badge>
                         )}
-                      <span className="text-[10px] text-muted-foreground">
+                      <span className="text-[12px] text-muted-foreground">
                         • ID: {viewingCompanyProfile.id}
                       </span>
                     </div>
@@ -255,7 +255,7 @@ const CompanyVerifyPage: React.FC = () => {
                         AI Moderation Scan Result (otak ai)
                       </span>
                     </div>
-                    <Badge className="bg-emerald-500 text-white font-extrabold text-[9px] h-5">
+                    <Badge className="bg-emerald-500 text-white font-extrabold text-[12px] h-5">
                       {viewingCompanyProfile.aiScore || 85}% TRUST SCORE
                     </Badge>
                   </div>
@@ -263,7 +263,7 @@ const CompanyVerifyPage: React.FC = () => {
                     <p className="font-semibold text-foreground">
                       Analisis Dokumen NIB & SIUP:
                     </p>
-                    <p className="text-muted-foreground text-[11px]">
+                    <p className="text-muted-foreground text-[12px]">
                       {viewingCompanyProfile.aiScore && viewingCompanyProfile.aiScore < 50 ? (
                         <span className="text-rose-500 font-extrabold">⚠️ TERINDIKASI REKAYASA DIGITAL: Ditemukan metadata edit gambar Photoshop/GIMP pada berkas PDF. Struktur nomor NIB tidak sinkron dengan data BKPM.</span>
                       ) : (
@@ -272,8 +272,8 @@ const CompanyVerifyPage: React.FC = () => {
                     </p>
                     {viewingCompanyProfile.aiScore && viewingCompanyProfile.aiScore < 50 && (
                       <div className="mt-3 bg-card border border-rose-500/20 rounded-xl p-3 space-y-2">
-                        <p className="font-bold text-[10px] text-rose-500 uppercase tracking-wide">Template Alasan Penolakan AI:</p>
-                        <p className="text-[11px] text-muted-foreground italic bg-muted/30 p-2.5 rounded-lg border border-border/40">
+                        <p className="font-bold text-[12px] text-rose-500 uppercase tracking-wide">Template Alasan Penolakan AI:</p>
+                        <p className="text-[12px] text-muted-foreground italic bg-muted/30 p-2.5 rounded-lg border border-border/40">
                           &quot;Berdasarkan pemindaian AI dari sistem moderasi, berkas dokumen legalitas (SIUP/NIB) yang diunggah terdeteksi memiliki rekayasa digital pada metadata file. Harap ajukan verifikasi ulang dengan melampirkan berkas scan dokumen asli tanpa suntingan.&quot;
                         </p>
                         <Button
@@ -284,7 +284,7 @@ const CompanyVerifyPage: React.FC = () => {
                             setRejectModalCompanyId(viewingCompanyProfile.id);
                             showToast("Template Alasan Penolakan AI disalin ke form Tolak!", "info");
                           }}
-                          className="h-7 text-[10px] font-bold border-rose-500/20 text-rose-600 hover:bg-rose-500/10 cursor-pointer bg-transparent"
+                          className="h-7 text-[12px] font-bold border-rose-500/20 text-rose-600 hover:bg-rose-500/10 cursor-pointer bg-transparent"
                         >
                           Gunakan Sebagai Alasan Penolakan
                         </Button>
@@ -383,7 +383,7 @@ const CompanyVerifyPage: React.FC = () => {
                 <div className="space-y-6 animate-in fade-in duration-200">
                   {/* Tim Kami Card */}
                   <div className="border border-border/80 bg-card rounded-2xl p-5 shadow-xs text-left">
-                    <span className="block text-[11px] font-black text-foreground uppercase tracking-wider mb-4 border-b border-border/50 pb-2">
+                    <span className="block text-[12px] font-black text-foreground uppercase tracking-wider mb-4 border-b border-border/50 pb-2">
                       Tim Kami
                     </span>
                     {viewingCompanyProfile.hasTeam !== false ? (
@@ -415,7 +415,7 @@ const CompanyVerifyPage: React.FC = () => {
                               <p className="text-xs font-black text-foreground leading-none">
                                 {member.name}
                               </p>
-                              <p className="text-[10px] text-muted-foreground mt-1 leading-none">
+                              <p className="text-[12px] text-muted-foreground mt-1 leading-none">
                                 {member.role}
                               </p>
                             </div>
@@ -434,7 +434,7 @@ const CompanyVerifyPage: React.FC = () => {
 
                   {/* Detail Company Card */}
                   <div className="border border-border/80 bg-card rounded-2xl p-5 shadow-xs space-y-4 text-left">
-                    <span className="block text-[11px] font-black text-foreground uppercase tracking-wider border-b border-border/50 pb-2">
+                    <span className="block text-[12px] font-black text-foreground uppercase tracking-wider border-b border-border/50 pb-2">
                       Detail Company
                     </span>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 pb-4">
@@ -443,7 +443,7 @@ const CompanyVerifyPage: React.FC = () => {
                           <Building2 className="h-4 w-4" />
                         </div>
                         <div className="text-left">
-                          <span className="block text-[10px] font-bold text-muted-foreground uppercase tracking-wider leading-none mb-1">
+                          <span className="block text-[12px] font-bold text-muted-foreground uppercase tracking-wider leading-none mb-1">
                             Industry
                           </span>
                           <p className="text-xs font-bold text-foreground">
@@ -457,7 +457,7 @@ const CompanyVerifyPage: React.FC = () => {
                           <MapPin className="h-4 w-4" />
                         </div>
                         <div className="text-left">
-                          <span className="block text-[10px] font-bold text-muted-foreground uppercase tracking-wider leading-none mb-1">
+                          <span className="block text-[12px] font-bold text-muted-foreground uppercase tracking-wider leading-none mb-1">
                             Location
                           </span>
                           <p className="text-xs font-bold text-foreground">
@@ -471,7 +471,7 @@ const CompanyVerifyPage: React.FC = () => {
                           <Users className="h-4 w-4" />
                         </div>
                         <div className="text-left">
-                          <span className="block text-[10px] font-bold text-muted-foreground uppercase tracking-wider leading-none mb-1">
+                          <span className="block text-[12px] font-bold text-muted-foreground uppercase tracking-wider leading-none mb-1">
                             Company Size
                           </span>
                           <p className="text-xs font-bold text-foreground">
@@ -487,7 +487,7 @@ const CompanyVerifyPage: React.FC = () => {
 
                   {/* Kultur Perusahaan */}
                   <div className="border border-border/80 bg-card rounded-2xl p-5 shadow-xs text-left">
-                    <span className="block text-[11px] font-black text-foreground uppercase tracking-wider mb-3 border-b border-border/50 pb-2">
+                    <span className="block text-[12px] font-black text-foreground uppercase tracking-wider mb-3 border-b border-border/50 pb-2">
                       Kultur Perusahaan
                     </span>
                     <p className="text-xs text-muted-foreground leading-relaxed">
@@ -500,7 +500,7 @@ const CompanyVerifyPage: React.FC = () => {
                   {/* Legal Documents Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5 border border-border/60 rounded-2xl p-5 bg-muted/20 text-left">
                     <div>
-                      <span className="block text-[10px] font-bold text-foreground uppercase tracking-wider mb-1">
+                      <span className="block text-[12px] font-bold text-foreground uppercase tracking-wider mb-1">
                         Nomor Induk Berusaha (NIB)
                       </span>
                       <p className="text-xs text-muted-foreground font-mono">
@@ -508,7 +508,7 @@ const CompanyVerifyPage: React.FC = () => {
                       </p>
                     </div>
                     <div>
-                      <span className="block text-[10px] font-bold text-foreground uppercase tracking-wider mb-1">
+                      <span className="block text-[12px] font-bold text-foreground uppercase tracking-wider mb-1">
                         Nomor SIUP
                       </span>
                       <p className="text-xs text-muted-foreground font-mono">
@@ -516,7 +516,7 @@ const CompanyVerifyPage: React.FC = () => {
                       </p>
                     </div>
                     <div>
-                      <span className="block text-[10px] font-bold text-foreground uppercase tracking-wider mb-1">
+                      <span className="block text-[12px] font-bold text-foreground uppercase tracking-wider mb-1">
                         NPWP Perusahaan
                       </span>
                       <p className="text-xs text-muted-foreground font-mono">
@@ -524,7 +524,7 @@ const CompanyVerifyPage: React.FC = () => {
                       </p>
                     </div>
                     <div>
-                      <span className="block text-[10px] font-bold text-foreground uppercase tracking-wider mb-1">
+                      <span className="block text-[12px] font-bold text-foreground uppercase tracking-wider mb-1">
                         Nama Penanggung Jawab (HRD)
                       </span>
                       <p className="text-xs text-muted-foreground">
@@ -535,7 +535,7 @@ const CompanyVerifyPage: React.FC = () => {
 
                   {/* Document File Preview */}
                   <div className="space-y-3 text-left">
-                    <span className="block text-[10px] font-bold text-foreground uppercase tracking-wider">
+                    <span className="block text-[12px] font-bold text-foreground uppercase tracking-wider">
                       Berkas Dokumen Pengajuan (Scan Asli)
                     </span>
                     <div className="border border-border/80 rounded-2xl p-4 bg-muted/40 flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -547,7 +547,7 @@ const CompanyVerifyPage: React.FC = () => {
                           <p className="text-xs font-bold text-foreground">
                             NIB_SIUP_{viewingCompanyProfile.name.replace(/\s+/g, '_')}.pdf
                           </p>
-                          <p className="text-[10px] text-muted-foreground">
+                          <p className="text-[12px] text-muted-foreground">
                             Size: 2.4 MB • Uploaded: {viewingCompanyProfile.joinedAt}
                           </p>
                         </div>
@@ -567,12 +567,12 @@ const CompanyVerifyPage: React.FC = () => {
                         <div className="text-center border-b-2 border-black pb-4">
                           <h2 className="font-extrabold text-sm uppercase tracking-wide">Pemerintah Republik Indonesia</h2>
                           <h3 className="font-bold text-xs uppercase text-zinc-700">Lembaga Pengelola dan Penyelenggara OSS</h3>
-                          <p className="text-[9px] font-sans text-zinc-500 mt-1">NIB (Nomor Induk Berusaha): 01234567891011</p>
+                          <p className="text-[12px] font-sans text-zinc-500 mt-1">NIB (Nomor Induk Berusaha): 01234567891011</p>
                         </div>
                         <div className="space-y-3 pt-2">
                           <p className="font-bold text-center underline uppercase tracking-tight">IZIN USAHA DI BIDANG PERDAGANGAN (SIUP)</p>
-                          <p className="text-[10px] font-sans mt-3 text-zinc-800">Berdasarkan Ketentuan Undang-Undang Republik Indonesia, dengan ini menerangkan bahwa:</p>
-                          <table className="w-full text-[10px] font-sans mt-2 border-collapse">
+                          <p className="text-[12px] font-sans mt-3 text-zinc-800">Berdasarkan Ketentuan Undang-Undang Republik Indonesia, dengan ini menerangkan bahwa:</p>
+                          <table className="w-full text-[12px] font-sans mt-2 border-collapse">
                             <tbody>
                               <tr className="border-b border-zinc-200/50 py-1.5">
                                 <td className="font-bold w-36 py-1.5 text-zinc-700">Nama Perusahaan</td>
@@ -596,11 +596,11 @@ const CompanyVerifyPage: React.FC = () => {
                               </tr>
                             </tbody>
                           </table>
-                          <p className="text-[10px] font-sans mt-4 text-zinc-700 leading-relaxed">
+                          <p className="text-[12px] font-sans mt-4 text-zinc-700 leading-relaxed">
                             Dokumen ini diterbitkan secara elektronik dan sah sebagai izin operasional resmi serta bukti legalitas perusahaan di wilayah hukum Negara Kesatuan Republik Indonesia.
                           </p>
                         </div>
-                        <div className="pt-8 flex justify-between items-center text-[9px] font-sans text-zinc-500">
+                        <div className="pt-8 flex justify-between items-center text-[12px] font-sans text-zinc-500">
                           <div>
                             <p>Dicetak Pada: 2026-07-02</p>
                             <p className="text-emerald-600 font-extrabold mt-1">✓ SECURE & VERIFIED BY OSS SYSTEM</p>
@@ -662,14 +662,14 @@ const CompanyVerifyPage: React.FC = () => {
               <div className="pb-4 border-b shrink-0 mb-4 flex items-center justify-between">
                 <div>
                   <span className="text-base font-extrabold text-foreground tracking-tight flex items-center gap-2 uppercase">
-                    Company Verification
+                    NIB Verification
                   </span>
                 </div>
                 <Button
                   onClick={() => setShowDoc(true)}
                   size="sm"
                   variant="outline"
-                  className="h-7 text-[10px] font-bold flex items-center gap-1.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-50 border-zinc-900 cursor-pointer dark:bg-zinc-100 dark:hover:bg-zinc-200 dark:text-zinc-900 dark:border-zinc-100 transition-colors"
+                  className="h-7 text-[12px] font-bold flex items-center gap-1.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-50 border-zinc-900 cursor-pointer dark:bg-zinc-100 dark:hover:bg-zinc-200 dark:text-zinc-900 dark:border-zinc-100 transition-colors"
                 >
                   <FileText className="h-3.5 w-3.5" />
                   <span>Documentation</span>
@@ -679,21 +679,6 @@ const CompanyVerifyPage: React.FC = () => {
               {/* Tab Navigation row inside Card */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 shrink-0 pb-1">
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-semibold whitespace-nowrap">
-                  <button
-                    onClick={() => {
-                      setCompanyVerifyTab('database');
-                      setCompanySearchQuery('');
-                      setCompanyFilter('all');
-                      setCompanyCurrentPage(1);
-                    }}
-                    className={`pb-2.5 text-sm font-semibold transition-all border-b-2 -mb-px cursor-pointer whitespace-nowrap ${
-                      companyVerifyTab === 'database'
-                        ? 'text-foreground border-primary'
-                        : 'border-transparent text-muted-foreground hover:text-foreground'
-                    }`}
-                  >
-                    Company Database
-                  </button>
                   <button
                     onClick={() => {
                       setCompanyVerifyTab('review');
@@ -735,6 +720,21 @@ const CompanyVerifyPage: React.FC = () => {
                     }
                     )
                   </button>
+                  <button
+                    onClick={() => {
+                      setCompanyVerifyTab('database');
+                      setCompanySearchQuery('');
+                      setCompanyFilter('all');
+                      setCompanyCurrentPage(1);
+                    }}
+                    className={`pb-2.5 text-sm font-semibold transition-all border-b-2 -mb-px cursor-pointer whitespace-nowrap ${
+                      companyVerifyTab === 'database'
+                        ? 'text-foreground border-primary'
+                        : 'border-transparent text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    Company Database
+                  </button>
                 </div>
 
                 <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
@@ -771,7 +771,7 @@ const CompanyVerifyPage: React.FC = () => {
                           Filter Perusahaan
                         </div>
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                          <label className="text-[12px] font-bold text-muted-foreground uppercase">
                             Mulai Nomor Dari
                           </label>
                           <Input
@@ -812,7 +812,7 @@ const CompanyVerifyPage: React.FC = () => {
                         </div>
 
                         <div className="space-y-1.5 pt-1">
-                          <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                          <label className="text-[12px] font-bold text-muted-foreground uppercase">
                             Jangka Waktu
                           </label>
                           <select
@@ -842,7 +842,7 @@ const CompanyVerifyPage: React.FC = () => {
                               setCompanyFilter('all');
                               setCompanyCurrentPage(1);
                             }}
-                            className="w-full h-8 text-[11px] font-semibold bg-rose-50 text-rose-600 hover:bg-rose-100 dark:bg-rose-500/10 dark:text-rose-400 dark:hover:bg-rose-500/20 border border-rose-200 dark:border-rose-800/60 rounded-md transition-colors"
+                            className="w-full h-8 text-[12px] font-semibold bg-rose-50 text-rose-600 hover:bg-rose-100 dark:bg-rose-500/10 dark:text-rose-400 dark:hover:bg-rose-500/20 border border-rose-200 dark:border-rose-800/60 rounded-md transition-colors"
                           >
                             Reset Filter
                           </Button>
@@ -895,7 +895,7 @@ const CompanyVerifyPage: React.FC = () => {
                         <div className="flex flex-wrap items-center gap-2 mb-4">
                           <Badge
                             variant="outline"
-                            className={`font-bold text-[10px] h-7 flex items-center justify-center px-2.5 ${
+                            className={`font-bold text-[12px] h-7 flex items-center justify-center px-2.5 ${
                               comp.status === 'verified'
                                 ? 'text-emerald-500 border-emerald-500/30 bg-emerald-500/5'
                                 : comp.status === 'review'
@@ -912,7 +912,7 @@ const CompanyVerifyPage: React.FC = () => {
                           {comp.status !== 'verified' && comp.verifyType && (
                             <Badge
                               variant="outline"
-                              className={`font-bold text-[9px] h-7 flex items-center justify-center px-2.5 ${
+                              className={`font-bold text-[12px] h-7 flex items-center justify-center px-2.5 ${
                                 comp.verifyType === 'old'
                                   ? 'text-blue-500 border-blue-500/30 bg-blue-500/5'
                                   : comp.verifyType === 'new'
@@ -929,7 +929,7 @@ const CompanyVerifyPage: React.FC = () => {
                           )}
                         </div>
 
-                        <div className="flex items-center gap-4 text-[10px] font-semibold text-muted-foreground bg-muted/40 p-2.5 rounded-lg mb-4">
+                        <div className="flex items-center gap-4 text-[12px] font-semibold text-muted-foreground bg-muted/40 p-2.5 rounded-lg mb-4">
                           <div>
                             <span className="block text-foreground mb-0.5">Industry</span>
                             {comp.industry}
@@ -942,17 +942,17 @@ const CompanyVerifyPage: React.FC = () => {
                         </div>
 
                         {comp.updateRequestReason ? (
-                          <div className="text-[10px] bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 p-2.5 rounded-xl mb-4 text-left leading-relaxed h-[64px]">
+                          <div className="text-[12px] bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 p-2.5 rounded-xl mb-4 text-left leading-relaxed h-[64px]">
                             <span className="font-bold block mb-0.5">Alasan Pengajuan:</span>
                             <span className="line-clamp-2">{comp.updateRequestReason}</span>
                           </div>
                         ) : (comp.rejectionReason && comp.status === 'rejected') ? (
-                          <div className="text-[10px] bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 p-2.5 rounded-xl mb-4 text-left leading-relaxed h-[64px]">
+                          <div className="text-[12px] bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 p-2.5 rounded-xl mb-4 text-left leading-relaxed h-[64px]">
                             <span className="font-bold block mb-0.5">Alasan Penolakan:</span>
                             <span className="line-clamp-2">{comp.rejectionReason}</span>
                           </div>
                         ) : (
-                          <div className="text-[10px] bg-muted/20 border border-dashed border-border/80 text-muted-foreground p-2.5 rounded-xl mb-4 text-left leading-relaxed h-[64px] flex items-center justify-center font-medium italic">
+                          <div className="text-[12px] bg-muted/20 border border-dashed border-border/80 text-muted-foreground p-2.5 rounded-xl mb-4 text-left leading-relaxed h-[64px] flex items-center justify-center font-medium italic">
                             Tidak ada alasan yang dilampirkan
                           </div>
                         )}
@@ -961,7 +961,7 @@ const CompanyVerifyPage: React.FC = () => {
                           <div className="flex gap-2 mt-auto pt-4 border-t border-border">
                             <Button
                               variant="outline"
-                              className="flex-1 rounded-xl h-8 text-[10px] font-bold border-rose-500/30 text-rose-500 hover:bg-rose-500/10 cursor-pointer"
+                              className="flex-1 rounded-xl h-8 text-[12px] font-bold border-rose-500/30 text-rose-500 hover:bg-rose-500/10 cursor-pointer"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 setRejectModalCompanyId(comp.id);
@@ -970,7 +970,7 @@ const CompanyVerifyPage: React.FC = () => {
                               Tolak
                             </Button>
                             <Button
-                              className="flex-1 rounded-xl h-8 text-[10px] font-bold bg-emerald-500 hover:bg-emerald-600 text-white cursor-pointer"
+                              className="flex-1 rounded-xl h-8 text-[12px] font-bold bg-emerald-500 hover:bg-emerald-600 text-white cursor-pointer"
                               onClick={() => {
                                 setMockCompanies((prev) =>
                                   prev.map((c) =>
@@ -1151,7 +1151,7 @@ const CompanyVerifyPage: React.FC = () => {
                     <Badge
                       key={idx}
                       variant="outline"
-                      className="cursor-pointer hover:bg-muted font-normal text-[10px]"
+                      className="cursor-pointer hover:bg-muted font-normal text-[12px]"
                       onClick={() => setRejectReason(tpl)}
                     >
                       {tpl.substring(0, 30)}...

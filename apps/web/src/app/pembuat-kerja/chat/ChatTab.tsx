@@ -260,14 +260,14 @@ const ChatTab: React.FC = () => {
                     <span className="text-xs font-bold text-foreground truncate">
                       {contact.name}
                     </span>
-                    <span className="text-[10px] text-muted-foreground/60">
+                    <span className="text-[12px] text-muted-foreground/60">
                       {contact.time}
                     </span>
                   </div>
-                  <p className="text-[10px] text-muted-foreground truncate mt-0.5 font-medium">
+                  <p className="text-[12px] text-muted-foreground truncate mt-0.5 font-medium">
                     {contact.title}
                   </p>
-                  <p className="text-[10px] text-muted-foreground truncate mt-0.5 italic">
+                  <p className="text-[12px] text-muted-foreground truncate mt-0.5 italic">
                     {contact.lastMessage}
                   </p>
                 </div>
@@ -323,7 +323,7 @@ const ChatTab: React.FC = () => {
                     <h2 className="text-xs font-bold text-foreground truncate">
                       {activeTalent.name}
                     </h2>
-                    <p className="text-[10px] text-primary font-bold truncate">
+                    <p className="text-[12px] text-primary font-bold truncate">
                       {activeTalent.title}
                     </p>
                   </div>
@@ -353,7 +353,7 @@ const ChatTab: React.FC = () => {
                           <p className="leading-relaxed whitespace-pre-wrap">
                             {msg.content}
                           </p>
-                          <div className="flex items-center justify-between mt-1 gap-3 opacity-75 text-[8px]">
+                          <div className="flex items-center justify-between mt-1 gap-3 opacity-75 text-[12px]">
                             <span>{msg.timestamp}</span>
                           </div>
                         </div>
@@ -366,7 +366,7 @@ const ChatTab: React.FC = () => {
                     <p className="text-xs font-bold text-muted-foreground">
                       Tidak ada pesan
                     </p>
-                    <p className="text-[10px] text-muted-foreground/80 mt-1">
+                    <p className="text-[12px] text-muted-foreground/80 mt-1">
                       Ketik pesan di bawah untuk memulai percakapan.
                     </p>
                   </div>

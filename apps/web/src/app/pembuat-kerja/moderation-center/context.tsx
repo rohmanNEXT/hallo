@@ -51,7 +51,9 @@ export interface ViolationRecord {
   violationType:
     | 'Pembayaran Tidak Sah'
     | 'Lowongan Bermasalah yang Lolos Publikasi'
-    | 'ID Chat Bermasalah';
+    | 'ID Chat Bermasalah'
+    | 'Spam Akun'
+    | 'Lainnya';
   alertLevel: 'Light Warning' | 'Suspend 30 Days' | 'Permanent Ban';
   finalAiReason: string;
   date: string;

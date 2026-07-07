@@ -27,19 +27,21 @@ const ModerationLayoutContent: React.FC<{ children: React.ReactNode }> = ({ chil
       icon: <FileSearch className="h-4 w-4 shrink-0" />,
     },
     {
-      path: '/pembuat-kerja/moderation-center/restriction',
-      label: 'Account Suspicion',
-      icon: <UserX className="h-4 w-4 shrink-0" />,
+      path: '/pembuat-kerja/moderation-center/companyverify',
+      label: 'NIB Verification',
+      icon: <Building2 className="h-4 w-4 shrink-0" />,
+      divider: true,
     },
     {
       path: '/pembuat-kerja/moderation-center/appeals',
       label: 'Appeal Human',
       icon: <ClipboardSignature className="h-4 w-4 shrink-0" />,
+      divider: true,
     },
     {
-      path: '/pembuat-kerja/moderation-center/companyverify',
-      label: 'Company Verify',
-      icon: <Building2 className="h-4 w-4 shrink-0" />,
+      path: '/pembuat-kerja/moderation-center/restriction',
+      label: 'Account Suspicion',
+      icon: <UserX className="h-4 w-4 shrink-0" />,
     },
     {
       path: '/pembuat-kerja/moderation-center/aiconfig',
@@ -72,7 +74,7 @@ const ModerationLayoutContent: React.FC<{ children: React.ReactNode }> = ({ chil
               <div className="font-extrabold text-sm text-foreground truncate">
                 {user?.name || 'Moderator Admin'}
               </div>
-              <div className="text-[10px] text-muted-foreground truncate font-medium mt-0.5">
+              <div className="text-[12px] text-muted-foreground truncate font-medium mt-0.5">
                 {user?.email || 'admin@jobstreet.com'}
               </div>
             </div>
@@ -83,21 +85,23 @@ const ModerationLayoutContent: React.FC<{ children: React.ReactNode }> = ({ chil
             {menuItems.map((item) => {
               const isActive = pathname === item.path;
               return (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer no-underline ${
-                    isActive
-                      ? 'bg-primary text-primary-foreground font-extrabold shadow-sm'
-                      : 'text-muted-foreground hover:bg-muted/55 hover:text-foreground bg-transparent border-transparent'
-                  }`}
-                >
-                  <div className="flex items-center gap-2.5">
-                    {item.icon}
-                    <span>{item.label}</span>
-                  </div>
-                  {isActive && <ChevronRight className="h-3.5 w-3.5" />}
-                </Link>
+                <React.Fragment key={item.path}>
+                  <Link
+                    href={item.path}
+                    className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer no-underline ${
+                      isActive
+                        ? 'bg-primary text-primary-foreground font-extrabold shadow-sm'
+                        : 'text-muted-foreground hover:bg-muted/55 hover:text-foreground bg-transparent border-transparent'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      {item.icon}
+                      <span>{item.label}</span>
+                    </div>
+                    {isActive && <ChevronRight className="h-3.5 w-3.5" />}
+                  </Link>
+                  {item.divider && <div className="border-b border-border/60 my-1.5" />}
+                </React.Fragment>
               );
             })}
           </nav>

@@ -222,7 +222,7 @@ const Navbar: React.FC = () => {
                 {/* Left Side: Logo & Main Nav */}
                 <div className="flex items-center gap-8">
                   <Link
-                    href="/pembuat-kerja/lowongan"
+                    href="/pembuat-kerja"
                     className="flex items-center gap-1.5 hover:opacity-90 transition-opacity"
                   >
                     <div className="h-7 w-7 relative flex items-center justify-center -mr-1.5">

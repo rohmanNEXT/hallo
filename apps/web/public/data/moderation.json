@@ -550,6 +550,13 @@
       "status": "Suspended"
     },
     {
+      "email": "rudi.h@gmail.com",
+      "name": "Rudi Hermawan",
+      "role": "User",
+      "violationCount": 1,
+      "status": "Active"
+    },
+    {
       "email": "budi@gmail.com",
       "name": "Budi Santoso",
       "role": "User",
@@ -579,7 +586,7 @@
       "role": "User",
       "violationType": "ID Chat Bermasalah",
       "alertLevel": "Light Warning",
-      "finalAiReason": "Mengirim tautan phising pada obrolan ID CHAT-801",
+      "finalAiReason": "Terdeteksi mengirim pesan penipuan bermodus administrasi via chat obrolan",
       "date": "2026-06-15",
       "daysAgo": 9,
       "blockType": "By Human",
@@ -592,7 +599,7 @@
       "role": "Company",
       "violationType": "Lowongan Bermasalah yang Lolos Publikasi",
       "alertLevel": "Suspend 30 Days",
-      "finalAiReason": "Laporan pembayaran di luar aplikasi pada loker JOB-001",
+      "finalAiReason": "Mempublikasikan lowongan kerja fiktif dengan modus penipuan registrasi",
       "date": "2026-06-01",
       "daysAgo": 23,
       "blockType": "By AI",
@@ -605,11 +612,11 @@
       "role": "Company",
       "violationType": "Pembayaran Tidak Sah",
       "alertLevel": "Light Warning",
-      "finalAiReason": "Memodifikasi sistem transaksi API di loker",
+      "finalAiReason": "Melakukan bypass sistem pembayaran platform secara ilegal",
       "date": "2026-04-10",
       "daysAgo": 75,
       "blockType": "By AI",
-      "status": "Trashed"
+      "status": "Active"
     },
     {
       "id": "VIOL-004",
@@ -618,11 +625,37 @@
       "role": "User",
       "violationType": "Pembayaran Tidak Sah",
       "alertLevel": "Permanent Ban",
-      "finalAiReason": "Bypass payment gateway secara ilegal",
+      "finalAiReason": "Penyalahgunaan fitur pembayaran premium dengan mod app",
       "date": "2026-04-01",
       "daysAgo": 84,
       "blockType": "By Human",
-      "status": "Trashed"
+      "status": "Active"
+    },
+    {
+      "id": "VIOL-005",
+      "email": "rudi.h@gmail.com",
+      "name": "Rudi Hermawan",
+      "role": "User",
+      "violationType": "Lainnya",
+      "alertLevel": "Light Warning",
+      "finalAiReason": "Recruiter meloloskan lowongan spam dan mengirim chat spam kepada banyak kandidat",
+      "date": "2026-06-15",
+      "daysAgo": 9,
+      "blockType": "By Human",
+      "status": "Active"
+    },
+    {
+      "id": "VIOL-006",
+      "email": "spam123@tempmail.com",
+      "name": "Akun Spam Bot",
+      "role": "User",
+      "violationType": "Spam Akun",
+      "alertLevel": "Permanent Ban",
+      "finalAiReason": "Kata sandi berubah sendiri dan terdeteksi aktivitas bot otomatis",
+      "date": "2026-06-20",
+      "daysAgo": 4,
+      "blockType": "By AI",
+      "status": "Active"
     }
   ],
   "staticAppeals": [
@@ -659,9 +692,22 @@
       "namaPelaku": "Cyber Hacker",
       "emailPelaku": "cyber@hack.com",
       "status": "Dismissed",
-      "alasan": "Spam berulang dan konten berbahaya di chat job application",
+      "alasan": "Kandidat mengirim chat spam berulang atau melakukan abuse kepada recruiter",
       "tanggal": "15 Jun 2026",
       "idChat": "CHAT-420",
+      "idLowongan": "N/A",
+      "alertLevel": "Permanent Ban"
+    },
+    {
+      "id": "APP-004",
+      "namaPelapor": "Deni Setiawan",
+      "emailPelapor": "deni.s@gmail.com",
+      "namaPelaku": "Akun Spam Bot",
+      "emailPelaku": "spam123@tempmail.com",
+      "status": "Pending",
+      "alasan": "Perubahan email secara mencurigakan tanpa melalui proses verifikasi yang sah",
+      "tanggal": "20 Jun 2026",
+      "idChat": "N/A",
       "idLowongan": "N/A",
       "alertLevel": "Permanent Ban"
     }
@@ -672,7 +718,7 @@
       "emailPelapor": "rizki.aditya@gmail.com",
       "pelaku": "PT Karya Niaga",
       "emailPelaku": "hrd@karya-niaga.com",
-      "alasan": "Perusahaan meminta biaya registrasi sebesar Rp 200.000 sebelum wawancara kerja dilaksanakan.",
+      "alasan": "Lowongan kerja melanggar kebijakan dengan mencantumkan informasi palsu atau menyesatkan.",
       "idChat": "N/A",
       "idLowongan": "JOB-110",
       "alertLevel": "Suspend 30 Days"
@@ -682,7 +728,7 @@
       "emailPelapor": "dewi.kartika@yahoo.com",
       "pelaku": "Ahmad Faizal",
       "emailPelaku": "faizal88@hotmail.com",
-      "alasan": "Mengirimkan pesan berisi tautan phising yang mengatasnamakan JobStreet kepada pelamar.",
+      "alasan": "Terdeteksi mengirim pesan penipuan phising yang berbahaya bagi pelamar di obrolan chat.",
       "idChat": "CHAT-902",
       "idLowongan": "N/A",
       "alertLevel": "Permanent Ban"
@@ -692,7 +738,7 @@
       "emailPelapor": "fajar.nugroho@gmail.com",
       "pelaku": "PT Maju Terus",
       "emailPelaku": "admin@majuterus.co.id",
-      "alasan": "Lowongan kerja fiktif, pelamar diminta mentransfer uang seragam Rp 350.000.",
+      "alasan": "Terindikasi melakukan transaksi mencurigakan dan bypass pembayaran koin premium.",
       "idChat": "N/A",
       "idLowongan": "JOB-220",
       "alertLevel": "Permanent Ban"
@@ -702,8 +748,8 @@
       "emailPelapor": "putri.h@gmail.com",
       "pelaku": "Rudi Hermawan",
       "emailPelaku": "rudi.h@gmail.com",
-      "alasan": "Pengguna mengirim spam lamaran dan pesan tidak relevan ke banyak pelamar lain.",
-      "idChat": "CHAT-303",
+      "alasan": "Email / nomor telepon berubah sendiri tanpa lewat proses verify sistem.",
+      "idChat": "N/A",
       "idLowongan": "N/A",
       "alertLevel": "Light Warning"
     },
@@ -712,7 +758,7 @@
       "emailPelapor": "agung.pras@gmail.com",
       "pelaku": "PT Digital Prima",
       "emailPelaku": "info@digitalprima.id",
-      "alasan": "Informasi gaji yang dicantumkan sangat menyesatkan dan tidak sesuai dengan realita pekerjaan.",
+      "alasan": "Kandidat mengirim chat spam atau melakukan abuse dengan kata-kata kasar.",
       "idChat": "N/A",
       "idLowongan": "JOB-445",
       "alertLevel": "Light Warning"

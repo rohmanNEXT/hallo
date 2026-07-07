@@ -170,9 +170,11 @@ const Hero: React.FC = () => {
 
             {isLocationOpen && (
               <div
-                className={`absolute top-full left-0 right-0 mt-1 z-100 rounded-lg border shadow-xl overflow-hidden bg-popover/40 backdrop-blur-2xl ${!mounted || theme === 'white'
+                className={`absolute top-full left-0 right-0 mt-1 z-100 rounded-lg border shadow-xl overflow-hidden bg-popover/40 backdrop-blur-2xl ${
+                  !mounted || theme === 'white'
                     ? 'border-[#d2e2f0]'
-                    : 'border-border/50'}`}
+                    : 'border-border/50'
+                }`}
               >
                 <div
                   className={`p-2 border-b ${

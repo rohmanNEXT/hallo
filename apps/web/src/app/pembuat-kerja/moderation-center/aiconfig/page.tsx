@@ -115,7 +115,7 @@ const AiConfigPage: React.FC = () => {
                   onChange={(e) => handleKeyChange(e.target.value)}
                   className="rounded-xl border-border bg-background text-sm h-10 text-foreground"
                 />
-                <p className="text-[10px] text-muted-foreground mt-1.5">
+                <p className="text-[12px] text-muted-foreground mt-1.5">
                   *Kunci API untuk {activeProvider} dienkripsi secara aman di sisi server.
                 </p>
               </div>

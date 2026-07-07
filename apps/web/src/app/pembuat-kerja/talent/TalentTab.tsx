@@ -471,7 +471,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
 
         <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-sm relative">
           <div
-            className="h-28 md:h-38 bg-cover bg-center relative transition-all duration-300"
+            className="h-20 md:h-28 bg-cover bg-center relative transition-all duration-300"
             style={{
               backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80&auto=format&fit=crop')`,
             }}
@@ -481,10 +481,10 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
             <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
           </div>
 
-          <div className="px-6 md:px-8 pb-6 relative">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between -mt-12 sm:-mt-15 gap-4 mb-4">
-              <div className="flex flex-col sm:flex-row items-center sm:items-end gap-4 text-center sm:text-left">
-                <div className="relative h-24 w-24 md:h-30 md:w-30 rounded-2xl overflow-hidden border-4 border-card shadow-md bg-muted shrink-0">
+          <div className="px-6 md:px-8 pb-4 relative">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between -mt-8 sm:-mt-10 gap-4 mb-2">
+              <div className="flex flex-col sm:flex-row items-center sm:items-end gap-3 text-center sm:text-left">
+                <div className="relative h-16 w-16 md:h-20 md:w-20 rounded-xl overflow-hidden border-2 border-card shadow-md bg-muted shrink-0">
                   {viewingTalentProfile.avatar &&
                   !viewingTalentProfile.avatar.includes('default-avatar') &&
                   !viewingTalentProfile.avatar.includes('placeholder') ? (
@@ -505,21 +505,21 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                           if (fallback) fallback.style.display = 'flex';
                         }}
                       />
-                      <div className="avatar-fallback hidden absolute inset-0 items-center justify-center bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-2xl md:text-3xl font-black uppercase">
+                      <div className="avatar-fallback hidden absolute inset-0 items-center justify-center bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-lg md:text-xl font-black uppercase">
                         {viewingTalentProfile.name?.[0] || '?'}
                       </div>
                     </>
                   ) : (
-                    <div className="absolute inset-0 flex items-center justify-center bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-2xl md:text-3xl font-black uppercase">
+                    <div className="absolute inset-0 flex items-center justify-center bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-lg md:text-xl font-black uppercase">
                       {viewingTalentProfile.name?.[0] || '?'}
                     </div>
                   )}
                 </div>
-                <div className="space-y-1 pb-1">
-                  <h1 className="text-xl md:text-2xl font-extrabold tracking-tight text-foreground sm:text-white sm:drop-shadow-[0_2px_4px_rgba(0,0,0,0.75)]">
+                <div className="space-y-0.5 pb-1">
+                  <h1 className="text-lg md:text-xl font-extrabold tracking-tight text-foreground sm:text-white sm:drop-shadow-[0_2px_4px_rgba(0,0,0,0.75)]">
                     {viewingTalentProfile.name}
                   </h1>
-                  <p className="text-xs md:text-sm font-semibold text-muted-foreground sm:text-white/90 sm:drop-shadow-[0_1px_3px_rgba(0,0,0,0.75)]">
+                  <p className="text-xs md:text-xs font-semibold text-muted-foreground sm:text-white/90 sm:drop-shadow-[0_1px_3px_rgba(0,0,0,0.75)]">
                     {viewingTalentProfile.title}
                   </p>
                 </div>
@@ -671,7 +671,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                     <p className="text-xs font-bold text-foreground">
                       Referensi Pekerjaan Minat Terkunci
                     </p>
-                    <p className="text-[10px] text-muted-foreground max-w-[280px] text-center mt-1">
+                    <p className="text-[12px] text-muted-foreground max-w-[280px] text-center mt-1">
                       Buka profil talent ini untuk melihat rincian minat dan
                       preferensi pekerjaan.
                     </p>
@@ -809,7 +809,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                 <div className="flex items-start gap-3">
                   <User className="w-4 h-4 text-slate-400 mt-0.5 shrink-0" />
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-black tracking-wide">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-black tracking-wide">
                       Nama Lengkap
                     </span>
                     <span className="font-bold text-foreground">
@@ -820,7 +820,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                 <div className="flex items-start gap-3">
                   <User className="w-4 h-4 text-slate-400 mt-0.5 shrink-0" />
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-black tracking-wide">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-black tracking-wide">
                       Nama Panggilan
                     </span>
                     <span className="font-bold text-foreground">
@@ -832,7 +832,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                 <div className="flex items-start gap-3">
                   <Briefcase className="w-4 h-4 text-slate-400 mt-0.5 shrink-0" />
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-black tracking-wide">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-black tracking-wide">
                       Posisi
                     </span>
                     <span className="font-bold text-foreground">
@@ -844,7 +844,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                 <div className="flex items-start gap-3">
                   <Phone className="w-4 h-4 text-slate-400 mt-0.5 shrink-0" />
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-black tracking-wide">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-black tracking-wide">
                       Whatsapp
                     </span>
                     {unlockedTalents.includes(viewingTalentProfile.id) ? (
@@ -863,7 +863,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                 <div className="flex items-start gap-3">
                   <Mail className="w-4 h-4 text-slate-400 mt-0.5 shrink-0" />
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-black tracking-wide">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-black tracking-wide">
                       Email
                     </span>
                     {unlockedTalents.includes(viewingTalentProfile.id) ? (
@@ -883,7 +883,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                 <div className="flex items-start gap-3">
                   <MapPin className="w-4 h-4 text-slate-400 mt-0.5 shrink-0" />
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-black tracking-wide">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-black tracking-wide">
                       Tempat Tinggal
                     </span>
                     {unlockedTalents.includes(viewingTalentProfile.id) ? (
@@ -913,14 +913,14 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                   <div className="flex items-start gap-3">
                     <FileText className="w-4 h-4 text-slate-400 mt-0.5 shrink-0" />
                     <div>
-                      <span className="text-[10px] text-muted-foreground uppercase block font-black tracking-wide">
+                      <span className="text-[12px] text-muted-foreground uppercase block font-black tracking-wide">
                         Resume
                       </span>
                       <div className="flex items-center gap-1.5 mt-0.5">
                         <span className="font-bold text-foreground truncate max-w-[150px]">
                           Portofolio_Frontend.pdf
                         </span>
-                        <span className="bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 text-[8px] rounded-md font-bold text-slate-600 dark:text-slate-350 shrink-0">
+                        <span className="bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 text-[12px] rounded-md font-bold text-slate-600 dark:text-slate-350 shrink-0">
                           PDF
                         </span>
                         <a 
@@ -940,7 +940,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                   <div className="flex items-start gap-3">
                     <Globe className="w-4 h-4 text-slate-400 mt-0.5 shrink-0" />
                     <div>
-                      <span className="text-[10px] text-muted-foreground uppercase block font-black tracking-wide">
+                      <span className="text-[12px] text-muted-foreground uppercase block font-black tracking-wide">
                         Website
                       </span>
                       <a
@@ -955,7 +955,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                   <div className="flex items-start gap-3">
                     <Linkedin className="w-4 h-4 text-slate-400 mt-0.5 shrink-0" />
                     <div>
-                      <span className="text-[10px] text-muted-foreground uppercase block font-black tracking-wide">
+                      <span className="text-[12px] text-muted-foreground uppercase block font-black tracking-wide">
                         LinkedIn
                       </span>
                       <a
@@ -985,10 +985,10 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                 <div className="relative py-4 flex flex-col items-center justify-center text-center space-y-3">
                   <div className="absolute inset-0 bg-card/60 backdrop-blur-[2px] z-10 flex flex-col items-center justify-center p-4">
                     <Lock className="w-8 h-8 text-amber-500 mb-2" />
-                    <p className="text-[11px] font-bold text-foreground">
+                    <p className="text-[12px] font-bold text-foreground">
                       Konten Terkunci
                     </p>
-                    <p className="text-[9px] text-muted-foreground max-w-[200px] mb-3">
+                    <p className="text-[12px] text-muted-foreground max-w-[200px] mb-3">
                       Buka profil untuk melihat CV, Portofolio & LinkedIn
                     </p>
                     <Button
@@ -1007,13 +1007,13 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                         }
                       }}
                       size="sm"
-                      className="h-7 text-[10px] font-extrabold uppercase gap-1 bg-linear-to-r from-amber-500 to-orange-500 hover:bg-amber-600 text-white rounded-xl border-none shadow-sm shadow-amber-500/10 cursor-pointer active:scale-95 transition-all px-3"
+                      className="h-7 text-[12px] font-extrabold uppercase gap-1 bg-linear-to-r from-amber-500 to-orange-500 hover:bg-amber-600 text-white rounded-xl border-none shadow-sm shadow-amber-500/10 cursor-pointer active:scale-95 transition-all px-3"
                     >
                       <Unlock className="h-3 w-3" />
                       <span>Unlock CV & Link</span>
                     </Button>
                   </div>
-                  <div className="w-full space-y-3 blur-[2px] pointer-events-none opacity-50 text-left text-[10px]">
+                  <div className="w-full space-y-3 blur-[2px] pointer-events-none opacity-50 text-left text-[12px]">
                     <div className="h-8 bg-muted rounded-xl w-full"></div>
                     <div className="h-8 bg-muted rounded-xl w-full"></div>
                     <div className="h-8 bg-muted rounded-xl w-full"></div>
@@ -1041,7 +1041,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                 <h3 className="font-extrabold text-sm text-foreground tracking-tight">
                   Undang Kerja
                 </h3>
-                <p className="text-[11px] text-muted-foreground">
+                <p className="text-[12px] text-muted-foreground">
                   Pilih lowongan aktif untuk mengundang <span className="font-bold text-foreground">{viewingTalentProfile?.name}</span>.
                 </p>
               </div>
@@ -1067,7 +1067,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                   
                   if (filteredJobs.length === 0) {
                     return (
-                      <p className="text-[11px] text-muted-foreground italic text-center py-4">
+                      <p className="text-[12px] text-muted-foreground italic text-center py-4">
                         {inviteJobSearch ? 'Tidak ada lowongan yang cocok.' : 'Anda tidak memiliki lowongan aktif.'}
                       </p>
                     );
@@ -1292,7 +1292,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                                       selectedPositions.includes(customPos);
                                     return (
                                       <div className="space-y-1">
-                                        <p className="text-[10px] text-muted-foreground italic">
+                                        <p className="text-[12px] text-muted-foreground italic">
                                           Posisi tidak ditemukan.
                                         </p>
                                         <button
@@ -1315,7 +1315,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                                           className="w-full text-left px-2 py-1 text-[12px] rounded bg-primary/10 hover:bg-primary/20 text-primary font-bold transition-all flex items-center justify-between"
                                         >
                                           <span>Gunakan &quot;{customPos}&quot;</span>
-                                          <span className="text-[10px] bg-primary text-primary-foreground px-1 py-0.5 rounded">
+                                          <span className="text-[12px] bg-primary text-primary-foreground px-1 py-0.5 rounded">
                                             Tambah
                                           </span>
                                         </button>
@@ -1361,7 +1361,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                                     <Badge
                                       key={pos}
                                       variant="secondary"
-                                      className="text-[10px] py-0 px-1.5 flex items-center gap-1 font-bold"
+                                      className="text-[12px] py-0 px-1.5 flex items-center gap-1 font-bold"
                                     >
                                       <span>{pos}</span>
                                       <X
@@ -1424,7 +1424,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                                       selectedSkills.includes(customSkill);
                                     return (
                                       <div className="space-y-1">
-                                        <p className="text-[10px] text-muted-foreground italic">
+                                        <p className="text-[12px] text-muted-foreground italic">
                                           Skill tidak ditemukan.
                                         </p>
                                         <button
@@ -1447,7 +1447,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                                           className="w-full text-left px-2 py-1 text-[12px] rounded bg-primary/10 hover:bg-primary/20 text-primary font-bold transition-all flex items-center justify-between"
                                         >
                                           <span>Gunakan &quot;{customSkill}&quot;</span>
-                                          <span className="text-[10px] bg-primary text-primary-foreground px-1 py-0.5 rounded">
+                                          <span className="text-[12px] bg-primary text-primary-foreground px-1 py-0.5 rounded">
                                             Tambah
                                           </span>
                                         </button>
@@ -1493,7 +1493,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                                     <Badge
                                       key={sk}
                                       variant="secondary"
-                                      className="text-[10px] py-0 px-1.5 flex items-center gap-1 font-bold"
+                                      className="text-[12px] py-0 px-1.5 flex items-center gap-1 font-bold"
                                     >
                                       <span>{sk}</span>
                                       <X
@@ -1564,7 +1564,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                                       setCEducation('D4');
                                     else setCEducation(edu);
                                   }}
-                                  className={`px-2.5 py-1.5 text-[10px] rounded-lg border transition-all cursor-pointer font-bold ${
+                                  className={`px-2.5 py-1.5 text-[12px] rounded-lg border transition-all cursor-pointer font-bold ${
                                     (cEducation === 'Semua' &&
                                       edu === 'Semua Pendidikan') ||
                                     (cEducation === 'S3' &&
@@ -2159,7 +2159,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                         {talent.name}
                       </h4>
  
-                      <p className="text-[10px] font-bold text-primary truncate max-w-full mt-0.5 tracking-wide uppercase">
+                      <p className="text-[12px] font-bold text-primary truncate max-w-full mt-0.5 tracking-wide uppercase">
                         {talent.title}
                       </p>
  
@@ -2170,7 +2170,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                             <Badge
                               key={roleIdx}
                               variant="outline"
-                              className={`text-[9px] font-extrabold tracking-wider uppercase px-2 py-0.5 h-[22px] rounded-md shadow-2xs flex items-center gap-1 shrink-0 ${
+                              className={`text-[12px] font-extrabold tracking-wider uppercase px-2 py-0.5 h-[22px] rounded-md shadow-2xs flex items-center gap-1 shrink-0 ${
                                 theme === 'white'
                                   ? 'bg-[#eef5fa] border-[#d2e2f0] text-[#334155]'
                                   : 'bg-background/50 border border-border/80 text-muted-foreground'
@@ -2187,7 +2187,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                       </div>
  
                       <div className="w-full mt-3.5 space-y-1.5">
-                        <div className="flex justify-between text-[9px] font-bold text-muted-foreground uppercase tracking-wider">
+                        <div className="flex justify-between text-[12px] font-bold text-muted-foreground uppercase tracking-wider">
                           <span>Score Profil</span>
                           <span className="text-emerald-500">
                             {talent.profileScore}%
@@ -2207,7 +2207,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                         <Badge
                           key={idx}
                           variant="outline"
-                          className={`text-[9px] font-bold px-2 py-0 h-5 rounded-md ${
+                          className={`text-[12px] font-bold px-2 py-0 h-5 rounded-md ${
                             theme === 'white'
                               ? 'bg-[#eef5fa] border-[#d2e2f0] text-[#334155]'
                               : 'bg-background/50 border border-border/80 text-muted-foreground'
@@ -2219,7 +2219,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                       {talent.skills.length > 3 && (
                         <Badge
                           variant="outline"
-                          className={`text-[9px] font-bold px-2 py-0 h-5 rounded-md ${
+                          className={`text-[12px] font-bold px-2 py-0 h-5 rounded-md ${
                             theme === 'white'
                               ? 'bg-[#eef5fa] border-[#d2e2f0] text-[#334155]'
                               : 'bg-background/50 border border-border/80 text-muted-foreground'
@@ -2234,7 +2234,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                   <div className="p-4 border-t border-border/60 space-y-2 bg-muted/20 dark:bg-muted/10 shrink-0">
                     <div className="flex items-center justify-between">
                       <div className="min-w-0">
-                        <p className="text-[8px] font-extrabold text-muted-foreground uppercase tracking-wider">
+                        <p className="text-[12px] font-extrabold text-muted-foreground uppercase tracking-wider">
                           Gaji Ekspektasi
                         </p>
                         <p className="text-xs font-black text-foreground truncate mt-0.5">
@@ -2243,7 +2243,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                       </div>
  
                       {isUnlocked ? (
-                        <div className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 font-extrabold text-[10px] h-7 px-2.5 flex items-center gap-1 rounded-xl shrink-0">
+                        <div className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 font-extrabold text-[12px] h-7 px-2.5 flex items-center gap-1 rounded-xl shrink-0">
                           <Unlock className="h-3 w-3" />
                           <span>Cv terbuka</span>
                         </div>
@@ -2263,7 +2263,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                               updateTabInUrl('coin-credit');
                             }
                           }}
-                          className="h-7 text-[10px] font-extrabold uppercase gap-1 bg-linear-to-r from-amber-500 to-orange-500 hover:bg-amber-600 text-white rounded-xl border-none shadow-sm shadow-amber-500/10 cursor-pointer active:scale-95 transition-all px-2.5 shrink-0"
+                          className="h-7 text-[12px] font-extrabold uppercase gap-1 bg-linear-to-r from-amber-500 to-orange-500 hover:bg-amber-600 text-white rounded-xl border-none shadow-sm shadow-amber-500/10 cursor-pointer active:scale-95 transition-all px-2.5 shrink-0"
                         >
                           <Unlock className="h-3 w-3" />
                           <span>Unlock</span>
@@ -2292,7 +2292,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                           setSelectedJobsForInvite([]);
                           setInviteSearchPerCard('');
                         }}
-                        className="flex-1 h-8 text-[10px] font-black rounded-xl bg-emerald-500 hover:bg-emerald-600 active:scale-95 hover:scale-102 text-white transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-sm shadow-emerald-500/20 border-none uppercase"
+                        className="flex-1 h-8 text-[12px] font-black rounded-xl bg-emerald-500 hover:bg-emerald-600 active:scale-95 hover:scale-102 text-white transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-sm shadow-emerald-500/20 border-none uppercase"
                         title="Undang Kerja"
                       >
                         <SendIcon className="h-3.5 w-3.5 shrink-0" />
@@ -2410,7 +2410,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
               <h3 className="font-extrabold text-sm text-foreground tracking-tight">
                 Undang Kerja
               </h3>
-              <p className="text-[11px] text-muted-foreground">
+              <p className="text-[12px] text-muted-foreground">
                 Pilih lowongan aktif untuk mengundang <span className="font-bold text-foreground">{viewingTalentProfile?.name}</span>.
               </p>
             </div>
@@ -2436,7 +2436,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                 
                 if (filteredJobs.length === 0) {
                   return (
-                    <p className="text-[11px] text-muted-foreground italic text-center py-4">
+                    <p className="text-[12px] text-muted-foreground italic text-center py-4">
                       {inviteJobSearch ? 'Tidak ada lowongan yang cocok.' : 'Anda tidak memiliki lowongan aktif.'}
                     </p>
                   );
@@ -2560,7 +2560,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
                     {quotaLeft === 0
                       ? 'Kuota undangan habis (0/20)'
                       : `Sisa kuota undangan: ${quotaLeft}/${quotaMax}`}
-                    {alreadyInvited && <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">Sudah Diundang</span>}
+                    {alreadyInvited && <span className="ml-auto text-[12px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">Sudah Diundang</span>}
                   </div>
 
                   {quotaLeft > 0 || alreadyInvited ? (

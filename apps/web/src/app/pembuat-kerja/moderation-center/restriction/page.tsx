@@ -23,6 +23,7 @@ import {
   LuUsers as Users,
   LuCircleAlert as AlertCircle,
   LuShieldCheck as ShieldCheck,
+  LuFilter as Filter,
 } from 'react-icons/lu';
 
 const AccountSuspicionPage: React.FC = () => {
@@ -60,72 +61,111 @@ const AccountSuspicionPage: React.FC = () => {
     handleBlockAccount,
     handleDbBlock,
     theme,
+    getDaysDiff,
   } = useModeration();
 
   const [showDoc, setShowDoc] = useState(false);
   const [activeLeftTab, setActiveLeftTab] = useState<
-    'check_account' | 'check_db' | 'history'
+    'check_account' | 'history'
   >('check_account');
   const [currentPage, setCurrentPage] = useState(1);
   const [historyFilter, setHistoryFilter] = useState<
     'All' | 'Permanent Ban' | 'Suspend 30 Days' | 'Light Warning'
   >('All');
   const [historySearch, setHistorySearch] = useState<string>('');
-  const [dbSearch, setDbSearch] = useState<string>('');
   const [showFullDescModal, setShowFullDescModal] = useState<{
     title: string;
     desc: string;
   } | null>(null);
 
-  const activeDbItems = dbScanResults.length > 0
-    ? dbScanResults
-    : localReviewJobs.map((job) => ({
-        idLowongan: job.id,
-        title: job.title,
-        company: job.company,
-        alertLevel: (job.aiScore ?? 100) < 70 ? 'Suspend 30 Days' : 'Aman',
-        finalAiReason: job.aiRecommendation || 'Aman & Sesuai Kebijakan',
-        type: (job.aiScore ?? 100) < 70 ? 'Keburukan Lowongan' : 'Aman',
-        aiScore: job.aiScore ?? 100,
-      }));
-
-  const filteredDbItems = activeDbItems.filter((item) => {
-    if (dbSearch === '') return true;
-    return (
-      item.title?.toLowerCase().includes(dbSearch.toLowerCase()) ||
-      item.company?.toLowerCase().includes(dbSearch.toLowerCase()) ||
-      item.idLowongan?.toLowerCase().includes(dbSearch.toLowerCase())
-    );
+  const [showHistoryFilterFloating, setShowHistoryFilterFloating] = useState(false);
+  const [historyStartFromNumber, setHistoryStartFromNumber] = useState<number | ''>('');
+  const [historyFilterTime, setHistoryFilterTime] = useState<
+    'all' | '1week' | '3weeks' | '1month' | '2months' | '3months'
+  >('all');
+  const [historyCategories, setHistoryCategories] = useState<{
+    Chat: boolean;
+    Lowongan: boolean;
+    ModApp: boolean;
+    SpamAccount: boolean;
+    Other: boolean;
+  }>({
+    Chat: false,
+    Lowongan: false,
+    ModApp: false,
+    SpamAccount: false,
+    Other: false,
   });
-
-  const dbItemsPerPage = 30;
-  const totalDbPages = Math.max(
-    1,
-    Math.ceil(filteredDbItems.length / dbItemsPerPage),
-  );
-  const paginatedDbResults = filteredDbItems.slice(
-    (currentPage - 1) * dbItemsPerPage,
-    currentPage * dbItemsPerPage,
-  );
 
   const activeViolations = violations.filter((v) => v.status === 'Active');
   const filteredHistory = activeViolations.filter((v) => {
+    // 1. Alert Level Filter
     const matchesFilter =
       historyFilter === 'All' || v.alertLevel === historyFilter;
+
+    // 2. Search Filter
     const matchesSearch =
       historySearch === '' ||
       v.name?.toLowerCase().includes(historySearch.toLowerCase()) ||
       v.email?.toLowerCase().includes(historySearch.toLowerCase()) ||
       v.id?.toLowerCase().includes(historySearch.toLowerCase());
-    return matchesFilter && matchesSearch;
+
+    if (!matchesFilter || !matchesSearch) return false;
+
+    // 3. Time Filter
+    if (historyFilterTime === '1week') {
+      if (getDaysDiff(v.date) > 7) return false;
+    } else if (historyFilterTime === '3weeks') {
+      if (getDaysDiff(v.date) > 21) return false;
+    } else if (historyFilterTime === '1month') {
+      if (getDaysDiff(v.date) > 30) return false;
+    } else if (historyFilterTime === '2months') {
+      if (getDaysDiff(v.date) > 60) return false;
+    } else if (historyFilterTime === '3months') {
+      if (getDaysDiff(v.date) > 90) return false;
+    }
+
+    // 4. Category Filter
+    let cat = 'Other';
+    if (v.violationType === 'ID Chat Bermasalah') {
+      cat = 'Chat';
+    } else if (v.violationType === 'Lowongan Bermasalah yang Lolos Publikasi') {
+      cat = 'Lowongan';
+    } else if (v.violationType === 'Pembayaran Tidak Sah') {
+      cat = 'ModApp';
+    } else if (v.violationType === 'Spam Akun') {
+      cat = 'SpamAccount';
+    }
+
+    const hasActiveCategoryFilter =
+      historyCategories.Chat ||
+      historyCategories.Lowongan ||
+      historyCategories.ModApp ||
+      historyCategories.SpamAccount ||
+      historyCategories.Other;
+
+    if (hasActiveCategoryFilter) {
+      if (cat === 'Chat' && !historyCategories.Chat) return false;
+      if (cat === 'Lowongan' && !historyCategories.Lowongan) return false;
+      if (cat === 'ModApp' && !historyCategories.ModApp) return false;
+      if (cat === 'SpamAccount' && !historyCategories.SpamAccount) return false;
+      if (cat === 'Other' && !historyCategories.Other) return false;
+    }
+
+    return true;
   });
+
+  const slicedHistory =
+    historyStartFromNumber !== '' && Number(historyStartFromNumber) > 0
+      ? filteredHistory.slice(Number(historyStartFromNumber) - 1)
+      : filteredHistory;
 
   const historyItemsPerPage = 30;
   const totalHistoryPages = Math.max(
     1,
-    Math.ceil(filteredHistory.length / historyItemsPerPage),
+    Math.ceil(slicedHistory.length / historyItemsPerPage),
   );
-  const paginatedHistory = filteredHistory.slice(
+  const paginatedHistory = slicedHistory.slice(
     (currentPage - 1) * historyItemsPerPage,
     currentPage * historyItemsPerPage,
   );
@@ -167,20 +207,20 @@ const AccountSuspicionPage: React.FC = () => {
                                 className={`flex flex-col ${isSystem ? 'items-center w-full' : isSelf ? 'items-end' : 'items-start'}`}
                               >
                                 {isSystem ? (
-                                  <span className="text-[9px] text-muted-foreground bg-slate-800/40 px-3 py-1 rounded-full border border-slate-700/20 my-1">
+                                  <span className="text-[12px] text-muted-foreground bg-slate-800/40 px-3 py-1 rounded-full border border-slate-700/20 my-1">
                                     {msg.message}
                                   </span>
                                 ) : (
                                   <div
                                     className={`max-w-[80%] rounded-2xl p-3 ${isSelf ? 'bg-primary text-primary-foreground rounded-tr-none' : 'bg-muted text-foreground rounded-tl-none'}`}
                                   >
-                                    <p className="text-[9px] font-bold opacity-80 mb-1">
+                                    <p className="text-[12px] font-bold opacity-80 mb-1">
                                       {msg.sender}
                                     </p>
                                     <p className="text-xs leading-relaxed">
                                       {msg.message}
                                     </p>
-                                    <p className="text-[8px] opacity-60 text-right mt-1">
+                                    <p className="text-[12px] opacity-60 text-right mt-1">
                                       {msg.timestamp}
                                     </p>
                                   </div>
@@ -319,7 +359,7 @@ const AccountSuspicionPage: React.FC = () => {
                 </h3>
                 <div className="space-y-4 text-xs">
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-black tracking-wide">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-black tracking-wide">
                       Email Target
                     </span>
                     <span className="font-bold text-foreground">
@@ -330,7 +370,7 @@ const AccountSuspicionPage: React.FC = () => {
                     </span>
                   </div>
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-black tracking-wide">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-black tracking-wide">
                       Nama Akun
                     </span>
                     <span className="font-bold text-foreground">
@@ -340,7 +380,7 @@ const AccountSuspicionPage: React.FC = () => {
                     </span>
                   </div>
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-black tracking-wide">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-black tracking-wide">
                       Rekomendasi Tindakan
                     </span>
                     <span className="font-bold text-amber-500 uppercase">
@@ -386,18 +426,55 @@ const AccountSuspicionPage: React.FC = () => {
                     }`}
                   >
                     <div className="space-y-1 text-left">
+                      {(() => {
+                        let catLabel = 'Other';
+                        let catColorClass = 'bg-zinc-500/10 text-zinc-500 border-zinc-500/20';
+                        const reasonLower = selectedCheckDetail.reason?.toLowerCase() || '';
+                        if (selectedCheckDetail.chatDetails) {
+                          catLabel = 'Chat ID';
+                          catColorClass = 'bg-blue-500/10 text-blue-500 border-blue-500/20';
+                        } else if (selectedCheckDetail.jobDetails) {
+                          catLabel = 'Lowongan ID';
+                          catColorClass = 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20';
+                        } else if (reasonLower.includes('mod app') || reasonLower.includes('pembayaran') || reasonLower.includes('transaksi')) {
+                          catLabel = 'Mod App';
+                          catColorClass = 'bg-rose-500/10 text-rose-500 border-rose-500/20';
+                        } else if (
+                          reasonLower.includes('berubah sendiri') ||
+                          reasonLower.includes('tanpa lewat verify') ||
+                          reasonLower.includes('tanpa melalui proses verifikasi') ||
+                          reasonLower.includes('sandi') ||
+                          reasonLower.includes('telepon') ||
+                          reasonLower.includes('email') ||
+                          reasonLower.includes('password') ||
+                          reasonLower.includes('kredensial')
+                        ) {
+                          catLabel = 'Spam Account';
+                          catColorClass = 'bg-orange-500/10 text-orange-500 border-orange-500/20';
+                        }
+                        return (
+                          <div className="mb-2 flex items-center gap-1.5">
+                            <span className={`font-bold tracking-wider uppercase text-[11px] ${theme === 'white' ? 'text-slate-400' : 'text-muted-foreground'}`}>
+                              Kategori:
+                            </span>
+                            <Badge variant="outline" className={`text-[10px] font-bold border rounded-full px-2 py-0.5 uppercase ${catColorClass}`}>
+                              {catLabel}
+                            </Badge>
+                          </div>
+                        );
+                      })()}
                       {selectedCheckDetail.jobDetails && (
-                        <div className="font-extrabold text-[11px] text-foreground">
+                        <div className="font-extrabold text-[12px] text-foreground">
                           Rekomendasi AI:{' '}
                           {selectedCheckDetail.jobDetails.aiRecommendation}
                         </div>
                       )}
-                      <p className="text-[10px] font-semibold text-muted-foreground opacity-90 leading-relaxed">
+                      <p className="text-[12px] font-semibold text-muted-foreground opacity-90 leading-relaxed">
                         {selectedCheckDetail.reason}
                       </p>
                     </div>
                     <Badge
-                      className={`text-[9px] border-none font-bold px-1.5 py-0.5 uppercase ${
+                      className={`text-[12px] border-none font-bold px-1.5 py-0.5 uppercase ${
                         selectedCheckDetail.alertLevel ===
                           'Permanent Ban' ||
                         selectedCheckDetail.alertLevel ===
@@ -434,7 +511,7 @@ const AccountSuspicionPage: React.FC = () => {
                     onClick={() => setShowDoc(true)}
                     size="sm"
                     variant="outline"
-                    className="h-7 text-[10px] font-bold flex items-center gap-1.5 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 cursor-pointer"
+                    className="h-7 text-[12px] font-bold flex items-center gap-1.5 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 cursor-pointer"
                   >
                     <FileText className="h-3.5 w-3.5" />
                     <span>Document</span>
@@ -456,19 +533,6 @@ const AccountSuspicionPage: React.FC = () => {
                       }`}
                     >
                       Account Details
-                    </button>
-                    <button
-                      onClick={() => {
-                        setActiveLeftTab('check_db');
-                        setCurrentPage(1);
-                      }}
-                      className={`pb-2.5 text-sm font-semibold transition-all border-b-2 -mb-px cursor-pointer whitespace-nowrap ${
-                        activeLeftTab === 'check_db'
-                          ? 'text-foreground border-primary'
-                          : 'border-transparent text-muted-foreground hover:text-foreground'
-                      }`}
-                    >
-                      Job Database
                     </button>
                     <button
                       onClick={() => {
@@ -503,30 +567,8 @@ const AccountSuspicionPage: React.FC = () => {
                     </div>
                   )}
 
-                  {activeLeftTab === 'check_db' && (
-                    <div className="flex gap-2 w-full sm:w-auto items-center shrink-0">
-                      <Input
-                        placeholder="Cari lowongan/perusahaan..."
-                        value={dbSearch}
-                        onChange={(e) => {
-                          setDbSearch(e.target.value);
-                          setCurrentPage(1);
-                        }}
-                        className="h-8 text-xs rounded-xl bg-background border border-border/80 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-primary text-foreground w-48 sm:w-56"
-                      />
-                      <Button
-                        onClick={handleScanDatabase}
-                        disabled={isScanning}
-                        size="sm"
-                        className="h-8 font-bold text-xs rounded-xl px-4 bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-200 border-none shrink-0"
-                      >
-                        {isScanning ? 'Scanning...' : 'Scan DB'}
-                      </Button>
-                    </div>
-                  )}
-
                   {activeLeftTab === 'history' && (
-                    <div className="flex gap-2 w-full sm:w-72 shrink-0">
+                    <div className="flex gap-2 w-full sm:w-80 shrink-0 justify-end relative">
                       <Input
                         placeholder="Cari akun (nama/email)..."
                         value={historySearch}
@@ -534,8 +576,145 @@ const AccountSuspicionPage: React.FC = () => {
                           setHistorySearch(e.target.value);
                           setCurrentPage(1);
                         }}
-                        className="h-8 text-xs rounded-xl bg-background border border-border/80 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-primary text-foreground"
+                        className="h-8 text-xs rounded-xl bg-background border border-border/80 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-primary text-foreground flex-1"
                       />
+                      <Button
+                        variant="outline"
+                        onClick={() =>
+                          setShowHistoryFilterFloating(!showHistoryFilterFloating)
+                        }
+                        className={`h-8 w-8 p-0 rounded-xl border flex items-center justify-center cursor-pointer shadow-none transition-all ${
+                          showHistoryFilterFloating ||
+                          historyStartFromNumber !== '' ||
+                          historyFilterTime !== 'all' ||
+                          historyCategories.Chat ||
+                          historyCategories.Lowongan ||
+                          historyCategories.ModApp ||
+                          historyCategories.SpamAccount ||
+                          historyCategories.Other
+                            ? 'bg-zinc-900 border-zinc-900 text-zinc-50 dark:bg-zinc-100 dark:border-zinc-100 dark:text-zinc-900 shadow-sm'
+                            : 'bg-background border-border text-muted-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-foreground'
+                        }`}
+                        title="Filter Violations"
+                      >
+                        <Filter className="h-4 w-4" />
+                      </Button>
+
+                      {showHistoryFilterFloating && (
+                        <div className="absolute right-0 top-9 z-30 w-60 bg-card border border-border rounded-2xl shadow-xl p-4 space-y-3.5 text-xs animate-in fade-in slide-in-from-top-1 duration-150 text-left">
+                          <div className="font-bold text-foreground">
+                            Filter Violations
+                          </div>
+
+                          {/* 1. Mulai Nomor Dari */}
+                          <div className="space-y-1.5">
+                            <label className="text-[11px] font-bold text-muted-foreground uppercase">
+                              Mulai Nomor Dari
+                            </label>
+                            <Input
+                              type="number"
+                              min="1"
+                              placeholder="Contoh: 5"
+                              value={historyStartFromNumber}
+                              onChange={(e) => {
+                                const val = e.target.value;
+                                setHistoryStartFromNumber(
+                                  val === '' ? '' : Number(val),
+                                );
+                                setCurrentPage(1);
+                              }}
+                              className="h-7 text-xs"
+                            />
+                          </div>
+
+                          {/* 2. Jangka Waktu */}
+                          <div className="space-y-1.5">
+                            <label className="text-[11px] font-bold text-muted-foreground uppercase">
+                              Jangka Waktu
+                            </label>
+                            <select
+                              className="w-full rounded-md border border-border bg-background px-2 py-1.5 text-xs text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                              value={historyFilterTime}
+                              onChange={(e) => {
+                                setHistoryFilterTime(
+                                  e.target.value as any,
+                                );
+                                setCurrentPage(1);
+                              }}
+                            >
+                              <option value="all">Semua Waktu</option>
+                              <option value="1week">1 Minggu Lalu</option>
+                              <option value="3weeks">3 Minggu Lalu</option>
+                              <option value="1month">1 Bulan Lalu</option>
+                              <option value="2months">2 Bulan Lalu</option>
+                              <option value="3months">3 Bulan Lalu</option>
+                            </select>
+                          </div>
+
+                          {/* 3. Checkbox Kategori */}
+                          <div className="space-y-2 pt-1 border-t border-border/50">
+                            <label className="text-[11px] font-bold text-muted-foreground uppercase block mb-1">
+                              Kategori
+                            </label>
+                            <div className="grid grid-cols-2 gap-2">
+                              {(['Chat', 'Lowongan', 'ModApp', 'SpamAccount', 'Other'] as const).map((catKey) => {
+                                const label = catKey === 'Chat' ? 'Chat ID' : catKey === 'Lowongan' ? 'Lowongan ID' : catKey === 'ModApp' ? 'Mod App' : catKey === 'SpamAccount' ? 'Spam Account' : catKey;
+                                return (
+                                  <div
+                                    key={catKey}
+                                    className="flex items-center gap-1.5 cursor-pointer"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setHistoryCategories((prev) => {
+                                        const next = { ...prev, [catKey]: !prev[catKey] };
+                                        return next;
+                                      });
+                                      setCurrentPage(1);
+                                    }}
+                                  >
+                                    <input
+                                      type="checkbox"
+                                      checked={historyCategories[catKey]}
+                                      onChange={() => {}} // handled by click container
+                                      className="h-3.5 w-3.5 rounded border-gray-300 text-primary focus:ring-primary accent-primary cursor-pointer"
+                                    />
+                                    <span className="text-[11px] font-medium text-foreground select-none cursor-pointer">
+                                      {label}
+                                    </span>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+
+                          {/* 4. Reset Button */}
+                          {(historyStartFromNumber !== '' ||
+                            historyFilterTime !== 'all' ||
+                            historyCategories.Chat ||
+                            historyCategories.Lowongan ||
+                            historyCategories.ModApp ||
+                            historyCategories.SpamAccount ||
+                            historyCategories.Other) && (
+                            <Button
+                              onClick={() => {
+                                setHistoryStartFromNumber('');
+                                setHistoryFilterTime('all');
+                                setHistoryCategories({
+                                  Chat: false,
+                                  Lowongan: false,
+                                  ModApp: false,
+                                  SpamAccount: false,
+                                  Other: false,
+                                });
+                                setCurrentPage(1);
+                              }}
+                              className="w-full h-8 text-[12px] font-semibold bg-rose-50 text-rose-600 hover:bg-rose-100 dark:bg-rose-500/10 dark:text-rose-400 dark:hover:bg-rose-500/20 border border-rose-200 dark:border-rose-800/60 rounded-md transition-colors"
+                            >
+                              Reset Filter
+                            </Button>
+                          )}
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -558,7 +737,7 @@ const AccountSuspicionPage: React.FC = () => {
                             {foundAccount.name?.charAt(0) || 'A'}
                           </div>
                           <div className="min-w-0">
-                            <p className="text-[10px] uppercase text-slate-400 font-black tracking-wider">
+                            <p className="text-[12px] uppercase text-slate-400 font-black tracking-wider">
                               Nama Akun
                             </p>
                             <p className="text-sm font-extrabold text-foreground truncate">
@@ -575,7 +754,7 @@ const AccountSuspicionPage: React.FC = () => {
 
                         <div className="grid grid-cols-2 gap-4 pt-3 border-t border-slate-800/60">
                           <div>
-                            <label className="text-[10px] uppercase text-slate-400 font-bold tracking-wider mb-1.5 block">
+                            <label className="text-[12px] uppercase text-slate-400 font-bold tracking-wider mb-1.5 block">
                               ID Chat
                             </label>
                             <Input
@@ -588,7 +767,7 @@ const AccountSuspicionPage: React.FC = () => {
                             />
                           </div>
                           <div>
-                            <label className="text-[10px] uppercase text-slate-400 font-bold tracking-wider mb-1.5 block">
+                            <label className="text-[12px] uppercase text-slate-400 font-bold tracking-wider mb-1.5 block">
                               ID Lowongan
                             </label>
                             <Input
@@ -614,195 +793,7 @@ const AccountSuspicionPage: React.FC = () => {
                   </div>
                 )}
 
-                {/* 2. Check Entire Database */}
-                {activeLeftTab === 'check_db' && (
-                  <div className="flex flex-col flex-1 w-full space-y-4 min-h-0">
-                    <div className="flex-1 w-full space-y-4 overflow-y-auto pr-1">
-                      {filteredDbItems.length > 0 ? (
-                        <div>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {paginatedDbResults.map((item, idx) => {
-                              const seqNum =
-                                (currentPage - 1) * dbItemsPerPage + idx + 1;
-                              return (
-                                <div
-                                  key={item.idLowongan}
-                                  className={`p-5 rounded-2xl flex flex-col justify-between shadow-lg transition-all duration-200 border cursor-pointer hover:scale-[1.01] ${
-                                    theme === 'white'
-                                      ? 'bg-white hover:bg-slate-50 border-slate-200/85 hover:border-slate-300'
-                                      : 'bg-slate-900 border-slate-800 hover:border-slate-700/80'
-                                  }`}
-                                  style={{ minHeight: '190px' }}
-                                  onClick={() => handleViewDbItemDetail(item)}
-                                >
-                                  <div className="space-y-3">
-                                    <div className="flex justify-between items-start gap-2">
-                                      <div className="min-w-0 flex-1 text-left">
-                                        <span
-                                          className={`font-extrabold text-xs truncate block ${
-                                            theme === 'white'
-                                              ? 'text-slate-800'
-                                              : 'text-foreground'
-                                          }`}
-                                        >
-                                          {seqNum}. {item.title}
-                                        </span>
-                                        <span className="text-[10px] text-primary font-bold block mt-1">
-                                          {item.company}
-                                        </span>
-                                      </div>
-                                      <div className="flex flex-col items-end gap-1.5 shrink-0">
-                                        <Badge
-                                          className={`font-bold text-[9px] px-2 py-0.5 rounded-full border ${
-                                            theme === 'white'
-                                              ? 'bg-amber-50 text-amber-600 border-amber-200'
-                                              : 'bg-amber-500/10 text-amber-500 hover:bg-amber-500/10 border-amber-500/20'
-                                          }`}
-                                        >
-                                          Loker ID: {item.idLowongan}
-                                        </Badge>
-                                        {item.aiScore !== undefined && (
-                                          <span
-                                            className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${
-                                              item.aiScore < 70
-                                                ? theme === 'white'
-                                                  ? 'bg-rose-50 text-rose-600 border-rose-100'
-                                                  : 'bg-rose-500/20 text-rose-500 border-rose-500/10'
-                                                : theme === 'white'
-                                                  ? 'bg-emerald-50 text-emerald-600 border-emerald-100'
-                                                  : 'bg-emerald-500/20 text-emerald-500 border-emerald-500/10'
-                                            }`}
-                                          >
-                                            Score: {item.aiScore}
-                                          </span>
-                                        )}
-                                      </div>
-                                    </div>
 
-                                    <div
-                                      className={`text-[11px] leading-relaxed p-3.5 rounded-xl shadow-xs mt-2 mb-3 border text-left ${
-                                        theme === 'white'
-                                          ? 'bg-slate-50/80 border-slate-200/60'
-                                          : 'bg-slate-950/40 border-border/40'
-                                      }`}
-                                    >
-                                      <span
-                                        className={`font-bold tracking-wider mb-1 block uppercase text-[9px] ${
-                                          theme === 'white'
-                                            ? 'text-slate-400'
-                                            : 'text-muted-foreground'
-                                        }`}
-                                      >
-                                        Reason:
-                                      </span>
-                                      <p
-                                        className={`line-clamp-2 font-normal ${
-                                          theme === 'white'
-                                            ? 'text-slate-600'
-                                            : 'text-muted-foreground/90'
-                                        }`}
-                                      >
-                                        {item.finalAiReason}
-                                      </p>
-                                    </div>
-                                  </div>
-                                  <div
-                                    className={`pt-2 border-t flex justify-end ${
-                                      theme === 'white'
-                                        ? 'border-slate-100'
-                                        : 'border-slate-800/60'
-                                    }`}
-                                  >
-                                    <Button
-                                      size="sm"
-                                      className={`h-7 text-[10px] font-bold rounded-lg cursor-pointer transition-all duration-200 border ${
-                                        theme === 'white'
-                                          ? 'bg-white hover:bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300'
-                                          : 'bg-slate-900/80 hover:bg-slate-800 border-slate-800 text-foreground hover:border-slate-700'
-                                      }`}
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleViewDbItemDetail(item);
-                                      }}
-                                    >
-                                      Lihat Detail
-                                    </Button>
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="h-[200px] flex flex-col items-center justify-center text-center text-xs text-muted-foreground border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
-                          No scan results available.
-                        </div>
-                      )}
-                    </div>
-
-                    {totalDbPages >= 1 && (
-                      <div className="flex justify-center items-center gap-4 mt-4 pt-4 border-t border-border/40 text-xs flex-none">
-                        <div className="flex items-center gap-1.5">
-                          <Button variant="outline"
-                            size="sm"
-                            className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
-                            onClick={() =>setCurrentPage((prev) =>
-                                Math.max(prev - 1, 1),
-                              )
-                            }
-                            disabled={currentPage === 1}
-                          >
-                            <ChevronLeft className="h-4 w-4" /></Button>
-                          <div className="flex items-center gap-1">
-                            {(() => {
-                              const renderedElements: React.ReactNode[] = [];
-                              for (let i = 1; i <= totalDbPages; i++) {
-                                const isCurrent = currentPage === i;
-                                renderedElements.push(
-                                  <Button
-                                    key={i}
-                                    variant="outline"
-                                    className="h-9 w-9 text-xs font-bold transition-all rounded-lg cursor-pointer shadow-sm"
-                                    style={
-                                      isCurrent
-                                        ? {
-                                            backgroundColor:
-                                              'hsl(var(--foreground))',
-                                            color:
-                                              'hsl(var(--background))',
-                                            borderColor:
-                                              'hsl(var(--foreground))',
-                                          }
-                                        : {
-                                            color:
-                                              'hsl(var(--foreground))',
-                                          }
-                                    }
-                                    onClick={() => setCurrentPage(i)}
-                                  >
-                                    {i}
-                                  </Button>,
-                                );
-                              }
-                              return renderedElements;
-                            })()}
-                          </div>
-                          <Button variant="outline"
-                            size="sm"
-                            className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
-                            onClick={() =>setCurrentPage((prev) =>
-                                Math.min(prev + 1, totalDbPages),
-                              )
-                            }
-                            disabled={currentPage === totalDbPages}
-                          >
-                            
-                            <ChevronRight className="h-4 w-4" /></Button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
 
                 {/* 3. History */}
                 {activeLeftTab === 'history' && (
@@ -839,12 +830,15 @@ const AccountSuspicionPage: React.FC = () => {
 
                       {filteredHistory.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {paginatedHistory.map((v, idx) => {
+                              {paginatedHistory.map((v, idx) => {
                             const seqNum =
                               (currentPage - 1) * historyItemsPerPage +
                               idx +
                               1;
-                            const fullReason = `${v.violationType} - ${v.finalAiReason}`;
+                            const baseReason = ((v.violationType as string) === 'Lainnya' || (v.violationType as string) === 'Other') 
+                              ? v.finalAiReason 
+                              : `${v.violationType} - ${v.finalAiReason}`;
+                            const fullReason = baseReason.replace(/^(Lainnya|Other)\s*-\s*/i, '');
                             return (
                               <div
                                 key={v.id}
@@ -869,7 +863,7 @@ const AccountSuspicionPage: React.FC = () => {
                                       </span>
                                       <div className="flex items-center gap-1.5 mt-0.5 pl-1">
                                         <span
-                                          className={`text-[8px] font-mono font-bold px-1.5 py-0.5 rounded inline-block ${
+                                          className={`text-[12px] font-mono font-bold px-1.5 py-0.5 rounded inline-block ${
                                             theme === 'white'
                                               ? 'bg-slate-100 text-slate-500'
                                               : 'bg-muted-foreground/15 text-muted-foreground'
@@ -892,7 +886,7 @@ const AccountSuspicionPage: React.FC = () => {
                                         </button>
                                       </div>
                                       <span
-                                        className={`text-[10px] block mt-0.5 pl-1 ${
+                                        className={`text-[12px] block mt-0.5 pl-1 ${
                                           theme === 'white'
                                             ? 'text-slate-500'
                                             : 'text-muted-foreground'
@@ -902,7 +896,7 @@ const AccountSuspicionPage: React.FC = () => {
                                       </span>
                                     </div>
                                     <Badge
-                                      className={`font-bold text-[9px] px-2 py-0.5 rounded-full shrink-0 border ${
+                                      className={`font-bold text-[12px] px-2 py-0.5 rounded-full shrink-0 border ${
                                         theme === 'white'
                                           ? 'bg-rose-50 text-rose-600 border-rose-200'
                                           : 'bg-rose-500/10 text-rose-500 hover:bg-rose-500/10 border-rose-500/20'
@@ -913,14 +907,44 @@ const AccountSuspicionPage: React.FC = () => {
                                   </div>
 
                                   <div
-                                    className={`text-[11px] leading-relaxed p-3.5 rounded-xl shadow-xs mt-2 mb-3 border ${
+                                    className={`text-[12px] leading-relaxed p-3.5 rounded-xl shadow-xs mt-2 mb-3 border ${
                                       theme === 'white'
                                         ? 'bg-slate-50/80 border-slate-200/60'
                                         : 'bg-slate-950/40 border-border/40'
                                     }`}
                                   >
+                                    {(() => {
+                                      let catLabel = 'Other';
+                                      let catColorClass = 'bg-zinc-500/10 text-zinc-500 border-zinc-500/20';
+                                      if (v.violationType === 'ID Chat Bermasalah') {
+                                        catLabel = 'Chat ID';
+                                        catColorClass = 'bg-blue-500/10 text-blue-500 border-blue-500/20';
+                                      } else if (v.violationType === 'Lowongan Bermasalah yang Lolos Publikasi') {
+                                        catLabel = 'Lowongan ID';
+                                        catColorClass = 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20';
+                                      } else if (v.violationType === 'Pembayaran Tidak Sah') {
+                                        catLabel = 'Mod App';
+                                        catColorClass = 'bg-rose-500/10 text-rose-500 border-rose-500/20';
+                                      } else if (v.violationType === 'Spam Akun') {
+                                        catLabel = 'Spam Account';
+                                        catColorClass = 'bg-orange-500/10 text-orange-500 border-orange-500/20';
+                                      } else if ((v.violationType as string) === 'Lainnya' || (v.violationType as string) === 'Other') {
+                                        catLabel = 'Other';
+                                        catColorClass = 'bg-zinc-500/10 text-zinc-500 border-zinc-500/20';
+                                      }
+                                      return (
+                                        <div className="mb-2 flex items-center gap-1.5">
+                                          <span className={`font-bold tracking-wider uppercase text-[12px] ${theme === 'white' ? 'text-slate-400' : 'text-muted-foreground'}`}>
+                                            Kategori:
+                                          </span>
+                                          <Badge variant="outline" className={`text-[11px] font-bold border rounded-full px-2 py-0.5 uppercase ${catColorClass}`}>
+                                            {catLabel}
+                                          </Badge>
+                                        </div>
+                                      );
+                                    })()}
                                     <span
-                                      className={`font-bold tracking-wider mb-1 block uppercase text-[9px] ${
+                                      className={`font-bold tracking-wider mb-1 block uppercase text-[12px] ${
                                         theme === 'white'
                                           ? 'text-slate-400'
                                           : 'text-muted-foreground'
@@ -946,7 +970,7 @@ const AccountSuspicionPage: React.FC = () => {
                                             desc: fullReason,
                                           });
                                         }}
-                                        className={`font-bold mt-2 text-[10px] inline-flex items-center gap-0.5 transition-colors duration-150 ${
+                                        className={`font-bold mt-2 text-[12px] inline-flex items-center gap-0.5 transition-colors duration-150 ${
                                           theme === 'white'
                                             ? 'text-sky-600 hover:text-sky-500'
                                             : 'text-primary hover:text-primary/80'
@@ -958,7 +982,7 @@ const AccountSuspicionPage: React.FC = () => {
                                   </div>
                                 </div>
                                 <div
-                                  className={`pt-2 border-t flex justify-between items-center text-[10px] ${
+                                  className={`pt-2 border-t flex justify-between items-center text-[12px] ${
                                     theme === 'white'
                                       ? 'border-slate-100 text-slate-400'
                                       : 'border-slate-800/60 text-slate-400'
@@ -1055,47 +1079,136 @@ const AccountSuspicionPage: React.FC = () => {
       {showDoc && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
           <div className="bg-card border border-border rounded-3xl w-full max-w-xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200 flex flex-col">
-            <div className="flex items-center justify-between bg-zinc-50 dark:bg-zinc-900/50 px-6 py-4 border-b border-border">
+             <div className="flex items-center justify-between bg-zinc-50 dark:bg-zinc-900/50 px-6 py-4 border-b border-border">
               <div className="flex items-center gap-2">
                 <h3 className="text-xs font-black uppercase tracking-wider text-zinc-900 dark:text-zinc-100">
-                  Kebijakan Pembatasan Akun
+                  Account Suspicion Documentation
                 </h3>
               </div>
               <button
                 onClick={() => setShowDoc(false)}
-                className="text-muted-foreground hover:text-foreground border-none bg-transparent cursor-pointer"
+                className="p-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-muted-foreground hover:text-foreground transition-colors cursor-pointer border-none bg-transparent"
               >
                 <X className="h-4 w-4" />
               </button>
             </div>
 
-            <div className="p-6 max-h-[65vh] overflow-y-auto space-y-5 text-xs leading-relaxed text-zinc-700 dark:text-zinc-300 text-left">
+            <div className="p-6 max-h-[65vh] overflow-y-auto space-y-6 text-xs leading-relaxed text-zinc-700 dark:text-zinc-300 text-left">
               <div className="space-y-2">
-                <h4 className="font-extrabold text-foreground uppercase text-[11px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
-                  <span className="text-emerald-500">🏢</span> COMPANIES (PERUSAHAAN)
-                </h4>
-                <ul className="list-disc list-inside space-y-1.5 pl-1">
-                  <li>
-                    <strong className="text-foreground">Pembayaran Tidak Sah</strong>: Pembayaran transaksi di luar platform atau penggunaan mod app. Tindakan langsung: <span className="text-rose-500 font-bold">Blokir Permanen</span>.
-                  </li>
-                  <li>
-                    <strong className="text-foreground">Loker Lolos Publikasi Tapi Bermasalah</strong>:
-                    <ul className="list-none pl-4 space-y-1 mt-1">
-                      <li>• Pelanggaran ke-1: Peringatan (email, beranda)</li>
-                      <li>• Pelanggaran ke-2: Suspend akun sementara (30 hari)</li>
-                      <li>• Pelanggaran ke-3: Blokir permanen akun</li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="space-y-2">
-                <h4 className="font-extrabold text-foreground uppercase text-[11px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
-                  <span className="text-blue-500">👤</span> USER (PENCARI KERJA)
+                <h4 className="font-extrabold text-foreground uppercase text-[12px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
+                  <span className="text-blue-500">💬</span> Chat
                 </h4>
                 <p className="pl-1">
-                  Pencari kerja yang terdeteksi melakukan spam lamaran atau aktivitas mencurigakan berulang akan dibatasi aksesnya selama 30 hari hingga permanen.
+                  Akun dilaporkan atau terdeteksi mengirim pesan mencurigakan melalui fitur chat, seperti mengirim tautan di luar platform, phishing, penipuan, atau pesan berbahaya lainnya.
                 </p>
+                <p className="pl-1">
+                  <strong>Action:</strong> <span className="text-amber-600 dark:text-amber-400 font-bold">Light Warning</span>
+                </p>
+              </div>
+
+              <hr className="border-border/60" />
+
+              <div className="space-y-2">
+                <h4 className="font-extrabold text-foreground uppercase text-[12px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
+                  <span className="text-emerald-500">🏢</span> Job Posting
+                </h4>
+                <p className="pl-1">
+                  Lowongan pekerjaan yang dipublikasikan melanggar kebijakan, seperti lowongan palsu, informasi yang menyesatkan, atau konten yang tidak sesuai.
+                </p>
+                <p className="pl-1">
+                  <strong>Action:</strong> <span className="text-amber-600 dark:text-amber-400 font-bold">Light Warning</span>
+                </p>
+              </div>
+
+              <hr className="border-border/60" />
+
+              <div className="space-y-2">
+                <h4 className="font-extrabold text-foreground uppercase text-[12px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
+                  <span className="text-rose-500">💳</span> Payment Abuse
+                </h4>
+                <p className="pl-1">
+                  Terdeteksi melakukan bypass pembayaran, transaksi di luar sistem resmi, atau penyalahgunaan fitur pembayaran.
+                </p>
+                <p className="pl-1">
+                  <strong>Action:</strong> <span className="text-rose-600 dark:text-rose-400 font-bold">Permanent Block</span>
+                </p>
+              </div>
+
+              <hr className="border-border/60" />
+
+              <div className="space-y-2">
+                <h4 className="font-extrabold text-foreground uppercase text-[12px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
+                  <span className="text-orange-500">🤖</span> Spam Account
+                </h4>
+                <p className="pl-1">
+                  Akun menunjukkan aktivitas spam atau indikasi telah dikompromikan, seperti perubahan email, nomor telepon, atau kata sandi tanpa melalui proses verifikasi yang sah.
+                </p>
+                <p className="pl-1">
+                  <strong>Action:</strong> <span className="text-rose-600 dark:text-rose-400 font-bold">Permanent Block</span>
+                </p>
+              </div>
+
+              <hr className="border-border/60" />
+
+              <div className="space-y-2">
+                <h4 className="font-extrabold text-foreground uppercase text-[12px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
+                  <span className="text-zinc-500">⚙️</span> Other
+                </h4>
+                <p className="pl-1">
+                  Pelanggaran lain yang tidak termasuk dalam kategori di atas, berdasarkan hasil deteksi AI atau peninjauan moderator.
+                </p>
+                <div className="pl-3 mt-1.5 space-y-1">
+                  <p className="font-bold text-foreground">Contoh:</p>
+                  <ul className="list-disc list-inside space-y-1 pl-1 text-slate-500 dark:text-slate-400">
+                    <li>Recruiter lolos memposting lowongan spam dan mengirim chat spam.</li>
+                    <li>Kandidat mengirim chat spam atau melakukan abuse kepada recruiter.</li>
+                    <li>Dan lainnya jika melakukan user sebuah abuse apapun yang belum diketahui.</li>
+                  </ul>
+                </div>
+                <p className="pl-1 pt-1.5">
+                  <strong>Action:</strong> <span className="text-amber-600 dark:text-amber-400 font-bold">Light Warning</span> (atau disesuaikan dengan tingkat pelanggaran)
+                </p>
+              </div>
+
+              <hr className="border-border/60" />
+
+              {/* LEVEL PELANGGARAN SECTION */}
+              <div className="space-y-2">
+                <h4 className="font-extrabold text-foreground uppercase text-[12px] tracking-wider mb-3 border-b border-border/80 pb-1">
+                  Level Pelanggaran
+                </h4>
+
+                <div className="space-y-3">
+                  <div className="p-3 rounded-xl bg-amber-500/5 border border-amber-500/20 space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-extrabold text-[12px] text-foreground uppercase tracking-wide">Light Warning</span>
+                      <span className="text-[11px] font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full">Level 1</span>
+                    </div>
+                    <p className="text-[12px] text-muted-foreground leading-relaxed">
+                      Peringatan ringan untuk pelanggaran pertama kali. Akun masih dapat beroperasi secara normal, namun tercatat dalam sistem moderasi. Berlaku untuk pelanggaran Chat ID dan Job Posting.
+                    </p>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-orange-500/5 border border-orange-500/20 space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-extrabold text-[12px] text-foreground uppercase tracking-wide">Suspend 30 Days</span>
+                      <span className="text-[11px] font-bold text-orange-600 dark:text-orange-400 bg-orange-500/10 px-2 py-0.5 rounded-full">Level 2</span>
+                    </div>
+                    <p className="text-[12px] text-muted-foreground leading-relaxed">
+                      Penangguhan akun selama 30 hari. Akun tidak dapat melakukan aktivitas apapun di platform selama masa suspensi. Berlaku untuk pelanggaran berulang atau kategori tertentu.
+                    </p>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-rose-500/5 border border-rose-500/20 space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-extrabold text-[12px] text-foreground uppercase tracking-wide">Permanent Ban</span>
+                      <span className="text-[11px] font-bold text-rose-600 dark:text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded-full">Level 3</span>
+                    </div>
+                    <p className="text-[12px] text-muted-foreground leading-relaxed">
+                      Pemblokiran permanen terhadap akun. Akun tidak dapat diaktifkan kembali dan semua data terkait akan dinonaktifkan. Berlaku untuk Payment Abuse, Spam Account, atau pelanggaran berat lainnya.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -1117,7 +1230,7 @@ const AccountSuspicionPage: React.FC = () => {
           <div className="bg-card w-full max-w-2xl rounded-3xl border border-border/80 shadow-2xl overflow-hidden relative animate-in zoom-in-95 duration-200">
             <button
               onClick={() => setShowFullDescModal(null)}
-              className="absolute top-4 right-4 h-9 w-9 rounded-full hover:bg-muted flex items-center justify-center text-muted-foreground transition-colors z-10"
+              className="absolute top-4 right-4 h-9 w-9 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center justify-center text-muted-foreground transition-colors z-10 border-none bg-transparent cursor-pointer"
             >
               <X className="h-4 w-4" />
             </button>

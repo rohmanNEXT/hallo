@@ -58,6 +58,15 @@ const AppealHumanPage: React.FC = () => {
   const [appealFilterTime, setAppealFilterTime] = useState<
     'all' | '1week' | '3weeks' | '1month' | '2months' | '3months'
   >('all');
+  const [appealCategories, setAppealCategories] = useState<{
+    Chat: boolean;
+    Lowongan: boolean;
+    Other: boolean;
+  }>({
+    Chat: false,
+    Lowongan: false,
+    Other: false,
+  });
 
   const filteredAppeals = appeals.filter((a) => {
     if (a.status !== appealFilter) return false;
@@ -89,6 +98,42 @@ const AppealHumanPage: React.FC = () => {
       )
         return false;
     }
+
+    // 3. Category Filter
+    let cat = 'Other';
+    const alasanLower = a.alasan?.toLowerCase() || '';
+    if (a.idChat && a.idChat !== 'N/A') {
+      cat = 'Chat';
+    } else if (a.idLowongan && a.idLowongan !== 'N/A') {
+      cat = 'Lowongan';
+    } else if (alasanLower.includes('mod app') || alasanLower.includes('pembayaran') || alasanLower.includes('transaksi')) {
+      cat = 'ModApp';
+    } else if (
+      alasanLower.includes('berubah sendiri') ||
+      alasanLower.includes('tanpa lewat verify') ||
+      alasanLower.includes('tanpa melalui proses verifikasi') ||
+      alasanLower.includes('sandi') ||
+      alasanLower.includes('telepon') ||
+      alasanLower.includes('email') ||
+      alasanLower.includes('password') ||
+      alasanLower.includes('kredensial')
+    ) {
+      cat = 'SpamAccount';
+    }
+
+    if (cat === 'ModApp' || cat === 'SpamAccount') return false;
+
+    const hasActiveCategoryFilter =
+      appealCategories.Chat ||
+      appealCategories.Lowongan ||
+      appealCategories.Other;
+
+    if (hasActiveCategoryFilter) {
+      if (cat === 'Chat' && !appealCategories.Chat) return false;
+      if (cat === 'Lowongan' && !appealCategories.Lowongan) return false;
+      if (cat === 'Other' && !appealCategories.Other) return false;
+    }
+
     return true;
   });
 
@@ -143,20 +188,20 @@ const AppealHumanPage: React.FC = () => {
                                 className={`flex flex-col ${isSystem ? 'items-center w-full' : isSelf ? 'items-end' : 'items-start'}`}
                               >
                                 {isSystem ? (
-                                  <span className="text-[9px] text-muted-foreground bg-slate-800/40 px-3 py-1 rounded-full border border-slate-700/20 my-1">
+                                  <span className="text-[12px] text-muted-foreground bg-slate-800/40 px-3 py-1 rounded-full border border-slate-700/20 my-1">
                                     {msg.message}
                                   </span>
                                 ) : (
                                   <div
                                     className={`max-w-[80%] rounded-2xl p-3 ${isSelf ? 'bg-primary text-primary-foreground rounded-tr-none' : 'bg-muted text-foreground rounded-tl-none'}`}
                                   >
-                                    <p className="text-[9px] font-bold opacity-80 mb-1">
+                                    <p className="text-[12px] font-bold opacity-80 mb-1">
                                       {msg.sender}
                                     </p>
                                     <p className="text-xs leading-relaxed">
                                       {msg.message}
                                     </p>
-                                    <p className="text-[8px] opacity-60 text-right mt-1">
+                                    <p className="text-[12px] opacity-60 text-right mt-1">
                                       {msg.timestamp}
                                     </p>
                                   </div>
@@ -276,7 +321,7 @@ const AppealHumanPage: React.FC = () => {
                 </h3>
                 <div className="space-y-4 text-xs">
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-black tracking-wide">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-black tracking-wide">
                       Email Pelaku
                     </span>
                     <span className="font-bold text-foreground">
@@ -284,7 +329,7 @@ const AppealHumanPage: React.FC = () => {
                     </span>
                   </div>
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-black tracking-wide">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-black tracking-wide">
                       Nama Akun
                     </span>
                     <span className="font-bold text-foreground">
@@ -292,7 +337,7 @@ const AppealHumanPage: React.FC = () => {
                     </span>
                   </div>
                   <div>
-                    <span className="text-[10px] text-muted-foreground uppercase block font-black tracking-wide">
+                    <span className="text-[12px] text-muted-foreground uppercase block font-black tracking-wide">
                       Rekomendasi Tindakan
                     </span>
                     <span className="font-bold text-amber-500 uppercase">
@@ -350,7 +395,7 @@ const AppealHumanPage: React.FC = () => {
                     onClick={() => setShowDoc(true)}
                     size="sm"
                     variant="outline"
-                    className="h-7 text-[10px] font-bold flex items-center gap-1.5 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 cursor-pointer"
+                    className="h-7 text-[12px] font-bold flex items-center gap-1.5 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 cursor-pointer"
                   >
                     <FileText className="h-3.5 w-3.5" />
                     <span>Document</span>
@@ -404,7 +449,6 @@ const AppealHumanPage: React.FC = () => {
                         className="h-8 pl-8 pr-3 text-xs rounded-xl bg-background border border-border/80 focus-visible:ring-1 focus-visible:ring-offset-0 w-full"
                       />
                     </div>
-
                     <div className="relative">
                       <Button
                         onClick={() =>
@@ -412,11 +456,14 @@ const AppealHumanPage: React.FC = () => {
                             !showAppealFilterFloating,
                           )
                         }
-                        className={`h-9 w-9 p-0 rounded-lg border flex items-center justify-center cursor-pointer shadow-none transition-all ${
+                        className={`h-8 w-8 p-0 rounded-xl border flex items-center justify-center cursor-pointer shadow-none transition-all ${
                           showAppealFilterFloating ||
                           showAppealOnlyUnviewed ||
                           appealStartFromNumber !== '' ||
-                          appealFilterTime !== 'all'
+                          appealFilterTime !== 'all' ||
+                          appealCategories.Chat ||
+                          appealCategories.Lowongan ||
+                          appealCategories.Other
                             ? 'bg-zinc-900 border-zinc-900 text-zinc-50 dark:bg-zinc-100 dark:border-zinc-100 dark:text-zinc-900 shadow-sm'
                             : 'bg-background border-border text-muted-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-foreground'
                         }`}
@@ -426,12 +473,14 @@ const AppealHumanPage: React.FC = () => {
                       </Button>
 
                       {showAppealFilterFloating && (
-                        <div className="absolute right-0 top-10 z-30 w-56 bg-card border border-border rounded-xl shadow-lg p-3 space-y-3 text-xs animate-in fade-in slide-in-from-top-1 duration-150">
+                        <div className="absolute right-0 top-9 z-30 w-60 bg-card border border-border rounded-2xl shadow-xl p-4 space-y-3.5 text-xs animate-in fade-in slide-in-from-top-1 duration-150 text-left">
                           <div className="font-bold text-foreground">
                             Filter Appeal
                           </div>
+
+                          {/* 1. Mulai Nomor Dari */}
                           <div className="space-y-1.5">
-                            <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                            <label className="text-[11px] font-bold text-muted-foreground uppercase">
                               Mulai Nomor Dari
                             </label>
                             <Input
@@ -449,6 +498,8 @@ const AppealHumanPage: React.FC = () => {
                               className="h-7 text-xs"
                             />
                           </div>
+
+                          {/* 2. Belum Lihat Detail Checkbox */}
                           <div
                             className="flex items-center gap-2 pt-1"
                             onClick={(e) => e.stopPropagation()}
@@ -472,8 +523,10 @@ const AppealHumanPage: React.FC = () => {
                               Belum Lihat Detail
                             </label>
                           </div>
-                          <div className="space-y-1.5 pt-1">
-                            <label className="text-[10px] font-bold text-muted-foreground uppercase">
+
+                          {/* 3. Jangka Waktu */}
+                          <div className="space-y-1.5">
+                            <label className="text-[11px] font-bold text-muted-foreground uppercase">
                               Jangka Waktu
                             </label>
                             <select
@@ -488,29 +541,69 @@ const AppealHumanPage: React.FC = () => {
                             >
                               <option value="all">Semua Waktu</option>
                               <option value="1week">1 Minggu Lalu</option>
-                              <option value="3weeks">
-                                3 Minggu Lalu
-                              </option>
+                              <option value="3weeks">3 Minggu Lalu</option>
                               <option value="1month">1 Bulan Lalu</option>
-                              <option value="2months">
-                                2 Bulan Lalu
-                              </option>
-                              <option value="3months">
-                                3 Bulan Lalu
-                              </option>
+                              <option value="2months">2 Bulan Lalu</option>
+                              <option value="3months">3 Bulan Lalu</option>
                             </select>
                           </div>
+
+                          {/* 4. Checkbox Kategori */}
+                          <div className="space-y-2 pt-1 border-t border-border/50">
+                            <label className="text-[11px] font-bold text-muted-foreground uppercase block mb-1">
+                              Kategori
+                            </label>
+                            <div className="grid grid-cols-2 gap-2">
+                              {(['Chat', 'Lowongan', 'Other'] as const).map((catKey) => {
+                                const label = catKey === 'Chat' ? 'Chat ID' : catKey === 'Lowongan' ? 'Lowongan ID' : catKey;
+                                return (
+                                  <div
+                                    key={catKey}
+                                    className="flex items-center gap-1.5 cursor-pointer"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setAppealCategories((prev) => {
+                                        const next = { ...prev, [catKey]: !prev[catKey] };
+                                        return next;
+                                      });
+                                      setCurrentPage(1);
+                                    }}
+                                  >
+                                    <input
+                                      type="checkbox"
+                                      checked={appealCategories[catKey]}
+                                      onChange={() => {}} // handled by click container
+                                      className="h-3.5 w-3.5 rounded border-gray-300 text-primary focus:ring-primary accent-primary cursor-pointer"
+                                    />
+                                    <span className="text-[11px] font-medium text-foreground select-none cursor-pointer">
+                                      {label}
+                                    </span>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+
+                          {/* 5. Reset Button */}
                           {(showAppealOnlyUnviewed ||
                             appealStartFromNumber !== '' ||
-                            appealFilterTime !== 'all') && (
+                            appealFilterTime !== 'all' ||
+                            appealCategories.Chat ||
+                            appealCategories.Lowongan ||
+                            appealCategories.Other) && (
                             <Button
                               onClick={() => {
                                 setAppealStartFromNumber('');
                                 setShowAppealOnlyUnviewed(false);
                                 setAppealFilterTime('all');
+                                setAppealCategories({
+                                  Chat: false,
+                                  Lowongan: false,
+                                  Other: false,
+                                });
                                 setCurrentPage(1);
                               }}
-                              className="w-full h-8 text-[11px] font-semibold bg-rose-50 text-rose-600 hover:bg-rose-100 dark:bg-rose-500/10 dark:text-rose-400 dark:hover:bg-rose-500/20 border border-rose-200 dark:border-rose-800/60 rounded-md transition-colors"
+                              className="w-full h-8 text-[12px] font-semibold bg-rose-50 text-rose-600 hover:bg-rose-100 dark:bg-rose-500/10 dark:text-rose-400 dark:hover:bg-rose-500/20 border border-rose-200 dark:border-rose-800/60 rounded-md transition-colors"
                             >
                               Reset Filter
                             </Button>
@@ -590,7 +683,7 @@ const AppealHumanPage: React.FC = () => {
                             <div className="flex items-start justify-between gap-3">
                               <div className="flex items-center gap-2">
                                 <span
-                                  className={`text-[10px] font-extrabold shrink-0 ${
+                                  className={`text-[12px] font-extrabold shrink-0 ${
                                     theme === 'white'
                                       ? 'text-slate-500'
                                       : 'text-muted-foreground'
@@ -600,7 +693,7 @@ const AppealHumanPage: React.FC = () => {
                                 </span>
                                 <button
                                   onClick={() => handleCopyId(appeal.id)}
-                                  className={`font-mono text-[9px] px-1.5 py-0.5 rounded font-bold border flex items-center gap-1.5 cursor-pointer transition-colors active:scale-95 shrink-0 ${
+                                  className={`font-mono text-[12px] px-1.5 py-0.5 rounded font-bold border flex items-center gap-1.5 cursor-pointer transition-colors active:scale-95 shrink-0 ${
                                     theme === 'white'
                                       ? 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
                                       : 'bg-slate-800 border-slate-700 text-foreground hover:bg-slate-700/80'
@@ -612,22 +705,56 @@ const AppealHumanPage: React.FC = () => {
                               </div>
                               <Badge
                                 variant="outline"
-                                className={`text-[8px] font-bold border rounded px-2 py-0.5 shrink-0 capitalize ${statusColors[appeal.status]}`}
+                                className={`text-[12px] font-bold border rounded px-2 py-0.5 shrink-0 capitalize ${statusColors[appeal.status]}`}
                               >
                                 {appeal.status}
                               </Badge>
                             </div>
 
-                            <div className="flex flex-col gap-2 pt-1 border-t border-border/50 text-[11px] font-semibold text-muted-foreground">
+                            <div className="flex flex-col gap-2 pt-1 border-t border-border/50 text-[12px] font-semibold text-muted-foreground">
+                              {(() => {
+                                let catLabel = 'Other';
+                                let catColorClass = 'bg-zinc-500/10 text-zinc-500 border-zinc-500/20';
+                                const alasanLower = appeal.alasan?.toLowerCase() || '';
+                                if (appeal.idChat && appeal.idChat !== 'N/A') {
+                                  catLabel = 'Chat ID';
+                                  catColorClass = 'bg-blue-500/10 text-blue-500 border-blue-500/20';
+                                } else if (appeal.idLowongan && appeal.idLowongan !== 'N/A') {
+                                  catLabel = 'Lowongan ID';
+                                  catColorClass = 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20';
+                                } else if (alasanLower.includes('mod app') || alasanLower.includes('pembayaran') || alasanLower.includes('transaksi')) {
+                                  catLabel = 'Mod App';
+                                  catColorClass = 'bg-rose-500/10 text-rose-500 border-rose-500/20';
+                                } else if (
+                                  alasanLower.includes('berubah sendiri') ||
+                                  alasanLower.includes('tanpa lewat verify') ||
+                                  alasanLower.includes('tanpa melalui proses verifikasi') ||
+                                  alasanLower.includes('sandi') ||
+                                  alasanLower.includes('telepon') ||
+                                  alasanLower.includes('email') ||
+                                  alasanLower.includes('password') ||
+                                  alasanLower.includes('kredensial')
+                                ) {
+                                  catLabel = 'Spam Account';
+                                  catColorClass = 'bg-orange-500/10 text-orange-500 border-orange-500/20';
+                                }
+                                return (
+                                  <div className="flex items-center gap-1.5 mt-1">
+                                    <span className={`font-bold tracking-wider uppercase text-[11px] ${theme === 'white' ? 'text-slate-400' : 'text-muted-foreground'}`}>
+                                      Kategori:
+                                    </span>
+                                    <Badge variant="outline" className={`text-[10px] font-bold border rounded-full px-2 py-0.5 uppercase ${catColorClass}`}>
+                                      {catLabel}
+                                    </Badge>
+                                  </div>
+                                );
+                              })()}
                               <div>
-                                <span className="block text-[9px] text-foreground uppercase tracking-wide">
-                                  Pelaku / Pelapor
-                                </span>
-                                <span className="text-rose-500 font-bold block">
-                                  {appeal.namaPelaku} ({appeal.emailPelaku})
+                                <span className="text-rose-500 font-medium block mb-1 mt-2">
+                                  Pelaku: {appeal.namaPelaku} ({appeal.emailPelaku})
                                 </span>
                                 <span className="text-emerald-500 font-medium block mt-0.5">
-                                  Lapor: {appeal.namaPelapor} ({appeal.emailPelapor})
+                                  Pelapor: {appeal.namaPelapor} ({appeal.emailPelapor})
                                 </span>
                               </div>
                             </div>
@@ -639,7 +766,7 @@ const AppealHumanPage: React.FC = () => {
                                   : 'bg-slate-950 border border-slate-800/80'
                               }`}
                             >
-                              <p className="text-[10px] uppercase font-black text-amber-500 tracking-wider mb-1">
+                              <p className="text-[12px] uppercase font-black text-amber-500 tracking-wider mb-1">
                                 Alasan Laporan
                               </p>
                               <p
@@ -667,7 +794,7 @@ const AppealHumanPage: React.FC = () => {
                                     }
                                     size="sm"
                                     variant="outline"
-                                    className="h-7 text-[10px] font-bold flex items-center gap-1.5"
+                                    className="h-7 text-[12px] font-bold flex items-center gap-1.5"
                                   >
                                     <MessageSquare className="h-3 w-3" />
                                     <span>Lihat Chat</span>
@@ -685,7 +812,7 @@ const AppealHumanPage: React.FC = () => {
                                     }
                                     size="sm"
                                     variant="outline"
-                                    className="h-7 text-[10px] font-bold flex items-center gap-1.5"
+                                    className="h-7 text-[12px] font-bold flex items-center gap-1.5"
                                   >
                                     <Briefcase className="h-3 w-3" />
                                     <span>Lihat Lowongan</span>
@@ -773,7 +900,7 @@ const AppealHumanPage: React.FC = () => {
               </div>
               <button
                 onClick={() => setShowDoc(false)}
-                className="text-muted-foreground hover:text-foreground border-none bg-transparent cursor-pointer"
+                className="p-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-muted-foreground hover:text-foreground transition-colors cursor-pointer border-none bg-transparent"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -781,7 +908,7 @@ const AppealHumanPage: React.FC = () => {
 
             <div className="p-6 max-h-[65vh] overflow-y-auto space-y-5 text-xs leading-relaxed text-zinc-700 dark:text-zinc-300 text-left">
               <div className="space-y-2">
-                <h4 className="font-extrabold text-foreground uppercase text-[11px] tracking-wider mb-1 border-b border-border/80 pb-1">
+                <h4 className="font-extrabold text-foreground uppercase text-[12px] tracking-wider mb-1 border-b border-border/80 pb-1">
                   PROSEDUR BANDING
                 </h4>
                 <p className="pl-1">

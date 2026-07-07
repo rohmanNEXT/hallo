@@ -22,6 +22,7 @@ import {
   LuDollarSign as DollarSign,
   LuFileText as FileText,
   LuCopy as Copy,
+  LuEye as Eye,
 } from 'react-icons/lu';
 
 const JobVerificationPage: React.FC = () => {
@@ -42,11 +43,15 @@ const JobVerificationPage: React.FC = () => {
     handleApproveJob,
     handleRejectJob,
     theme,
+    dbScanResults,
+    isScanning,
+    handleScanDatabase,
   } = useModeration();
 
   const [showDoc, setShowDoc] = useState(false);
-  const [showRejected, setShowRejected] = useState(false);
+  const [reviewTab, setReviewTab] = useState<'under_review' | 'rejected' | 'database'>('under_review');
   const [reviewSearchQuery, setReviewSearchQuery] = useState('');
+  const [dbSearch, setDbSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [showFilterFloating, setShowFilterFloating] = useState(false);
   const [startFromNumber, setStartFromNumber] = useState<number | ''>('');
@@ -94,8 +99,64 @@ const JobVerificationPage: React.FC = () => {
     (j) => j.status === 'ditolak',
   ).length;
 
+  const activeDbItems = dbScanResults.length > 0
+    ? dbScanResults
+    : localReviewJobs.map((job) => ({
+        idLowongan: job.id,
+        title: job.title,
+        company: job.company,
+        alertLevel: (job.aiScore ?? 100) < 70 ? 'Suspend 30 Days' : 'Aman',
+        finalAiReason: job.aiRecommendation || 'Aman & Sesuai Kebijakan',
+        type: (job.aiScore ?? 100) < 70 ? 'Keburukan Lowongan' : 'Aman',
+        aiScore: job.aiScore ?? 100,
+      }));
+
+  const filteredDbItems = activeDbItems.filter((item) => {
+    if (dbSearch === '') return true;
+    return (
+      item.title?.toLowerCase().includes(dbSearch.toLowerCase()) ||
+      item.company?.toLowerCase().includes(dbSearch.toLowerCase()) ||
+      item.idLowongan?.toLowerCase().includes(dbSearch.toLowerCase())
+    );
+  });
+
+  const dbItemsPerPage = 30;
+  const totalDbPages = Math.max(
+    1,
+    Math.ceil(filteredDbItems.length / dbItemsPerPage),
+  );
+  const paginatedDbResults = filteredDbItems.slice(
+    (currentPage - 1) * dbItemsPerPage,
+    currentPage * dbItemsPerPage,
+  );
+
+  const handleViewDbItemDetailLocal = (item: any) => {
+    const job =
+      localReviewJobs.find(
+        (j) => j.id === item.idLowongan || j.serialId === item.idLowongan,
+      ) ||
+      employerJobs.find(
+        (j) => j.id === item.idLowongan || j.serialId === item.idLowongan,
+      );
+
+    if (job) {
+      setSelectedJobDetail(job);
+    } else {
+      setSelectedJobDetail({
+        id: item.idLowongan,
+        title: item.title,
+        company: item.company,
+        salary: 4500000,
+        description: `Deskripsi tidak tersedia. Lowongan kerja ${item.idLowongan} dilaporkan memiliki indikasi pelanggaran aturan moderasi platform.`,
+        aiScore: item.aiScore,
+        aiRecommendation: item.finalAiReason,
+        status: (item.alertLevel === 'Aman' || item.alertLevel === 'Lolos') ? 'aktif' : 'ditolak',
+      });
+    }
+  };
+
   const inReviewJobs = allReviewJobs.filter((j) => {
-    if (showRejected) {
+    if (reviewTab === 'rejected') {
       return j.status === 'ditolak';
     }
     return j.status === 'in review' || j.status === 'in-review';
@@ -331,7 +392,7 @@ const JobVerificationPage: React.FC = () => {
                   <div className="flex items-start gap-3">
                     <span className="text-slate-400 mt-0.5">🔑</span>
                     <div>
-                      <span className="text-[10px] text-muted-foreground uppercase block font-black tracking-wide">
+                      <span className="text-[12px] text-muted-foreground uppercase block font-black tracking-wide">
                         Serial ID
                       </span>
                       <span className="font-mono font-bold text-foreground">
@@ -389,13 +450,13 @@ const JobVerificationPage: React.FC = () => {
                       <div className="font-extrabold text-xs text-foreground">
                         AI Score: {selectedJobDetail.aiScore}/100
                       </div>
-                      <p className="text-[10px] font-semibold text-muted-foreground opacity-90 leading-relaxed">
+                      <p className="text-[12px] font-semibold text-muted-foreground opacity-90 leading-relaxed">
                         Rekomendasi:{' '}
                         {selectedJobDetail.aiRecommendation}
                       </p>
                     </div>
                     <Badge
-                      className={`text-[10px] border-none font-bold px-2 py-0.5 ${
+                      className={`text-[12px] border-none font-bold px-2 py-0.5 ${
                         selectedJobDetail.aiScore >= 50
                           ? 'bg-emerald-500/20 text-emerald-600'
                           : 'bg-rose-500/20 text-rose-600'
@@ -428,7 +489,7 @@ const JobVerificationPage: React.FC = () => {
                       onClick={() => setShowDoc(true)}
                       size="sm"
                       variant="outline"
-                      className="h-7 text-[10px] font-bold flex items-center gap-1.5 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 cursor-pointer"
+                      className="h-7 text-[12px] font-bold flex items-center gap-1.5 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 cursor-pointer"
                     >
                       <FileText className="h-3.5 w-3.5" />
                       <span>Document</span>
@@ -441,11 +502,11 @@ const JobVerificationPage: React.FC = () => {
                   <div className="flex items-center gap-6 text-sm font-semibold">
                     <button
                       onClick={() => {
-                        setShowRejected(false);
+                        setReviewTab('under_review');
                         setCurrentPage(1);
                       }}
                       className={`pb-2.5 text-sm font-semibold transition-all border-b-2 -mb-px cursor-pointer whitespace-nowrap ${
-                        !showRejected
+                        reviewTab === 'under_review'
                           ? 'text-foreground border-primary'
                           : 'border-transparent text-muted-foreground hover:text-foreground'
                       }`}
@@ -454,21 +515,34 @@ const JobVerificationPage: React.FC = () => {
                     </button>
                     <button
                       onClick={() => {
-                        setShowRejected(true);
+                        setReviewTab('rejected');
                         setCurrentPage(1);
                       }}
                       className={`pb-2.5 text-sm font-semibold transition-all border-b-2 -mb-px cursor-pointer whitespace-nowrap ${
-                        showRejected
+                        reviewTab === 'rejected'
                           ? 'text-foreground border-primary'
                           : 'border-transparent text-muted-foreground hover:text-foreground'
                       }`}
                     >
                       Ditolak ({reviewFailedCount})
                     </button>
+                    <button
+                      onClick={() => {
+                        setReviewTab('database');
+                        setCurrentPage(1);
+                      }}
+                      className={`pb-2.5 text-sm font-semibold transition-all border-b-2 -mb-px cursor-pointer whitespace-nowrap ${
+                        reviewTab === 'database'
+                          ? 'text-foreground border-primary'
+                          : 'border-transparent text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      Job Database
+                    </button>
                   </div>
 
                   <div className="flex items-center gap-2.5 justify-end">
-                    {!showRejected && (
+                    {reviewTab === 'under_review' && (
                       <Button
                         onClick={() => handleAutoAcceptPass(filteredReviewJobs)}
                         className="h-8 font-bold text-xs bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/15 hover:border-emerald-500/30 cursor-pointer px-3 rounded-lg shrink-0 shadow-none transition-all duration-200"
@@ -477,44 +551,71 @@ const JobVerificationPage: React.FC = () => {
                       </Button>
                     )}
 
+                    {reviewTab === 'database' && (
+                      <Button
+                        onClick={handleScanDatabase}
+                        disabled={isScanning}
+                        size="sm"
+                        className="h-8 font-bold text-xs rounded-lg px-4 bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-200 border-none shrink-0"
+                      >
+                        {isScanning ? 'Rejecting...' : 'Reject'}
+                      </Button>
+                    )}
+
                     <div className="w-full sm:w-60 relative flex gap-2 items-center">
                       <div className="relative flex-1">
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
-                        <Input
-                          placeholder="Cari lowongan..."
-                          value={reviewSearchQuery}
-                          onChange={(e) => {
-                            setReviewSearchQuery(e.target.value);
-                            setCurrentPage(1);
-                          }}
-                          className="pl-9 h-8 text-xs bg-background/50 border border-border rounded-lg placeholder-zinc-500 dark:placeholder-zinc-400 shadow-none focus-visible:ring-1 focus-visible:ring-offset-0"
-                        />
+                        {reviewTab === 'database' ? (
+                          <Input
+                            placeholder="Cari lowongan/perusahaan..."
+                            value={dbSearch}
+                            onChange={(e) => {
+                              setDbSearch(e.target.value);
+                              setCurrentPage(1);
+                            }}
+                            className="pl-9 h-8 text-xs bg-background/50 border border-border rounded-lg placeholder-zinc-500 dark:placeholder-zinc-400 shadow-none focus-visible:ring-1 focus-visible:ring-offset-0"
+                          />
+                        ) : (
+                          <Input
+                            placeholder="Cari lowongan..."
+                            value={reviewSearchQuery}
+                            onChange={(e) => {
+                              setReviewSearchQuery(e.target.value);
+                              setCurrentPage(1);
+                            }}
+                            className="pl-9 h-8 text-xs bg-background/50 border border-border rounded-lg placeholder-zinc-500 dark:placeholder-zinc-400 shadow-none focus-visible:ring-1 focus-visible:ring-offset-0"
+                          />
+                        )}
                       </div>
 
-                      <div className="relative">
-                        <Button
-                          onClick={() =>
-                            setShowFilterFloating(!showFilterFloating)
-                          }
-                          className={`h-9 w-9 p-0 rounded-lg border flex items-center justify-center cursor-pointer shadow-none transition-all ${
-                            showFilterFloating ||
-                            showOnlyUnviewed ||
-                            startFromNumber !== ''
-                              ? 'bg-zinc-900 border-zinc-900 text-zinc-50 dark:bg-zinc-100 dark:border-zinc-100 dark:text-zinc-900 shadow-sm'
-                              : 'bg-background border-border text-muted-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-foreground'
-                          }`}
-                          title="Filter Lanjutan"
-                        >
-                          <Filter className="h-4 w-4" />
-                        </Button>
+                      {reviewTab !== 'database' && (
+                        <div className="relative">
+                          <Button
+                            onClick={() =>
+                              setShowFilterFloating(!showFilterFloating)
+                            }
+                            className={`h-9 w-9 p-0 rounded-lg border flex items-center justify-center cursor-pointer shadow-none transition-all ${
+                              showFilterFloating ||
+                              showOnlyUnviewed ||
+                              startFromNumber !== ''
+                                ? 'bg-zinc-900 border-zinc-900 text-zinc-50 dark:bg-zinc-100 dark:border-zinc-100 dark:text-zinc-900 shadow-sm'
+                                : 'bg-background border-border text-muted-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-foreground'
+                            }`}
+                            title="Filter Lanjutan"
+                          >
+                            <Filter className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      )}
+                    </div>
 
-                        {showFilterFloating && (
+                    {showFilterFloating && (
                           <div className="absolute right-0 top-10 z-30 w-56 bg-card border border-border rounded-xl shadow-lg p-3 space-y-3 text-xs animate-in fade-in slide-in-from-top-1 duration-150">
                             <div className="font-bold text-foreground">
                               Filter Lowongan
                             </div>
                             <div className="space-y-1.5">
-                              <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                              <label className="text-[12px] font-bold text-muted-foreground uppercase">
                                 Mulai Nomor Dari
                               </label>
                               <Input
@@ -557,7 +658,7 @@ const JobVerificationPage: React.FC = () => {
                             </div>
 
                             <div className="space-y-1.5 pt-1">
-                              <label className="text-[10px] font-bold text-muted-foreground uppercase">
+                              <label className="text-[12px] font-bold text-muted-foreground uppercase">
                                 Jangka Waktu
                               </label>
                               <select
@@ -648,7 +749,7 @@ const JobVerificationPage: React.FC = () => {
                                   setFilterLolos(false);
                                   setCurrentPage(1);
                                 }}
-                                className="w-full h-8 text-[11px] font-semibold bg-rose-50 text-rose-600 hover:bg-rose-100 dark:bg-rose-500/10 dark:text-rose-400 dark:hover:bg-rose-500/20 border border-rose-200 dark:border-rose-800/60 rounded-md transition-colors"
+                                className="w-full h-8 text-[12px] font-semibold bg-rose-50 text-rose-600 hover:bg-rose-100 dark:bg-rose-500/10 dark:text-rose-400 dark:hover:bg-rose-500/20 border border-rose-200 dark:border-rose-800/60 rounded-md transition-colors"
                               >
                                 Reset Filter
                               </Button>
@@ -658,283 +759,413 @@ const JobVerificationPage: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
 
               <div className="flex-1 w-full overflow-y-auto pr-1 min-h-0">
                 <div className="w-full">
-                  {filteredReviewJobs.length === 0 ? (
-                    <div className="h-[200px] flex flex-col items-center justify-center text-center text-xs text-muted-foreground border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
-                      Tidak ada lowongan yang cocok atau dalam antrean.
-                    </div>
-                  ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-                      {paginatedJobs.map((job, index) => {
-                        const globalIndex =
-                          (currentPage - 1) * itemsPerPage + index;
-                        const isSuspicious =
-                          job.aiScore !== undefined &&
-                          job.aiScore < 50;
-
-                        return (
-                          <div
-                            key={job.id}
-                            className="p-3.5 border border-border/70 rounded-2xl bg-card flex flex-col justify-between shadow-[0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-md hover:border-border transition-all duration-200"
-                            style={{ minHeight: '245px' }}
-                            onClick={() => handleOpenJobDetail(job)}
-                          >
-                            <div className="space-y-3">
-                              <div className="flex justify-between items-start">
-                                <div className="flex items-start gap-2.5">
-                                  <div className="h-6 w-6 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-[11px] shrink-0">
-                                    {inReviewJobs.findIndex(
-                                      (j) => j.id === job.id,
-                                    ) + 1}
-                                  </div>
-                                  <div className="h-10 w-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-black text-[16px] border border-emerald-500/15 shrink-0">
-                                    {job.company?.charAt(0) || 'C'}
-                                  </div>
-                                  <div>
-                                    <div>
-                                      <h4 className="font-bold text-[13px] text-foreground leading-tight hover:underline">
-                                        {job.title}
-                                      </h4>
-                                      <div className="mt-1 flex items-center gap-1.5">
-                                        <span className="text-[8px] font-mono font-bold bg-muted-foreground/10 text-muted-foreground px-1.5 py-0.5 rounded inline-block">
-                                          {getJobSerialId(job)}
-                                        </span>
-                                        <button
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleCopyId(getJobSerialId(job));
-                                          }}
-                                          className="p-0.5 hover:bg-muted rounded transition-all border-none bg-transparent flex items-center justify-center text-muted-foreground hover:text-foreground"
-                                          title="Salin Serial ID"
-                                        >
-                                          <Copy className="h-2.5 w-2.5" />
-                                        </button>
-                                      </div>
-                                    </div>
-                                    <span className="text-[11px] font-bold text-emerald-500 block mt-1.5">
-                                      {job.company}
+                  {reviewTab === 'database' ? (
+                    filteredDbItems.length === 0 ? (
+                      <div className="h-[200px] flex flex-col items-center justify-center text-center text-xs text-muted-foreground border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
+                        No scan results available.
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {paginatedDbResults.map((item, idx) => {
+                          const seqNum =
+                            (currentPage - 1) * dbItemsPerPage + idx + 1;
+                          return (
+                            <div
+                              key={item.idLowongan}
+                              className={`p-5 rounded-2xl flex flex-col justify-between shadow-[0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-md border cursor-pointer transition-all duration-200 ${
+                                theme === 'white'
+                                  ? 'bg-white hover:bg-slate-50 border-slate-200/85 hover:border-slate-300'
+                                  : 'bg-slate-900 border-slate-800 hover:border-slate-700/80'
+                              }`}
+                              style={{ minHeight: '190px' }}
+                              onClick={() => handleViewDbItemDetailLocal(item)}
+                            >
+                              <div className="space-y-3">
+                                <div className="flex justify-between items-start gap-2">
+                                  <div className="min-w-0 flex-1 text-left">
+                                    <span
+                                      className={`font-extrabold text-xs truncate block ${
+                                        theme === 'white'
+                                          ? 'text-slate-800'
+                                          : 'text-foreground'
+                                      }`}
+                                    >
+                                      {seqNum}. {item.title}
                                     </span>
+                                    <span className="text-[12px] text-primary font-bold block mt-1">
+                                      {item.company}
+                                    </span>
+                                  </div>
+                                  <div className="flex flex-col items-end gap-1.5 shrink-0">
+                                    <Badge
+                                      className={`font-bold text-[12px] px-2 py-0.5 rounded-full border ${
+                                        theme === 'white'
+                                          ? 'bg-amber-50 text-amber-600 border-amber-200'
+                                          : 'bg-amber-500/10 text-amber-500 hover:bg-amber-500/10 border-amber-500/20'
+                                      }`}
+                                    >
+                                      Loker ID: {item.idLowongan}
+                                    </Badge>
+                                    {item.aiScore !== undefined && (
+                                      <span
+                                        className={`text-[12px] font-bold px-1.5 py-0.5 rounded border ${
+                                          item.aiScore < 70
+                                            ? theme === 'white'
+                                              ? 'bg-rose-50 text-rose-600 border-rose-100'
+                                              : 'bg-rose-500/20 text-rose-500 border-rose-500/10'
+                                            : theme === 'white'
+                                              ? 'bg-emerald-50 text-emerald-600 border-emerald-100'
+                                              : 'bg-emerald-500/20 text-emerald-500 border-emerald-500/10'
+                                        }`}
+                                      >
+                                        Score: {item.aiScore}
+                                      </span>
+                                    )}
                                   </div>
                                 </div>
-                                <Badge
-                                  className={`text-[8px] border-none font-bold px-1.5 py-0.5 rounded-full capitalize ${
-                                    job.status === 'aktif'
-                                      ? 'bg-emerald-500/20 text-emerald-600'
-                                      : job.status === 'ditolak'
-                                        ? 'bg-rose-500/20 text-rose-600'
-                                        : 'bg-amber-500/20 text-amber-600'
-                                  }`}
-                                >
-                                  {job.status}
-                                </Badge>
-                              </div>
 
-                              <p
-                                className="text-[11px] text-muted-foreground leading-relaxed font-normal"
-                                style={{
-                                  display: '-webkit-box',
-                                  WebkitLineClamp: 2,
-                                  WebkitBoxOrient: 'vertical',
-                                  overflow: 'hidden',
-                                }}
-                              >
-                                {job.description}
-                              </p>
-
-                              {job.aiScore !== undefined && (
                                 <div
-                                  className={`p-2 rounded-xl border flex items-center justify-between text-[10px] ${
-                                    !isSuspicious
-                                      ? 'bg-emerald-500/5 border-emerald-500/10 text-emerald-600 dark:text-emerald-400'
-                                      : 'bg-rose-500/5 border-rose-500/10 text-rose-600 dark:text-rose-400'
+                                  className={`text-[12px] leading-relaxed p-3.5 rounded-xl shadow-xs mt-2 mb-3 border text-left ${
+                                    theme === 'white'
+                                      ? 'bg-slate-50/80 border-slate-200/60'
+                                      : 'bg-slate-950/40 border-border/40'
                                   }`}
-                                  style={{ height: '32px' }}
                                 >
-                                  <div className="flex items-center gap-1.5">
-                                    <Sparkles className="h-3.5 w-3.5 shrink-0" />
-                                    <span>
-                                      AI Score:{' '}
-                                      <strong
-                                        className={
-                                          isSuspicious
-                                            ? 'text-rose-500'
-                                            : 'text-emerald-500'
-                                        }
-                                      >
-                                        {job.aiScore}/100
-                                      </strong>{' '}
-                                      - {job.aiRecommendation}
-                                    </span>
-                                  </div>
-                                  <Badge
-                                    className={`text-[9px] border-none px-1.5 py-0 ${
-                                      !isSuspicious
-                                        ? 'bg-emerald-500/20 text-emerald-600'
-                                        : 'bg-rose-500/20 text-rose-600'
+                                  <span
+                                    className={`font-bold tracking-wider mb-1 block uppercase text-[12px] ${
+                                      theme === 'white'
+                                        ? 'text-slate-400'
+                                        : 'text-muted-foreground'
                                     }`}
                                   >
-                                    {!isSuspicious
-                                      ? 'Lolos'
-                                      : 'Curiga'}
+                                    Reason:
+                                  </span>
+                                  <p
+                                    className={`line-clamp-2 font-normal ${
+                                      theme === 'white'
+                                        ? 'text-slate-600'
+                                        : 'text-muted-foreground/90'
+                                    }`}
+                                  >
+                                    {item.finalAiReason}
+                                  </p>
+                                </div>
+                              </div>
+                              <div
+                                className={`pt-2 border-t flex justify-end ${
+                                  theme === 'white'
+                                    ? 'border-slate-100'
+                                    : 'border-slate-800/60'
+                                }`}
+                              >
+                                <Button
+                                  size="sm"
+                                  className={`h-7 text-[12px] font-bold rounded-lg cursor-pointer transition-all duration-200 border ${
+                                    theme === 'white'
+                                      ? 'bg-white hover:bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300'
+                                      : 'bg-slate-900/80 hover:bg-slate-800 border-slate-800 text-foreground hover:border-slate-700'
+                                  }`}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleViewDbItemDetailLocal(item);
+                                  }}
+                                >
+                                  Lihat Detail
+                                </Button>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )
+                  ) : (
+                    filteredReviewJobs.length === 0 ? (
+                      <div className="h-[200px] flex flex-col items-center justify-center text-center text-xs text-muted-foreground border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
+                        Tidak ada lowongan yang cocok atau dalam antrean.
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                        {paginatedJobs.map((job, index) => {
+                          const globalIndex =
+                            (currentPage - 1) * itemsPerPage + index;
+                          const isSuspicious =
+                            job.aiScore !== undefined &&
+                            job.aiScore < 50;
+
+                          return (
+                            <div
+                              key={job.id}
+                              className="p-3.5 border border-border/70 rounded-2xl bg-card flex flex-col justify-between shadow-[0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-md hover:border-border transition-all duration-200"
+                              style={{ minHeight: '245px' }}
+                              onClick={() => handleOpenJobDetail(job)}
+                            >
+                              <div className="space-y-3">
+                                <div className="flex justify-between items-start">
+                                  <div className="flex items-start gap-2.5">
+                                    <div className="h-6 w-6 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-[12px] shrink-0">
+                                      {inReviewJobs.findIndex(
+                                        (j) => j.id === job.id,
+                                      ) + 1}
+                                    </div>
+                                    <div className="h-10 w-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-black text-[16px] border border-emerald-500/15 shrink-0">
+                                      {job.company?.charAt(0) || 'C'}
+                                    </div>
+                                    <div>
+                                      <div>
+                                        <h4 className="font-bold text-[13px] text-foreground leading-tight hover:underline">
+                                          {job.title}
+                                        </h4>
+                                        <div className="mt-1 flex items-center gap-1.5">
+                                          <span className="text-[12px] font-mono font-bold bg-muted-foreground/10 text-muted-foreground px-1.5 py-0.5 rounded inline-block">
+                                            {getJobSerialId(job)}
+                                          </span>
+                                          <button
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              handleCopyId(getJobSerialId(job));
+                                            }}
+                                            className="p-0.5 hover:bg-muted rounded transition-all border-none bg-transparent flex items-center justify-center text-muted-foreground hover:text-foreground"
+                                            title="Salin Serial ID"
+                                          >
+                                            <Copy className="h-2.5 w-2.5" />
+                                          </button>
+                                        </div>
+                                      </div>
+                                      <span className="text-[12px] font-bold text-emerald-500 block mt-1.5">
+                                        {job.company}
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <Badge
+                                    className={`text-[12px] border-none font-bold px-1.5 py-0.5 rounded-full capitalize ${
+                                      job.status === 'aktif'
+                                        ? 'bg-emerald-500/20 text-emerald-600'
+                                        : job.status === 'ditolak'
+                                          ? 'bg-rose-500/20 text-rose-600'
+                                          : 'bg-amber-500/20 text-amber-600'
+                                    }`}
+                                  >
+                                    {job.status}
                                   </Badge>
                                 </div>
-                              )}
-                            </div>
 
-                            <div className="space-y-2">
-                              <div className="border-t border-border/60" />
-                              <div
-                                className="flex justify-between items-center"
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <span className="text-[11px] font-black text-emerald-600 dark:text-emerald-400">
-                                  Rp{' '}
-                                  {job.salary?.toLocaleString(
-                                    'id-ID',
-                                  )}{' '}
-                                  / bln
-                                </span>
-                                <div className="flex gap-1.5">
-                                  <Button
-                                    onClick={() => handleApproveJob(job.id)}
-                                    className="h-7 font-bold text-[9px] px-2.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/15 hover:border-emerald-500/30 shadow-none cursor-pointer rounded-lg transition-all duration-200"
+                                <p
+                                  className="text-[12px] text-muted-foreground leading-relaxed font-normal"
+                                  style={{
+                                    display: '-webkit-box',
+                                    WebkitLineClamp: 2,
+                                    WebkitBoxOrient: 'vertical',
+                                    overflow: 'hidden',
+                                  }}
+                                >
+                                  {job.description}
+                                </p>
+
+                                {job.aiScore !== undefined && (
+                                  <div
+                                    className={`p-2 rounded-xl border flex items-center justify-between text-[12px] ${
+                                      !isSuspicious
+                                        ? 'bg-emerald-500/5 border-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+                                        : 'bg-rose-500/5 border-rose-500/10 text-rose-600 dark:text-rose-400'
+                                    }`}
+                                    style={{ height: '32px' }}
                                   >
-                                    Diterima
-                                  </Button>
-                                  <Button
-                                    onClick={() => handleRejectJob(job.id)}
-                                    className="h-7 font-bold text-[9px] px-2.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-400 border border-rose-500/15 hover:border-rose-500/30 shadow-none cursor-pointer rounded-lg transition-all duration-200"
-                                  >
-                                    Gagal
-                                  </Button>
+                                    <div className="flex items-center gap-1.5">
+                                      <Sparkles className="h-3.5 w-3.5 shrink-0" />
+                                      <span>
+                                        AI Score:{' '}
+                                        <strong
+                                          className={
+                                            isSuspicious
+                                              ? 'text-rose-500'
+                                              : 'text-emerald-500'
+                                          }
+                                        >
+                                          {job.aiScore}/100
+                                        </strong>{' '}
+                                        - {job.aiRecommendation}
+                                      </span>
+                                    </div>
+                                    <Badge
+                                      className={`text-[12px] border-none px-1.5 py-0 ${
+                                        !isSuspicious
+                                          ? 'bg-emerald-500/20 text-emerald-600'
+                                          : 'bg-rose-500/20 text-rose-600'
+                                      }`}
+                                    >
+                                      {!isSuspicious
+                                        ? 'Lolos'
+                                        : 'Curiga'}
+                                    </Badge>
+                                  </div>
+                                )}
+                              </div>
+
+                              <div className="space-y-2">
+                                <div className="border-t border-border/60" />
+                                <div
+                                  className="flex justify-between items-center"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <span className="text-[12px] font-black text-emerald-600 dark:text-emerald-400">
+                                    Rp{' '}
+                                    {job.salary?.toLocaleString(
+                                      'id-ID',
+                                    )}{' '}
+                                    / bln
+                                  </span>
+                                  <div className="flex gap-1.5">
+                                    <Button
+                                      onClick={() => handleOpenJobDetail(job)}
+                                      className="h-7 w-7 p-0 flex items-center justify-center bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 shadow-none cursor-pointer rounded-lg transition-all duration-200"
+                                      title="Lihat Detail"
+                                    >
+                                      <Eye className="h-3.5 w-3.5" />
+                                    </Button>
+                                    <Button
+                                      onClick={() => handleApproveJob(job.id)}
+                                      className="h-7 font-bold text-[12px] px-2.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/15 hover:border-emerald-500/30 shadow-none cursor-pointer rounded-lg transition-all duration-200"
+                                    >
+                                      Diterima
+                                    </Button>
+                                    <Button
+                                      onClick={() => handleRejectJob(job.id)}
+                                      className="h-7 font-bold text-[12px] px-2.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-400 border border-rose-500/15 hover:border-rose-500/30 shadow-none cursor-pointer rounded-lg transition-all duration-200"
+                                    >
+                                      Gagal
+                                    </Button>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        );
-                      })}
-                    </div>
+                          );
+                        })}
+                      </div>
+                    )
                   )}
                 </div>
               </div>
               {/* ALWAYS SHOW PAGINATION AT THE BOTTOM OF THE MENU INSIDE THE BOX */}
-              {totalPages >= 1 && (
-                <div className="flex justify-center items-center gap-4 mt-6 pt-4 border-t border-border/40 text-xs">
-                  <div className="flex items-center gap-1.5">
-                    <Button variant="outline"
-                      size="sm"
-                      className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
-                      onClick={() =>setCurrentPage((prev) =>
-                          Math.max(prev - 1, 1),
-                        )
-                      }
-                      disabled={currentPage === 1}
-                    >
-                      <ChevronLeft className="h-4 w-4" /></Button>
-
-                    <div className="flex items-center gap-1">
-                      {(() => {
-                        const renderedElements: React.ReactNode[] =
-                          [];
-                        const renderButton = (pageNum: number) => {
-                          const isCurrent = currentPage === pageNum;
-                          return (
-                            <Button
-                              key={pageNum}
-                              variant="outline"
-                              className="h-9 w-9 text-xs font-bold transition-all rounded-lg cursor-pointer shadow-sm"
-                              style={
-                                isCurrent
-                                  ? {
-                                      backgroundColor:
-                                        'hsl(var(--foreground))',
-                                      color: 'hsl(var(--background))',
-                                      borderColor:
-                                        'hsl(var(--foreground))',
-                                    }
-                                  : {
-                                      color: 'hsl(var(--foreground))',
-                                    }
-                              }
-                              onClick={() => setCurrentPage(pageNum)}
-                            >
-                              {pageNum}
-                            </Button>
-                          );
-                        };
-
-                        const renderDots = (key: string) => (
-                          <span
-                            key={key}
-                            className="px-1.5 text-muted-foreground font-bold text-sm select-none"
-                          >
-                            ...
-                          </span>
-                        );
-
-                        if (totalPages <= 3) {
-                          for (let i = 1; i <= totalPages; i++) {
-                            renderedElements.push(renderButton(i));
-                          }
-                        } else {
-                          if (currentPage < 3) {
-                            renderedElements.push(renderButton(1));
-                            renderedElements.push(renderButton(2));
-                            renderedElements.push(
-                              renderDots('dots-right'),
-                            );
-                            renderedElements.push(
-                              renderButton(totalPages),
-                            );
-                          } else if (currentPage >= totalPages - 1) {
-                            renderedElements.push(renderButton(1));
-                            renderedElements.push(
-                              renderDots('dots-left'),
-                            );
-                            renderedElements.push(
-                              renderButton(totalPages - 1),
-                            );
-                            renderedElements.push(
-                              renderButton(totalPages),
-                            );
-                          } else {
-                            renderedElements.push(renderButton(1));
-                            renderedElements.push(
-                              renderDots('dots-left'),
-                            );
-                            renderedElements.push(
-                              renderButton(currentPage),
-                            );
-                            renderedElements.push(
-                              renderDots('dots-right'),
-                            );
-                            renderedElements.push(
-                              renderButton(totalPages),
-                            );
-                          }
+              {(() => {
+                const paginationTotalPages = reviewTab === 'database' ? totalDbPages : totalPages;
+                if (paginationTotalPages < 1) return null;
+                return (
+                  <div className="flex justify-center items-center gap-4 mt-6 pt-4 border-t border-border/40 text-xs">
+                    <div className="flex items-center gap-1.5">
+                      <Button variant="outline"
+                        size="sm"
+                        className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                        onClick={() =>setCurrentPage((prev) =>
+                            Math.max(prev - 1, 1),
+                          )
                         }
-                        return renderedElements;
-                      })()}
-                    </div>
+                        disabled={currentPage === 1}
+                      >
+                        <ChevronLeft className="h-4 w-4" /></Button>
 
-                    <Button variant="outline"
-                      size="sm"
-                      className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
-                      onClick={() =>setCurrentPage((prev) =>
-                          Math.min(prev + 1, totalPages),
-                        )
-                      }
-                      disabled={currentPage === totalPages}
-                    >
-                      
-                      <ChevronRight className="h-4 w-4" /></Button>
+                      <div className="flex items-center gap-1">
+                        {(() => {
+                          const renderedElements: React.ReactNode[] =
+                            [];
+                          const renderButton = (pageNum: number) => {
+                            const isCurrent = currentPage === pageNum;
+                            return (
+                              <Button
+                                key={pageNum}
+                                variant="outline"
+                                className="h-9 w-9 text-xs font-bold transition-all rounded-lg cursor-pointer shadow-sm"
+                                style={
+                                  isCurrent
+                                    ? {
+                                        backgroundColor:
+                                          'hsl(var(--foreground))',
+                                        color: 'hsl(var(--background))',
+                                        borderColor:
+                                          'hsl(var(--foreground))',
+                                      }
+                                    : {
+                                        color: 'hsl(var(--foreground))',
+                                      }
+                                }
+                                onClick={() => setCurrentPage(pageNum)}
+                              >
+                                {pageNum}
+                              </Button>
+                            );
+                          };
+
+                          const renderDots = (key: string) => (
+                            <span
+                              key={key}
+                              className="px-1.5 text-muted-foreground font-bold text-sm select-none"
+                            >
+                              ...
+                            </span>
+                          );
+
+                          if (paginationTotalPages <= 3) {
+                            for (let i = 1; i <= paginationTotalPages; i++) {
+                              renderedElements.push(renderButton(i));
+                            }
+                          } else {
+                            if (currentPage < 3) {
+                              renderedElements.push(renderButton(1));
+                              renderedElements.push(renderButton(2));
+                              renderedElements.push(
+                                renderDots('dots-right'),
+                              );
+                              renderedElements.push(
+                                renderButton(paginationTotalPages),
+                              );
+                            } else if (currentPage >= paginationTotalPages - 1) {
+                              renderedElements.push(renderButton(1));
+                              renderedElements.push(
+                                renderDots('dots-left'),
+                              );
+                              renderedElements.push(
+                                renderButton(paginationTotalPages - 1),
+                              );
+                              renderedElements.push(
+                                renderButton(paginationTotalPages),
+                              );
+                            } else {
+                              renderedElements.push(renderButton(1));
+                              renderedElements.push(
+                                renderDots('dots-left'),
+                              );
+                              renderedElements.push(
+                                renderButton(currentPage),
+                              );
+                              renderedElements.push(
+                                renderDots('dots-right'),
+                              );
+                              renderedElements.push(
+                                renderButton(paginationTotalPages),
+                              );
+                            }
+                          }
+                          return renderedElements;
+                        })()}
+                      </div>
+
+                      <Button variant="outline"
+                        size="sm"
+                        className="h-9 w-9 border border-border/60 hover:bg-accent hover:text-accent-foreground text-xs font-semibold cursor-pointer disabled:opacity-50"
+                        onClick={() =>setCurrentPage((prev) =>
+                            Math.min(prev + 1, paginationTotalPages),
+                          )
+                        }
+                        disabled={currentPage === paginationTotalPages}
+                      >
+                        
+                        <ChevronRight className="h-4 w-4" /></Button>
+                    </div>
                   </div>
-                </div>
-              )}
+                );
+              })()}
             </CardContent>
           </Card>
 
@@ -962,7 +1193,7 @@ const JobVerificationPage: React.FC = () => {
 
             <div className="p-6 max-h-[65vh] overflow-y-auto space-y-5 text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">
               <div className="space-y-2">
-                <h4 className="font-extrabold text-foreground uppercase text-[11px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
+                <h4 className="font-extrabold text-foreground uppercase text-[12px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
                   <span className="text-emerald-500"><Sparkles className="h-4 w-4" /></span> HALLO AI HELPER
                 </h4>
                 <p className="pl-1">
@@ -971,7 +1202,7 @@ const JobVerificationPage: React.FC = () => {
               </div>
 
               <div className="space-y-2">
-                <h4 className="font-extrabold text-foreground uppercase text-[11px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
+                <h4 className="font-extrabold text-foreground uppercase text-[12px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
                   <span className="text-blue-500"><ShieldCheck className="h-4 w-4" /></span> KUALITAS & KEAMANAN
                 </h4>
                 <p className="pl-1">
@@ -980,7 +1211,7 @@ const JobVerificationPage: React.FC = () => {
               </div>
 
               <div className="space-y-2">
-                <h4 className="font-extrabold text-foreground uppercase text-[11px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
+                <h4 className="font-extrabold text-foreground uppercase text-[12px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
                   <span className="text-purple-500"><Briefcase className="h-4 w-4" /></span> TINDAKAN FLEXIBEL
                 </h4>
                 <p className="pl-1">
