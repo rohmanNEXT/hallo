@@ -146,7 +146,7 @@ const ProfileTab: React.FC = () => {
   const bannerPhotos = [
     {
       url: '/images/banners/banner1.png?v=25',
-      label: 'Mountains',
+      label: 'Mountain',
     },
     {
       url: '/images/banners/banner2.png?v=25',
