@@ -38,7 +38,8 @@ interface DashboardOverviewProps {
 export default function DashboardOverview({
   onNavigate,
 }: DashboardOverviewProps) {
-  const { user, applications, bookmarks, theme, bannerIndex, setBannerIndex } = useAppStore();
+  const { user, applications, bookmarks, theme, bannerIndex, setBannerIndex } =
+    useAppStore();
   const [allJobs, setAllJobs] = useState<Job[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [mounted, setMounted] = useState(false);
@@ -89,78 +90,31 @@ export default function DashboardOverview({
 
   // Change photo with crossfade + save to store
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const bannerPhotos = [
     {
       url: '/images/banners/banner1.png?v=25',
-      label: 'Pegunungan',
+      label: 'Mountains',
     },
     {
       url: '/images/banners/banner2.png?v=25',
-      label: 'Hutan',
+      label: 'Forest',
     },
     {
       url: '/images/banners/banner3.png?v=25',
-      label: 'Pantai',
+      label: 'Beach',
     },
     {
       url: '/images/banners/banner4.png?v=25',
-      label: 'Kota',
+      label: 'City',
     },
     {
       url: '/images/banners/banner5.png?v=25',
-      label: 'Laut',
+      label: 'Ocean',
       copyright: 'Maldives Atolls',
     },
     {
       url: '/images/banners/banner6.png?v=25',
-      label: 'Salju',
+      label: 'Fruit',
     },
     {
       url: 'https://bing.biturl.top/?resolution=1920&format=image&index=0',
@@ -176,8 +130,6 @@ export default function DashboardOverview({
     setBannerIndex(idx);
     setTimeout(() => setFading(false), 700);
   };
-
-
 
   useEffect(() => {
     setMounted(true);
@@ -313,9 +265,12 @@ export default function DashboardOverview({
                       alt={photo.label}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       draggable={false}
-                     width={100} height={100} unoptimized />
+                      width={100}
+                      height={100}
+                      unoptimized
+                    />
                     <div className="absolute inset-0 bg-black/25 group-hover:bg-black/5 transition-all" />
-                    <span className="absolute bottom-1 left-0 right-0 text-center text-[12px] font-bold text-white drop-shadow-md">
+                    <span className="absolute bottom-1 left-0 right-0 text-center text-[10px] font-bold text-white drop-shadow-md">
                       {photo.label}
                     </span>
                     {bannerIndex === idx && (
@@ -343,7 +298,10 @@ export default function DashboardOverview({
                       alt="Bing"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       draggable={false}
-                     width={100} height={100} unoptimized />
+                      width={100}
+                      height={100}
+                      unoptimized
+                    />
                     <div className="absolute inset-0 bg-black/25" />
                   </div>
                   <span className="text-[12px] font-bold text-foreground">
@@ -353,7 +311,7 @@ export default function DashboardOverview({
                 {bannerIndex === 6 && (
                   <div className="flex -space-x-2 mr-2">
                     <div className="w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center border-2 border-card z-10">
-                    <LuCheck className="w-3 h-3 text-primary-foreground" />
+                      <LuCheck className="w-3 h-3 text-primary-foreground" />
                     </div>
                   </div>
                 )}
@@ -424,16 +382,16 @@ export default function DashboardOverview({
             <span className="font-semibold text-sm text-foreground block">
               Lamaran Saya
             </span>
-             <div className="relative flex items-center w-full sm:max-w-[240px]">
-               <Search className="absolute left-2.5 h-3.5 w-3.5 text-muted-foreground" />
-               <input
-                 type="text"
-                 placeholder="Cari lamaran"
-                 value={searchQuery}
-                 onChange={(e) => setSearchQuery(e.target.value)}
-                 className="w-full pl-8 pr-3 py-1.5 text-xs rounded-xl border bg-background/50 focus:outline-none focus:ring-1 focus:ring-primary"
-               />
-             </div>
+            <div className="relative flex items-center w-full sm:max-w-[240px]">
+              <Search className="absolute left-2.5 h-3.5 w-3.5 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="Cari lamaran"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-8 pr-3 py-1.5 text-xs rounded-xl border bg-background/50 focus:outline-none focus:ring-1 focus:ring-primary"
+              />
+            </div>
           </div>
 
           {/* Fixed Height Scroll Container (height set to fit 9 items neatly, approx 450px) */}
@@ -467,7 +425,10 @@ export default function DashboardOverview({
                           src={app.logo}
                           alt={app.company}
                           className="w-full h-full object-contain"
-                         width={100} height={100} unoptimized />
+                          width={100}
+                          height={100}
+                          unoptimized
+                        />
                       ) : (
                         <LuBuilding2 className="w-5 h-5 text-muted-foreground" />
                       )}
@@ -543,11 +504,18 @@ export default function DashboardOverview({
                       : 'text-muted-foreground'
                   }
                 >
-                  {profileStrength === 100
-                    ? <span className="flex items-center gap-1"><Sparkles className="h-3 w-3" /> Profil Sempurna!</span>
-                    : profileStrength >= 80
-                      ? <span className="flex items-center gap-1"><CheckCircle2 className="h-3 w-3" /> Sudah Dilirik Rekruter</span>
-                      : 'Minimal 80% Dilirik Rekruter'}
+                  {profileStrength === 100 ? (
+                    <span className="flex items-center gap-1">
+                      <Sparkles className="h-3 w-3" /> Profil Sempurna!
+                    </span>
+                  ) : profileStrength >= 80 ? (
+                    <span className="flex items-center gap-1">
+                      <CheckCircle2 className="h-3 w-3" /> Sudah Dilirik
+                      Rekruter
+                    </span>
+                  ) : (
+                    'Minimal 80% Dilirik Rekruter'
+                  )}
                 </span>
               </div>
               <div className="w-full h-2 bg-muted rounded-full overflow-hidden mt-1">
@@ -568,8 +536,14 @@ export default function DashboardOverview({
             <div className="space-y-3 pt-2">
               {[
                 { label: 'Informasi Kontak WhatsApp', done: !!user.waNumber },
-                { label: 'Pendidikan Terakhir', done: !!(user.education && user.education.length > 0) },
-                { label: 'Pengalaman Kerja', done: !!(user.experience && user.experience.length > 0) },
+                {
+                  label: 'Pendidikan Terakhir',
+                  done: !!(user.education && user.education.length > 0),
+                },
+                {
+                  label: 'Pengalaman Kerja',
+                  done: !!(user.experience && user.experience.length > 0),
+                },
                 { label: 'Unggah Berkas Resume CV', done: !!user.resume },
                 { label: 'Deskripsi Tentang Saya', done: !!user.aboutMe },
                 {

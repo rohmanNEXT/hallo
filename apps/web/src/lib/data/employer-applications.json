@@ -1,0 +1,815 @@
+[
+  {
+    "id": "app-1", "talentId": "talent-1", "jobId": "emp-job-1", "status": "Melamar", "date": "10 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Halo, saya sangat tertarik dengan lowongan Frontend Engineer ini.", "timestamp": "10 Jun 2026, 10:00" }],
+    "screeningAnswers": {
+      "sq-1-1": "Foto_Profil_Budi_Santoso.jpg",
+      "sq-1-2": "Resume_Budi_Santoso.pdf",
+      "sq-1-3": "Selama 4 tahun terakhir, saya telah memimpin tim pengembang dalam membangun arsitektur frontend yang kompleks untuk aplikasi perbankan digital berskala besar. Kami menggunakan React.js dan Next.js secara intensif untuk memastikan performa yang sangat cepat, SEO yang teroptimasi, dan pengalaman pengguna yang luar biasa. Saya juga memiliki pengalaman mendalam yang mencakup optimasi performa web, CI/CD pipelines terintegrasi, dan automated testing secara menyeluruh menggunakan tools seperti Cypress dan Jest. Proyek terbesar yang pernah saya tangani secara langsung berhasil meningkatkan conversion rate hingga 45% dalam waktu 3 bulan pertama setelah peluncuran fitur baru tersebut.",
+      "sq-1-4": "",
+      "sq-1-5": "Rp 12.000.000 per bulan",
+      "sq-1-6": "Ya, saya bersedia"
+    }
+  },
+  {
+    "id": "app-2", "talentId": "talent-2", "jobId": "emp-job-3", "status": "Terseleksi", "date": "11 Jun 2026",
+    "chatHistory": [
+      { "sender": "user", "content": "Halo, saya telah mengirimkan portfolio desain terbaru saya.", "timestamp": "11 Jun 2026, 11:30" },
+      { "sender": "company", "content": "Terima kasih, portfolio Anda sedang kami tinjau.", "timestamp": "11 Jun 2026, 14:00" }
+    ],
+    "screeningAnswers": {
+      "sq-3-1": "Foto_Profil_Siti_Rahmawati.jpg",
+      "sq-3-2": "Resume_Siti_Rahmawati.pdf",
+      "sq-3-3": "https://www.figma.com/@sitidesign",
+      "sq-3-4": "",
+      "sq-3-5": "Sebagai seorang UI/UX Designer yang bersemangat, saya memiliki rekam jejak yang kuat dalam menciptakan antarmuka pengguna yang intuitif, menarik secara visual, dan berpusat pada pengguna untuk berbagai aplikasi digital. Pengalaman saya mencakup seluruh proses desain produk, mulai dari riset pengguna (user research), pembuatan wireframe, prototyping tingkat lanjut, hingga penyerahan desain akhir (handoff) ke tim pengembang. Saya sangat mahir menggunakan berbagai perangkat lunak desain industri standar seperti Figma, Adobe XD, Sketch, dan Principle untuk menciptakan animasi mikro yang halus dan interaksi yang kompleks. Saya selalu memastikan bahwa setiap elemen desain mematuhi pedoman aksesibilitas global (WCAG) dan prinsip-prinsip desain responsif, sehingga produk dapat diakses dan digunakan dengan nyaman di berbagai perangkat dan ukuran layar.",
+      "sq-3-6": "Rp 8.500.000 per bulan"
+    }
+  },
+  {
+    "id": "app-3", "talentId": "talent-3", "jobId": "emp-job-2", "status": "Melamar", "date": "12 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Selamat siang, saya melamar untuk posisi Backend Developer.", "timestamp": "12 Jun 2026, 09:15" }],
+    "screeningAnswers": {
+      "sq-2-1": "Foto_Profil_Rian_Hidayat.jpg",
+      "sq-2-2": "Resume_Rian_Hidayat.pdf",
+      "sq-2-3": "NestJS dan Express (utama), pernah juga menggunakan Django",
+      "sq-2-4": "Ya",
+      "sq-2-5": "Rp 15.000.000 per bulan",
+      "sq-2-6": "Ya",
+      "sq-2-7": "Pernah menangani API dengan 50.000 request/menit di Shopee, menggunakan Redis caching dan horizontal scaling"
+    }
+  },
+  {
+    "id": "app-4", "talentId": "talent-4", "jobId": "emp-job-9", "status": "Diterima", "date": "09 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Terima kasih banyak atas kesempatannya!", "timestamp": "09 Jun 2026, 16:30" }],
+    "screeningAnswers": {
+      "sq-9-1": "Foto_Profil_Amalia_Putri.jpg",
+      "sq-9-2": "Resume_Amalia_Putri.pdf",
+      "sq-9-3": "Google Ads dan Meta Ads (Facebook & Instagram)",
+      "sq-9-4": "Rp 5.000.000 per bulan",
+      "sq-9-5": "Ya, Google Ads Certified",
+      "sq-9-6": "Rp 6.000.000 per bulan"
+    }
+  },
+  {
+    "id": "app-5", "talentId": "talent-5", "jobId": "emp-job-4", "status": "Ditutup", "date": "08 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya siap mengikuti proses seleksi.", "timestamp": "08 Jun 2026, 13:00" }],
+    "screeningAnswers": {
+      "sq-4-1": "Foto_Profil_Dimas_Prabowo.jpg",
+      "sq-4-2": "Resume_Dimas_Prabowo.pdf",
+      "sq-4-3": "React + Node.js + MongoDB (MERN Stack), juga TypeScript dan Next.js",
+      "sq-4-4": "Ya, pernah deploy ke AWS EC2, S3, dan Lambda",
+      "sq-4-5": "5 tahun total pengalaman",
+      "sq-4-6": "Rp 18.000.000 per bulan"
+    }
+  },
+  {
+    "id": "app-6", "talentId": "talent-6", "jobId": "emp-job-10", "status": "Melamar", "date": "10 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya tertarik dengan posisi HR Specialist ini.", "timestamp": "10 Jun 2026, 09:00" }],
+    "screeningAnswers": {
+      "sq-10-1": "Foto_Profil_Dewi_Lestari.jpg",
+      "sq-10-2": "Resume_Dewi_Lestari.pdf",
+      "sq-10-3": "SAP HR, Workday, dan software HRIS lokal Talenta.co",
+      "sq-10-4": "10-15 posisi per bulan di berbagai level",
+      "sq-10-5": "Ya",
+      "sq-10-6": "Rp 9.000.000 per bulan"
+    }
+  },
+  {
+    "id": "app-7", "talentId": "talent-7", "jobId": "emp-job-8", "status": "Terseleksi", "date": "11 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Halo, saya melamar posisi Mobile Developer Flutter.", "timestamp": "11 Jun 2026, 08:30" }],
+    "screeningAnswers": {
+      "sq-8-1": "Foto_Profil_Kevin_Wijaya.jpg",
+      "sq-8-2": "Resume_Kevin_Wijaya.pdf",
+      "sq-8-3": "Flutter 3.19.6",
+      "sq-8-4": "BLoC dan Riverpod, tergantung kebutuhan project",
+      "sq-8-5": "Ya, sudah publish 3 aplikasi di Play Store dan 2 di App Store",
+      "sq-8-6": "Rp 10.000.000 per bulan"
+    }
+  },
+  {
+    "id": "app-8", "talentId": "talent-8", "jobId": "emp-job-11", "status": "Melamar", "date": "12 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya sangat tertarik dengan posisi Content Writer remote ini.", "timestamp": "12 Jun 2026, 11:00" }],
+    "screeningAnswers": {
+      "sq-11-1": "Foto_Profil_Indah_Kusuma.jpg",
+      "sq-11-2": "Resume_Indah_Kusuma.pdf",
+      "sq-11-3": "https://medium.com/@indahwrites, https://idntimes.com/author/indah",
+      "sq-11-4": "Teknologi dan Lifestyle",
+      "sq-11-5": "5-7 artikel per minggu",
+      "sq-11-6": "Rp 7.000.000 per bulan"
+    }
+  },
+  {
+    "id": "app-9", "talentId": "talent-9", "jobId": "emp-job-7", "status": "Diterima", "date": "09 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya sangat antusias untuk bergabung sebagai Product Manager.", "timestamp": "09 Jun 2026, 10:15" }],
+    "screeningAnswers": {
+      "sq-7-1": "Foto_Profil_Aditya_Pratama.jpg",
+      "sq-7-2": "Resume_Aditya_Pratama.pdf",
+      "sq-7-3": "Scrum, OKR, dan Product-Led Growth (PLG)",
+      "sq-7-4": "Ya, pernah memimpin tim 15 orang di OVO",
+      "sq-7-5": "Rp 20.000.000 per bulan",
+      "sq-7-6": "Membangun fitur dompet digital OVO yang meningkatkan transaksi 40% dalam 6 bulan"
+    }
+  },
+  {
+    "id": "app-10", "talentId": "talent-10", "jobId": "emp-job-5", "status": "Terseleksi", "date": "10 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar posisi Data Scientist di perusahaan Anda.", "timestamp": "10 Jun 2026, 14:00" }],
+    "screeningAnswers": {
+      "sq-5-1": "Foto_Profil_Laras_Rahayu.jpg",
+      "sq-5-2": "Resume_Laras_Rahayu.pdf",
+      "sq-5-3": "TensorFlow, PyTorch, dan scikit-learn",
+      "sq-5-4": "Ya",
+      "sq-5-5": "Rp 22.000.000 per bulan",
+      "sq-5-6": "Membangun model credit scoring untuk Bank Mandiri yang meningkatkan akurasi approval 25%",
+      "sq-5-7": "Ya, memiliki sertifikasi AWS Machine Learning Specialty dan Google Professional Data Engineer"
+    }
+  },
+  {
+    "id": "app-11", "talentId": "talent-11", "jobId": "emp-job-1", "status": "Melamar", "date": "11 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Halo rekruter, saya melamar posisi Frontend Engineer.", "timestamp": "11 Jun 2026, 10:00" }],
+    "screeningAnswers": {
+      "sq-1-1": "Foto_Profil_Budi_Santoso_11.jpg",
+      "sq-1-2": "Resume_Budi_Santoso_11.pdf",
+      "sq-1-3": "2 tahun",
+      "sq-1-4": "Ya",
+      "sq-1-5": "Rp 9.000.000",
+      "sq-1-6": "Ya"
+    }
+  },
+  {
+    "id": "app-12", "talentId": "talent-12", "jobId": "emp-job-3", "status": "Terseleksi", "date": "12 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar sebagai UI/UX Designer.", "timestamp": "12 Jun 2026, 09:30" }],
+    "screeningAnswers": {
+      "sq-3-1": "Foto_Profil_Siti_Rahmawati_12.jpg",
+      "sq-3-2": "Resume_Siti_Rahmawati_12.pdf",
+      "sq-3-3": "https://behance.net/sitidesign12",
+      "sq-3-4": "Tidak, belum pernah dari nol tapi pernah berkontribusi",
+      "sq-3-5": "Figma (utama), Sketch",
+      "sq-3-6": "Rp 7.500.000"
+    }
+  },
+  {
+    "id": "app-13", "talentId": "talent-13", "jobId": "emp-job-2", "status": "Melamar", "date": "13 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar Backend Developer (Node.js).", "timestamp": "13 Jun 2026, 08:00" }],
+    "screeningAnswers": {
+      "sq-2-1": "Foto_Profil_Rian_Hidayat_13.jpg",
+      "sq-2-2": "Resume_Rian_Hidayat_13.pdf",
+      "sq-2-3": "Express.js",
+      "sq-2-4": "Ya",
+      "sq-2-5": "Rp 12.000.000",
+      "sq-2-6": "Ya, familiar dengan Docker",
+      "sq-2-7": "Pernah menangani 10.000 req/menit menggunakan Redis caching"
+    }
+  },
+  {
+    "id": "app-14", "talentId": "talent-14", "jobId": "emp-job-9", "status": "Diterima", "date": "14 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar Digital Marketing Specialist.", "timestamp": "14 Jun 2026, 11:00" }],
+    "screeningAnswers": {
+      "sq-9-1": "Foto_Profil_Amalia_Putri_14.jpg",
+      "sq-9-2": "Resume_Amalia_Putri_14.pdf",
+      "sq-9-3": "Meta Ads (Facebook & Instagram)",
+      "sq-9-4": "Rp 15.000.000 per bulan",
+      "sq-9-5": "Ya, Meta Blueprint Certified",
+      "sq-9-6": "Rp 7.500.000"
+    }
+  },
+  {
+    "id": "app-15", "talentId": "talent-15", "jobId": "emp-job-4", "status": "Melamar", "date": "15 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar Full Stack Developer.", "timestamp": "15 Jun 2026, 10:30" }],
+    "screeningAnswers": {
+      "sq-4-1": "Foto_Profil_Dimas_Prabowo_15.jpg",
+      "sq-4-2": "Resume_Dimas_Prabowo_15.pdf",
+      "sq-4-3": "Sebagai Full Stack Developer, saya memiliki pengalaman ekstensif dalam merancang dan mengembangkan sistem skala besar dari awal hingga akhir. Di bagian frontend, saya mahir menggunakan ekosistem React (termasuk Next.js, Redux, dan Tailwind CSS) untuk membuat antarmuka yang sangat responsif, mulus, dan ramah pengguna dengan fokus utama pada Core Web Vitals dan aksesibilitas (a11y). Di sisi backend, saya sangat terbiasa merancang RESTful API dan GraphQL menggunakan Node.js (Express/NestJS) maupun Laravel, serta mengelola arsitektur database relasional (PostgreSQL, MySQL) dan NoSQL (MongoDB, Redis) untuk mengoptimalkan performa kueri yang sangat masif. Selain itu, saya memiliki pengalaman langsung dalam menyiapkan CI/CD pipelines menggunakan GitHub Actions dan GitLab CI, melakukan containerization dengan Docker, serta orkestrasi deployment di AWS (EC2, S3, RDS) dan Google Cloud Platform (GCP). Semuanya saya bangun dengan mengedepankan prinsip clean code, arsitektur microservices, dan automated testing terintegrasi (Jest, Cypress, PHPUnit) demi menjaga stabilitas sistem secara keseluruhan pada lingkungan production yang memiliki traffic sangat tinggi setiap harinya.",
+      "sq-4-4": "",
+      "sq-4-5": "3 tahun",
+      "sq-4-6": "Rp 15.000.000",
+      "sq-4-7": "https://github.com/dimasprabowo/fullstack-project"
+    }
+  },
+  {
+    "id": "app-16", "talentId": "talent-16", "jobId": "emp-job-10", "status": "Terseleksi", "date": "16 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar HR Specialist.", "timestamp": "16 Jun 2026, 09:00" }],
+    "screeningAnswers": {
+      "sq-10-1": "Foto_Profil_Dewi_Lestari_16.jpg",
+      "sq-10-2": "Resume_Dewi_Lestari_16.pdf",
+      "sq-10-3": "Talenta.co dan spreadsheet HR manual",
+      "sq-10-4": "5-8 posisi per bulan",
+      "sq-10-5": "Ya",
+      "sq-10-6": "Rp 8.000.000"
+    }
+  },
+  {
+    "id": "app-17", "talentId": "talent-17", "jobId": "emp-job-8", "status": "Melamar", "date": "17 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar Mobile Developer Flutter.", "timestamp": "17 Jun 2026, 08:30" }],
+    "screeningAnswers": {
+      "sq-8-1": "Foto_Profil_Kevin_Wijaya_17.jpg",
+      "sq-8-2": "Resume_Kevin_Wijaya_17.pdf",
+      "sq-8-3": "Flutter 3.16.9",
+      "sq-8-4": "Provider",
+      "sq-8-5": "Ya, 1 aplikasi di Play Store",
+      "sq-8-6": "Rp 8.500.000"
+    }
+  },
+  {
+    "id": "app-18", "talentId": "talent-18", "jobId": "emp-job-11", "status": "Ditutup", "date": "18 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar Content Writer.", "timestamp": "18 Jun 2026, 11:00" }],
+    "screeningAnswers": {
+      "sq-11-1": "Foto_Profil_Indah_Kusuma_18.jpg",
+      "sq-11-2": "Resume_Indah_Kusuma_18.pdf",
+      "sq-11-3": "https://kompas.com/author/indah18",
+      "sq-11-4": "Kesehatan dan Gaya Hidup",
+      "sq-11-5": "3-4 artikel per minggu",
+      "sq-11-6": "Rp 6.000.000"
+    }
+  },
+  {
+    "id": "app-19", "talentId": "talent-19", "jobId": "emp-job-7", "status": "Melamar", "date": "19 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar Product Manager.", "timestamp": "19 Jun 2026, 10:00" }],
+    "screeningAnswers": {
+      "sq-7-1": "Foto_Profil_Aditya_Pratama_19.jpg",
+      "sq-7-2": "Resume_Aditya_Pratama_19.pdf",
+      "sq-7-3": "Agile Scrum",
+      "sq-7-4": "Ya, 12 orang",
+      "sq-7-5": "Rp 18.000.000",
+      "sq-7-6": "Meluncurkan fitur baru yang meningkatkan retention 30%"
+    }
+  },
+  {
+    "id": "app-20", "talentId": "talent-20", "jobId": "emp-job-5", "status": "Diterima", "date": "20 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar Data Scientist.", "timestamp": "20 Jun 2026, 14:00" }],
+    "screeningAnswers": {
+      "sq-5-1": "Foto_Profil_Laras_Rahayu_20.jpg",
+      "sq-5-2": "Resume_Laras_Rahayu_20.pdf",
+      "sq-5-3": "scikit-learn dan XGBoost",
+      "sq-5-4": "Ya",
+      "sq-5-5": "Rp 20.000.000",
+      "sq-5-6": "Membangun model rekomendasi produk yang meningkatkan konversi 15%",
+      "sq-5-7": "Tidak"
+    }
+  },
+  {
+    "id": "app-21", "talentId": "talent-21", "jobId": "emp-job-6", "status": "Melamar", "date": "21 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar DevOps Engineer.", "timestamp": "21 Jun 2026, 09:00" }],
+    "screeningAnswers": {
+      "sq-6-1": "Foto_Profil_Budi_Santoso_21.jpg",
+      "sq-6-2": "Resume_Budi_Santoso_21.pdf",
+      "sq-6-3": "AWS",
+      "sq-6-4": "Ya",
+      "sq-6-5": "Terraform dan Ansible",
+      "sq-6-6": "Rp 15.000.000"
+    }
+  },
+  {
+    "id": "app-22", "talentId": "talent-22", "jobId": "emp-job-12", "status": "Terseleksi", "date": "22 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar QA Engineer.", "timestamp": "22 Jun 2026, 08:00" }],
+    "screeningAnswers": {
+      "sq-12-1": "Foto_Profil_Siti_Rahmawati_22.jpg",
+      "sq-12-2": "Resume_Siti_Rahmawati_22.pdf",
+      "sq-12-3": "Cypress dan Playwright",
+      "sq-12-4": "Ya, menggunakan Postman dan Newman",
+      "sq-12-5": "Rp 10.000.000"
+    }
+  },
+  {
+    "id": "app-23", "talentId": "talent-23", "jobId": "emp-job-13", "status": "Melamar", "date": "23 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar Cyber Security Analyst.", "timestamp": "23 Jun 2026, 10:30" }],
+    "screeningAnswers": {
+      "sq-13-1": "Foto_Profil_Rian_Hidayat_23.jpg",
+      "sq-13-2": "Resume_Rian_Hidayat_23.pdf",
+      "sq-13-3": "CEH (Certified Ethical Hacker) dan CompTIA Security+",
+      "sq-13-4": "Ya",
+      "sq-13-5": "Rp 14.000.000",
+      "sq-13-6": "Menangani serangan ransomware di perusahaan fintech, berhasil recover data dalam 24 jam"
+    }
+  },
+  {
+    "id": "app-24", "talentId": "talent-24", "jobId": "emp-job-14", "status": "Diterima", "date": "24 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar Business Analyst.", "timestamp": "24 Jun 2026, 09:00" }],
+    "screeningAnswers": {
+      "sq-14-1": "Foto_Profil_Amalia_Putri_24.jpg",
+      "sq-14-2": "Resume_Amalia_Putri_24.pdf",
+      "sq-14-3": "Lucidchart dan Visio untuk BPMN",
+      "sq-14-4": "Ya",
+      "sq-14-5": "Rp 11.000.000"
+    }
+  },
+  {
+    "id": "app-25", "talentId": "talent-25", "jobId": "emp-job-15", "status": "Melamar", "date": "25 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar Social Media Manager.", "timestamp": "25 Jun 2026, 11:00" }],
+    "screeningAnswers": {
+      "sq-15-1": "Foto_Profil_Dimas_Prabowo_25.jpg",
+      "sq-15-2": "Resume_Dimas_Prabowo_25.pdf",
+      "sq-15-3": "TikTok dan Instagram",
+      "sq-15-4": "Mengelola akun @techbrand dengan pertumbuhan 50K followers dalam 3 bulan, engagement rate 8%",
+      "sq-15-5": "Rp 8.000.000"
+    }
+  },
+  {
+    "id": "app-26", "talentId": "talent-26", "jobId": "emp-job-16", "status": "Terseleksi", "date": "26 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar Sales Executive.", "timestamp": "26 Jun 2026, 08:30" }],
+    "screeningAnswers": {
+      "sq-16-1": "Foto_Profil_Dewi_Lestari_26.jpg",
+      "sq-16-2": "Resume_Dewi_Lestari_26.pdf",
+      "sq-16-3": "Rp 50.000.000 per bulan (150% achievement)",
+      "sq-16-4": "Ya, 3 tahun pengalaman B2B",
+      "sq-16-5": "Ya, memiliki SIM A dan motor sendiri",
+      "sq-16-6": "Rp 6.500.000"
+    }
+  },
+  {
+    "id": "app-27", "talentId": "talent-27", "jobId": "emp-job-17", "status": "Melamar", "date": "27 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar Customer Support Specialist.", "timestamp": "27 Jun 2026, 10:00" }],
+    "screeningAnswers": {
+      "sq-17-1": "Foto_Profil_Kevin_Wijaya_27.jpg",
+      "sq-17-2": "Resume_Kevin_Wijaya_27.pdf",
+      "sq-17-3": "Ya, bersedia shift termasuk weekend",
+      "sq-17-4": "Zendesk dan Freshdesk",
+      "sq-17-5": "Rp 5.000.000"
+    }
+  },
+  {
+    "id": "app-28", "talentId": "talent-28", "jobId": "emp-job-20", "status": "Diterima", "date": "28 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar Scrum Master.", "timestamp": "28 Jun 2026, 09:30" }],
+    "screeningAnswers": {
+      "sq-20-1": "Foto_Profil_Indah_Kusuma_28.jpg",
+      "sq-20-2": "Resume_Indah_Kusuma_28.pdf",
+      "sq-20-3": "Ya, CSM (Certified Scrum Master) dari Scrum Alliance",
+      "sq-20-4": "3 tim sekaligus (masing-masing 7-9 orang)",
+      "sq-20-5": "Rp 14.000.000"
+    }
+  },
+  {
+    "id": "app-29", "talentId": "talent-29", "jobId": "emp-job-21", "status": "Melamar", "date": "29 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar Graphic Designer.", "timestamp": "29 Jun 2026, 11:00" }],
+    "screeningAnswers": {
+      "sq-21-1": "Foto_Profil_Aditya_Pratama_29.jpg",
+      "sq-21-2": "Resume_Aditya_Pratama_29.pdf",
+      "sq-21-3": "https://www.behance.net/adityagraphic29",
+      "sq-21-4": "Adobe Illustrator dan Photoshop",
+      "sq-21-5": "Ya, pernah buat motion graphic sederhana",
+      "sq-21-6": "Rp 7.000.000"
+    }
+  },
+  {
+    "id": "app-30", "talentId": "talent-30", "jobId": "emp-job-22", "status": "Terseleksi", "date": "30 Jun 2026",
+    "chatHistory": [{ "sender": "user", "content": "Saya melamar SEO Specialist.", "timestamp": "30 Jun 2026, 09:00" }],
+    "screeningAnswers": {
+      "sq-22-1": "Foto_Profil_Laras_Rahayu_30.jpg",
+      "sq-22-2": "Resume_Laras_Rahayu_30.pdf",
+      "sq-22-3": "Ahrefs dan SEMrush",
+      "sq-22-4": "Meningkatkan organic traffic website dari 10K ke 150K/bulan dalam 8 bulan untuk klien e-commerce",
+      "sq-22-5": "Ya, familiar dengan Core Web Vitals dan Schema Markup",
+      "sq-22-6": "Rp 9.000.000"
+    }
+  },
+  {
+    "id": "app-31", "talentId": "talent-31", "jobId": "emp-job-1", "status": "Melamar", "date": "01 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Halo, saya melamar Frontend Engineer.", "timestamp": "01 Jul 2026, 10:00" }],
+    "screeningAnswers": { "sq-1-1": "Foto_Profil_Budi_Santoso_31.jpg", "sq-1-2": "Resume_31.pdf", "sq-1-3": "3 tahun", "sq-1-4": "Ya", "sq-1-5": "Rp 10.000.000", "sq-1-6": "Ya" }
+  },
+  {
+    "id": "app-32", "talentId": "talent-32", "jobId": "emp-job-2", "status": "Terseleksi", "date": "02 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Backend Developer.", "timestamp": "02 Jul 2026, 09:00" }],
+    "screeningAnswers": { "sq-2-1": "Foto_Profil_32.jpg", "sq-2-2": "Resume_32.pdf", "sq-2-3": "Node.js + Express", "sq-2-4": "Ya", "sq-2-5": "Rp 13.000.000", "sq-2-6": "Ya", "sq-2-7": "Menangani 20K req/menit dengan load balancer" }
+  },
+  {
+    "id": "app-33", "talentId": "talent-33", "jobId": "emp-job-3", "status": "Melamar", "date": "03 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar UI/UX Designer.", "timestamp": "03 Jul 2026, 11:00" }],
+    "screeningAnswers": { "sq-3-1": "Foto_33.jpg", "sq-3-2": "CV_33.pdf", "sq-3-3": "https://dribbble.com/designer33", "sq-3-4": "Ya", "sq-3-5": "Figma", "sq-3-6": "Rp 9.000.000" }
+  },
+  {
+    "id": "app-34", "talentId": "talent-34", "jobId": "emp-job-4", "status": "Diterima", "date": "04 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Full Stack Developer.", "timestamp": "04 Jul 2026, 10:30" }],
+    "screeningAnswers": { "sq-4-1": "Foto_34.jpg", "sq-4-2": "CV_34.pdf", "sq-4-3": "React + Node.js", "sq-4-4": "Ya", "sq-4-5": "4 tahun", "sq-4-6": "Rp 16.000.000" }
+  },
+  {
+    "id": "app-35", "talentId": "talent-35", "jobId": "emp-job-5", "status": "Melamar", "date": "05 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Data Scientist.", "timestamp": "05 Jul 2026, 14:00" }],
+    "screeningAnswers": { "sq-5-1": "Foto_35.jpg", "sq-5-2": "CV_35.pdf", "sq-5-3": "PyTorch", "sq-5-4": "Ya", "sq-5-5": "Rp 19.000.000", "sq-5-6": "Model NLP untuk analisis sentimen produk", "sq-5-7": "Ya, TensorFlow Developer Certificate" }
+  },
+  {
+    "id": "app-36", "talentId": "talent-36", "jobId": "emp-job-6", "status": "Terseleksi", "date": "06 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar DevOps Engineer.", "timestamp": "06 Jul 2026, 09:00" }],
+    "screeningAnswers": { "sq-6-1": "Foto_36.jpg", "sq-6-2": "CV_36.pdf", "sq-6-3": "GCP", "sq-6-4": "Ya", "sq-6-5": "Terraform", "sq-6-6": "Rp 16.000.000" }
+  },
+  {
+    "id": "app-37", "talentId": "talent-37", "jobId": "emp-job-7", "status": "Melamar", "date": "07 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Product Manager.", "timestamp": "07 Jul 2026, 10:00" }],
+    "screeningAnswers": { "sq-7-1": "Foto_37.jpg", "sq-7-2": "CV_37.pdf", "sq-7-3": "OKR dan Design Thinking", "sq-7-4": "Tidak, tim terbesar 8 orang", "sq-7-5": "Rp 19.000.000", "sq-7-6": "Meluncurkan fitur checkout one-click yang turunkan cart abandonment 25%" }
+  },
+  {
+    "id": "app-38", "talentId": "talent-38", "jobId": "emp-job-8", "status": "Ditutup", "date": "08 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Mobile Developer.", "timestamp": "08 Jul 2026, 08:30" }],
+    "screeningAnswers": { "sq-8-1": "Foto_38.jpg", "sq-8-2": "CV_38.pdf", "sq-8-3": "Flutter 3.22.0", "sq-8-4": "Riverpod", "sq-8-5": "Ya, 2 app di Play Store", "sq-8-6": "Rp 11.000.000" }
+  },
+  {
+    "id": "app-39", "talentId": "talent-39", "jobId": "emp-job-9", "status": "Melamar", "date": "09 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Digital Marketing Specialist.", "timestamp": "09 Jul 2026, 10:00" }],
+    "screeningAnswers": { "sq-9-1": "Foto_39.jpg", "sq-9-2": "CV_39.pdf", "sq-9-3": "TikTok Ads dan Google Ads", "sq-9-4": "Rp 8.000.000 per bulan", "sq-9-5": "Tidak", "sq-9-6": "Rp 6.500.000" }
+  },
+  {
+    "id": "app-40", "talentId": "talent-40", "jobId": "emp-job-10", "status": "Diterima", "date": "10 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar HR Specialist.", "timestamp": "10 Jul 2026, 09:00" }],
+    "screeningAnswers": { "sq-10-1": "Foto_40.jpg", "sq-10-2": "CV_40.pdf", "sq-10-3": "SAP HR", "sq-10-4": "20 posisi per bulan", "sq-10-5": "Ya", "sq-10-6": "Rp 9.500.000" }
+  },
+  {
+    "id": "app-41", "talentId": "talent-41", "jobId": "emp-job-11", "status": "Melamar", "date": "11 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Content Writer.", "timestamp": "11 Jul 2026, 11:00" }],
+    "screeningAnswers": { "sq-11-1": "Foto_41.jpg", "sq-11-2": "CV_41.pdf", "sq-11-3": "https://kompas.com/author/writer41", "sq-11-4": "Teknologi dan Bisnis", "sq-11-5": "6 artikel/minggu", "sq-11-6": "Rp 6.500.000" }
+  },
+  {
+    "id": "app-42", "talentId": "talent-42", "jobId": "emp-job-12", "status": "Terseleksi", "date": "12 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar QA Engineer.", "timestamp": "12 Jul 2026, 08:00" }],
+    "screeningAnswers": { "sq-12-1": "Foto_42.jpg", "sq-12-2": "CV_42.pdf", "sq-12-3": "Selenium WebDriver", "sq-12-4": "Ya", "sq-12-5": "Rp 10.500.000" }
+  },
+  {
+    "id": "app-43", "talentId": "talent-43", "jobId": "emp-job-13", "status": "Melamar", "date": "13 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Cyber Security Analyst.", "timestamp": "13 Jul 2026, 10:30" }],
+    "screeningAnswers": { "sq-13-1": "Foto_43.jpg", "sq-13-2": "CV_43.pdf", "sq-13-3": "CISSP", "sq-13-4": "Ya", "sq-13-5": "Rp 15.000.000", "sq-13-6": "Menemukan dan menutup 15 vulnerability kritis di sistem perbankan" }
+  },
+  {
+    "id": "app-44", "talentId": "talent-44", "jobId": "emp-job-14", "status": "Diterima", "date": "14 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Business Analyst.", "timestamp": "14 Jul 2026, 09:00" }],
+    "screeningAnswers": { "sq-14-1": "Foto_44.jpg", "sq-14-2": "CV_44.pdf", "sq-14-3": "BPMN dengan Visio", "sq-14-4": "Ya", "sq-14-5": "Rp 12.000.000" }
+  },
+  {
+    "id": "app-45", "talentId": "talent-45", "jobId": "emp-job-15", "status": "Melamar", "date": "15 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Social Media Manager.", "timestamp": "15 Jul 2026, 11:00" }],
+    "screeningAnswers": { "sq-15-1": "Foto_45.jpg", "sq-15-2": "CV_45.pdf", "sq-15-3": "Instagram dan YouTube", "sq-15-4": "Mengelola akun 200K followers dengan engagement rate 5%", "sq-15-5": "Rp 8.500.000" }
+  },
+  {
+    "id": "app-46", "talentId": "talent-46", "jobId": "emp-job-16", "status": "Terseleksi", "date": "16 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Sales Executive.", "timestamp": "16 Jul 2026, 08:30" }],
+    "screeningAnswers": { "sq-16-1": "Foto_46.jpg", "sq-16-2": "CV_46.pdf", "sq-16-3": "Rp 30.000.000 per bulan", "sq-16-4": "Ya", "sq-16-5": "Ya", "sq-16-6": "Rp 5.500.000" }
+  },
+  {
+    "id": "app-47", "talentId": "talent-47", "jobId": "emp-job-17", "status": "Melamar", "date": "17 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Customer Support.", "timestamp": "17 Jul 2026, 10:00" }],
+    "screeningAnswers": { "sq-17-1": "Foto_47.jpg", "sq-17-2": "CV_47.pdf", "sq-17-3": "Ya", "sq-17-4": "Freshdesk", "sq-17-5": "Rp 4.500.000" }
+  },
+  {
+    "id": "app-48", "talentId": "talent-48", "jobId": "emp-job-20", "status": "Ditutup", "date": "18 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Scrum Master.", "timestamp": "18 Jul 2026, 09:30" }],
+    "screeningAnswers": { "sq-20-1": "Foto_48.jpg", "sq-20-2": "CV_48.pdf", "sq-20-3": "Ya, PSM I", "sq-20-4": "2 tim", "sq-20-5": "Rp 13.000.000" }
+  },
+  {
+    "id": "app-49", "talentId": "talent-49", "jobId": "emp-job-21", "status": "Melamar", "date": "19 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Graphic Designer.", "timestamp": "19 Jul 2026, 11:00" }],
+    "screeningAnswers": { "sq-21-1": "Foto_49.jpg", "sq-21-2": "CV_49.pdf", "sq-21-3": "https://behance.net/designer49", "sq-21-4": "Adobe Illustrator", "sq-21-5": "Tidak", "sq-21-6": "Rp 7.500.000" }
+  },
+  {
+    "id": "app-50", "talentId": "talent-50", "jobId": "emp-job-22", "status": "Terseleksi", "date": "20 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar SEO Specialist.", "timestamp": "20 Jul 2026, 09:00" }],
+    "screeningAnswers": { "sq-22-1": "Foto_50.jpg", "sq-22-2": "CV_50.pdf", "sq-22-3": "Ahrefs", "sq-22-4": "Naikkan traffic dari 5K ke 80K dalam 6 bulan", "sq-22-5": "Ya", "sq-22-6": "Rp 8.500.000" }
+  },
+  {
+    "id": "app-51", "talentId": "talent-51", "jobId": "emp-job-1", "status": "Melamar", "date": "21 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Frontend Engineer.", "timestamp": "21 Jul 2026, 10:00" }],
+    "screeningAnswers": { "sq-1-1": "Foto_51.jpg", "sq-1-2": "CV_51.pdf", "sq-1-3": "2 tahun", "sq-1-4": "Tidak", "sq-1-5": "Rp 8.000.000", "sq-1-6": "Ya" }
+  },
+  {
+    "id": "app-52", "talentId": "talent-52", "jobId": "emp-job-2", "status": "Diterima", "date": "22 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Backend Developer.", "timestamp": "22 Jul 2026, 09:00" }],
+    "screeningAnswers": { "sq-2-1": "Foto_52.jpg", "sq-2-2": "CV_52.pdf", "sq-2-3": "NestJS", "sq-2-4": "Ya", "sq-2-5": "Rp 14.000.000", "sq-2-6": "Ya", "sq-2-7": "API dengan 30K req/menit menggunakan message queue" }
+  },
+  {
+    "id": "app-53", "talentId": "talent-53", "jobId": "emp-job-3", "status": "Melamar", "date": "23 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar UI/UX Designer.", "timestamp": "23 Jul 2026, 11:00" }],
+    "screeningAnswers": { "sq-3-1": "Foto_53.jpg", "sq-3-2": "CV_53.pdf", "sq-3-3": "https://figma.com/@uiux53", "sq-3-4": "Ya", "sq-3-5": "Figma dan Adobe XD", "sq-3-6": "Rp 10.000.000" }
+  },
+  {
+    "id": "app-54", "talentId": "talent-54", "jobId": "emp-job-4", "status": "Terseleksi", "date": "24 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Full Stack Developer.", "timestamp": "24 Jul 2026, 10:30" }],
+    "screeningAnswers": { "sq-4-1": "Foto_54.jpg", "sq-4-2": "CV_54.pdf", "sq-4-3": "Angular + Spring Boot", "sq-4-4": "Ya, GCP", "sq-4-5": "5 tahun", "sq-4-6": "Rp 17.000.000" }
+  },
+  {
+    "id": "app-55", "talentId": "talent-55", "jobId": "emp-job-5", "status": "Melamar", "date": "25 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Data Scientist.", "timestamp": "25 Jul 2026, 14:00" }],
+    "screeningAnswers": { "sq-5-1": "Foto_55.jpg", "sq-5-2": "CV_55.pdf", "sq-5-3": "TensorFlow", "sq-5-4": "Ya", "sq-5-5": "Rp 21.000.000", "sq-5-6": "Model prediksi churn customer dengan akurasi 92%", "sq-5-7": "Ya" }
+  },
+  {
+    "id": "app-56", "talentId": "talent-56", "jobId": "emp-job-6", "status": "Diterima", "date": "26 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar DevOps Engineer.", "timestamp": "26 Jul 2026, 09:00" }],
+    "screeningAnswers": { "sq-6-1": "Foto_56.jpg", "sq-6-2": "CV_56.pdf", "sq-6-3": "AWS", "sq-6-4": "Ya", "sq-6-5": "Terraform dan Jenkins", "sq-6-6": "Rp 17.000.000" }
+  },
+  {
+    "id": "app-57", "talentId": "talent-57", "jobId": "emp-job-7", "status": "Melamar", "date": "27 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Product Manager.", "timestamp": "27 Jul 2026, 10:00" }],
+    "screeningAnswers": { "sq-7-1": "Foto_57.jpg", "sq-7-2": "CV_57.pdf", "sq-7-3": "Scrum dan Kanban", "sq-7-4": "Ya, 14 orang", "sq-7-5": "Rp 20.000.000", "sq-7-6": "Fitur push notification yang meningkatkan DAU 20%" }
+  },
+  {
+    "id": "app-58", "talentId": "talent-58", "jobId": "emp-job-8", "status": "Terseleksi", "date": "28 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Mobile Developer Flutter.", "timestamp": "28 Jul 2026, 08:30" }],
+    "screeningAnswers": { "sq-8-1": "Foto_58.jpg", "sq-8-2": "CV_58.pdf", "sq-8-3": "Flutter 3.20.3", "sq-8-4": "BLoC", "sq-8-5": "Ya, 4 app di Play Store", "sq-8-6": "Rp 12.000.000" }
+  },
+  {
+    "id": "app-59", "talentId": "talent-59", "jobId": "emp-job-9", "status": "Melamar", "date": "29 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Digital Marketing.", "timestamp": "29 Jul 2026, 10:00" }],
+    "screeningAnswers": { "sq-9-1": "Foto_59.jpg", "sq-9-2": "CV_59.pdf", "sq-9-3": "Google Ads", "sq-9-4": "Rp 20.000.000 per bulan", "sq-9-5": "Ya, Google Ads Professional", "sq-9-6": "Rp 7.000.000" }
+  },
+  {
+    "id": "app-60", "talentId": "talent-60", "jobId": "emp-job-10", "status": "Ditutup", "date": "30 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar HR Specialist.", "timestamp": "30 Jul 2026, 09:00" }],
+    "screeningAnswers": { "sq-10-1": "Foto_60.jpg", "sq-10-2": "CV_60.pdf", "sq-10-3": "Workday", "sq-10-4": "12 posisi per bulan", "sq-10-5": "Ya", "sq-10-6": "Rp 9.000.000" }
+  },
+  {
+    "id": "app-61", "talentId": "talent-61", "jobId": "emp-job-11", "status": "Melamar", "date": "01 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Content Writer.", "timestamp": "01 Jul 2026, 11:00" }],
+    "screeningAnswers": { "sq-11-1": "Foto_61.jpg", "sq-11-2": "CV_61.pdf", "sq-11-3": "https://detik.com/author/61", "sq-11-4": "Otomotif dan Teknologi", "sq-11-5": "4 artikel/minggu", "sq-11-6": "Rp 5.500.000" }
+  },
+  {
+    "id": "app-62", "talentId": "talent-62", "jobId": "emp-job-12", "status": "Diterima", "date": "02 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar QA Engineer.", "timestamp": "02 Jul 2026, 08:00" }],
+    "screeningAnswers": { "sq-12-1": "Foto_62.jpg", "sq-12-2": "CV_62.pdf", "sq-12-3": "Playwright", "sq-12-4": "Ya", "sq-12-5": "Rp 11.000.000" }
+  },
+  {
+    "id": "app-63", "talentId": "talent-63", "jobId": "emp-job-13", "status": "Terseleksi", "date": "03 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Cyber Security Analyst.", "timestamp": "03 Jul 2026, 10:30" }],
+    "screeningAnswers": { "sq-13-1": "Foto_63.jpg", "sq-13-2": "CV_63.pdf", "sq-13-3": "CEH dan OSCP", "sq-13-4": "Ya", "sq-13-5": "Rp 16.000.000", "sq-13-6": "Menemukan SQL injection di 3 sistem pemerintah melalui bug bounty" }
+  },
+  {
+    "id": "app-64", "talentId": "talent-64", "jobId": "emp-job-14", "status": "Melamar", "date": "04 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Business Analyst.", "timestamp": "04 Jul 2026, 09:00" }],
+    "screeningAnswers": { "sq-14-1": "Foto_64.jpg", "sq-14-2": "CV_64.pdf", "sq-14-3": "Confluence dan Lucidchart", "sq-14-4": "Ya", "sq-14-5": "Rp 11.500.000" }
+  },
+  {
+    "id": "app-65", "talentId": "talent-65", "jobId": "emp-job-15", "status": "Diterima", "date": "05 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Social Media Manager.", "timestamp": "05 Jul 2026, 11:00" }],
+    "screeningAnswers": { "sq-15-1": "Foto_65.jpg", "sq-15-2": "CV_65.pdf", "sq-15-3": "TikTok", "sq-15-4": "Pertumbuhan 100K TikTok followers dalam 2 bulan, average views 500K per video", "sq-15-5": "Rp 9.000.000" }
+  },
+  {
+    "id": "app-66", "talentId": "talent-66", "jobId": "emp-job-16", "status": "Melamar", "date": "06 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Sales Executive.", "timestamp": "06 Jul 2026, 08:30" }],
+    "screeningAnswers": { "sq-16-1": "Foto_66.jpg", "sq-16-2": "CV_66.pdf", "sq-16-3": "Rp 80.000.000 per bulan (200% achievement)", "sq-16-4": "Ya", "sq-16-5": "Ya, SIM A dan mobil", "sq-16-6": "Rp 7.000.000" }
+  },
+  {
+    "id": "app-67", "talentId": "talent-67", "jobId": "emp-job-17", "status": "Terseleksi", "date": "07 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Customer Support.", "timestamp": "07 Jul 2026, 10:00" }],
+    "screeningAnswers": { "sq-17-1": "Foto_67.jpg", "sq-17-2": "CV_67.pdf", "sq-17-3": "Ya", "sq-17-4": "Zendesk dan Intercom", "sq-17-5": "Rp 5.500.000" }
+  },
+  {
+    "id": "app-68", "talentId": "talent-68", "jobId": "emp-job-19", "status": "Melamar", "date": "08 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Systems Administrator.", "timestamp": "08 Jul 2026, 09:30" }],
+    "screeningAnswers": { "sq-19-1": "Foto_68.jpg", "sq-19-2": "CV_68.pdf", "sq-19-3": "Linux (Ubuntu/CentOS)", "sq-19-4": "Ya, VMware vSphere", "sq-19-5": "Rp 10.000.000" }
+  },
+  {
+    "id": "app-69", "talentId": "talent-69", "jobId": "emp-job-21", "status": "Diterima", "date": "09 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Graphic Designer.", "timestamp": "09 Jul 2026, 11:00" }],
+    "screeningAnswers": { "sq-21-1": "Foto_69.jpg", "sq-21-2": "CV_69.pdf", "sq-21-3": "https://dribbble.com/graphic69", "sq-21-4": "Adobe Photoshop dan Illustrator", "sq-21-5": "Ya, After Effects", "sq-21-6": "Rp 8.000.000" }
+  },
+  {
+    "id": "app-70", "talentId": "talent-70", "jobId": "emp-job-22", "status": "Melamar", "date": "10 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar SEO Specialist.", "timestamp": "10 Jul 2026, 09:00" }],
+    "screeningAnswers": { "sq-22-1": "Foto_70.jpg", "sq-22-2": "CV_70.pdf", "sq-22-3": "SEMrush dan Moz", "sq-22-4": "Traffic naik 300% dalam 12 bulan untuk klien fashion", "sq-22-5": "Ya", "sq-22-6": "Rp 10.000.000" }
+  },
+  {
+    "id": "app-71", "talentId": "talent-71", "jobId": "emp-job-1", "status": "Terseleksi", "date": "11 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Frontend Engineer.", "timestamp": "11 Jul 2026, 10:00" }],
+    "screeningAnswers": { "sq-1-1": "Foto_71.jpg", "sq-1-2": "CV_71.pdf", "sq-1-3": "5 tahun", "sq-1-4": "Ya", "sq-1-5": "Rp 13.000.000", "sq-1-6": "Ya" }
+  },
+  {
+    "id": "app-72", "talentId": "talent-72", "jobId": "emp-job-2", "status": "Melamar", "date": "12 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Backend Developer.", "timestamp": "12 Jul 2026, 09:00" }],
+    "screeningAnswers": { "sq-2-1": "Foto_72.jpg", "sq-2-2": "CV_72.pdf", "sq-2-3": "Go (Golang)", "sq-2-4": "Ya", "sq-2-5": "Rp 16.000.000", "sq-2-6": "Ya", "sq-2-7": "Microservices dengan 100K req/menit" }
+  },
+  {
+    "id": "app-73", "talentId": "talent-73", "jobId": "emp-job-3", "status": "Diterima", "date": "13 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar UI/UX Designer.", "timestamp": "13 Jul 2026, 11:00" }],
+    "screeningAnswers": { "sq-3-1": "Foto_73.jpg", "sq-3-2": "CV_73.pdf", "sq-3-3": "https://figma.com/@designer73", "sq-3-4": "Ya", "sq-3-5": "Figma, Framer", "sq-3-6": "Rp 11.000.000" }
+  },
+  {
+    "id": "app-74", "talentId": "talent-74", "jobId": "emp-job-4", "status": "Melamar", "date": "14 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Full Stack Developer.", "timestamp": "14 Jul 2026, 10:30" }],
+    "screeningAnswers": { "sq-4-1": "Foto_74.jpg", "sq-4-2": "CV_74.pdf", "sq-4-3": "Next.js + NestJS + PostgreSQL", "sq-4-4": "Ya, AWS Amplify", "sq-4-5": "6 tahun", "sq-4-6": "Rp 19.000.000" }
+  },
+  {
+    "id": "app-75", "talentId": "talent-75", "jobId": "emp-job-5", "status": "Terseleksi", "date": "15 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Data Scientist.", "timestamp": "15 Jul 2026, 14:00" }],
+    "screeningAnswers": { "sq-5-1": "Foto_75.jpg", "sq-5-2": "CV_75.pdf", "sq-5-3": "scikit-learn dan Keras", "sq-5-4": "Ya", "sq-5-5": "Rp 20.000.000", "sq-5-6": "Sistem rekomendasi konten yang meningkatkan watch time 35%", "sq-5-7": "Ya" }
+  },
+  {
+    "id": "app-76", "talentId": "talent-76", "jobId": "emp-job-6", "status": "Melamar", "date": "16 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar DevOps Engineer.", "timestamp": "16 Jul 2026, 09:00" }],
+    "screeningAnswers": { "sq-6-1": "Foto_76.jpg", "sq-6-2": "CV_76.pdf", "sq-6-3": "Azure", "sq-6-4": "Ya", "sq-6-5": "Bicep dan Azure DevOps", "sq-6-6": "Rp 15.000.000" }
+  },
+  {
+    "id": "app-77", "talentId": "talent-77", "jobId": "emp-job-7", "status": "Diterima", "date": "17 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Product Manager.", "timestamp": "17 Jul 2026, 10:00" }],
+    "screeningAnswers": { "sq-7-1": "Foto_77.jpg", "sq-7-2": "CV_77.pdf", "sq-7-3": "Lean Startup dan Jobs-to-be-Done", "sq-7-4": "Ya, 20 orang", "sq-7-5": "Rp 22.000.000", "sq-7-6": "Platform marketplace yang capai GMV Rp 50M dalam tahun pertama" }
+  },
+  {
+    "id": "app-78", "talentId": "talent-78", "jobId": "emp-job-8", "status": "Melamar", "date": "18 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Mobile Developer.", "timestamp": "18 Jul 2026, 08:30" }],
+    "screeningAnswers": { "sq-8-1": "Foto_78.jpg", "sq-8-2": "CV_78.pdf", "sq-8-3": "Flutter 3.19.1", "sq-8-4": "Provider", "sq-8-5": "Ya, 5 app di Play Store dan 3 di App Store", "sq-8-6": "Rp 13.000.000" }
+  },
+  {
+    "id": "app-79", "talentId": "talent-79", "jobId": "emp-job-9", "status": "Terseleksi", "date": "19 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Digital Marketing.", "timestamp": "19 Jul 2026, 10:00" }],
+    "screeningAnswers": { "sq-9-1": "Foto_79.jpg", "sq-9-2": "CV_79.pdf", "sq-9-3": "Google Ads dan Programmatic Display", "sq-9-4": "Rp 100.000.000 per bulan", "sq-9-5": "Ya, Google Analytics 4 Certified", "sq-9-6": "Rp 8.000.000" }
+  },
+  {
+    "id": "app-80", "talentId": "talent-80", "jobId": "emp-job-10", "status": "Melamar", "date": "20 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar HR Specialist.", "timestamp": "20 Jul 2026, 09:00" }],
+    "screeningAnswers": { "sq-10-1": "Foto_80.jpg", "sq-10-2": "CV_80.pdf", "sq-10-3": "GreatDay HR dan Mekari Talenta", "sq-10-4": "8 posisi per bulan", "sq-10-5": "Ya", "sq-10-6": "Rp 8.500.000" }
+  },
+  {
+    "id": "app-81", "talentId": "talent-81", "jobId": "emp-job-11", "status": "Diterima", "date": "21 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Content Writer.", "timestamp": "21 Jul 2026, 11:00" }],
+    "screeningAnswers": { "sq-11-1": "Foto_81.jpg", "sq-11-2": "CV_81.pdf", "sq-11-3": "https://tirto.id/author/81", "sq-11-4": "Pendidikan dan Sosial", "sq-11-5": "8 artikel/minggu", "sq-11-6": "Rp 7.500.000" }
+  },
+  {
+    "id": "app-82", "talentId": "talent-82", "jobId": "emp-job-12", "status": "Melamar", "date": "22 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar QA Engineer.", "timestamp": "22 Jul 2026, 08:00" }],
+    "screeningAnswers": { "sq-12-1": "Foto_82.jpg", "sq-12-2": "CV_82.pdf", "sq-12-3": "Cypress dan Appium", "sq-12-4": "Ya", "sq-12-5": "Rp 12.000.000" }
+  },
+  {
+    "id": "app-83", "talentId": "talent-83", "jobId": "emp-job-13", "status": "Terseleksi", "date": "23 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Cyber Security Analyst.", "timestamp": "23 Jul 2026, 10:30" }],
+    "screeningAnswers": { "sq-13-1": "Foto_83.jpg", "sq-13-2": "CV_83.pdf", "sq-13-3": "CISSP dan CEH", "sq-13-4": "Ya", "sq-13-5": "Rp 17.000.000", "sq-13-6": "Memimpin tim security incident response di perusahaan telco nasional" }
+  },
+  {
+    "id": "app-84", "talentId": "talent-84", "jobId": "emp-job-14", "status": "Melamar", "date": "24 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Business Analyst.", "timestamp": "24 Jul 2026, 09:00" }],
+    "screeningAnswers": { "sq-14-1": "Foto_84.jpg", "sq-14-2": "CV_84.pdf", "sq-14-3": "BPMN 2.0 dengan Visio dan Camunda", "sq-14-4": "Ya, termasuk PRD dan FSD", "sq-14-5": "Rp 13.000.000" }
+  },
+  {
+    "id": "app-85", "talentId": "talent-85", "jobId": "emp-job-15", "status": "Diterima", "date": "25 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Social Media Manager.", "timestamp": "25 Jul 2026, 11:00" }],
+    "screeningAnswers": { "sq-15-1": "Foto_85.jpg", "sq-15-2": "CV_85.pdf", "sq-15-3": "LinkedIn dan Instagram", "sq-15-4": "Pertumbuhan followers B2B dari 5K ke 50K dalam setahun, conversion rate 3%", "sq-15-5": "Rp 9.500.000" }
+  },
+  {
+    "id": "app-86", "talentId": "talent-86", "jobId": "emp-job-16", "status": "Melamar", "date": "26 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Sales Executive.", "timestamp": "26 Jul 2026, 08:30" }],
+    "screeningAnswers": { "sq-16-1": "Foto_86.jpg", "sq-16-2": "CV_86.pdf", "sq-16-3": "Rp 45.000.000 per bulan", "sq-16-4": "Tidak, lebih ke B2C", "sq-16-5": "Ya", "sq-16-6": "Rp 5.000.000" }
+  },
+  {
+    "id": "app-87", "talentId": "talent-87", "jobId": "emp-job-17", "status": "Terseleksi", "date": "27 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Customer Support.", "timestamp": "27 Jul 2026, 10:00" }],
+    "screeningAnswers": { "sq-17-1": "Foto_87.jpg", "sq-17-2": "CV_87.pdf", "sq-17-3": "Ya", "sq-17-4": "Salesforce Service Cloud", "sq-17-5": "Rp 6.000.000" }
+  },
+  {
+    "id": "app-88", "talentId": "talent-88", "jobId": "emp-job-18", "status": "Melamar", "date": "28 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Network Engineer.", "timestamp": "28 Jul 2026, 09:30" }],
+    "screeningAnswers": { "sq-18-1": "Foto_88.jpg", "sq-18-2": "CV_88.pdf", "sq-18-3": "CCNP", "sq-18-4": "Ya", "sq-18-5": "Rp 13.000.000" }
+  },
+  {
+    "id": "app-89", "talentId": "talent-89", "jobId": "emp-job-19", "status": "Diterima", "date": "29 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Systems Administrator.", "timestamp": "29 Jul 2026, 09:30" }],
+    "screeningAnswers": { "sq-19-1": "Foto_89.jpg", "sq-19-2": "CV_89.pdf", "sq-19-3": "Windows Server 2022", "sq-19-4": "Ya, Hyper-V", "sq-19-5": "Rp 11.500.000" }
+  },
+  {
+    "id": "app-90", "talentId": "talent-90", "jobId": "emp-job-20", "status": "Melamar", "date": "30 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Scrum Master.", "timestamp": "30 Jul 2026, 09:00" }],
+    "screeningAnswers": { "sq-20-1": "Foto_90.jpg", "sq-20-2": "CV_90.pdf", "sq-20-3": "Ya, SAFe Agilist", "sq-20-4": "5 tim Scrum bersamaan", "sq-20-5": "Rp 16.000.000" }
+  },
+  {
+    "id": "app-91", "talentId": "talent-91", "jobId": "emp-job-21", "status": "Terseleksi", "date": "31 Jul 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Graphic Designer.", "timestamp": "31 Jul 2026, 11:00" }],
+    "screeningAnswers": { "sq-21-1": "Foto_91.jpg", "sq-21-2": "CV_91.pdf", "sq-21-3": "https://behance.net/creative91", "sq-21-4": "Canva Pro dan Figma", "sq-21-5": "Tidak", "sq-21-6": "Rp 6.500.000" }
+  },
+  {
+    "id": "app-92", "talentId": "talent-92", "jobId": "emp-job-22", "status": "Melamar", "date": "01 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar SEO Specialist.", "timestamp": "01 Aug 2026, 09:00" }],
+    "screeningAnswers": { "sq-22-1": "Foto_92.jpg", "sq-22-2": "CV_92.pdf", "sq-22-3": "Screaming Frog dan Ahrefs", "sq-22-4": "Naikkan DR website dari 15 ke 55 dalam 1 tahun melalui link building", "sq-22-5": "Ya", "sq-22-6": "Rp 9.500.000" }
+  },
+  {
+    "id": "app-93", "talentId": "talent-93", "jobId": "emp-job-1", "status": "Diterima", "date": "02 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Frontend Engineer.", "timestamp": "02 Aug 2026, 10:00" }],
+    "screeningAnswers": { "sq-1-1": "Foto_93.jpg", "sq-1-2": "CV_93.pdf", "sq-1-3": "6 tahun", "sq-1-4": "Ya", "sq-1-5": "Rp 14.000.000", "sq-1-6": "Ya" }
+  },
+  {
+    "id": "app-94", "talentId": "talent-94", "jobId": "emp-job-2", "status": "Melamar", "date": "03 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Backend Developer.", "timestamp": "03 Aug 2026, 09:00" }],
+    "screeningAnswers": { "sq-2-1": "Foto_94.jpg", "sq-2-2": "CV_94.pdf", "sq-2-3": "Python FastAPI", "sq-2-4": "Ya", "sq-2-5": "Rp 13.500.000", "sq-2-6": "Ya, Docker Compose", "sq-2-7": "REST API dengan OAuth2 untuk fintech" }
+  },
+  {
+    "id": "app-95", "talentId": "talent-95", "jobId": "emp-job-3", "status": "Terseleksi", "date": "04 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar UI/UX Designer.", "timestamp": "04 Aug 2026, 11:00" }],
+    "screeningAnswers": { "sq-3-1": "Foto_95.jpg", "sq-3-2": "CV_95.pdf", "sq-3-3": "https://figma.com/@uux95", "sq-3-4": "Ya", "sq-3-5": "Figma dan Zeplin", "sq-3-6": "Rp 10.500.000" }
+  },
+  {
+    "id": "app-96", "talentId": "talent-96", "jobId": "emp-job-4", "status": "Melamar", "date": "05 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Full Stack Developer.", "timestamp": "05 Aug 2026, 10:30" }],
+    "screeningAnswers": { "sq-4-1": "Foto_96.jpg", "sq-4-2": "CV_96.pdf", "sq-4-3": "Nuxt.js + Laravel", "sq-4-4": "Ya, Digital Ocean", "sq-4-5": "3 tahun", "sq-4-6": "Rp 14.000.000" }
+  },
+  {
+    "id": "app-97", "talentId": "talent-97", "jobId": "emp-job-5", "status": "Ditutup", "date": "06 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Data Scientist.", "timestamp": "06 Aug 2026, 14:00" }],
+    "screeningAnswers": { "sq-5-1": "Foto_97.jpg", "sq-5-2": "CV_97.pdf", "sq-5-3": "XGBoost dan LightGBM", "sq-5-4": "Ya", "sq-5-5": "Rp 18.000.000", "sq-5-6": "Model deteksi fraud real-time dengan latency < 50ms", "sq-5-7": "Ya" }
+  },
+  {
+    "id": "app-98", "talentId": "talent-98", "jobId": "emp-job-6", "status": "Melamar", "date": "07 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar DevOps Engineer.", "timestamp": "07 Aug 2026, 09:00" }],
+    "screeningAnswers": { "sq-6-1": "Foto_98.jpg", "sq-6-2": "CV_98.pdf", "sq-6-3": "AWS dan GCP", "sq-6-4": "Ya, EKS dan GKE", "sq-6-5": "Terraform, Helm", "sq-6-6": "Rp 18.000.000" }
+  },
+  {
+    "id": "app-99", "talentId": "talent-99", "jobId": "emp-job-7", "status": "Terseleksi", "date": "08 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Product Manager.", "timestamp": "08 Aug 2026, 10:00" }],
+    "screeningAnswers": { "sq-7-1": "Foto_99.jpg", "sq-7-2": "CV_99.pdf", "sq-7-3": "Agile, Design Sprint, Growth Hacking", "sq-7-4": "Ya, 18 orang lintas fungsi", "sq-7-5": "Rp 21.000.000", "sq-7-6": "Super app yang mencapai 1 juta DAU dalam tahun pertama" }
+  },
+  {
+    "id": "app-100", "talentId": "talent-100", "jobId": "emp-job-8", "status": "Melamar", "date": "09 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Mobile Developer Flutter.", "timestamp": "09 Aug 2026, 08:30" }],
+    "screeningAnswers": { "sq-8-1": "Foto_100.jpg", "sq-8-2": "CV_100.pdf", "sq-8-3": "Flutter 3.22.2", "sq-8-4": "Riverpod dan GetX", "sq-8-5": "Ya, 7 app aktif di Play Store", "sq-8-6": "Rp 14.000.000" }
+  },
+  {
+    "id": "app-101", "talentId": "talent-101", "jobId": "emp-job-9", "status": "Diterima", "date": "10 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Digital Marketing.", "timestamp": "10 Aug 2026, 10:00" }],
+    "screeningAnswers": { "sq-9-1": "Foto_101.jpg", "sq-9-2": "CV_101.pdf", "sq-9-3": "Semua platform: Google, Meta, TikTok", "sq-9-4": "Rp 200.000.000 per bulan", "sq-9-5": "Ya, semua sertifikasi utama", "sq-9-6": "Rp 9.000.000" }
+  },
+  {
+    "id": "app-102", "talentId": "talent-102", "jobId": "emp-job-10", "status": "Melamar", "date": "11 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar HR Specialist.", "timestamp": "11 Aug 2026, 09:00" }],
+    "screeningAnswers": { "sq-10-1": "Foto_102.jpg", "sq-10-2": "CV_102.pdf", "sq-10-3": "BambooHR dan SAP SuccessFactors", "sq-10-4": "25 posisi per bulan", "sq-10-5": "Ya, termasuk program onboarding", "sq-10-6": "Rp 10.000.000" }
+  },
+  {
+    "id": "app-103", "talentId": "talent-103", "jobId": "emp-job-11", "status": "Terseleksi", "date": "12 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Content Writer.", "timestamp": "12 Aug 2026, 11:00" }],
+    "screeningAnswers": { "sq-11-1": "Foto_103.jpg", "sq-11-2": "CV_103.pdf", "sq-11-3": "https://cnnindonesia.com/author/103", "sq-11-4": "Keuangan dan Investasi", "sq-11-5": "10 artikel/minggu", "sq-11-6": "Rp 8.000.000" }
+  },
+  {
+    "id": "app-104", "talentId": "talent-104", "jobId": "emp-job-12", "status": "Melamar", "date": "13 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar QA Engineer.", "timestamp": "13 Aug 2026, 08:00" }],
+    "screeningAnswers": { "sq-12-1": "Foto_104.jpg", "sq-12-2": "CV_104.pdf", "sq-12-3": "Cucumber + Selenium", "sq-12-4": "Ya", "sq-12-5": "Rp 11.500.000" }
+  },
+  {
+    "id": "app-105", "talentId": "talent-105", "jobId": "emp-job-13", "status": "Diterima", "date": "14 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Cyber Security Analyst.", "timestamp": "14 Aug 2026, 10:30" }],
+    "screeningAnswers": { "sq-13-1": "Foto_105.jpg", "sq-13-2": "CV_105.pdf", "sq-13-3": "OSCP dan CISM", "sq-13-4": "Ya", "sq-13-5": "Rp 18.000.000", "sq-13-6": "Membangun SOC dari nol di startup unicorn" }
+  },
+  {
+    "id": "app-106", "talentId": "talent-106", "jobId": "emp-job-14", "status": "Melamar", "date": "15 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Business Analyst.", "timestamp": "15 Aug 2026, 09:00" }],
+    "screeningAnswers": { "sq-14-1": "Foto_106.jpg", "sq-14-2": "CV_106.pdf", "sq-14-3": "Enterprise Architect dan Visio", "sq-14-4": "Ya, termasuk user story mapping", "sq-14-5": "Rp 13.500.000" }
+  },
+  {
+    "id": "app-107", "talentId": "talent-107", "jobId": "emp-job-15", "status": "Terseleksi", "date": "16 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Social Media Manager.", "timestamp": "16 Aug 2026, 11:00" }],
+    "screeningAnswers": { "sq-15-1": "Foto_107.jpg", "sq-15-2": "CV_107.pdf", "sq-15-3": "YouTube dan Podcast", "sq-15-4": "Channel YouTube 500K subscriber, rata-rata 100K views per video", "sq-15-5": "Rp 10.000.000" }
+  },
+  {
+    "id": "app-108", "talentId": "talent-108", "jobId": "emp-job-16", "status": "Melamar", "date": "17 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Sales Executive.", "timestamp": "17 Aug 2026, 08:30" }],
+    "screeningAnswers": { "sq-16-1": "Foto_108.jpg", "sq-16-2": "CV_108.pdf", "sq-16-3": "Rp 120.000.000 per bulan (top performer)", "sq-16-4": "Ya", "sq-16-5": "Ya, SIM A dan B", "sq-16-6": "Rp 8.000.000" }
+  },
+  {
+    "id": "app-109", "talentId": "talent-109", "jobId": "emp-job-17", "status": "Diterima", "date": "18 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Customer Support.", "timestamp": "18 Aug 2026, 10:00" }],
+    "screeningAnswers": { "sq-17-1": "Foto_109.jpg", "sq-17-2": "CV_109.pdf", "sq-17-3": "Ya", "sq-17-4": "Zendesk, Freshdesk, dan HubSpot", "sq-17-5": "Rp 6.500.000" }
+  },
+  {
+    "id": "app-110", "talentId": "talent-110", "jobId": "emp-job-19", "status": "Melamar", "date": "19 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Systems Administrator.", "timestamp": "19 Aug 2026, 09:30" }],
+    "screeningAnswers": { "sq-19-1": "Foto_110.jpg", "sq-19-2": "CV_110.pdf", "sq-19-3": "Linux dan Windows Server", "sq-19-4": "Ya, VMware vSphere dan Hyper-V", "sq-19-5": "Rp 12.000.000" }
+  },
+  {
+    "id": "app-111", "talentId": "talent-111", "jobId": "emp-job-20", "status": "Terseleksi", "date": "20 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Scrum Master.", "timestamp": "20 Aug 2026, 09:00" }],
+    "screeningAnswers": { "sq-20-1": "Foto_111.jpg", "sq-20-2": "CV_111.pdf", "sq-20-3": "Ya, CSM dan PSM II", "sq-20-4": "4 tim Agile", "sq-20-5": "Rp 15.000.000" }
+  },
+  {
+    "id": "app-112", "talentId": "talent-112", "jobId": "emp-job-21", "status": "Melamar", "date": "21 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Graphic Designer.", "timestamp": "21 Aug 2026, 11:00" }],
+    "screeningAnswers": { "sq-21-1": "Foto_112.jpg", "sq-21-2": "CV_112.pdf", "sq-21-3": "https://dribbble.com/designer112", "sq-21-4": "Adobe suite lengkap + Figma", "sq-21-5": "Ya, motion graphic dan VFX sederhana", "sq-21-6": "Rp 8.500.000" }
+  },
+  {
+    "id": "app-113", "talentId": "talent-113", "jobId": "emp-job-22", "status": "Diterima", "date": "22 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar SEO Specialist.", "timestamp": "22 Aug 2026, 09:00" }],
+    "screeningAnswers": { "sq-22-1": "Foto_113.jpg", "sq-22-2": "CV_113.pdf", "sq-22-3": "Ahrefs, SEMrush, Surfer SEO", "sq-22-4": "Traffic organik naik 1000% dalam setahun untuk startup SaaS", "sq-22-5": "Ya, termasuk international SEO", "sq-22-6": "Rp 11.000.000" }
+  },
+  {
+    "id": "app-114", "talentId": "talent-114", "jobId": "emp-job-1", "status": "Melamar", "date": "23 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Frontend Engineer.", "timestamp": "23 Aug 2026, 10:00" }],
+    "screeningAnswers": { "sq-1-1": "Foto_114.jpg", "sq-1-2": "CV_114.pdf", "sq-1-3": "7 tahun senior level", "sq-1-4": "Ya, expert level", "sq-1-5": "Rp 15.000.000", "sq-1-6": "Ya" }
+  },
+  {
+    "id": "app-115", "talentId": "talent-115", "jobId": "emp-job-2", "status": "Terseleksi", "date": "24 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Backend Developer.", "timestamp": "24 Aug 2026, 09:00" }],
+    "screeningAnswers": { "sq-2-1": "Foto_115.jpg", "sq-2-2": "CV_115.pdf", "sq-2-3": "Rust dan Go", "sq-2-4": "Ya", "sq-2-5": "Rp 17.000.000", "sq-2-6": "Ya, Kubernetes native", "sq-2-7": "High-frequency trading system dengan latency sub-millisecond" }
+  },
+  {
+    "id": "app-116", "talentId": "talent-116", "jobId": "emp-job-3", "status": "Melamar", "date": "25 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar UI/UX Designer.", "timestamp": "25 Aug 2026, 11:00" }],
+    "screeningAnswers": { "sq-3-1": "Foto_116.jpg", "sq-3-2": "CV_116.pdf", "sq-3-3": "https://figma.com/@senior116", "sq-3-4": "Ya, 3 design system dari nol", "sq-3-5": "Figma, Principle, ProtoPie", "sq-3-6": "Rp 12.000.000" }
+  },
+  {
+    "id": "app-117", "talentId": "talent-117", "jobId": "emp-job-4", "status": "Diterima", "date": "26 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Full Stack Developer.", "timestamp": "26 Aug 2026, 10:30" }],
+    "screeningAnswers": { "sq-4-1": "Foto_117.jpg", "sq-4-2": "CV_117.pdf", "sq-4-3": "T3 Stack (Next.js + tRPC + Prisma)", "sq-4-4": "Ya, Vercel dan AWS", "sq-4-5": "8 tahun", "sq-4-6": "Rp 20.000.000" }
+  },
+  {
+    "id": "app-118", "talentId": "talent-118", "jobId": "emp-job-5", "status": "Melamar", "date": "27 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Data Scientist.", "timestamp": "27 Aug 2026, 14:00" }],
+    "screeningAnswers": { "sq-5-1": "Foto_118.jpg", "sq-5-2": "CV_118.pdf", "sq-5-3": "PyTorch dan Hugging Face Transformers", "sq-5-4": "Ya, LLM deployment di production", "sq-5-5": "Rp 25.000.000", "sq-5-6": "Chatbot AI berbasis LLM yang digunakan 500K pengguna/hari", "sq-5-7": "Ya, PhD di bidang NLP" }
+  },
+  {
+    "id": "app-119", "talentId": "talent-119", "jobId": "emp-job-6", "status": "Terseleksi", "date": "28 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar DevOps Engineer.", "timestamp": "28 Aug 2026, 09:00" }],
+    "screeningAnswers": { "sq-6-1": "Foto_119.jpg", "sq-6-2": "CV_119.pdf", "sq-6-3": "AWS (Expert Level)", "sq-6-4": "Ya, multi-cluster Kubernetes", "sq-6-5": "Terraform, Pulumi, Helm", "sq-6-6": "Rp 20.000.000" }
+  },
+  {
+    "id": "app-120", "talentId": "talent-120", "jobId": "emp-job-7", "status": "Melamar", "date": "29 Aug 2026",
+    "chatHistory": [{ "sender": "user", "content": "Melamar Product Manager.", "timestamp": "29 Aug 2026, 10:00" }],
+    "screeningAnswers": { "sq-7-1": "Foto_120.jpg", "sq-7-2": "CV_120.pdf", "sq-7-3": "Dual-track Agile dan Jobs-to-be-Done", "sq-7-4": "Ya, 25 orang global team", "sq-7-5": "Rp 23.000.000", "sq-7-6": "Platform SaaS yang diakuisisi dengan nilai $50M setelah 3 tahun" }
+  }
+]

@@ -473,7 +473,7 @@ const TalentTab: React.FC<TalentTabProps> = ({ updateTabInUrl }) => {
           <div
             className="h-20 md:h-28 bg-cover bg-center relative transition-all duration-300"
             style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80&auto=format&fit=crop')`,
+              backgroundImage: `url('')`,
             }}
           >
             <div className="absolute inset-0 bg-black/45" />

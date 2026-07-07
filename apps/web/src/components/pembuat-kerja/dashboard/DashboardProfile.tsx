@@ -146,28 +146,28 @@ const ProfileTab: React.FC = () => {
   const bannerPhotos = [
     {
       url: '/images/banners/banner1.png?v=25',
-      label: 'Pegunungan',
+      label: 'Mountains',
     },
     {
       url: '/images/banners/banner2.png?v=25',
-      label: 'Hutan',
+      label: 'Forest',
     },
     {
       url: '/images/banners/banner3.png?v=25',
-      label: 'Pantai',
+      label: 'Beach',
     },
     {
       url: '/images/banners/banner4.png?v=25',
-      label: 'Kota',
+      label: 'City',
     },
     {
       url: '/images/banners/banner5.png?v=25',
-      label: 'Laut',
+      label: 'Ocean',
       copyright: 'Maldives Atolls',
     },
     {
       url: '/images/banners/banner6.png?v=25',
-      label: 'Salju',
+      label: 'Fruit',
     },
     {
       url: 'https://bing.biturl.top/?resolution=1920&format=image&index=0',
@@ -274,9 +274,9 @@ const ProfileTab: React.FC = () => {
   // Custom states for Gallery and Team
   const [galleryImages, setGalleryImages] = useState<string[]>(
     user?.companyVerification?.galleryImages || [
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
+      '',
+      '',
+      '',
     ]
   );
   const [galleryVideos, setGalleryVideos] = useState<string[]>(
@@ -291,7 +291,7 @@ const ProfileTab: React.FC = () => {
       {
         name: 'Budi Santoso',
         position: 'Chief Executive Officer (CEO)',
-        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80',
+        image: '',
         linkedin: 'https://linkedin.com',
       },
       {
@@ -763,7 +763,7 @@ const ProfileTab: React.FC = () => {
                         draggable={false}
                        width={100} height={100} unoptimized />
                       <div className="absolute inset-0 bg-black/25 group-hover:bg-black/5 transition-all" />
-                      <span className="absolute bottom-1 left-0 right-0 text-center text-[12px] font-bold text-white drop-shadow-md">
+                      <span className="absolute bottom-1 left-0 right-0 text-center text-[10px] font-bold text-white drop-shadow-md">
                         {photo.label}
                       </span>
                       {bannerIndex === idx && (

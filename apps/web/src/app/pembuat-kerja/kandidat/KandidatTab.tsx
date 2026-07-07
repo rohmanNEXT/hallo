@@ -44,6 +44,12 @@ import {
   LuLockKeyholeOpen as Unlock,
   LuLock as Lock,
   LuDownload as Download,
+  LuInfo as Info,
+  LuMinus as Minus,
+  LuPencil as Pencil,
+  LuPlus as Plus,
+  LuExternalLink as ExternalLink,
+  LuImage as ImageIcon,
 } from 'react-icons/lu';
 import { useRouter } from 'next/navigation';
 import MultiSelectJob from '@/components/ui/multi-select-job';
@@ -57,6 +63,248 @@ const PROVINCES = provincesData as ProvinceData[];
 const CircleCheckIcon = () => (
   <CheckCircle className="w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0" />
 );
+
+const HrdCorrectionItem = ({
+  q,
+  index,
+  candidateAnswer,
+  initialCorrection,
+  onSave,
+}: any) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [value, setValue] = useState(initialCorrection);
+  const [showFullAnswer, setShowFullAnswer] = useState(false);
+  const hasAnswer = !!candidateAnswer;
+
+  const handleSave = () => {
+    onSave(value);
+    setIsEditing(false);
+  };
+
+  return (
+    <div className="rounded-xl border border-border bg-background/50 hover:bg-background hover:border-primary/20 p-4 transition-all duration-200 space-y-3">
+      {/* Question header */}
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2.5">
+          <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-black text-primary">
+            {index + 1}
+          </span>
+          <span className="text-xs font-bold text-foreground">
+            {q.question}
+          </span>
+        </div>
+      </div>
+
+      {/* 2-Column layout for Answer and HRD Input */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ml-7">
+        {/* Candidate Answer Box */}
+        <div className="rounded-lg bg-muted/30 border border-border/50 p-3 flex flex-col justify-between min-h-[60px]">
+          <div>
+            <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground mb-1.5">
+              Jawaban Pelamar
+            </p>
+            <div className="text-xs text-foreground font-semibold leading-relaxed whitespace-pre-wrap wrap-break-words">
+              {!candidateAnswer ? (
+                <span className="text-muted-foreground/60 italic text-[11px] font-medium">
+                  Kosong
+                </span>
+              ) : (
+                (() => {
+                  const cleanAns = candidateAnswer.trim();
+                  const isImage = /\.(jpeg|jpg|gif|png|webp)(?:\?.*)?$/i.test(
+                    cleanAns,
+                  );
+                  const isPdf = /\.pdf(?:\?.*)?$/i.test(cleanAns);
+                  const urlMatch = candidateAnswer.match(
+                    /^(https?:\/\/[^\s]+|(?:www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?)$/i,
+                  );
+
+                  if (isImage || isPdf || urlMatch) {
+                    let linkTarget = urlMatch
+                      ? urlMatch[0]
+                      : `https://placehold.co/600x400/f8fafc/0f172a?text=${cleanAns}`;
+                    if (urlMatch && !/^https?:\/\//i.test(linkTarget)) {
+                      linkTarget = 'https://' + linkTarget;
+                    }
+
+                    return (
+                      <div className="flex flex-col mt-1">
+                        {isImage && (
+                          <a
+                            href={linkTarget}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 w-fit pr-4 p-2.5 rounded-lg border border-border hover:border-primary/40 bg-background transition-all group shadow-sm hover:shadow-md"
+                          >
+                            <div className="bg-primary/5 p-2 rounded-md group-hover:bg-primary/10 transition-colors shrink-0">
+                              <ImageIcon className="w-5 h-5 text-primary" />
+                            </div>
+                            <div className="flex-1 min-w-0 pr-2">
+                              <p className="text-xs font-bold text-foreground truncate max-w-[150px]">
+                                {urlMatch ? 'Gambar / Foto' : cleanAns}
+                              </p>
+                              <p className="text-[9px] text-muted-foreground truncate">
+                                Klik untuk melihat gambar
+                              </p>
+                            </div>
+                            <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary shrink-0 transition-colors" />
+                          </a>
+                        )}
+                        {isPdf && (
+                          <a
+                            href={linkTarget}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 w-fit pr-4 p-2.5 rounded-lg border border-border hover:border-primary/40 bg-background transition-all group shadow-sm hover:shadow-md"
+                          >
+                            <div className="bg-primary/5 p-2 rounded-md group-hover:bg-primary/10 transition-colors shrink-0">
+                              <FileText className="w-5 h-5 text-primary" />
+                            </div>
+                            <div className="flex-1 min-w-0 pr-2">
+                              <p className="text-xs font-bold text-foreground truncate max-w-[150px]">
+                                {urlMatch ? 'Dokumen PDF' : cleanAns}
+                              </p>
+                              <p className="text-[9px] text-muted-foreground truncate">
+                                Klik untuk melihat file
+                              </p>
+                            </div>
+                            <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary shrink-0 transition-colors" />
+                          </a>
+                        )}
+                        {!isImage && !isPdf && urlMatch && (
+                          <a
+                            href={linkTarget}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-xs font-bold text-foreground hover:text-primary break-all bg-background px-3 py-2 rounded-lg border border-border hover:border-primary/40 shadow-sm hover:shadow-md transition-all w-fit group"
+                          >
+                            <div className="bg-primary/5 p-1 rounded-md group-hover:bg-primary/10 transition-colors shrink-0">
+                              <ExternalLink className="w-3.5 h-3.5 text-primary" />
+                            </div>
+                            Buka Tautan Eksternal
+                          </a>
+                        )}
+                      </div>
+                    );
+                  }
+                  if (cleanAns.length > 150) {
+                    return (
+                      <div className="flex flex-col items-start gap-1">
+                        <span>{cleanAns.substring(0, 150)}...</span>
+                        <button
+                          onClick={() => setShowFullAnswer(true)}
+                          className="text-[10px] font-bold text-primary hover:underline transition-colors cursor-pointer mt-1"
+                        >
+                          Lihat Semua
+                        </button>
+                      </div>
+                    );
+                  }
+
+                  return candidateAnswer;
+                })()
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* HRD Correction Input */}
+        <div className="flex flex-col justify-start">
+          <div className="flex items-center justify-between mb-1.5">
+            <label className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+              Nilai / Catatan Koreksi HRD
+            </label>
+            {!isEditing && (
+              <button
+                onClick={() => setIsEditing(true)}
+                className="text-[10px] font-bold text-primary hover:bg-primary/10 flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-primary/20 transition-colors cursor-pointer mb-1.5"
+              >
+                {initialCorrection ? (
+                  <>
+                    <Pencil className="w-3 h-3" /> Edit
+                  </>
+                ) : (
+                  <>
+                    <Plus className="w-3 h-3" /> Tambah Catatan
+                  </>
+                )}
+              </button>
+            )}
+          </div>
+
+          {isEditing ? (
+            <div className="flex flex-col gap-2 mt-1.5 p-3.5 rounded-xl border border-primary/30 bg-primary/5 shadow-inner">
+              <div className="flex items-center gap-1.5 mb-1">
+                <Lock className="w-3 h-3 text-primary" />
+                <span className="text-[9px] font-black uppercase tracking-widest text-primary">
+                  Internal HRD Saja
+                </span>
+              </div>
+              <textarea
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                placeholder="Masukkan catatan evaluasi untuk kandidat ini..."
+                className="w-full min-h-[70px] rounded-lg border border-border bg-background p-3 text-xs text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all duration-200 resize-none custom-scrollbar"
+                autoFocus
+              />
+              <div className="flex justify-end gap-2 mt-1">
+                <button
+                  onClick={() => setIsEditing(false)}
+                  className="h-8 px-3 bg-muted/60 hover:bg-muted text-muted-foreground border border-border rounded-lg text-[10px] font-bold transition-all active:scale-95 cursor-pointer"
+                >
+                  Batal
+                </button>
+                <button
+                  onClick={handleSave}
+                  className="h-8 px-4 bg-primary hover:bg-primary/90 text-white shadow-sm rounded-lg text-[10px] font-bold transition-all active:scale-95 flex items-center gap-1.5 cursor-pointer"
+                >
+                  <span>Simpan Catatan</span>
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex-1 min-h-[40px] rounded-lg border border-border/50 bg-muted/30 px-3 py-2.5 text-xs text-foreground transition-colors">
+              {initialCorrection ? (
+                <span className="leading-relaxed whitespace-pre-wrap">
+                  {initialCorrection}
+                </span>
+              ) : (
+                <span className="text-muted-foreground/50 italic text-[11px] font-medium">
+                  Belum ada catatan.
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Full Answer Modal */}
+      {showFullAnswer && (
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="w-full max-w-lg bg-background rounded-xl shadow-2xl border border-border overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[400px]">
+            <div className="flex items-center justify-between p-4 border-b border-border bg-muted/30 shrink-0">
+              <h3 className="font-bold text-sm text-foreground">
+                Jawaban Lengkap Pelamar
+              </h3>
+              <button
+                onClick={() => setShowFullAnswer(false)}
+                className="p-1.5 rounded-md text-muted-foreground hover:text-rose-500 hover:bg-rose-500/10 transition-colors cursor-pointer"
+                title="Tutup"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <div className="p-5 overflow-y-auto custom-scrollbar flex-1">
+              <p className="text-sm text-foreground whitespace-pre-wrap leading-relaxed wrap-break-words">
+                {candidateAnswer}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const DEFAULT_POSITIONS = Array.from({ length: 400 }, (_, i) => {
   const baseRoles = [
@@ -260,6 +508,7 @@ const KandidatTab: React.FC = () => {
     toggleFavoriteTalent,
     unlockedTalents,
     unlockTalent,
+    updateScreeningKoreksi,
   } = useAppStore();
 
   const activeHrd =
@@ -647,20 +896,19 @@ const KandidatTab: React.FC = () => {
 
         <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-sm relative">
           <div
-            className="h-20 md:h-28 bg-cover bg-center relative transition-all duration-300"
+            className="h-24 md:h-32 bg-cover bg-center relative transition-all duration-300 z-10 shadow-[0_8px_30px_rgba(0,0,0,0.4)]"
             style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80&auto=format&fit=crop')`,
+              backgroundImage: `url('/images/banners/banner2.png?v=25')`,
             }}
           >
             <div className="absolute inset-0 bg-black/45" />
             <div className="absolute inset-0 bg-linear-to-r from-black/60 via-black/30 to-black/10" />
-            <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
           </div>
 
-          <div className="px-6 md:px-8 pb-4 relative">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between -mt-8 sm:-mt-10 gap-4 mb-2">
+          <div className="px-6 md:px-8 pb-4 relative z-20">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between -mt-10 sm:-mt-12 gap-4 mb-2 relative">
               <div className="flex flex-col sm:flex-row items-center sm:items-end gap-3 text-center sm:text-left">
-                <div className="relative h-16 w-16 md:h-20 md:w-20 rounded-xl overflow-hidden border-2 border-card shadow-md bg-muted shrink-0">
+                <div className="relative h-20 w-20 md:h-24 md:w-24 rounded-xl overflow-hidden border-4 border-card shadow-xl bg-muted shrink-0 z-30">
                   {viewingTalentProfile.avatar &&
                   !viewingTalentProfile.avatar.includes('default-avatar') &&
                   !viewingTalentProfile.avatar.includes('placeholder') ? (
@@ -681,21 +929,21 @@ const KandidatTab: React.FC = () => {
                           if (fallback) fallback.style.display = 'flex';
                         }}
                       />
-                      <div className="avatar-fallback hidden absolute inset-0 items-center justify-center bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-lg md:text-xl font-black uppercase">
+                      <div className="avatar-fallback hidden absolute inset-0 items-center justify-center bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-2xl font-black uppercase shadow-inner">
                         {viewingTalentProfile.name?.[0] || '?'}
                       </div>
                     </>
                   ) : (
-                    <div className="absolute inset-0 flex items-center justify-center bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-lg md:text-xl font-black uppercase">
+                    <div className="absolute inset-0 flex items-center justify-center bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-2xl font-black uppercase shadow-inner">
                       {viewingTalentProfile.name?.[0] || '?'}
                     </div>
                   )}
                 </div>
-                <div className="space-y-0.5 pb-1">
-                  <h1 className="text-lg md:text-xl font-extrabold tracking-tight text-foreground sm:text-white sm:drop-shadow-[0_2px_4px_rgba(0,0,0,0.75)]">
+                <div className="space-y-1 pb-1 sm:pb-2">
+                  <h1 className="text-xl md:text-2xl font-extrabold tracking-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] leading-none">
                     {viewingTalentProfile.name}
                   </h1>
-                  <p className="text-xs md:text-xs font-semibold text-muted-foreground sm:text-white/90 sm:drop-shadow-[0_1px_3px_rgba(0,0,0,0.75)]">
+                  <p className="text-sm md:text-sm font-semibold text-white/90 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                     {viewingTalentProfile.title}
                   </p>
                 </div>
@@ -719,6 +967,131 @@ const KandidatTab: React.FC = () => {
                   'Saya adalah Frontend Engineer yang bersemangat dalam membangun antarmuka web yang interaktif, responsif, dan ramah pengguna.'}
               </p>
             </div>
+
+            {/* Pertanyaan Screening & Koreksi HRD — Left Column, Under Tentang Saya */}
+            {(() => {
+              const talentApp = employerApplications.find(
+                (app) => app.talentId === viewingTalentProfile.id,
+              );
+              if (!talentApp) return null;
+
+              const jobInfo = employerJobs.find(
+                (j) => j.id === talentApp.jobId,
+              );
+              const screeningQuestions = jobInfo?.screeningQuestions || [
+                {
+                  id: 'req-photo',
+                  question: 'Upload Foto Profil',
+                  type: 'file_upload',
+                  isRequired: true,
+                },
+                {
+                  id: 'req-resume',
+                  question: 'Upload Resume / Curriculum Vitae',
+                  type: 'file_upload',
+                  isRequired: true,
+                },
+              ];
+              const answeredCount = screeningQuestions.filter(
+                (q: any) => talentApp.screeningAnswers?.[q.id],
+              ).length;
+              const progressPct =
+                screeningQuestions.length > 0
+                  ? Math.round(
+                      (answeredCount / screeningQuestions.length) * 100,
+                    )
+                  : 0;
+
+              return (
+                <div className="relative rounded-2xl border border-border bg-card shadow-sm">
+                  {/* Header */}
+                  <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-border bg-muted/10">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 border border-primary/20">
+                        <svg
+                          className="h-4 w-4 text-primary"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                          />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-sm font-black text-foreground tracking-tight flex items-center gap-1.5 mb-1">
+                          Pertanyaan Screening
+                          <span className="group relative flex items-center cursor-pointer">
+                            <span className="flex h-4 w-4 items-center justify-center rounded-full bg-muted-foreground/10 text-muted-foreground opacity-40 group-hover:opacity-100 group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                              <Info className="w-3 h-3" />
+                            </span>
+                            <span className="pointer-events-none flex items-center gap-2 absolute left-0 bottom-full mb-2.5 w-max max-w-[250px] opacity-0 transition-all duration-200 translate-y-1 group-hover:translate-y-0 group-hover:opacity-100 bg-foreground/10 backdrop-blur-sm border border-border/50 text-foreground text-[10px] font-semibold px-3 py-2 rounded-lg shadow-lg z-20">
+                              <Info className="w-3.5 h-3.5 text-primary shrink-0" />
+                              <span className="leading-relaxed">
+                                Koreksi HRD bersifat internal saja untuk
+                                membantu penilaian rekruter.
+                              </span>
+                            </span>
+                          </span>
+                        </p>
+                        {jobInfo && (
+                          <p className="text-xs text-muted-foreground font-semibold">
+                            {jobInfo.title}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-2">
+                        <div className="w-24 h-1.5 rounded-full bg-border overflow-hidden">
+                          <div
+                            className="h-full rounded-full bg-primary transition-all duration-500"
+                            style={{ width: `${progressPct}%` }}
+                          />
+                        </div>
+                        <span className="text-xs font-black text-foreground">
+                          {progressPct}%
+                        </span>
+                      </div>
+                      <div className="h-4 w-px bg-border" />
+                      <span className="text-xs font-bold text-muted-foreground">
+                        <span className="text-primary font-black">
+                          {answeredCount}
+                        </span>
+                        /{screeningQuestions.length} Terjawab
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Questions list */}
+                  <div className="p-6 space-y-4 max-h-[500px] overflow-y-auto custom-scrollbar">
+                    {screeningQuestions.map((q: any, index: number) => {
+                      const candidateAnswer: string =
+                        talentApp.screeningAnswers?.[q.id] || '';
+                      const currentCorrection =
+                        talentApp.screeningKoreksi?.[q.id] || '';
+
+                      return (
+                        <HrdCorrectionItem
+                          key={q.id || index}
+                          q={q}
+                          index={index}
+                          candidateAnswer={candidateAnswer}
+                          initialCorrection={currentCorrection}
+                          onSave={(newVal: string) =>
+                            updateScreeningKoreksi(talentApp.id, q.id, newVal)
+                          }
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })()}
 
             {/* Pengalaman Kerja */}
             <div className="bg-card border border-border rounded-2xl p-6 shadow-sm space-y-4 relative">
@@ -1057,10 +1430,12 @@ const KandidatTab: React.FC = () => {
                           `/pembuat-kerja/chat?appId=${talentApp.id}`,
                         );
                       }}
-                      className="w-full h-10 font-bold text-xs bg-primary/20 hover:bg-primary/50 text-white cursor-pointer rounded-xl flex items-center justify-center gap-1.5 transition-all shadow-xs active:scale-[0.98] border border-primary/30 backdrop-blur-2xl"
+                      className="group w-full h-10 font-bold text-xs bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground cursor-pointer rounded-xl flex items-center justify-center gap-1.5 transition-all shadow-xs active:scale-[0.98] border border-primary/20"
                     >
-                      <Send className="w-3.5 h-3.5 text-white" />
-                      <span>Hubungi / Chat Kandidat</span>
+                      <Send className="w-3.5 h-3.5 text-primary group-hover:text-primary-foreground transition-colors" />
+                      <span className="transition-colors">
+                        Hubungi / Chat Kandidat
+                      </span>
                     </button>
                   </div>
                 </div>
@@ -2314,7 +2689,6 @@ const KandidatTab: React.FC = () => {
                 </>
               )}
             </div>
-
           </div>
         </div>
 
@@ -2394,12 +2768,12 @@ const KandidatTab: React.FC = () => {
                                   if (fallback) fallback.style.display = 'flex';
                                 }}
                               />
-                              <div className="avatar-fallback hidden absolute inset-0 items-center justify-center bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-black uppercase">
+                              <div className="avatar-fallback hidden absolute inset-0 items-center justify-center bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-black uppercase shadow-inner">
                                 {app.talent?.name?.[0] || '?'}
                               </div>
                             </div>
                           ) : (
-                            <div className="h-10 w-10 rounded-full bg-slate-100 dark:bg-slate-800 border border-border flex items-center justify-center shrink-0 text-slate-700 dark:text-slate-200 text-sm font-black uppercase">
+                            <div className="h-10 w-10 rounded-full bg-slate-100 dark:bg-slate-800 border border-border flex items-center justify-center shrink-0 text-slate-700 dark:text-slate-200 text-sm font-black uppercase shadow-inner">
                               {app.talent?.name?.[0] || '?'}
                             </div>
                           )}
@@ -2622,7 +2996,7 @@ const KandidatTab: React.FC = () => {
                     </div>
                     <div className="h-1.5 w-full bg-emerald-500/10 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-full transition-all duration-500"
+                        className="h-full bg-linear-to-r from-emerald-400 to-emerald-500 rounded-full transition-all duration-500"
                         style={{
                           width: `${calculateHalloScore(selectedMatchApp.talent, selectedMatchApp.job)}%`,
                         }}
@@ -3057,7 +3431,6 @@ const KandidatTab: React.FC = () => {
           </Card>
         </div>
       )}
-
     </div>
   );
 };

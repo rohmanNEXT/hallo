@@ -31,7 +31,7 @@ const PembuatKerjaPage: React.FC = () => {
   return (
     <main className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden">
       {/* ─── 1. HERO SECTION ─── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#1a0533] via-[#2d0a5e] to-[#1a0533] text-white py-24 px-6 lg:px-12 min-h-[680px] flex items-center">
+      <section className="relative overflow-hidden bg-linear-to-br from-[#1a0533] via-[#2d0a5e] to-[#1a0533] text-white py-24 px-6 lg:px-12 min-h-[680px] flex items-center">
         {/* Decorative blobs */}
         <div className="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full bg-violet-600/20 blur-[120px] pointer-events-none" />
         <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-fuchsia-600/15 blur-[100px] pointer-events-none" />
@@ -47,7 +47,7 @@ const PembuatKerjaPage: React.FC = () => {
                 <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
                   Temukan & Rekrut{' '}
                   <span className="block mt-1">
-                    <span className="bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
+                    <span className="bg-linear-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
                       Kandidat Terbaik
                     </span>
                   </span>
@@ -62,7 +62,7 @@ const PembuatKerjaPage: React.FC = () => {
               </div>
 
               <div className="flex flex-wrap gap-3">
-                <Button className="h-12 px-7 text-sm font-bold rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white border-0 shadow-lg shadow-orange-500/30 transition-all hover:scale-105 hover:shadow-orange-500/50">
+                <Button className="h-12 px-7 text-sm font-bold rounded-2xl bg-linear-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white border-0 shadow-lg shadow-orange-500/30 transition-all hover:scale-105 hover:shadow-orange-500/50">
                   <LuRocket className="h-4 w-4 mr-2" />
                   Pasang Loker Sekarang
                 </Button>
@@ -185,7 +185,7 @@ const PembuatKerjaPage: React.FC = () => {
               ({ icon: Icon, label, value, color, border, iconColor }, i) => (
                 <div
                   key={i}
-                  className={`bg-gradient-to-br ${color} backdrop-blur-sm border ${border} rounded-xl p-3.5 flex items-center gap-3 hover:scale-102 transition-transform duration-300`}
+                  className={`bg-linear-to-br ${color} backdrop-blur-sm border ${border} rounded-xl p-3.5 flex items-center gap-3 hover:scale-102 transition-transform duration-300`}
                 >
                   <div
                     className={`h-9 w-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0`}
@@ -237,8 +237,8 @@ const PembuatKerjaPage: React.FC = () => {
         </div>
 
         <div className="relative w-full overflow-hidden flex">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-linear-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-linear-to-l from-background to-transparent z-10 pointer-events-none" />
 
           <div
             className="animate-marquee items-center opacity-60 hover:opacity-100 transition-opacity duration-500"
@@ -337,7 +337,7 @@ const PembuatKerjaPage: React.FC = () => {
                   className={`group ${bg} border ${border} rounded-3xl p-6 hover:shadow-xl ${glow} hover:-translate-y-2 transition-all duration-300`}
                 >
                   <div
-                    className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center mb-5 shadow-lg ${glow} group-hover:scale-110 transition-transform duration-300`}
+                    className={`h-14 w-14 rounded-2xl bg-linear-to-br ${gradient} flex items-center justify-center mb-5 shadow-lg ${glow} group-hover:scale-110 transition-transform duration-300`}
                   >
                     <Icon className="h-7 w-7 text-white" />
                   </div>
@@ -415,7 +415,7 @@ const PembuatKerjaPage: React.FC = () => {
       <section className="py-24 px-6 lg:px-12 bg-muted/20 border-y border-border/40">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-14 items-start">
           <div className="w-full md:w-1/3 md:sticky md:top-24">
-            <div className="bg-gradient-to-br from-violet-500 to-indigo-600 text-white p-6 rounded-3xl shadow-xl shadow-violet-500/30 inline-block mb-5">
+            <div className="bg-linear-to-br from-violet-500 to-indigo-600 text-white p-6 rounded-3xl shadow-xl shadow-violet-500/30 inline-block mb-5">
               <LuMessageCircleQuestion className="h-10 w-10" />
             </div>
             <h3 className="text-base font-black text-foreground">
@@ -562,7 +562,7 @@ const PembuatKerjaPage: React.FC = () => {
                 </div>
 
                 <div className="pt-1">
-                  <Button className="w-full h-12 text-sm font-black rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white border-0 shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 transition-all hover:scale-[1.02]">
+                  <Button className="w-full h-12 text-sm font-black rounded-2xl bg-linear-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white border-0 shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 transition-all hover:scale-[1.02]">
                     <LuRocket className="h-4 w-4 mr-2" />
                     Daftar Sekarang — Gratis!
                   </Button>

@@ -24,6 +24,10 @@ import {
   LuCircleAlert as AlertCircle,
   LuShieldCheck as ShieldCheck,
   LuFilter as Filter,
+  LuBuilding2 as Building2,
+  LuCreditCard as CreditCard,
+  LuBot as Bot,
+  LuSettings as Settings,
 } from 'react-icons/lu';
 
 const AccountSuspicionPage: React.FC = () => {
@@ -1096,7 +1100,7 @@ const AccountSuspicionPage: React.FC = () => {
             <div className="p-6 max-h-[65vh] overflow-y-auto space-y-6 text-xs leading-relaxed text-zinc-700 dark:text-zinc-300 text-left">
               <div className="space-y-2">
                 <h4 className="font-extrabold text-foreground uppercase text-[12px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
-                  <span className="text-blue-500">💬</span> Chat
+                  <MessageSquare className="w-4 h-4 text-blue-500 shrink-0" /> Chat
                 </h4>
                 <p className="pl-1">
                   Akun dilaporkan atau terdeteksi mengirim pesan mencurigakan melalui fitur chat, seperti mengirim tautan di luar platform, phishing, penipuan, atau pesan berbahaya lainnya.
@@ -1110,7 +1114,7 @@ const AccountSuspicionPage: React.FC = () => {
 
               <div className="space-y-2">
                 <h4 className="font-extrabold text-foreground uppercase text-[12px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
-                  <span className="text-emerald-500">🏢</span> Job Posting
+                  <Building2 className="w-4 h-4 text-emerald-500 shrink-0" /> Job Posting
                 </h4>
                 <p className="pl-1">
                   Lowongan pekerjaan yang dipublikasikan melanggar kebijakan, seperti lowongan palsu, informasi yang menyesatkan, atau konten yang tidak sesuai.
@@ -1124,7 +1128,7 @@ const AccountSuspicionPage: React.FC = () => {
 
               <div className="space-y-2">
                 <h4 className="font-extrabold text-foreground uppercase text-[12px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
-                  <span className="text-rose-500">💳</span> Payment Abuse
+                  <CreditCard className="w-4 h-4 text-rose-500 shrink-0" /> Payment Abuse
                 </h4>
                 <p className="pl-1">
                   Terdeteksi melakukan bypass pembayaran, transaksi di luar sistem resmi, atau penyalahgunaan fitur pembayaran.
@@ -1138,7 +1142,7 @@ const AccountSuspicionPage: React.FC = () => {
 
               <div className="space-y-2">
                 <h4 className="font-extrabold text-foreground uppercase text-[12px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
-                  <span className="text-orange-500">🤖</span> Spam Account
+                  <Bot className="w-4 h-4 text-orange-500 shrink-0" /> Spam Account
                 </h4>
                 <p className="pl-1">
                   Akun menunjukkan aktivitas spam atau indikasi telah dikompromikan, seperti perubahan email, nomor telepon, atau kata sandi tanpa melalui proses verifikasi yang sah.
@@ -1152,7 +1156,7 @@ const AccountSuspicionPage: React.FC = () => {
 
               <div className="space-y-2">
                 <h4 className="font-extrabold text-foreground uppercase text-[12px] tracking-wider mb-1 border-b border-border/80 pb-1 flex items-center gap-1.5">
-                  <span className="text-zinc-500">⚙️</span> Other
+                  <Settings className="w-4 h-4 text-zinc-500 shrink-0" /> Other
                 </h4>
                 <p className="pl-1">
                   Pelanggaran lain yang tidak termasuk dalam kategori di atas, berdasarkan hasil deteksi AI atau peninjauan moderator.

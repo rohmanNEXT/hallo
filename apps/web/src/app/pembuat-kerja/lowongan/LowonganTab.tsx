@@ -907,7 +907,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
       <div className="flex gap-8 w-full">
         <button
           onClick={() => setActiveSubTab('semua')}
-          className={`pb-3 font-bold text-xs border-b-2 -mb-[2px] transition-all cursor-pointer ${
+          className={`pb-3 font-bold text-xs border-b-2 mb-[-2px] transition-all cursor-pointer ${
             activeSubTab === 'semua'
               ? 'border-primary text-primary'
               : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -917,7 +917,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
         </button>
         <button
           onClick={() => setActiveSubTab('trash')}
-          className={`pb-3 font-bold text-xs border-b-2 -mb-[2px] transition-all cursor-pointer ${
+          className={`pb-3 font-bold text-xs border-b-2 mb-[-2px] transition-all cursor-pointer ${
             activeSubTab === 'trash'
               ? 'border-primary text-primary'
               : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -1265,22 +1265,26 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                                       ),
                                       salaryMax: String(job.salaryMax || ''),
                                       description: job.description || '',
-                                      skills: job.requirements
-                                        ? job.requirements
-                                            .split(',')
-                                            .map((s: string) => s.trim())
-                                            .filter(
-                                              (s: string) =>
-                                                !s
-                                                  .toLowerCase()
-                                                  .startsWith('work type') &&
-                                                !s
-                                                  .toLowerCase()
-                                                  .startsWith('min experience'),
-                                            )
-                                            .join(', ')
+                                      skills: job.skills 
+                                        ? (Array.isArray(job.skills) ? job.skills.join(', ') : job.skills)
+                                        : (job.requirements
+                                          ? (Array.isArray(job.requirements) ? job.requirements.join(', ') : job.requirements)
+                                              .split(',')
+                                              .map((s: string) => s.trim())
+                                              .filter(
+                                                (s: string) =>
+                                                  !s
+                                                    .toLowerCase()
+                                                    .startsWith('work type') &&
+                                                  !s
+                                                    .toLowerCase()
+                                                    .startsWith('min experience'),
+                                              )
+                                              .join(', ')
+                                          : ''),
+                                      benefits: job.benefits 
+                                        ? (Array.isArray(job.benefits) ? job.benefits.join(', ') : job.benefits)
                                         : '',
-                                      benefits: job.benefits || '',
                                     });
                                     setIsUrgent(job.badge === 'urgent hiring');
                                     setIsPremiumJob(
@@ -2840,7 +2844,7 @@ const LowonganTab: React.FC<LowonganTabProps> = ({ updateTabInUrl }) => {
                       onClick={() =>
                         companyFormik.setFieldValue(
                           'logo',
-                          'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=150&auto=format&fit=crop&q=80',
+                          '',
                         )
                       }
                       className="text-xs font-bold text-primary hover:underline bg-transparent border-none cursor-pointer p-0"

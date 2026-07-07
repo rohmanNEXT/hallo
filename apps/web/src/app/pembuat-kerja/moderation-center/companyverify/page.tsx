@@ -26,6 +26,8 @@ import {
   LuCircleAlert as AlertCircle,
   LuFilter as Filter,
   LuSparkles as Sparkles,
+  LuCircleCheck as CheckCircle,
+  LuTriangleAlert as AlertTriangle,
 } from 'react-icons/lu';
 
 const CompanyVerifyPage: React.FC = () => {
@@ -247,7 +249,7 @@ const CompanyVerifyPage: React.FC = () => {
 
               {/* AI Verification Assessment (otak ai) */}
               {aiModeration && (
-                <div className="bg-gradient-to-r from-emerald-500/10 to-teal-500/10 dark:from-emerald-950/20 dark:to-teal-950/20 border border-emerald-500/20 dark:border-emerald-800/40 rounded-2xl p-5 text-left space-y-3 animate-in fade-in duration-300">
+                <div className="bg-linear-to-r from-emerald-500/10 to-teal-500/10 dark:from-emerald-950/20 dark:to-teal-950/20 border border-emerald-500/20 dark:border-emerald-800/40 rounded-2xl p-5 text-left space-y-3 animate-in fade-in duration-300">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Sparkles className="h-5 w-5 text-emerald-500 animate-pulse" />
@@ -265,9 +267,15 @@ const CompanyVerifyPage: React.FC = () => {
                     </p>
                     <p className="text-muted-foreground text-[12px]">
                       {viewingCompanyProfile.aiScore && viewingCompanyProfile.aiScore < 50 ? (
-                        <span className="text-rose-500 font-extrabold">⚠️ TERINDIKASI REKAYASA DIGITAL: Ditemukan metadata edit gambar Photoshop/GIMP pada berkas PDF. Struktur nomor NIB tidak sinkron dengan data BKPM.</span>
+                        <span className="flex items-start gap-1 text-rose-500 font-extrabold">
+                          <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" />
+                          <span>TERINDIKASI REKAYASA DIGITAL: Ditemukan metadata edit gambar Photoshop/GIMP pada berkas PDF. Struktur nomor NIB tidak sinkron dengan data BKPM.</span>
+                        </span>
                       ) : (
-                        <span className="text-emerald-600 font-extrabold">✓ DOKUMEN VALID: Tanda tangan digital cocok dengan sertifikat BKPM. Informasi pimpinan dan bidang usaha sinkron dengan database pemerintah.</span>
+                        <span className="flex items-start gap-1 text-emerald-600 font-extrabold">
+                          <CheckCircle className="w-4 h-4 mt-0.5 shrink-0" />
+                          <span>DOKUMEN VALID: Tanda tangan digital cocok dengan sertifikat BKPM. Informasi pimpinan dan bidang usaha sinkron dengan database pemerintah.</span>
+                        </span>
                       )}
                     </p>
                     {viewingCompanyProfile.aiScore && viewingCompanyProfile.aiScore < 50 && (
@@ -393,13 +401,13 @@ const CompanyVerifyPage: React.FC = () => {
                             name: 'Budi Santoso',
                             role: 'Chief Executive Officer (CEO)',
                             avatar:
-                              'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80',
+                              '',
                           },
                           {
                             name: 'Siti Rahma',
                             role: 'Head of HR Department',
                             avatar:
-                              'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&q=80',
+                              '',
                           },
                         ].map((member, idx) => (
                           <div
@@ -603,7 +611,9 @@ const CompanyVerifyPage: React.FC = () => {
                         <div className="pt-8 flex justify-between items-center text-[12px] font-sans text-zinc-500">
                           <div>
                             <p>Dicetak Pada: 2026-07-02</p>
-                            <p className="text-emerald-600 font-extrabold mt-1">✓ SECURE & VERIFIED BY OSS SYSTEM</p>
+                            <p className="flex items-center justify-center gap-1.5 text-emerald-600 font-extrabold mt-1">
+                              <CheckCircle className="w-4 h-4" /> SECURE & VERIFIED BY OSS SYSTEM
+                            </p>
                           </div>
                           <div className="text-center">
                             <p>Kepala Badan Koordinasi Penanaman BKPM</p>

@@ -2,6 +2,8 @@ import { StateCreator } from 'zustand';
 import type { AppState } from '@/store/store';
 import { getLocalStorage, setLocalStorage } from '../zustand/helpers';
 import { chatSettingsApi } from '@/lib/api';
+import defaultJobsData from '@/lib/data/employer-jobs.json';
+import defaultApplicationsData from '@/lib/data/employer-applications.json';
 
 export interface HRDAccount {
   id: string;
@@ -49,6 +51,7 @@ export interface EmployerSlice {
   addHrdAccount: (hrd: Omit<HRDAccount, 'id'>) => void;
   updateHrdAccount: (id: string, updates: Partial<Omit<HRDAccount, 'id'>>) => void;
   deleteHrdAccount: (id: string) => void;
+  updateScreeningKoreksi: (applicationId: string, questionId: string, correction: string) => void;
 }
 
 const getInitialJobs = () => {
@@ -66,134 +69,25 @@ const getInitialJobs = () => {
     setLocalStorage("jobseeker-employerJobs", filtered);
   }
 
-  if (filtered && filtered.length >= 22) return filtered;
+  // Cek versi data: jika data lama tidak punya screeningQuestions, paksa refresh dari JSON
+  const hasScreeningQuestions = filtered.length > 0 && filtered[0]?.screeningQuestions;
+  // FORCE RELOAD: comment out this line temporarily so it picks up JSON changes
+  // if (filtered && filtered.length >= 22 && hasScreeningQuestions) return filtered;
 
-  const defaultJobs: any[] = [
-    {
-      id: "emp-job-1",
-      title: "Frontend Engineer (React)",
-      description: "Kami sedang mencari Frontend Engineer berbakat untuk membangun aplikasi web modern berskala besar.",
-      salary: 12000000,
-      badge: "urgent hiring",
-      status: "aktif",
-      requirements: "Work type: On-site, Min Experience: 2 years",
-      skills: ["React", "Next.js", "TypeScript"],
-      benefits: ["Kesehatan", "Bonus Kinerja", "Makan Siang Gratis"],
-      date: "08 Jun 2026",
-    },
-    {
-      id: "emp-job-2",
-      title: "Backend Developer",
-      description: "Mendesain dan memelihara API handal menggunakan NestJS dan PostgreSQL.",
-      salary: 15000000,
-      badge: "premium company",
-      status: "nonaktif",
-      requirements: "Work type: Remote, Min Experience: 3 years",
-      skills: ["Node.js", "Express", "TypeScript", "PostgreSQL"],
-      benefits: ["Tunjangan Kerja Remote", "Kesehatan"],
-      date: "07 Jun 2026",
-    }
-  ];
-
-  const jobTitles = [
-    "Full Stack Developer", "UI/UX Designer", "DevOps Engineer", "Data Scientist",
-    "QA Engineer", "Mobile Engineer (Android/iOS)", "Product Manager", "Scrum Master",
-    "Cyber Security Analyst", "SEO Specialist", "Content Writer", "Social Media Manager",
-    "Sales Executive", "Customer Support", "HR Specialist", "Business Analyst", "Network Engineer", "Systems Administrator"
-  ];
-
-  for (let i = 3; i <= 22; i++) {
-    const title = jobTitles[(i - 3) % jobTitles.length];
-    defaultJobs.push({
-      id: `emp-job-${i}`,
-      title,
-      description: `Membuka lowongan untuk posisi ${title} yang berpengalaman dan berdedikasi tinggi di bidangnya.`,
-      salary: 6000000 + (i * 1000000) % 12000000,
-      badge: i % 3 === 0 ? "urgent hiring" : i % 5 === 0 ? "premium company" : "",
-      status: i % 7 === 0 ? "trash" : i % 4 === 0 ? "nonaktif" : "aktif",
-      deletedAt: i % 7 === 0 ? new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString() : undefined,
-      requirements: `Work type: Hybrid, Min Experience: ${(i % 4) + 1} years`,
-      skills: ["Problem Solving", "Teamwork", "Communication"],
-      benefits: ["Kesehatan", "Tunjangan"],
-      date: `0${(i % 9) + 1} Jun 2026`,
-    });
-  }
-
+  // Load from JSON — no fake data
+  const defaultJobs = defaultJobsData as any[];
   setLocalStorage("jobseeker-employerJobs", defaultJobs);
   return defaultJobs;
 };
 
 const getInitialApplications = () => {
   const initial = getLocalStorage("jobseeker-employerApplications", []);
-  if (initial && initial.length >= 120) return initial;
 
-  const defaultApps = [
-    {
-      id: "app-1",
-      talentId: "talent-1",
-      jobId: "emp-job-1",
-      status: "Melamar",
-      date: "10 Jun 2026",
-      chatHistory: [
-        { sender: "user", content: "Halo, saya sangat tertarik dengan lowongan Frontend Engineer ini.", timestamp: "10 Jun 2026, 10:00" }
-      ]
-    },
-    {
-      id: "app-2",
-      talentId: "talent-2",
-      jobId: "emp-job-1",
-      status: "Terseleksi",
-      date: "11 Jun 2026",
-      chatHistory: [
-        { sender: "user", content: "Halo, saya telah mengirimkan portfolio desain terbaru saya.", timestamp: "11 Jun 2026, 11:30" },
-        { sender: "company", content: "Terima kasih, portfolio Anda sedang kami tinjau.", timestamp: "11 Jun 2026, 14:00" }
-      ]
-    },
-    {
-      id: "app-3",
-      talentId: "talent-3",
-      jobId: "emp-job-2",
-      status: "Melamar",
-      date: "12 Jun 2026",
-      chatHistory: [
-        { sender: "user", content: "Selamat siang, saya melamar untuk posisi Backend Developer.", timestamp: "12 Jun 2026, 09:15" }
-      ]
-    },
-    {
-      id: "app-4",
-      talentId: "talent-4",
-      jobId: "emp-job-1",
-      status: "Diterima",
-      date: "09 Jun 2026",
-      chatHistory: [
-        { sender: "user", content: "Terima kasih banyak atas kesempatannya!", timestamp: "09 Jun 2026, 16:30" }
-      ]
-    },
-    {
-      id: "app-5",
-      talentId: "talent-5",
-      jobId: "emp-job-1",
-      status: "Ditutup",
-      date: "08 Jun 2026",
-      chatHistory: [
-        { sender: "user", content: "Saya siap mengikuti proses seleksi.", timestamp: "08 Jun 2026, 13:00" }
-      ]
-    }
-  ];
-
-  for (let i = defaultApps.length + 1; i <= 120; i++) {
-    defaultApps.push({
-      id: `app-${i}`,
-      talentId: `talent-${i}`,
-      jobId: `emp-job-${(i % 20) + 1}`,
-      status: i % 4 === 0 ? "Terseleksi" : i % 3 === 0 ? "Diterima" : i % 5 === 0 ? "Ditutup" : "Melamar",
-      date: `${10 + (i % 20)} Jun 2026`,
-      chatHistory: [
-        { sender: "user", content: `Halo rekruter, saya melamar lewat sistem. Kualifikasi saya sesuai.`, timestamp: `${10 + (i % 20)} Jun 2026, 10:00` }
-      ]
-    });
-  }
-
+  // Cek versi data: jika data lama tidak punya screeningAnswers, paksa refresh dari JSON
+  const hasScreeningAnswers = initial.length > 0 && initial[0]?.screeningAnswers;
+  
+  // Load from JSON — no fake data
+  const defaultApps = defaultApplicationsData as any[];
   setLocalStorage("jobseeker-employerApplications", defaultApps);
   return defaultApps;
 };
@@ -462,13 +356,9 @@ export const createEmployerSlice: StateCreator<
           }
 
           if (welcomeMsg) {
-            const candidateName = "Kandidat"; // Assuming candidate name is not directly available in employer app object or we use a fallback
-            // To get actual jobTitle, company: wait, the app object contains jobTitle? No, app contains jobId.
-            // But let's assume we can't easily replace it here unless we fetch the job. 
-            // In employerApplications, it might have some data. Let's look up the job from employerJobs.
+            const candidateName = "Kandidat"; 
             const job = get().employerJobs.find((j: any) => j.id === app.jobId);
             const jobTitle = job?.title || "[Posisi]";
-            // We know the current user is the company.
             const company = get().user?.companyVerification?.name || "[Nama Perusahaan]";
             
             welcomeMsg = welcomeMsg
@@ -521,6 +411,25 @@ export const createEmployerSlice: StateCreator<
               }),
             },
           ],
+        };
+      }
+      return app;
+    });
+    setLocalStorage("jobseeker-employerApplications", updated);
+    set({ employerApplications: updated });
+  },
+
+  updateScreeningKoreksi: (applicationId, questionId, correction) => {
+    const current = get().employerApplications;
+    const updated = current.map((app: any) => {
+      if (app.id === applicationId) {
+        const screeningKoreksi = app.screeningKoreksi || {};
+        return {
+          ...app,
+          screeningKoreksi: {
+            ...screeningKoreksi,
+            [questionId]: correction,
+          },
         };
       }
       return app;

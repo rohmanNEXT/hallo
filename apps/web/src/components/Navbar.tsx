@@ -427,7 +427,7 @@ const Navbar: React.FC = () => {
                           unoptimized
                         />
                       ) : (
-                        <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary/80 to-primary text-white flex items-center justify-center font-bold text-xs shadow-sm">
+                        <div className="h-7 w-7 rounded-full bg-linear-to-br from-primary/80 to-primary text-white flex items-center justify-center font-bold text-xs shadow-sm">
                           {user.name.charAt(0)}
                         </div>
                       )}
@@ -449,7 +449,7 @@ const Navbar: React.FC = () => {
                                 unoptimized
                               />
                             ) : (
-                              <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary/80 to-primary text-white flex items-center justify-center font-bold text-xs shadow-sm">
+                              <div className="h-7 w-7 rounded-full bg-linear-to-br from-primary/80 to-primary text-white flex items-center justify-center font-bold text-xs shadow-sm">
                                 {user.name.charAt(0)}
                               </div>
                             )}
@@ -822,7 +822,7 @@ const Navbar: React.FC = () => {
                             unoptimized
                           />
                         ) : (
-                          <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary/80 to-primary text-white flex items-center justify-center font-bold text-xs shadow-sm">
+                          <div className="h-7 w-7 rounded-full bg-linear-to-br from-primary/80 to-primary text-white flex items-center justify-center font-bold text-xs shadow-sm">
                             {user.name.charAt(0)}
                           </div>
                         )}
@@ -842,7 +842,7 @@ const Navbar: React.FC = () => {
                                   unoptimized
                                 />
                               ) : (
-                                <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary/80 to-primary text-white flex items-center justify-center font-bold text-xs shadow-sm">
+                                <div className="h-7 w-7 rounded-full bg-linear-to-br from-primary/80 to-primary text-white flex items-center justify-center font-bold text-xs shadow-sm">
                                   {user.name.charAt(0)}
                                 </div>
                               )}

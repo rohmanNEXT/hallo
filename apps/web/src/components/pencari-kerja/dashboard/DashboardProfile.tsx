@@ -70,28 +70,28 @@ export default function DashboardProfile({
   const bannerPhotos = [
     {
       url: '/images/banners/banner1.png?v=25',
-      label: 'Pegunungan',
+      label: 'Mountains',
     },
     {
       url: '/images/banners/banner2.png?v=25',
-      label: 'Hutan',
+      label: 'Forest',
     },
     {
       url: '/images/banners/banner3.png?v=25',
-      label: 'Pantai',
+      label: 'Beach',
     },
     {
       url: '/images/banners/banner4.png?v=25',
-      label: 'Kota',
+      label: 'City',
     },
     {
       url: '/images/banners/banner5.png?v=25',
-      label: 'Laut',
+      label: 'Ocean',
       copyright: 'Maldives Atolls',
     },
     {
       url: '/images/banners/banner6.png?v=25',
-      label: 'Salju',
+      label: 'Fruit',
     },
     {
       url: 'https://bing.biturl.top/?resolution=1920&format=image&index=0',
@@ -1014,7 +1014,7 @@ export default function DashboardProfile({
                             unoptimized
                           />
                           <div className="absolute inset-0 bg-black/25 group-hover:bg-black/5 transition-all" />
-                          <span className="absolute bottom-1 left-0 right-0 text-center text-[12px] font-bold text-white drop-shadow-md">
+                          <span className="absolute bottom-1 left-0 right-0 text-center text-[10px] font-bold text-white drop-shadow-md">
                             {photo.label}
                           </span>
                           {bannerIndex === idx && (

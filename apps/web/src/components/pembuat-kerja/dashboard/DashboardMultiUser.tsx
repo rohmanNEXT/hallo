@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppStore } from '@/store/store';
 import { Button } from '@/components/ui/button';
-import { LuPlus as Plus, LuTrash2 as Trash2, LuPen as Edit, LuUsers as Users } from 'react-icons/lu';
+import { LuPlus as Plus, LuTrash2 as Trash2, LuPen as Edit, LuUsers as Users, LuCircleCheck as CheckCircle } from 'react-icons/lu';
 
 const MultiUserTab: React.FC = () => {
   const { hrdAccounts, employerJobs, addHrdAccount, updateHrdAccount, deleteHrdAccount } = useAppStore();
@@ -234,10 +234,10 @@ const MultiUserTab: React.FC = () => {
 
       {/* OTP Verification Modal */}
       {isOtpModalOpen && (
-        <div className="fixed inset-0 z-[60] bg-black/60 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div className="fixed inset-0 z-60 bg-black/60 flex items-center justify-center p-4 backdrop-blur-sm">
           <div className="bg-card w-full max-w-sm rounded-3xl p-6 shadow-2xl flex flex-col text-center">
             <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="font-bold">✓</span>
+              <CheckCircle className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-bold mb-2">Verifikasi Email</h3>
             <p className="text-sm text-muted-foreground mb-6">

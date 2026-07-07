@@ -30,7 +30,7 @@ export const mockTalents: Talent[] = [
   {
     id: 'talent-1',
     name: 'Budi Santoso',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80', // using a quality headshot placeholder
+    avatar: '', // using a quality headshot placeholder
     gender: 'Laki-laki',
     age: 27,
     location: 'Jakarta Selatan',
@@ -56,7 +56,7 @@ export const mockTalents: Talent[] = [
   {
     id: 'talent-2',
     name: 'Siti Rahmawati',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
+    avatar: '',
     gender: 'Perempuan',
     age: 24,
     location: 'Bandung',
@@ -82,7 +82,7 @@ export const mockTalents: Talent[] = [
   {
     id: 'talent-3',
     name: 'Rian Hidayat',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+    avatar: '',
     gender: 'Laki-laki',
     age: 30,
     location: 'Surabaya',
@@ -108,7 +108,7 @@ export const mockTalents: Talent[] = [
   {
     id: 'talent-4',
     name: 'Amalia Putri',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&auto=format&fit=crop&q=80',
+    avatar: '',
     gender: 'Perempuan',
     age: 22,
     location: 'Yogyakarta',
@@ -134,7 +134,7 @@ export const mockTalents: Talent[] = [
   {
     id: 'talent-5',
     name: 'Dimas Prabowo',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
+    avatar: '',
     gender: 'Laki-laki',
     age: 29,
     location: 'Tangerang',
@@ -160,7 +160,7 @@ export const mockTalents: Talent[] = [
   {
     id: 'talent-6',
     name: 'Dewi Lestari',
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80',
+    avatar: '',
     gender: 'Perempuan',
     age: 25,
     location: 'Jakarta Barat',
@@ -186,7 +186,7 @@ export const mockTalents: Talent[] = [
   {
     id: 'talent-7',
     name: 'Kevin Wijaya',
-    avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80',
+    avatar: '',
     gender: 'Laki-laki',
     age: 26,
     location: 'Bekasi',
@@ -212,7 +212,7 @@ export const mockTalents: Talent[] = [
   {
     id: 'talent-8',
     name: 'Indah Kusuma',
-    avatar: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?w=150&auto=format&fit=crop&q=80',
+    avatar: '',
     gender: 'Perempuan',
     age: 23,
     location: 'Depok',
@@ -238,7 +238,7 @@ export const mockTalents: Talent[] = [
   {
     id: 'talent-9',
     name: 'Aditya Pratama',
-    avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80',
+    avatar: '',
     gender: 'Laki-laki',
     age: 28,
     location: 'Jakarta Pusat',
@@ -264,7 +264,7 @@ export const mockTalents: Talent[] = [
   {
     id: 'talent-10',
     name: 'Laras Rahayu',
-    avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80',
+    avatar: '',
     gender: 'Perempuan',
     age: 31,
     location: 'Surabaya',
@@ -306,7 +306,7 @@ const extraTalents: Talent[] = Array.from({ length: 110 }, (_, i) => {
   return {
     id: `talent-${11 + i}`,
     name,
-    avatar: `https://images.unsplash.com/photo-${1500000000000 + (i + 1) * 123456}?w=150&auto=format&fit=crop&q=80`,
+    avatar: ``,
     gender,
     age,
     location: locations[i % 10],

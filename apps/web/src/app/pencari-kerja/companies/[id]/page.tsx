@@ -93,10 +93,10 @@ const CompanyProfilePage: React.FC = () => {
               'Company Outings',
             ],
             galleryImages: [
-              'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
-              'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80',
-              'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
-              'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80',
+              '',
+              '',
+              '',
+              '',
             ],
             galleryVideos: [
               'https://assets.mixkit.co/videos/preview/mixkit-business-people-meeting-around-table-40192-large.mp4',
@@ -108,13 +108,13 @@ const CompanyProfilePage: React.FC = () => {
                 name: 'Budi Santoso',
                 position: 'Chief Executive Officer (CEO)',
                 image:
-                  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80',
+                  '',
               },
               {
                 name: 'Siti Rahma',
                 position: 'Head of HR Department',
                 image:
-                  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80',
+                  '',
               },
             ],
           };
